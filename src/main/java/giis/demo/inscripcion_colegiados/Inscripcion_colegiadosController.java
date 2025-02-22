@@ -1,49 +1,75 @@
 package giis.demo.inscripcion_colegiados;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JFrame;
+
+import giis.demo.util.SwingMain;
 import giis.demo.util.SwingUtil;
 
 public class Inscripcion_colegiadosController {
-
-	private Inscripcion_colegiadosModel modelo;
+	private Inscripcion_colegiadosModel modelo; // NO HACE NADA POR AHORA
 	private Inscripcion_colegiadosView vista;
-	
-	
+
+	/**
+	 * CONSTRUCTOR
+	 * @param model
+	 * @param view
+	 */
 	public Inscripcion_colegiadosController(Inscripcion_colegiadosModel model, Inscripcion_colegiadosView view) {
 		this.modelo = model;
 		this.vista = view;
 		this.initView();
 	}
-	
+
 	/**
-	 * Incializa la vista de la interfaz 
+	 * INICIALIZO LA INTERFAZ 
 	 */
-	public void initView() {
-		//getFrame , metodo de la clase View para poder acceder a el	
+	public void initView() {	
 		vista.getFrame().setVisible(true); 
 	}
-	
+
+	/**
+	 * BOTON INSCRIBIR COLEGIADO ; QUE GENERA UNA EXCEPCION EN CASO DE QUE FUNCIONE MAL
+	 */
 	public void initController() {
-		//ActionListener define solo un metodo actionPerformed(), es un interfaz funcional que se puede invocar de la siguiente forma:
-		//view.getBtnTablaCarreras().addActionListener(e -> getListaCarreras());
-		//ademas invoco el metodo que responde al listener en el exceptionWrapper para que se encargue de las excepciones
-		
-		/**
-		 * vista.getBtnInscribirColegiado().addActionListener(e -> SwingUtil.exceptionWrapper(() -> getListaCarreras()));
-		 */
-	
-		//En el caso del mouse listener (para detectar seleccion de una fila) no es un interfaz funcional puesto que tiene varios metodos
-		//ver discusion: https://stackoverflow.com/questions/21833537/java-8-lambda-expressions-what-about-multiple-methods-in-nested-class
-		/**
-		 * 
-		 
-		vista.getTablaCarreras().addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				//no usa mouseClicked porque al establecer seleccion simple en la tabla de carreras
-				//el usuario podria arrastrar el raton por varias filas e interesa solo la ultima
-				SwingUtil.exceptionWrapper(() -> updateDetail());
-			}
-		});
-		*/
+		vista.getBtnInscribirColegiado().addActionListener(e -> SwingUtil.exceptionWrapper(() -> inscribirColegiado()));
 	}
+
+	private void inscribirColegiado() {
+		// RECOGO LOS DATOS INTRODUCIDOS EN LA VISTA
+		String nombre = vista.getNombretxt().getText();
+		String apellidos = vista.getApellidostxt().getText();
+		String dni = vista.getDNItxt().getText();
+		String direccion = vista.getDirecciontxt().getText();
+		String poblacion = vista.getPoblaciontxt().getText();
+		Date fechanacimiento = vista.getFechanacimientotxt().getDate();
+		String cuenta = vista.getCuentatxt().getText();
+		String titulacion = vista.getTitulaciontxt().getText();
+
+
+		// CREO UN COLEGIADO 
+		Inscripcion_colegiadosEntity colegiado = new Inscripcion_colegiadosEntity();
+		colegiado.setNombre(nombre);
+		colegiado.setApellidos(apellidos);
+		colegiado.setDni(dni);
+		colegiado.setDireccion(direccion);
+		colegiado.setPoblacion(poblacion);
+		colegiado.setFechanacimiento(fechanacimiento);
+		colegiado.setFechasolicitud(new Date()); 
+		colegiado.setCuenta(cuenta);
+		colegiado.setTitulacion(titulacion);
+
+		// CREO EL JUSTIFICANTE CON LOS DATOS RELLENADOS Y MUESTRO EL JUSTIFICANTE POR PANTALLA
+		Justificante justificante = new Justificante(colegiado);
+		justificante.setVisible(true);
+	}
+
+
+
+
+
 }

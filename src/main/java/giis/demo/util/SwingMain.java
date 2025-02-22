@@ -67,7 +67,27 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun);
 		
-			
+		
+		//Historia visualizacion_cursos
+		/**
+		 * 
+		 
+		JButton btnEjecutarTkrun2 = new JButton("Ejecuccion de  Visualizacion_cursos(Alejandro Piñeiro)");
+		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				Visualizacion_cursosController controller=new Visualizar_cursosController(new Visualizacion_cursosModel(), new Visualizacion_cursosView());
+				controller.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnEjecutarTkrun2);
+		*/
+		/**
+		 * CARGAR LA BASE DE DATOS EN BLANCO 
+		 */
+		/**
+		 * 
+		 
 		JButton btnInicializarBaseDeDatos = new JButton("Inicializar Base de Datos en Blanco");
 		btnInicializarBaseDeDatos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
@@ -76,7 +96,15 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnInicializarBaseDeDatos);
-			
+		*/
+		
+		/**
+		 * CARGAR LA BASES DE DATOS DEL PROYECTO	
+		 */
+		
+		/**
+		 * 
+		 
 		JButton btnCargarDatosIniciales = new JButton("Cargar Datos Iniciales para Pruebas");
 		btnCargarDatosIniciales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
@@ -86,6 +114,7 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnCargarDatosIniciales);
+		*/
 	}
 
 	public JFrame getFrame() { return this.frame; }
