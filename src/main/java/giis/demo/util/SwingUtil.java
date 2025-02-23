@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.apache.commons.beanutils.PropertyUtils;
 
+import giis.demo.inscripcion_cursos.CursoDTO;
+
 /**
  * Metodos de utilidad para interfaces de usuario con swing (poblar tablas a partir de un objeto POJO
  * que ha sido obtenido desde la base de datos, manejo de excepciones para metodos del 
@@ -146,7 +148,6 @@ public class SwingUtil {
 		}
 		return cm;
 	}
-	
 	
 
 }

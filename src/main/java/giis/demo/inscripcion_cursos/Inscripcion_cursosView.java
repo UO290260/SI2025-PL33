@@ -36,7 +36,7 @@ public class Inscripcion_cursosView {
 	    	frame = new JFrame();
 			frame.setTitle("Inscripción de curso");
 			frame.setName("Inscripción");
-			frame.setBounds(0, 0, 592, 422);
+			frame.setBounds(0, 0, 592, 280);
 			frame.setResizable(false); // para que la ventana no pueda cambiar de tamaño 
 			frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 			frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]")); //Es el layout que usaremos dividiendolo en filas y columnas
@@ -76,8 +76,8 @@ public class Inscripcion_cursosView {
 		tabDatos.setDefaultEditor(Object.class, null); //readonly
 		tabDatos.setBackground(SystemColor.control);
 		JScrollPane tableDetallePanel = new JScrollPane(tabDatos);
-		tableDetallePanel.setMinimumSize(new Dimension(200,220));
-		tableDetallePanel.setPreferredSize(new Dimension(700,220));
+		tableDetallePanel.setMinimumSize(new Dimension(200,65));
+		tableDetallePanel.setPreferredSize(new Dimension(700,65));
 		frame.getContentPane().add(tableDetallePanel, "cell 0 6 2 1");
 		//Boton para inscribir a un colegiado al curso 
 		btnInscripcion = new JButton("Inscribirse");
@@ -102,12 +102,5 @@ public class Inscripcion_cursosView {
      public JTable getTabDatos() {return tabDatos;}
      public void setTabDatos(JTable tabDatos) {this.tabDatos = tabDatos;}
      
-     //Se eliminará más adelante 
-     public static void main(String[] args) 
-     {
-	Inscripcion_cursosView obj = new Inscripcion_cursosView();
-	obj.frame.setVisible(true);
-	
-     }
 
 }
