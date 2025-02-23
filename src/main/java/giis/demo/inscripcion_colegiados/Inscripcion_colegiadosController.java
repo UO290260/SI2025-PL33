@@ -4,8 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.table.TableModel;
 
 import giis.demo.util.SwingMain;
 import giis.demo.util.SwingUtil;
@@ -30,6 +32,7 @@ public class Inscripcion_colegiadosController {
 	 */
 	public void initView() {	
 		vista.getFrame().setVisible(true); 
+		cargarListaColegiados();
 	}
 
 	/**
@@ -40,7 +43,7 @@ public class Inscripcion_colegiadosController {
 	}
 
 	private void inscribirColegiado() {
-		// RECOGO LOS DATOS INTRODUCIDOS EN LA VISTA
+		// RECOJO LOS DATOS INTRODUCIDOS EN LA VISTA
 		String nombre = vista.getNombretxt().getText();
 		String apellidos = vista.getApellidostxt().getText();
 		String dni = vista.getDNItxt().getText();
@@ -63,9 +66,38 @@ public class Inscripcion_colegiadosController {
 		colegiado.setCuenta(cuenta);
 		colegiado.setTitulacion(titulacion);
 
+		// CREO UN COLEGIADO DTO
+		Inscripcion_colegiadosDTO colegiado2 = new Inscripcion_colegiadosDTO();
+		colegiado2.setNombre(nombre);
+		colegiado2.setApellidos(apellidos);
+		colegiado2.setDNI(dni);
+		colegiado2.setDireccion(direccion);
+		colegiado2.setPoblacion(poblacion);
+		colegiado2.setFecha_nacimiento(fechanacimiento);
+		colegiado2.setCuenta_bancaria(cuenta);
+		colegiado2.setTitulacion(titulacion);
+
+		// INSERTO EN LA BASE DE DATOS
+		modelo.insertarColegiado(colegiado2);
+		cargarListaColegiados();
+
 		// CREO EL JUSTIFICANTE CON LOS DATOS RELLENADOS Y MUESTRO EL JUSTIFICANTE POR PANTALLA
 		Justificante justificante = new Justificante(colegiado);
 		justificante.setVisible(true);
+
+	}
+	/**
+	 * CARGA LA LISTA DE COLEGIADOS
+	 */
+	public void cargarListaColegiados() {
+		List<Inscripcion_colegiadosDTO> colegiados = modelo.getListaColegiados();
+		TableModel tmodel = SwingUtil.getTableModelFromPojos(colegiados, new String[]{
+				"id_colegiado", "nombre", "apellidos", "DNI", "direccion", "poblacion",
+				"fecha_nacimiento", "cuenta_bancaria", "titulacion", "fecha_colegiacion"
+		});
+
+		vista.getTabla().setModel(tmodel);
+		SwingUtil.autoAdjustColumns(vista.getTabla());
 	}
 
 
