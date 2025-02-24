@@ -25,8 +25,11 @@ CREATE TABLE Cursos (
     descripcion VARCHAR(100),
     fecha_inicio DATE NOT NULL,
     fecha_fin DATE NOT NULL,
-    duracion INT,
-    plazas INT,
+    duracion INT NOT NULL,
+    plazas INT NOT NULL,
+    cuota_precolegiado INT,
+    cuota_colegiado INT,
+    cuota_otros INT,
     estado VARCHAR(15) NOT NULL
 );
 

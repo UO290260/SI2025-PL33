@@ -8,9 +8,12 @@ public class OfertarCursosDTO {
 	private String fecha_fin;
 	private int duracion;
 	private int plazas;
+	private int cuota_precolegiado;
+	private int cuota_colegiado;
+	private int cuota_otros;
 	
 	public OfertarCursosDTO() {}
-	public OfertarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz) {
+	public OfertarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int cuotaPre, int cuotaCol, int cuotaOtros) {
 		setId_curso(id);
 		setTitulo(tit); 
 		setDescripcion(descr);
@@ -18,6 +21,9 @@ public class OfertarCursosDTO {
 		setFecha_fin(ffin);
 		setDuracion(dur);
 		setPlazas(plz);
+		setCuota_precolegiado(cuotaPre);
+		setCuota_colegiado(cuotaCol);
+		setCuota_otros(cuotaOtros);
 	}
 	
 	public int getId_curso() {
@@ -61,6 +67,24 @@ public class OfertarCursosDTO {
 	}
 	public void setPlazas(int plazas) {
 		this.plazas = plazas;
+	}
+	public int getCuota_precolegiado() {
+		return cuota_precolegiado;
+	}
+	public void setCuota_precolegiado(int cuota_precolegiado) {
+		this.cuota_precolegiado = cuota_precolegiado;
+	}
+	public int getCuota_colegiado() {
+		return cuota_colegiado;
+	}
+	public void setCuota_colegiado(int cuota_colegiado) {
+		this.cuota_colegiado = cuota_colegiado;
+	}
+	public int getCuota_otros() {
+		return cuota_otros;
+	}
+	public void setCuota_otros(int cuota_otros) {
+		this.cuota_otros = cuota_otros;
 	}
 	
 	

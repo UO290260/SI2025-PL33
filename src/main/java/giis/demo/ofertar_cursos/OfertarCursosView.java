@@ -20,9 +20,10 @@ import java.util.Date;
 
 public class OfertarCursosView {
 	private JFrame frame;
-	private JTextField txtTitulo, txtDescripcion, txtDuracion, txtPlazas, txtCuota;
+	private JTextField txtTitulo, txtDescripcion, txtDuracion, txtPlazas, txtCuotaPrecolegiado, txtCuotaColegiado, txtCuotaOtros;
 	private JDateChooser calFechaIni, calFechaFin;
 	private JButton bConfirmar;
+	private JCheckBox col1, col2, col3;
 	
 	/**
 	 * Create the application.
@@ -38,7 +39,7 @@ public class OfertarCursosView {
 		frame = new JFrame();
 		frame.setTitle("Ofertar Curso");
 		frame.setName("Ofertar Curso");
-		frame.setBounds(0, 0, 400, 500);
+		frame.setBounds(0, 0, 400, 550);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
@@ -49,7 +50,9 @@ public class OfertarCursosView {
 		final JLabel lblFechaFin;
 		final JLabel lblDuracion;
 		final JLabel lblPlazas;
-		final JLabel lblCuota;
+		final JLabel lblCuotaPrecolegiado;
+		final JLabel lblCuotaColegiado;
+		final JLabel lblCuotaOtros;
 		final JLabel lblColectivos;
 		
 
@@ -108,22 +111,42 @@ public class OfertarCursosView {
 		txtPlazas = new JTextField();
 		txtPlazas.setName("txtPlazas");
 		
-		// Cuota
-		lblCuota = new JLabel("Cuota");
-								
-		txtCuota = new JTextField();
-		txtCuota.setName("txtCuota");
-		
-		//Panel para organizar Duración, plazas y cuota
+		//Panel para organizar Duración y plazas
 		JPanel panelDatos = new JPanel();
 		frame.getContentPane().add(panelDatos, "wrap");
-		panelDatos.setLayout(new GridLayout(3, 3, 70, 10));
+		panelDatos.setLayout(new GridLayout(2, 2, 70, 10));
 		panelDatos.add(lblDuracion);
 		panelDatos.add(txtDuracion);
 		panelDatos.add(lblPlazas);
 		panelDatos.add(txtPlazas);
-		panelDatos.add(lblCuota);
-        panelDatos.add(txtCuota);
+		panelDatos.setBorder(new EmptyBorder(0,0,15,0));
+		
+		// Cuotas
+		lblCuotaPrecolegiado = new JLabel("Cuota Precolegiados");
+								
+		txtCuotaPrecolegiado = new JTextField();
+		txtCuotaPrecolegiado.setName("txtCuotaPrecolegiado");
+		
+		lblCuotaColegiado = new JLabel("Cuota Colegiados");
+		
+		txtCuotaColegiado = new JTextField();
+		txtCuotaColegiado.setName("txtCuotaColegiado");
+		
+		lblCuotaOtros = new JLabel("Cuota Otros");
+		
+		txtCuotaOtros = new JTextField();
+		txtCuotaOtros.setName("txtCuotaOtros");
+		
+		JPanel panelCuotas = new JPanel();
+		frame.getContentPane().add(panelCuotas, "wrap");
+		panelCuotas.setLayout(new GridLayout(3, 2, 70, 10));
+
+		panelCuotas.add(lblCuotaPrecolegiado);
+        panelCuotas.add(txtCuotaPrecolegiado);
+        panelCuotas.add(lblCuotaColegiado);
+        panelCuotas.add(txtCuotaColegiado);
+        panelCuotas.add(lblCuotaOtros);
+        panelCuotas.add(txtCuotaOtros);
 		
 		// Colectivo al que va dirigido
         lblColectivos = new JLabel("Colectivos a los que va dirigido");
@@ -132,9 +155,9 @@ public class OfertarCursosView {
 		
 		JPanel colectivos = new JPanel();
 		colectivos.setLayout(new BoxLayout(colectivos, BoxLayout.Y_AXIS)); // Acomoda en columna
-        JCheckBox col1 = new JCheckBox("Colegiados");
-        JCheckBox col2 = new JCheckBox("Precolegiados");
-        JCheckBox col3 = new JCheckBox("Otros");
+        col1 = new JCheckBox("Colegiados");
+        col2 = new JCheckBox("Precolegiados");
+        col3 = new JCheckBox("Otros");
 
         colectivos.add(col1);
         colectivos.add(col2);
@@ -150,10 +173,17 @@ public class OfertarCursosView {
 	}
 	//Getters y Setters añadidos para acceso desde el controlador
 	public JFrame getFrame() { return this.frame; }
-	public Component getCuota() { return txtCuota; }
-	public Component getDuracion() { return txtDuracion; }
-	public Component getPlazas() { return txtPlazas; }
+	public JTextField getCuotaPrecolegiado() { return txtCuotaPrecolegiado; }
+	public JTextField getCuotaColegiado() { return txtCuotaColegiado; }
+	public JTextField getCuotaOtros() { return txtCuotaOtros; }
+	public JTextField getDuracion() { return txtDuracion; }
+	public JTextField getPlazas() { return txtPlazas; }
 	public Date getFechaIni() { return calFechaIni.getDate(); }
 	public Date getFechaFin() { return calFechaFin.getDate(); }
 	public JButton getBoton() { return bConfirmar; }
+	public JTextField getTitulo() {return txtTitulo; }
+	public JTextField getDescripcion() {return txtDescripcion; }
+	public JCheckBox getCheckPrecolegiado() {return col1; }
+	public JCheckBox getCheckColegiado() {return col2; }
+	public JCheckBox getCheckOtros() {return col3; }
 }
