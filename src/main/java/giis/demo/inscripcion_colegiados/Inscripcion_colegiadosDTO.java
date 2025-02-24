@@ -1,9 +1,7 @@
 package giis.demo.inscripcion_colegiados;
 
-import java.util.Date;
-
 /**
- *CADA UNA DE LAS FILAS QUE MUESTRAN AL USUARIO LOS COLEGIADOS 
+ *Cada una de las filas que muestran al usuario los colegiados 
  */
 public class Inscripcion_colegiadosDTO {
 
@@ -17,7 +15,7 @@ public class Inscripcion_colegiadosDTO {
 	private String cuenta_bancaria;
 	private String titulacion;
 	private String fecha_colegiacion;
-	
+
 	public Inscripcion_colegiadosDTO() {}
 
 	public Inscripcion_colegiadosDTO(int id_colegiado, String nombre, String apellidos, String dNI, String direccion,
@@ -55,7 +53,5 @@ public class Inscripcion_colegiadosDTO {
 	public void setTitulacion(String titulacion) { this.titulacion = titulacion; }
 	public String getFecha_colegiacion() { return this.fecha_colegiacion; }
 	public void setFecha_colegiacion(String fecha_colegiacion) { this.fecha_colegiacion = fecha_colegiacion; }
-
-	public void setFecha_nacimiento(Date fechanacimiento) {}
 
 }

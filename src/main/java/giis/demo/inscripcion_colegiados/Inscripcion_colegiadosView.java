@@ -1,6 +1,5 @@
 package giis.demo.inscripcion_colegiados;
 
-import java.awt.Dimension;
 import java.awt.SystemColor;
 
 import javax.swing.JButton;
@@ -33,67 +32,72 @@ public class Inscripcion_colegiadosView {
 	public Inscripcion_colegiadosView() {
 		initialize();
 	}
-
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Inscripcion Colegiados");
-		frame.setBounds(0, 0, 400, 275);
+		frame.setBounds(0, 0, 1080, 500);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
+		frame.getContentPane().setLayout(new MigLayout("fillx, insets 10", "[right]10[grow,fill]", "[]5[]5[]5[]5[]5[]5[]5[grow]"));
 		frame.setLocationRelativeTo(null);
 
-		//Nombre
-		frame.getContentPane().add(new JLabel("Nombre:"));
+		//NOMBRE
+		frame.getContentPane().add(new JLabel("Nombre:"), "cell 0 0, right");
 		nombretxt = new JTextField(15);
-		frame.getContentPane().add(nombretxt, "growx , wrap");
+		Inscripcion_colegiadosController.soloLetras(nombretxt);
+		frame.getContentPane().add(nombretxt, "cell 1 0, growx");
 
-		//Apellidos
-		frame.getContentPane().add(new JLabel("Apellidos:"));
+		//APELLIDOS
+		frame.getContentPane().add(new JLabel("Apellidos:"), "cell 0 1, right");
 		apellidostxt = new JTextField(20);
-		frame.getContentPane().add(apellidostxt, "growx, wrap");
+		Inscripcion_colegiadosController.soloLetras(apellidostxt);
+		frame.getContentPane().add(apellidostxt, "cell 1 1, growx");
 
 		//DNI
-		frame.getContentPane().add(new JLabel("DNI:"));
+		frame.getContentPane().add(new JLabel("DNI:"), "cell 0 2, right");
 		DNItxt = new JTextField(20);
-		frame.getContentPane().add(DNItxt, "growx, wrap");
+		Inscripcion_colegiadosController.validarDNI(DNItxt);
+		frame.getContentPane().add(DNItxt, "cell 1 2, growx");
 
-		//Dirección
-		frame.getContentPane().add(new JLabel("Dirección:"));
-		direcciontxt = new JTextField(20);
-		frame.getContentPane().add(direcciontxt, "growx, wrap");
+		//DIRECCION
+		frame.getContentPane().add(new JLabel("Dirección:"), "cell 0 3, right");
+		direcciontxt = new JTextField(20);		
+		Inscripcion_colegiadosController.soloLetras(direcciontxt);
+		frame.getContentPane().add(direcciontxt, "cell 1 3, growx");
 
-		//Población
-		frame.getContentPane().add(new JLabel("Población:"));
+		//POBLACION
+		frame.getContentPane().add(new JLabel("Población:"), "cell 0 4, right");
 		poblaciontxt = new JTextField(20);
-		frame.getContentPane().add(poblaciontxt, "growx, wrap");
+		Inscripcion_colegiadosController.soloLetras(poblaciontxt);
+		frame.getContentPane().add(poblaciontxt, "cell 1 4, growx");
 
-		//Fecha de nacimiento
-		frame.getContentPane().add(new JLabel("Fecha de nacimiento:"));
+		//FECHA DE NACIMIENTO
+		frame.getContentPane().add(new JLabel("Fecha de nacimiento:"), "cell 0 5, right");
 		fechanacimientoDate = new JDateChooser();
-		frame.getContentPane().add(fechanacimientoDate, "growx, wrap");
-
-		//Cuenta
-		frame.getContentPane().add(new JLabel("Cuenta bancaria:"));
+		frame.getContentPane().add(fechanacimientoDate, "cell 1 5, growx");
+		
+		//CUENTA BANCARIA
+		frame.getContentPane().add(new JLabel("Cuenta bancaria:"), "cell 0 6, right");
 		cuentatxt = new JTextField(20);
-		frame.getContentPane().add(cuentatxt, "growx, wrap");
+		Inscripcion_colegiadosController.validarCuentaBancaria(cuentatxt);
+		frame.getContentPane().add(cuentatxt, "cell 1 6, growx");
 
-		//Titulación
-		frame.getContentPane().add(new JLabel("Titulación:"));
+		//TITULACION
+		frame.getContentPane().add(new JLabel("Titulación:"), "cell 0 7, right");
 		titulaciontxt = new JTextField(20);
-		frame.getContentPane().add(titulaciontxt, "growx, wrap");
+		Inscripcion_colegiadosController.soloLetras(titulaciontxt);
+		frame.getContentPane().add(titulaciontxt, "cell 1 7, growx");
 
-		//Tabla
+		//TABLA
 		tabla = new JTable();
 		tabla.setName("tabDetalle");
 		tabla.setRowSelectionAllowed(false);
-		tabla.setDefaultEditor(Object.class, null); //readonly
+		tabla.setDefaultEditor(Object.class, null); // readonly
 		tabla.setBackground(SystemColor.control);
 		JScrollPane tableDetallePanel = new JScrollPane(tabla);
-		tableDetallePanel.setMinimumSize(new Dimension(200,95));
-		tableDetallePanel.setPreferredSize(new Dimension(300,95));
-		frame.getContentPane().add(tableDetallePanel, "growx, wrap");
+		frame.getContentPane().add(tableDetallePanel, "cell 0 8 2 1, grow, wrap");
 
-		// Botón de inscripción
+		//BOTON DE INSCRIPCION
 		btnInscribir = new JButton("Inscribir un colegiado");
 		frame.getContentPane().add(btnInscribir, "span, center, wrap");
 

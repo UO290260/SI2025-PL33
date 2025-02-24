@@ -57,7 +57,7 @@ public class SwingMain {
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 		//Historia inscripcion_colegiados
-		JButton btnEjecutarTkrun = new JButton("Ejecuccion de Inscripcion_colegiados (Alejandro Piñeiro)");
+		JButton btnEjecutarTkrun = new JButton("Ejecuccion de Inscripcion_colegiados (Alejandro Piñeiro)");
 		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
 				Inscripcion_colegiadosController controller=new Inscripcion_colegiadosController(new Inscripcion_colegiadosModel(), new Inscripcion_colegiadosView());
@@ -71,8 +71,7 @@ public class SwingMain {
 		//Historia visualizacion_cursos
 		/**
 		 * 
-		 
-		JButton btnEjecutarTkrun2 = new JButton("Ejecuccion de  Visualizacion_cursos(Alejandro Piñeiro)");
+		JButton btnEjecutarTkrun2 = new JButton("Ejecuccion de  Visualizacion_cursos(Alejandro Piñeiro)");
 		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
 				Visualizacion_cursosController controller=new Visualizar_cursosController(new Visualizacion_cursosModel(), new Visualizacion_cursosView());
@@ -81,13 +80,11 @@ public class SwingMain {
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun2);
+		
 		*/
 		/**
-		 * CARGAR LA BASE DE DATOS EN BLANCO 
+		 * Cargar la base de datos en blanco 
 		 */
-		/**
-		 * 
-		 
 		JButton btnInicializarBaseDeDatos = new JButton("Inicializar Base de Datos en Blanco");
 		btnInicializarBaseDeDatos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
@@ -96,15 +93,10 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnInicializarBaseDeDatos);
-		*/
 		
 		/**
-		 * CARGAR LA BASES DE DATOS DEL PROYECTO	
+		 * Cargar la base de datos del proyecto	
 		 */
-		
-		/**
-		 * 
-		 
 		JButton btnCargarDatosIniciales = new JButton("Cargar Datos Iniciales para Pruebas");
 		btnCargarDatosIniciales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
@@ -114,9 +106,9 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnCargarDatosIniciales);
-		*/
+		
 	}
 
-	public JFrame getFrame() { return this.frame; }
+	public JFrame getFrame() { return this.frame;}
 	
 }
