@@ -9,6 +9,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import giis.demo.*;
+import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
+import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
+import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -52,18 +55,36 @@ public class SwingMain {
 		frame.setTitle("Main");
 		frame.setBounds(0, 0, 287, 185);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		
-		JButton btnEjecutarTkrun = new JButton("Ejecutar giis.demo.tkrun");
+
+		//Historia inscripcion_colegiados
+		JButton btnEjecutarTkrun = new JButton("Ejecuccion de Inscripcion_colegiados (Alejandro Piñeiro)");
 		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				//CarrerasController controller=new CarrerasController(new CarrerasModel(), new CarrerasView());
-				//controller.initController();
+				Inscripcion_colegiadosController controller=new Inscripcion_colegiadosController(new Inscripcion_colegiadosModel(), new Inscripcion_colegiadosView());
+				controller.initController();
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun);
 		
-			
+		
+		//Historia visualizacion_cursos
+		/**
+		 * 
+		JButton btnEjecutarTkrun2 = new JButton("Ejecuccion de  Visualizacion_cursos(Alejandro Piñeiro)");
+		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				Visualizacion_cursosController controller=new Visualizar_cursosController(new Visualizacion_cursosModel(), new Visualizacion_cursosView());
+				controller.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnEjecutarTkrun2);
+		
+		*/
+		/**
+		 * Cargar la base de datos en blanco 
+		 */
 		JButton btnInicializarBaseDeDatos = new JButton("Inicializar Base de Datos en Blanco");
 		btnInicializarBaseDeDatos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
@@ -72,7 +93,10 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnInicializarBaseDeDatos);
-			
+		
+		/**
+		 * Cargar la base de datos del proyecto	
+		 */
 		JButton btnCargarDatosIniciales = new JButton("Cargar Datos Iniciales para Pruebas");
 		btnCargarDatosIniciales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
@@ -82,6 +106,7 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnCargarDatosIniciales);
+		
 	}
 
 	public JFrame getFrame() { return this.frame; }
