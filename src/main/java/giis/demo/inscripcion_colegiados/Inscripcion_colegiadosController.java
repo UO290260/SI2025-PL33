@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import giis.demo.util.SwingUtil;
@@ -40,25 +41,27 @@ public class Inscripcion_colegiadosController {
 	public void initController() {
 		vista.getBtnInscribirColegiado().addActionListener(e -> SwingUtil.exceptionWrapper(() -> inscribirColegiado()));
 	}
-	
+
 	/**
 	 * Valida que los campos no esten vacios
 	 * @return
 	 */
 	private boolean validarCampos() {
-		 if (vista.getNombretxt().getText().isEmpty() ||
-			        vista.getApellidostxt().getText().isEmpty() ||
-			        vista.getDNItxt().getText().isEmpty() ||
-			        vista.getDirecciontxt().getText().isEmpty() ||
-			        vista.getPoblaciontxt().getText().isEmpty() ||
-			        vista.getFechanacimientotxt().getDate() == null ||  
-			        vista.getCuentatxt().getText().isEmpty() ||
-			        vista.getTitulaciontxt().getText().isEmpty()) {
-			        return false;
+		if (vista.getNombretxt().getText().isEmpty() ||
+				vista.getApellidostxt().getText().isEmpty() ||
+				vista.getDNItxt().getText().isEmpty() ||
+				vista.getDNItxt().getText().length()!=9 ||
+				vista.getDirecciontxt().getText().isEmpty() ||
+				vista.getPoblaciontxt().getText().isEmpty() ||
+				vista.getFechanacimientotxt().getDate() == null ||  
+				vista.getCuentatxt().getText().isEmpty() ||
+				vista.getCuentatxt().getText().length()!=24 ||
+				vista.getTitulaciontxt().getText().isEmpty()) {
+			return false;
 		}
 		return true; 
 	}
-	
+
 	/**
 	 * Inscribir al colegiado en la base de datos
 	 */
@@ -72,19 +75,19 @@ public class Inscripcion_colegiadosController {
 		Date fechanacimiento = vista.getFechanacimientotxt().getDate();
 		String cuenta = vista.getCuentatxt().getText();
 		String titulacion = vista.getTitulaciontxt().getText();
-		
-		
+
+
 		//VERIFICO SI EL DNI YA EXISTE EN LA BASE DE DATOS
-	    if (modelo.dniExiste(dni)) {
-	        System.out.println("Error: El DNI ya está registrado en la base de datos.");
-	        return; 
-	    }
-	    
+		if (modelo.dniExiste(dni)) {
+			JOptionPane.showMessageDialog(null, "El DNI ya esta en la base de datos"); 
+			return; 
+		}
+
 		//VERIFICO SI LOS CAMPOS ESTAN TODOS RELLENADOS
-	    if (!validarCampos()) {
-	        System.out.println("No estan los campos rellenados");
-	        return; 
-	    }
+		if (!validarCampos()) {
+			JOptionPane.showMessageDialog(null, "No estan los campos rellenados");
+			return; 
+		}
 
 		//FORMATO PARA LAS FECHAS
 		SimpleDateFormat formatear = new SimpleDateFormat("dd/MM/yyyy");
@@ -111,12 +114,12 @@ public class Inscripcion_colegiadosController {
 		if (validarCampos()) {
 			Justificante justificante = new Justificante(colegiado2);
 		} else {
-		    System.out.println(" Hay campos vacíos");
+			System.out.println(" Hay campos vacíos");
 
 		}
 
 	}
-	
+
 	/**
 	 * Carga la lista de los colegiados
 	 */
@@ -168,7 +171,10 @@ public class Inscripcion_colegiadosController {
 				else if (texto.length() == 8) {
 					if (!Character.isLetter(c)) {
 						evt.consume(); 
-					} 
+					}
+					else {
+						evt.setKeyChar(Character.toUpperCase(c)); 
+					}
 				} 
 				//SI YA HAY 9 CARACTERES , NO PERMITE MAS ENTRADAS
 				else {
@@ -178,7 +184,7 @@ public class Inscripcion_colegiadosController {
 		});
 	}
 
-	
+
 	/**
 	 * Valida la cuenta bancaria y solo permite 2 letras y 22 digitos
 	 * @param letra
@@ -189,7 +195,7 @@ public class Inscripcion_colegiadosController {
 			public void keyTyped(KeyEvent evt) {
 				char c = evt.getKeyChar();
 				String texto = letra.getText();
-				
+
 				//SOLO PERMITE 2 LETRAS
 				if (texto.length() < 2) {
 					if (!Character.isLetter(c)) {
@@ -209,6 +215,6 @@ public class Inscripcion_colegiadosController {
 			}
 		});
 	}
-	
+
 
 }

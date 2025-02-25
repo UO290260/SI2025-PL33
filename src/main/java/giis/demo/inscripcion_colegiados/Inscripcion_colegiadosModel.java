@@ -2,6 +2,7 @@ package giis.demo.inscripcion_colegiados;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
 
 import giis.demo.util.Database;
 
@@ -25,7 +26,7 @@ public class Inscripcion_colegiadosModel {
 	public void insertarColegiado(Inscripcion_colegiadosDTO colegiado) {
 		
 		if (dniExiste(colegiado.getDNI())) {
-	        System.out.println("Error: El DNI ya está registrado en la base de datos ");	 
+	    	JOptionPane.showMessageDialog(null, "El DNI ya existe en la base de datos");
 	        return;
 	    }
 		

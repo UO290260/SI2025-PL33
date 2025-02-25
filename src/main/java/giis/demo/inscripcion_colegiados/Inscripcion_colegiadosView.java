@@ -14,8 +14,8 @@ import com.toedter.calendar.JDateChooser;
 import net.miginfocom.swing.MigLayout;
 
 public class Inscripcion_colegiadosView {
+	
 	private JFrame frame;
-
 	private JTextField nombretxt;
 	private JTextField apellidostxt;
 	private JTextField DNItxt;
@@ -37,7 +37,7 @@ public class Inscripcion_colegiadosView {
 		frame = new JFrame();
 		frame.setTitle("Inscripcion Colegiados");
 		frame.setBounds(0, 0, 1080, 500);
-		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("fillx, insets 10", "[right]10[grow,fill]", "[]5[]5[]5[]5[]5[]5[]5[grow]"));
 		frame.setLocationRelativeTo(null);
 
