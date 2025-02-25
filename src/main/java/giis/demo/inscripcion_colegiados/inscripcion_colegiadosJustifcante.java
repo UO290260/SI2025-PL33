@@ -6,12 +6,12 @@ import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 
-public class Justificante extends JFrame {
+public class inscripcion_colegiadosJustifcante extends JFrame {
 
 	private JFrame frame;
 	private JButton btnCerrar;
 
-	public Justificante(Inscripcion_colegiadosDTO colegiado) {
+	public inscripcion_colegiadosJustifcante(Inscripcion_colegiadosDTO colegiado) {
 		frame = new JFrame();
 		frame.setTitle("Justificante de Inscripción");
 		frame.setBounds(0, 0, 400, 275);

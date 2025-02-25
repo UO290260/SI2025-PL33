@@ -42,48 +42,48 @@ public class Inscripcion_colegiadosView {
 		frame.setLocationRelativeTo(null);
 
 		//NOMBRE
-		frame.getContentPane().add(new JLabel("Nombre:"), "cell 0 0, right");
+		frame.getContentPane().add(new JLabel("(*)Nombre:"), "cell 0 0, right");
 		nombretxt = new JTextField(15);
 		Inscripcion_colegiadosController.soloLetras(nombretxt);
 		frame.getContentPane().add(nombretxt, "cell 1 0, growx");
 
 		//APELLIDOS
-		frame.getContentPane().add(new JLabel("Apellidos:"), "cell 0 1, right");
+		frame.getContentPane().add(new JLabel("(*)Apellidos:"), "cell 0 1, right");
 		apellidostxt = new JTextField(20);
 		Inscripcion_colegiadosController.soloLetras(apellidostxt);
 		frame.getContentPane().add(apellidostxt, "cell 1 1, growx");
 
 		//DNI
-		frame.getContentPane().add(new JLabel("DNI:"), "cell 0 2, right");
+		frame.getContentPane().add(new JLabel("(*)DNI:"), "cell 0 2, right");
 		DNItxt = new JTextField(20);
 		Inscripcion_colegiadosController.validarDNI(DNItxt);
 		frame.getContentPane().add(DNItxt, "cell 1 2, growx");
 
 		//DIRECCION
-		frame.getContentPane().add(new JLabel("Dirección:"), "cell 0 3, right");
+		frame.getContentPane().add(new JLabel("(*)Dirección:"), "cell 0 3, right");
 		direcciontxt = new JTextField(20);		
 		Inscripcion_colegiadosController.soloLetras(direcciontxt);
 		frame.getContentPane().add(direcciontxt, "cell 1 3, growx");
 
 		//POBLACION
-		frame.getContentPane().add(new JLabel("Población:"), "cell 0 4, right");
+		frame.getContentPane().add(new JLabel("(*)Población:"), "cell 0 4, right");
 		poblaciontxt = new JTextField(20);
 		Inscripcion_colegiadosController.soloLetras(poblaciontxt);
 		frame.getContentPane().add(poblaciontxt, "cell 1 4, growx");
 
 		//FECHA DE NACIMIENTO
-		frame.getContentPane().add(new JLabel("Fecha de nacimiento:"), "cell 0 5, right");
+		frame.getContentPane().add(new JLabel("(*)Fecha de nacimiento:"), "cell 0 5, right");
 		fechanacimientoDate = new JDateChooser();
 		frame.getContentPane().add(fechanacimientoDate, "cell 1 5, growx");
 		
 		//CUENTA BANCARIA
-		frame.getContentPane().add(new JLabel("Cuenta bancaria:"), "cell 0 6, right");
+		frame.getContentPane().add(new JLabel("(*)Cuenta bancaria:"), "cell 0 6, right");
 		cuentatxt = new JTextField(20);
 		Inscripcion_colegiadosController.validarCuentaBancaria(cuentatxt);
 		frame.getContentPane().add(cuentatxt, "cell 1 6, growx");
 
 		//TITULACION
-		frame.getContentPane().add(new JLabel("Titulación:"), "cell 0 7, right");
+		frame.getContentPane().add(new JLabel("(*)Titulación:"), "cell 0 7, right");
 		titulaciontxt = new JTextField(20);
 		Inscripcion_colegiadosController.soloLetras(titulaciontxt);
 		frame.getContentPane().add(titulaciontxt, "cell 1 7, growx");
@@ -92,7 +92,7 @@ public class Inscripcion_colegiadosView {
 		tabla = new JTable();
 		tabla.setName("tabDetalle");
 		tabla.setRowSelectionAllowed(false);
-		tabla.setDefaultEditor(Object.class, null); // readonly
+		tabla.setDefaultEditor(Object.class, null); 
 		tabla.setBackground(SystemColor.control);
 		JScrollPane tableDetallePanel = new JScrollPane(tabla);
 		frame.getContentPane().add(tableDetallePanel, "cell 0 8 2 1, grow, wrap");

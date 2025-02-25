@@ -112,7 +112,7 @@ public class Inscripcion_colegiadosController {
 
 		//CREO EL JUSTIFICANTE CON LOS DATOS RELLENADOS Y MUESTRO EL JUSTIFICANTE POR PANTALLA
 		if (validarCampos()) {
-			Justificante justificante = new Justificante(colegiado2);
+			inscripcion_colegiadosJustifcante justificante = new inscripcion_colegiadosJustifcante(colegiado2);
 		} else {
 			System.out.println(" Hay campos vacíos");
 
