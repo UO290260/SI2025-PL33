@@ -23,7 +23,7 @@ public class Inscripcion_cursosView {
 	private JTextField  JTnumero;
 	private JButton btnNumero;
 	private JButton btnInscripcion;
-	private JComboBox<Object> lstCursos;
+	private JTable TabCurso;
 	private JLabel DatosPersonales;
 	private JTable tabDatos;
 	
@@ -36,7 +36,7 @@ public class Inscripcion_cursosView {
 	    	frame = new JFrame();
 			frame.setTitle("Inscripción de curso");
 			frame.setName("Inscripción");
-			frame.setBounds(0, 0, 592, 280);
+			frame.setBounds(0, 0, 792, 380);
 			frame.setResizable(false); // para que la ventana no pueda cambiar de tamaño 
 			frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 			frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]")); //Es el layout que usaremos dividiendolo en filas y columnas
@@ -62,9 +62,16 @@ public class Inscripcion_cursosView {
 		
 		lblistacursos = new JLabel("Lista de los cursos disponibles:");
 		frame.getContentPane().add(lblistacursos, "cell 0 3");
-		//Lista desplegable de cursos disponibles 
-		lstCursos = new JComboBox<>();
-		frame.getContentPane().add(lstCursos, "cell 0 4,growx");
+		//Lista desplegable de cursos disponibles
+		TabCurso = new JTable();
+		TabCurso.setName("tabDetalle");
+		TabCurso.setRowSelectionAllowed(true);
+		TabCurso.setDefaultEditor(Object.class, null); //readonly
+		TabCurso.setBackground(SystemColor.control);
+		JScrollPane tableDetallePanelCursos = new JScrollPane(TabCurso);
+		tableDetallePanelCursos.setMinimumSize(new Dimension(200,65));
+		tableDetallePanelCursos.setPreferredSize(new Dimension(1000,100));
+		frame.getContentPane().add(tableDetallePanelCursos, "cell 0 4 2 1");
 		
 		JLabel lblDatoscolegiado = new JLabel("Datos personales del colegiado:");
 		frame.getContentPane().add(lblDatoscolegiado, "cell 0 5");
@@ -77,7 +84,7 @@ public class Inscripcion_cursosView {
 		tabDatos.setBackground(SystemColor.control);
 		JScrollPane tableDetallePanel = new JScrollPane(tabDatos);
 		tableDetallePanel.setMinimumSize(new Dimension(200,65));
-		tableDetallePanel.setPreferredSize(new Dimension(700,65));
+		tableDetallePanel.setPreferredSize(new Dimension(1000,65));
 		frame.getContentPane().add(tableDetallePanel, "cell 0 6 2 1");
 		//Boton para inscribir a un colegiado al curso 
 		btnInscripcion = new JButton("Inscribirse");
@@ -95,8 +102,8 @@ public class Inscripcion_cursosView {
      public void setBtnNumero(JButton btnNumero) {this.btnNumero = btnNumero;}
      public JButton getBtnInscripcion() {return btnInscripcion;}
      public void setBtnInscripcion(JButton btnInscripcion) {this.btnInscripcion = btnInscripcion;}
-     public JComboBox<Object> getLstCursos() {return lstCursos;}
-     public void setLstCursos(JComboBox<Object> lstCursos) {this.lstCursos = lstCursos;}
+     public JTable getTabCurso() {return TabCurso;}
+     public void setTabCurso(JTable tabCurso) {TabCurso = tabCurso;}
      public JLabel getDatosPersonales() {return DatosPersonales;}
      public void setDatosPersonales(JLabel datosPersonales) {DatosPersonales = datosPersonales;}
      public JTable getTabDatos() {return tabDatos;}

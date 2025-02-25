@@ -28,12 +28,13 @@ import giis.demo.util.Util;
 public class Inscripcion_cursosController {
 	private Inscripcion_cursosModel model;
 	private Inscripcion_cursosView view;
-	private String lastSelectedKey="";
+	private List<CursosDTO> ListaCursos;
 	
 	
 	public Inscripcion_cursosController(Inscripcion_cursosModel m, Inscripcion_cursosView v) {
 		this.model = m;
 		this.view = v;
+		
 		//no hay inicializacion especifica del modelo, solo de la vista
 		this.initView();
 	}
@@ -85,8 +86,8 @@ public class Inscripcion_cursosController {
 		
 		view.getBtnInscripcion().addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				if(!view.getJTnumero().getText().isEmpty()) { //Comprueba que la Jtextnumero no se encuentre vacio
-					int cursoId=Inscripcion_cursosController.this.obteneridCurso(); //Obtiene la ID del curso seleccionado
+				if(!view.getJTnumero().getText().isEmpty() && view.getTabCurso().getSelectedRow()!=-1) { //Comprueba que la Jtextnumero no se encuentre vacio y se selcciona un curso
+					int cursoId=ListaCursos.get(view.getTabCurso().getSelectedRow()).getId_curso();
 					ColegiadoDTO colegiado=Inscripcion_cursosController.this.getDatosColegiados(); //Obtiene el objeto de tipo ColegiadoDTO
 					if(model.Comprobar_Inscripción(colegiado.getId_colegiado(), cursoId)) { //Comprueba si el alumno está o no matriculado
 						 	throw new ApplicationException("El alumno ya está matriculado: ");
@@ -98,13 +99,16 @@ public class Inscripcion_cursosController {
 					else
 						{
 							int idInscripcion=model.ObtenerIdInscripcion(); //Obtenemos el nuevo id para insertar en la tabla
-							model.InscribirEnCurso(idInscripcion,colegiado,cursoId,Inscripcion_cursosController.this.Obtener_fechaActual()); //Inscribimos al alumno en el curso
+							model.InscribirEnCurso(idInscripcion,colegiado,cursoId,SwingUtil.Obtener_fechaActual()); //Inscribimos al alumno en el curso
+							Inscripcion_cursosController.this.getListaCursos(); //Actualizar la lista de cursos
+							Justificante_Inscripción justificante= new Justificante_Inscripción(colegiado,SwingUtil.Obtener_fechaActual());
+							justificante.getFrame().setVisible(true);
 						}
 				
 				}
 				else
 					{
-						throw new ApplicationException("El campo no debe de estar vacio: ");
+						throw new ApplicationException("El campo no debe de estar vacio y debe seleccionar curso: ");
 					}
 			}
 			
@@ -113,18 +117,18 @@ public class Inscripcion_cursosController {
 	}
 	
 	/**
-	 * 	Obtiene la lista de cursos disponibles y los carga en el comoboxmodel
+	 * 	Obtiene la lista de cursos disponibles y los carga en el una tabla 
 	 */
 	public void getListaCursos() {
-		//A modo de demo, se muestra tambien la misma informacion en forma de lista en un combobox
-		
-				List<Object[]> ListaCursos=model.getListacursos();
+				ListaCursos=model.getListacursos();
 				
-				ComboBoxModel<Object> lmodel=SwingUtil.getComboModelFromList(ListaCursos);
-				 
-				view.getLstCursos().setModel(lmodel);			
+				TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","estado"});
+				view.getTabCurso().setModel(tmodel);
+				SwingUtil.autoAdjustColumns(view.getTabCurso());			
 		
 	}
+	
+	
 	
 	/**
 	 * Obtiene los datoS y los almacena en una clase llamada ColegiadoDTO y crea una tabla para mostrar los datos correspondientes
@@ -138,29 +142,8 @@ public class Inscripcion_cursosController {
 		return colegiado;
 	}
 	
-	/**
-	 * Obtiene el ID del curso seleccionado en la lista
-	 * @return el identificador del curso en formato entero
-	 */
-	public int obteneridCurso() {
-		Object curso=  view.getLstCursos().getSelectedItem();
-		String  [] partes=curso.toString().split(" - ");
-		return Integer.parseInt(partes[0]);	
-	}
 	
-	/**
-	 * Obtiene la fecha actual y la trasforma a un formato asequible para la base de datos
-	 * @return la fecha actual en formato cadena
-	 */
-	public String Obtener_fechaActual() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        // Obtener la fecha actual
-        Date currentDate = new Date();
-
-        // Formatear la fecha actual
-        return formatter.format(currentDate);
-	}
+	
 	
 		 
 }

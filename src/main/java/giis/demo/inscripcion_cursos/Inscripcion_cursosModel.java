@@ -16,13 +16,12 @@ public class Inscripcion_cursosModel {
 	private Database db= new Database();
 	
 	
-	public static final String SQL_LISTA_DE_CURSOS="SELECT id_curso, titulo, fecha_inicio, plazas "+
-	"FROM Cursos "+
-	"Where estado='Disponible'"; //Consulta para extraer los campos de la tabla cursos
-	
-	public List<Object[]> getListacursos(){
-		String sql="SELECT id_curso || ' - ' || titulo || ' - ' || fecha_inicio || ' - ' ||  plazas from (" + SQL_LISTA_DE_CURSOS + ")";
-		return db.executeQueryArray(sql);
+	public List<CursosDTO> getListacursos(){
+		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, estado "+
+				"FROM Cursos "+
+				"Where estado='Disponible'";
+		 List<CursosDTO> rows=db.executeQueryPojo(CursosDTO.class,sql); //Envia en forma de List CursoDTO la consulta sql
+		 return rows;
 	}
 	
 	/**Obtiene los datos del colegiado al que qeremos acceder a través de su ID y los almacena en una clase llamada colegiadoDTO 

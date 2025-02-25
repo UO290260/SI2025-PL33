@@ -1,6 +1,8 @@
 package giis.demo.util;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.ComboBoxModel;
@@ -12,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.apache.commons.beanutils.PropertyUtils;
 
-import giis.demo.inscripcion_cursos.CursoDTO;
+
 
 /**
  * Metodos de utilidad para interfaces de usuario con swing (poblar tablas a partir de un objeto POJO
@@ -149,5 +151,18 @@ public class SwingUtil {
 		return cm;
 	}
 	
+	/**
+	 * Obtiene la fecha actual y la trasforma a un formato asequible para la base de datos
+	 * @return la fecha actual en formato cadena
+	 */
+	public static String Obtener_fechaActual() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Obtener la fecha actual
+        Date currentDate = new Date();
+
+        // Formatear la fecha actual
+        return formatter.format(currentDate);
+	}
 
 }

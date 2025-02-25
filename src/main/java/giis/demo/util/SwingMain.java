@@ -53,7 +53,7 @@ public class SwingMain {
 		frame = new JFrame();
 		frame.setTitle("Main");
 		frame.setBounds(0, 0, 287, 185);
-		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		
 		
 		JButton btnIncripcióncurso = new JButton("Ejecutar Inscripción de curso"); //Botón que llama a la ventana de inscripción de curso
