@@ -1,6 +1,5 @@
 package giis.demo.ofertar_cursos;
 
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
@@ -43,6 +42,7 @@ public class OfertarCursosView {
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
+		frame.setLocationRelativeTo(null);
 		
 		final JLabel lblIntroduccion;
 		final JLabel lblTitulo;
@@ -61,7 +61,7 @@ public class OfertarCursosView {
 		frame.getContentPane().add(lblIntroduccion, "growx, wrap");
 		
 		//Titulo del curso
-		lblTitulo = new JLabel("Título del curso");
+		lblTitulo = new JLabel("Título del curso*");
 		frame.getContentPane().add(lblTitulo, "growx, wrap");
 		
 		txtTitulo = new JTextField();
@@ -69,7 +69,7 @@ public class OfertarCursosView {
 		frame.getContentPane().add(txtTitulo, "growx, wrap");
 		
 		//Descripcion del curso
-		JLabel lblDescripcion = new JLabel("Descripción del curso:");
+		JLabel lblDescripcion = new JLabel("Descripción del curso*");
 		frame.getContentPane().add(lblDescripcion, "growx, wrap");
 		
 		txtDescripcion = new JTextField();
@@ -78,13 +78,13 @@ public class OfertarCursosView {
 		txtDescripcion.setPreferredSize(new Dimension(350,100));
 		
 		// Fecha de inicio
-		lblFechaIni = new JLabel("Fecha de inicio");
+		lblFechaIni = new JLabel("Fecha de inicio*");
 		
 		calFechaIni = new JDateChooser();
         calFechaIni.setPreferredSize(new Dimension(100,24));
        
 		// Fecha de fin
-		lblFechaFin = new JLabel("Fecha de fin");
+		lblFechaFin = new JLabel("Fecha de fin*");
 				
 		calFechaFin = new JDateChooser();
         calFechaFin.setPreferredSize(new Dimension(100,24));
@@ -100,13 +100,13 @@ public class OfertarCursosView {
         panelFechas.setBorder(new EmptyBorder(0,0,15,0));
 		
 		// Duracion
-		lblDuracion = new JLabel("Duración (horas)");
+		lblDuracion = new JLabel("Duración (horas)*");
 						
 		txtDuracion = new JTextField();
 		txtDuracion.setName("txtDuracion");
 		
 		// Plazas máximas
-		lblPlazas = new JLabel("Plazas máximas");
+		lblPlazas = new JLabel("Plazas máximas*");
 						
 		txtPlazas = new JTextField();
 		txtPlazas.setName("txtPlazas");

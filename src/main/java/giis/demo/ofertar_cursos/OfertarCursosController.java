@@ -8,8 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
 
 public class OfertarCursosController {
 	private OfertarCursosModel model;
@@ -22,17 +20,20 @@ public class OfertarCursosController {
 		
 		this.initView();	
 	}
-
+	
+	/**
+	 * Acciones que se van a ejecutar al iniciar el programa
+	 */
 	public void initView() {
 		view.getFrame().setVisible(true);
 		
-		//Para que comiencen en el mismo estado que sus checkBox
+		//Para que los cuadros de texto comiencen en el mismo estado que sus checkBox
 		view.getCuotaPrecolegiado().setEnabled(false);
 		view.getCuotaColegiado().setEnabled(false);
 		view.getCuotaOtros().setEnabled(false);
 		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getCuotaPrecolegiado().addKeyListener(new KeyAdapter() {
-			//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 			@Override
 			public void keyTyped(KeyEvent e) { 
 				char c = e.getKeyChar();
@@ -42,8 +43,8 @@ public class OfertarCursosController {
 			}
 		});
 		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getCuotaColegiado().addKeyListener(new KeyAdapter() {
-			//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 			@Override
 			public void keyTyped(KeyEvent e) { 
 				char c = e.getKeyChar();
@@ -53,8 +54,8 @@ public class OfertarCursosController {
 			}
 		});
 		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getCuotaOtros().addKeyListener(new KeyAdapter() {
-			//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 			@Override
 			public void keyTyped(KeyEvent e) { 
 				char c = e.getKeyChar();
@@ -64,8 +65,8 @@ public class OfertarCursosController {
 			}
 		});
 		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getPlazas().addKeyListener(new KeyAdapter() {
-			//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 			@Override
 			public void keyTyped(KeyEvent e) { 
 				char c = e.getKeyChar();
@@ -75,8 +76,8 @@ public class OfertarCursosController {
 			}
 		});
 		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getDuracion().addKeyListener(new KeyAdapter() {
-			//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 			@Override
 			public void keyTyped(KeyEvent e) { 
 				char c = e.getKeyChar();
@@ -86,6 +87,7 @@ public class OfertarCursosController {
 			}
 		});
 		
+		//Acción ejecutada al pulsar el boton
 		this.view.getBoton().addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -119,7 +121,10 @@ public class OfertarCursosController {
         });
 
 	}
-	
+	/**
+	 * Metodo que ejecuta una serie de instrucciones con el fin de
+	 * insertar un curso en la base de datos
+	 */
 	private void insertarCurso() {	
 		//Pasar las fechas al formato de la base de datos
 		Date fechaIni = view.getFechaIni();
@@ -139,7 +144,8 @@ public class OfertarCursosController {
 		String fechaIniStr = sdf.format(fechaIni);
 		String fechaFinStr = sdf.format(fechaFin);
 		
-		//Codigo para poder permitir nulos los campos
+		//Codigo para poder permitir campos nulos y que sean
+		//detectados mas adelante
 		int duracion = -1;
 		int plazas = -1;
 		int cuotaPre = -1;
@@ -151,16 +157,8 @@ public class OfertarCursosController {
 		if (!view.getCuotaColegiado().getText().isBlank()) cuotaCol = Integer.parseInt(view.getCuotaColegiado().getText());
 		if (!view.getCuotaOtros().getText().isBlank()) cuotaOtr = Integer.parseInt(view.getCuotaOtros().getText());
 		
-		OfertarCursosDTO curso = new OfertarCursosDTO( model.incrementarID(),
-				view.getTitulo().getText(),
-				view.getDescripcion().getText(),
-				fechaIniStr,
-				fechaFinStr,
-				duracion,
-				plazas,
-				cuotaPre,
-				cuotaCol,
-				cuotaOtr);
+		OfertarCursosDTO curso = new OfertarCursosDTO( model.incrementarID(), view.getTitulo().getText(), view.getDescripcion().getText(),
+				fechaIniStr, fechaFinStr, duracion, plazas, cuotaPre, cuotaCol,	cuotaOtr);
 		
 		//Comprobaciones para que el formulario sea correcto
 		if (fechaFin.before(fechaIni)) {

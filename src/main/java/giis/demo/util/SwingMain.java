@@ -8,7 +8,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import giis.demo.*;
 import giis.demo.ofertar_cursos.*;
 
 /**
@@ -53,9 +52,10 @@ public class SwingMain {
 		frame.setTitle("Main");
 		frame.setBounds(0, 0, 287, 185);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		
 		JButton btnEjecutarTkrun = new JButton("Ejecutar ofertar_curso");
-		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+		btnEjecutarTkrun.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				OfertarCursosController controller=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
 			}
@@ -63,6 +63,16 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun);
 		
+		
+		JButton btnCargarDatosIniciales = new JButton("Cargar Datos Iniciales para Pruebas");
+		btnCargarDatosIniciales.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				Database db=new Database();
+				db.createDatabase(false);
+				db.loadDatabase();
+			}
+		});
+		frame.getContentPane().add(btnCargarDatosIniciales);
 	}
 
 	public JFrame getFrame() { return this.frame; }

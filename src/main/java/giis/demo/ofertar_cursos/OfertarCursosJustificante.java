@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -19,17 +20,19 @@ public class OfertarCursosJustificante {
 	OfertarCursosDTO curso;
 	
 	/**
-	 * Initialize the contents of the frame.
+	 * Inicializa el justificante del curso
 	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Justificante");
 		frame.setName("Justificante");
 		frame.setBounds(0, 0, 300, 300);
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
+		frame.setLocationRelativeTo(null);
 		
+		final JLabel lblInicio;
 		final JLabel lblTitulo;
 		final JLabel lblDescripcion;
 		final JLabel lblFechaIni;
@@ -40,6 +43,10 @@ public class OfertarCursosJustificante {
 		final JLabel lblCuotaColegiado;
 		final JLabel lblCuotaOtros;
 		
+		
+		lblInicio = new JLabel("Justificante del curso añadido");
+		lblInicio.setBorder(new EmptyBorder(0, 0, 10, 0));
+		frame.getContentPane().add(lblInicio, "wrap");
 		
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, "wrap");
@@ -101,5 +108,6 @@ public class OfertarCursosJustificante {
 		panel.add(txtCuotaOtros, "growx, wrap");
 		
 		frame.setVisible(true);
+		frame.pack();
 	}
 }
