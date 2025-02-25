@@ -12,6 +12,7 @@ import giis.demo.*;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
+import giis.demo.ofertar_cursos.*;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -55,17 +56,28 @@ public class SwingMain {
 		frame.setTitle("Main");
 		frame.setBounds(0, 0, 287, 185);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 
-		//Historia inscripcion_colegiados
-		JButton btnEjecutarTkrun = new JButton("Ejecuccion de Inscripcion_colegiados (Alejandro Piñeiro)");
-		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+		//Boton de la historia Ofertar Cursos
+		JButton btnEjecutarTkrun = new JButton("Ejecutar ofertar_curso");
+		btnEjecutarTkrun.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				Inscripcion_colegiadosController controller=new Inscripcion_colegiadosController(new Inscripcion_colegiadosModel(), new Inscripcion_colegiadosView());
-				controller.initController();
+				OfertarCursosController controller=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun);
+		
+		//Historia inscripcion_colegiados
+		JButton btnEjecutarTkrun2 = new JButton("Ejecuccion de Inscripcion_colegiados (Alejandro Piñeiro)");
+		btnEjecutarTkrun2.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				Inscripcion_colegiadosController controller2=new Inscripcion_colegiadosController(new Inscripcion_colegiadosModel(), new Inscripcion_colegiadosView());
+				controller2.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnEjecutarTkrun2);
 		
 		
 		//Historia visualizacion_cursos
@@ -98,7 +110,7 @@ public class SwingMain {
 		 * Cargar la base de datos del proyecto	
 		 */
 		JButton btnCargarDatosIniciales = new JButton("Cargar Datos Iniciales para Pruebas");
-		btnCargarDatosIniciales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+		btnCargarDatosIniciales.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				Database db=new Database();
 				db.createDatabase(false);
