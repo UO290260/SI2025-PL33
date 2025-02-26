@@ -8,7 +8,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import giis.demo.*;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
