@@ -9,10 +9,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import giis.demo.*;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
-import giis.demo.ofertar_cursos.*;
+import giis.demo.inscripcioncolegiados.Inscripcion_colegiadosController;
+import giis.demo.inscripcioncolegiados.Inscripcion_colegiadosModel;
+import giis.demo.inscripcioncolegiados.Inscripcion_colegiadosView;
+import giis.demo.ofertarcursos.*;
+import giis.demo.visualizarcursos.*;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -79,6 +80,14 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun2);
 		
+		JButton btnEjecutarTkrun3 = new JButton("Ejecutar visualizar_cursos");
+		btnEjecutarTkrun3.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				VisualizarCursosController controller3=new VisualizarCursosController(new VisualizarCursosModel(), new VisualizarCursosView());
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnEjecutarTkrun3);
 		
 		//Historia visualizacion_cursos
 		/**

@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_colegiados;
+package giis.demo.inscripcioncolegiados;
 
 /**
  *Cada una de las filas que muestran al usuario los colegiados 

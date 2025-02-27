@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_cursos;
+package giis.demo.inscripcioncursos;
 
 import java.awt.Dimension;
 

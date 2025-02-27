@@ -1,4 +1,4 @@
-package giis.demo.ofertar_cursos;
+package giis.demo.ofertarcursos;
 
 import java.util.List;
 
