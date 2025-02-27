@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_cursos;
+package giis.demo.inscripcioncursos;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,6 +10,11 @@ public class Justificante_Inscripción extends JFrame {
 	private ColegiadoDTO colegiado;
 	private String fecha;
 	
+	/**
+	 * Clase Justificante utilizada por Inscripcion_cursosController para imprimir datos del justificante
+	 * @param colegiado objeto de tipo DTO
+	 * @param fecha de tipo String
+	 */
 	public Justificante_Inscripción(ColegiadoDTO colegiado, String fecha) {
 		this.colegiado=colegiado;
 		this.fecha=fecha;
@@ -17,7 +22,6 @@ public class Justificante_Inscripción extends JFrame {
 	}
 	
 	public void init () {
-		
 		frame= new JFrame();
 		frame.setTitle("Justificante");
 		frame.setName("Justificante");
@@ -25,14 +29,12 @@ public class Justificante_Inscripción extends JFrame {
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]")); //Es el layout que usaremos dividiendolo en filas y columnas
 		frame.setResizable(false);
-		
-		
+		//Contenido de la ventana
 		frame.getContentPane().add(new JLabel("Nombre : "+colegiado.getNombre()), "growx,wrap");
 		frame.getContentPane().add(new JLabel("Apellidos : "+colegiado.getApellidos()),"wrap");
 		frame.getContentPane().add(new JLabel("ColegiadoID : "+colegiado.getId_colegiado()),"wrap");
 		frame.getContentPane().add(new JLabel("Fecha actual de inscripción: : "+fecha),"wrap");
 		frame.getContentPane().add(new JLabel("Cuenta bancaria : "+colegiado.getCuenta_bancaria()),"wrap");
-		
 	}
 
 	public JFrame getFrame() {
@@ -58,6 +60,4 @@ public class Justificante_Inscripción extends JFrame {
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-
-	
 }

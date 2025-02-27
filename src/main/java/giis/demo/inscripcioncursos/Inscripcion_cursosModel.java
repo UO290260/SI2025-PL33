@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_cursos;
+package giis.demo.inscripcioncursos;
 
 
 
@@ -14,7 +14,6 @@ import giis.demo.util.Util;
 public class Inscripcion_cursosModel {
 	
 	private Database db= new Database();
-	
 	
 	public List<CursosDTO> getListacursos(){
 		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, estado "+
@@ -80,7 +79,6 @@ public class Inscripcion_cursosModel {
 			return false;
 		}
 	}
-	
 	/**
 	 * Comprueba si el colegiado o precolegiado ha sido ya matriculado en el curso
 	 * @param colegiadoID Identificador de colegiado o pre de tipo entero
@@ -96,7 +94,6 @@ public class Inscripcion_cursosModel {
 		}else {
 			return false;
 		}
-		
 	}
 	
 }

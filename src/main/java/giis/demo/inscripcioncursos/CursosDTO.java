@@ -1,5 +1,6 @@
-package giis.demo.inscripcion_cursos;
+package giis.demo.inscripcioncursos;
 
+//Clase CursoDTO usada en controller para implementar los datos de la clase Cursos a una tabla
 public class CursosDTO {
 	 	private int id_curso;
 	    private String titulo;
@@ -10,7 +11,7 @@ public class CursosDTO {
 	    private int plazas;
 	    private String estado;
 	    
-	    public CursosDTO(){};
+	  public CursosDTO(){};
 	    
 	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas, String estado) {
 	        this.id_curso = id_curso;

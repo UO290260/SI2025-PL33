@@ -1,5 +1,4 @@
-package giis.demo.inscripcion_cursos;
-
+package giis.demo.inscripcioncursos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -23,28 +22,22 @@ import giis.demo.util.Database;
 import giis.demo.util.SwingUtil;
 import giis.demo.util.Util;
 
-
-
+//Clase controller que actua como intermediario entre la interfaz y el modelo
 public class Inscripcion_cursosController {
 	private Inscripcion_cursosModel model;
 	private Inscripcion_cursosView view;
 	private List<CursosDTO> ListaCursos;
-	
-	
+
 	public Inscripcion_cursosController(Inscripcion_cursosModel m, Inscripcion_cursosView v) {
 		this.model = m;
 		this.view = v;
-		
 		//no hay inicializacion especifica del modelo, solo de la vista
 		this.initView();
 	}
 	
 	//Mostrar la ventana generada en el modelo View
 	public void initView() {
-		
 		view.getFrame().setVisible(true);
-		
-		
 		// Agregar KeyListener para restringir la entrada y solo se pueden incluir caracteres numéricos
 		view.getJTnumero().addKeyListener(new KeyAdapter() {
             @Override
@@ -75,7 +68,6 @@ public class Inscripcion_cursosController {
 			public void actionPerformed(ActionEvent e) {
 				if(!view.getJTnumero().getText().isEmpty()) //Comprueba que la Jtextnumero no se encuentre vacio
             	{
-            		
             		Inscripcion_cursosController.this.getDatosColegiados();
                 }
 				
@@ -113,7 +105,6 @@ public class Inscripcion_cursosController {
 			}
 			
 		});
-			
 	}
 	
 	/**
@@ -121,14 +112,10 @@ public class Inscripcion_cursosController {
 	 */
 	public void getListaCursos() {
 				ListaCursos=model.getListacursos();
-				
 				TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","estado"});
 				view.getTabCurso().setModel(tmodel);
 				SwingUtil.autoAdjustColumns(view.getTabCurso());			
-		
 	}
-	
-	
 	
 	/**
 	 * Obtiene los datoS y los almacena en una clase llamada ColegiadoDTO y crea una tabla para mostrar los datos correspondientes
@@ -140,10 +127,5 @@ public class Inscripcion_cursosController {
 		view.getTabDatos().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(view.getTabDatos());
 		return colegiado;
-	}
-	
-	
-	
-	
-		 
+	}		 
 }

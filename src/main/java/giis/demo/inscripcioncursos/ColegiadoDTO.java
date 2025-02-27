@@ -1,39 +1,38 @@
-package giis.demo.inscripcion_cursos;
-
-
+package giis.demo.inscripcioncursos;
 
 public class ColegiadoDTO {
 	
-	private int id_colegiado;
+	private int idcolegiado;
     private String nombre;
     private String apellidos;
     private String direccion;
     private String poblacion;
     private String titulacion;
-    private String fecha_colegiacion;
-    private String cuenta_bancaria;
-    
+    private String fechacolegiacion;
+    private String cuentabancaria;
+    /**
+     * Clase ColegiadoDTO usada por la clase Controller para almacenar los datos en una tabla
+     * Clase que contiene todos los datos con los campos de la tabla colegiados
+     */
     public ColegiadoDTO() { }
     
     public ColegiadoDTO(int id_colegiado, String nombre, String apellidos, String direccion, String poblacion, String titulacion, String fecha_colegiacion, String cuenta_bancaria) {
-        this.id_colegiado = id_colegiado;
+        this.idcolegiado = id_colegiado;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
         this.poblacion = poblacion;
         this.titulacion = titulacion;
-        this.fecha_colegiacion = fecha_colegiacion;
-        this.cuenta_bancaria=cuenta_bancaria;
+        this.fechacolegiacion = fecha_colegiacion;
+        this.cuentabancaria=cuenta_bancaria;
     }
-
-	
-	
+    
 	public int getId_colegiado() {
-		return id_colegiado;
+		return idcolegiado;
 	}
 
 	public void setId_colegiado(int id_colegiado) {
-		this.id_colegiado = id_colegiado;
+		this.idcolegiado = id_colegiado;
 	}
 
 	public String getNombre() {
@@ -77,20 +76,18 @@ public class ColegiadoDTO {
 	}
 
 	public String getFecha_colegiacion() {
-		return fecha_colegiacion;
+		return fechacolegiacion;
 	}
 
 	public void setFecha_colegiacion(String fecha_colegiacion) {
-		this.fecha_colegiacion = fecha_colegiacion;
+		this.fechacolegiacion = fecha_colegiacion;
 	}
 
 	public String getCuenta_bancaria() {
-		return cuenta_bancaria;
+		return cuentabancaria;
 	}
 
 	public void setCuenta_bancaria(String cuenta_bancaria) {
-		this.cuenta_bancaria = cuenta_bancaria;
+		this.cuentabancaria = cuenta_bancaria;
 	}
-
-
 }

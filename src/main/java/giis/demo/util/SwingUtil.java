@@ -25,7 +25,6 @@ public class SwingUtil {
 	private SwingUtil() {
 		throw new IllegalStateException("Utility class");
 	}
-
 	/**
 	 * Ejecuta un metodo en respuesta a un evento envolviendolo en un manejador de excepciones estandar
 	 * que muestra un mensaje informativo o mensaje de error en funcion de la excepcion producida
