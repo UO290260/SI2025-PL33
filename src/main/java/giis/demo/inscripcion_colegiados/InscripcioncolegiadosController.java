@@ -11,17 +11,17 @@ import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import giis.demo.util.SwingUtil;
 
-public class Inscripcion_colegiadosController {
+public class InscripcioncolegiadosController {
 
-	private Inscripcion_colegiadosModel modelo; 
-	private Inscripcion_colegiadosView vista;
+	private InscripcioncolegiadosModel modelo; 
+	private InscripcioncolegiadosView vista;
 
 	/**
 	 * Constructor
 	 * @param model
 	 * @param view
 	 */
-	public Inscripcion_colegiadosController(Inscripcion_colegiadosModel model, Inscripcion_colegiadosView view) {
+	public InscripcioncolegiadosController(InscripcioncolegiadosModel model, InscripcioncolegiadosView view) {
 		this.modelo = model;
 		this.vista = view;
 		this.initView();
@@ -95,7 +95,7 @@ public class Inscripcion_colegiadosController {
 		String fechacolegiacion2 = formatear.format(new Date());
 
 		//CREO UN COLEGIADO DTO
-		Inscripcion_colegiadosDTO colegiado2 = new Inscripcion_colegiadosDTO();
+		InscripcioncolegiadosDTO colegiado2 = new InscripcioncolegiadosDTO();
 		colegiado2.setNombre(nombre);
 		colegiado2.setApellidos(apellidos);
 		colegiado2.setDNI(dni);
@@ -112,7 +112,7 @@ public class Inscripcion_colegiadosController {
 
 		//CREO EL JUSTIFICANTE CON LOS DATOS RELLENADOS Y MUESTRO EL JUSTIFICANTE POR PANTALLA
 		if (validarCampos()) {
-			inscripcion_colegiadosJustifcante justificante = new inscripcion_colegiadosJustifcante(colegiado2);
+			InscripcioncolegiadosJustifcante justificante = new InscripcioncolegiadosJustifcante(colegiado2);
 		} else {
 			System.out.println(" Hay campos vacíos");
 
@@ -124,7 +124,7 @@ public class Inscripcion_colegiadosController {
 	 * Carga la lista de los colegiados
 	 */
 	public void cargarListaColegiados() {
-		List<Inscripcion_colegiadosDTO> colegiados = modelo.getListaColegiados();
+		List<InscripcioncolegiadosDTO> colegiados = modelo.getListaColegiados();
 		TableModel tmodel = SwingUtil.getTableModelFromPojos(colegiados, new String[]{
 				"id_colegiado", "nombre", "apellidos", "DNI", "direccion", "poblacion",
 				"fecha_nacimiento", "cuenta_bancaria", "titulacion", "fecha_colegiacion"

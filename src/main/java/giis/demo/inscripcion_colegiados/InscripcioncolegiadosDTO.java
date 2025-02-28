@@ -3,7 +3,7 @@ package giis.demo.inscripcion_colegiados;
 /**
  *Cada una de las filas que muestran al usuario los colegiados 
  */
-public class Inscripcion_colegiadosDTO {
+public class InscripcioncolegiadosDTO {
 
 	private int id_colegiado;
 	private String nombre; 
@@ -16,9 +16,9 @@ public class Inscripcion_colegiadosDTO {
 	private String titulacion;
 	private String fecha_colegiacion;
 
-	public Inscripcion_colegiadosDTO() {}
+	public InscripcioncolegiadosDTO() {}
 
-	public Inscripcion_colegiadosDTO(int id_colegiado, String nombre, String apellidos, String dNI, String direccion,
+	public InscripcioncolegiadosDTO(int id_colegiado, String nombre, String apellidos, String dNI, String direccion,
 			String poblacion, String fecha_nacimiento, String cuenta_bancaria, String titulacion,
 			String fecha_colegiacion) {
 

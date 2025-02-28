@@ -9,9 +9,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import giis.demo.*;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
+import giis.demo.inscripcion_colegiados.InscripcioncolegiadosController;
+import giis.demo.inscripcion_colegiados.InscripcioncolegiadosModel;
+import giis.demo.inscripcion_colegiados.InscripcioncolegiadosView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -60,7 +60,7 @@ public class SwingMain {
 		JButton btnEjecutarTkrun = new JButton("Ejecuccion de Inscripcion_colegiados (Alejandro Piñeiro)");
 		btnEjecutarTkrun.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				Inscripcion_colegiadosController controller=new Inscripcion_colegiadosController(new Inscripcion_colegiadosModel(), new Inscripcion_colegiadosView());
+				InscripcioncolegiadosController controller=new InscripcioncolegiadosController(new InscripcioncolegiadosModel(), new InscripcioncolegiadosView());
 				controller.initController();
 			}
 		});

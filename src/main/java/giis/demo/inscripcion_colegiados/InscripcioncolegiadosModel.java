@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 import giis.demo.util.Database;
 
-public class Inscripcion_colegiadosModel {
+public class InscripcioncolegiadosModel {
 
 	private Database db = new Database();
 
@@ -14,16 +14,16 @@ public class Inscripcion_colegiadosModel {
 	 * Lista de Colegiados 
 	 * @return
 	 */
-	public List<Inscripcion_colegiadosDTO> getListaColegiados() {
+	public List<InscripcioncolegiadosDTO> getListaColegiados() {
 		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria, titulacion, fecha_colegiacion FROM Colegiados";
-		return db.executeQueryPojo(Inscripcion_colegiadosDTO.class, sql);
+		return db.executeQueryPojo(InscripcioncolegiadosDTO.class, sql);
 	}
 	
 	/**
 	 * 	Insertar el Colegiado en la base de datos
 	 * @param colegiado
 	 */
-	public void insertarColegiado(Inscripcion_colegiadosDTO colegiado) {
+	public void insertarColegiado(InscripcioncolegiadosDTO colegiado) {
 		
 		if (dniExiste(colegiado.getDNI())) {
 	    	JOptionPane.showMessageDialog(null, "El DNI ya existe en la base de datos");
