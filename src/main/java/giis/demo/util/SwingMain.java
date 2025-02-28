@@ -9,9 +9,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import giis.demo.historico_cursos.Historico_cursosController;
-import giis.demo.historico_cursos.Historico_cursosModel;
-import giis.demo.historico_cursos.Historico_cursosView;
+import giis.demo.historicocursos.HistoricocursosController;
+import giis.demo.historicocursos.HistoricocursosModel;
+import giis.demo.historicocursos.HistoricocursosView;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
@@ -87,7 +87,7 @@ public class SwingMain {
 		JButton btnEjecutarTkrun3 = new JButton("3. Ejecutar de historico_cursos");
 		btnEjecutarTkrun3.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				Historico_cursosController controller=new Historico_cursosController(new Historico_cursosModel(), new Historico_cursosView());
+				HistoricocursosController controller=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
 				controller.initController();
 			}
 		});

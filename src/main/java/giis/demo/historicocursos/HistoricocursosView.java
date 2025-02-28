@@ -1,7 +1,5 @@
-package giis.demo.historico_cursos;
-
+package giis.demo.historicocursos;
 import java.awt.SystemColor;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,12 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
-
 import net.miginfocom.swing.MigLayout;
 
-public class Historico_cursosView {
-
+/**
+ * Vista de la pantalla que muestra los cursos que ha realizado un colegiado
+ */
+public class HistoricocursosView {
 	private JFrame frame;
 	private JTextField numerocolegiadotxt;
 	private JButton btnBuscar;
@@ -23,11 +21,16 @@ public class Historico_cursosView {
 	private JLabel totalcursos;
 	private JLabel totalhoras;
 
-
-	public Historico_cursosView() {
+	/**
+	 * Crea la aplicacion
+	 */
+	public HistoricocursosView() {
 		initialize();
 	}
 
+	/**
+	 * Inicializa el contenido del frame
+	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Histórico de cursos");
@@ -35,13 +38,12 @@ public class Historico_cursosView {
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("fillx, insets 10", "[right]10[grow,fill]10[right]", "[]5[]5[]5[]5[grow][]"));
 		frame.setLocationRelativeTo(null);
-
 		frame.getContentPane().add(new JLabel("Busca un numero de un colegiado para mostrar los cursos en los que esta inscrito"), "cell 0 0 2 1, growx , wrap");
 
 		//NUMERO DE COLEGIADO
 		frame.add(new JLabel("Número de colegiado:"), "cell 0 1");
 		numerocolegiadotxt = new JTextField(5);
-		Historico_cursosController.soloNumeros(numerocolegiadotxt);
+		HistoricocursosController.soloNumeros(numerocolegiadotxt);
 		frame.add(numerocolegiadotxt, "cell 1 1, growx");
 
 		//BOTON BUSCAR
@@ -68,7 +70,6 @@ public class Historico_cursosView {
 		panelResumen.add(totalhoras, "wrap");
 		frame.getContentPane().add(panelResumen, "cell 2 3, top, grow");
 	}
-
 	public JFrame getFrame() { return this.frame; }
 	public void setFrame(JFrame frame) { this.frame = frame; }
 	public JTextField getNumerocolegiadotxt() { return this.numerocolegiadotxt; }
@@ -81,5 +82,4 @@ public class Historico_cursosView {
 	public void setTotalcursos(JLabel totalcursos) { this.totalcursos = totalcursos; }
 	public JLabel getTotalhoras() { return totalhoras; }
 	public void setTotalhoras(JLabel totalhoras) { this.totalhoras = totalhoras; }
-
 }

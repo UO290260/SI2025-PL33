@@ -1,61 +1,57 @@
-package giis.demo.historico_cursos;
-
+package giis.demo.historicocursos;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import giis.demo.util.SwingUtil;
 
-public class Historico_cursosController {
+/**
+ * Controlador para la funcionalidad de visualizacion de los cursos de un colegiado
+ * -instancia el controlador con la vista y el modelo
+ * -ejecutando initController que instalara los manejadores de eventos
+ */
+public class HistoricocursosController {
+	private HistoricocursosModel modelo; 
+	private HistoricocursosView vista;
 
-	private Historico_cursosModel modelo; 
-	private Historico_cursosView vista;
-
-	/**
-	 * Constructor
-	 * @param model
-	 * @param view
-	 */
-	public Historico_cursosController(Historico_cursosModel model, Historico_cursosView view) {
+	public HistoricocursosController(HistoricocursosModel model, HistoricocursosView view) {
 		this.modelo = model;
 		this.vista = view;
 		this.initView();
 	}
 
 	/**
-	 * Inicializo la interfaz
-	 */
-	public void initView() {	
-		vista.getFrame().setVisible(true);
-		cargarListaCursos();
-	}
-
-	/**
-	 * Boton de buscar colegiado , que si tiene una excecpion la genera
+	 * Inicializacion del controlador 
 	 */
 	public void initController() {
+		//Invoco el metodo que responde al listener para que se encargue de generar las excepciones
 		vista.getBtnBuscar().addActionListener(e -> SwingUtil.exceptionWrapper(() -> cargarListaCursos()));
 
 	}
 
+	public void initView() {	
+		//Abre la ventana
+		vista.getFrame().setVisible(true);
+		//Inicia los datos de la vista 
+		cargarListaCursos();
+	}
+
 	/**
-	 * Muestra la lista de los cursos y del resumen
+	 * Obtencion de la lista de cursos que necesita la lista de objetos del modelo y muestra tambien los resumenes.
 	 */
 	public void cargarListaCursos() {
-
 		String numeroColegiadovista = vista.getNumerocolegiadotxt().getText();
 		if (numeroColegiadovista.isEmpty()) { 
 			JOptionPane.showMessageDialog(null, "Introduzca un número de colegiado");
 			return;
 		}
-		int idColegiado = Integer.parseInt(numeroColegiadovista);
-		List<Historico_cursosDTO> cursos = modelo.getListaCursos(idColegiado);
 
+		int idColegiado = Integer.parseInt(numeroColegiadovista);
+		List<HistoricocursosDTO> cursos = modelo.getListaCursos(idColegiado);
 		if (cursos.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Este colegiado " + idColegiado + " no está inscrito en ningún curso.");
+			JOptionPane.showMessageDialog(null, "El colegiado numero " + idColegiado + " no está inscrito en ningún curso.");
 			return;
 		}
 
@@ -66,7 +62,6 @@ public class Historico_cursosController {
 		vista.getTabla().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(vista.getTabla());
 
-		//RESUMENES
 		int totalCursos = modelo.getTotalCursos(idColegiado);
 		int totalHoras = modelo.getTotalHoras(idColegiado);
 		vista.getTotalcursos().setText(String.valueOf(totalCursos));
@@ -89,4 +84,3 @@ public class Historico_cursosController {
 		});
 	}
 }
-
