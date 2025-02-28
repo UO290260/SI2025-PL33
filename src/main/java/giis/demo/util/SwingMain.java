@@ -1,5 +1,6 @@
 package giis.demo.util;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -13,6 +14,9 @@ import giis.demo.ofertar_cursos.*;
 import giis.demo.inscripcioncursos.Inscripcion_cursosController;
 import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
 import giis.demo.inscripcioncursos.Inscripcion_cursosView;
+import giis.demo.aperturacursos.apertura_cursosController;
+import giis.demo.aperturacursos.apertura_cursosModel;
+import giis.demo.aperturacursos.apertura_cursosView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -87,16 +91,16 @@ public class SwingMain {
 		frame.getContentPane().add(btnIncripcióncurso);
 		
 		//Apertura de cursos
-		/*
+		
 		JButton btnAbrirCurso = new JButton("Apertura Curso"); //Botón que llama a la ventana de inscripción de curso
-		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+		btnAbrirCurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				Inscripcion_cursosController controller=new Inscripcion_cursosController(new Inscripcion_cursosModel(), new Inscripcion_cursosView());
+				apertura_cursosController controller=new apertura_cursosController(new apertura_cursosModel(), new apertura_cursosView());
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnAbrirCurso);
-		*/
+		
 		
 		//Historia visualizacion_cursos
 		/**
