@@ -1,7 +1,6 @@
 package giis.demo.inscripcion_colegiados;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
