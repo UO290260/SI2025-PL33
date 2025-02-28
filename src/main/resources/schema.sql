@@ -30,6 +30,8 @@ CREATE TABLE Cursos (
     cuota_precolegiado INT,
     cuota_colegiado INT,
     cuota_otros INT,
+    apertura_inscripcion DATE,
+    cierre_inscripcion DATE,
     estado VARCHAR(15) NOT NULL
 );
 
@@ -41,4 +43,5 @@ CREATE TABLE Inscripciones (
     FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE,
     FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
 );
+
 
