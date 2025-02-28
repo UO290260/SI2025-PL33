@@ -88,7 +88,7 @@ public class SwingMain {
 		
 		//Apertura de cursos
 		/*
-		JButton btnAbrirCurso = new JButton("Abrir Curso"); //Botón que llama a la ventana de inscripción de curso
+		JButton btnAbrirCurso = new JButton("Apertura Curso"); //Botón que llama a la ventana de inscripción de curso
 		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
 				Inscripcion_cursosController controller=new Inscripcion_cursosController(new Inscripcion_cursosModel(), new Inscripcion_cursosView());
