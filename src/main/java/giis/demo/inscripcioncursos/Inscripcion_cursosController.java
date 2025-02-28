@@ -83,13 +83,21 @@ public class Inscripcion_cursosController {
 					String fechaapertura=ListaCursos.get(view.getTabCurso().getSelectedRow()).getApertura_inscripcion();
 					String cierre=ListaCursos.get(view.getTabCurso().getSelectedRow()).getCierre_inscripcion();
 					ColegiadoDTO colegiado=Inscripcion_cursosController.this.getDatosColegiados(); //Obtiene el objeto de tipo ColegiadoDTO
+					 LocalDate fechaActual = Util.isoStringToLocalDate(SwingUtil.Obtener_fechaActual()); // Convierte la fecha actual a LocalDate
+					 LocalDate fechaApertura = Util.isoStringToLocalDate(fechaapertura); // Convierte la fecha de apertura de inscripción a LocalDate
+					 LocalDate fechaCierre = Util.isoStringToLocalDate(cierre); // Convierte la fecha de cierre de inscripción a LocalDate
 					if(model.Comprobar_Inscripción(colegiado.getId_colegiado(), cursoId)) { //Comprueba si el alumno está o no matriculado
 						 	throw new ApplicationException("El alumno ya está matriculado: ");
 						}
 					if(!model.plazasDisponibles(cursoId)) //Comprueba si hay o no plazas disponibles 
 						{
+
 							throw new ApplicationException("No hay plazas disponibles");
 						}
+					if((fechaActual.isBefore(fechaApertura) || fechaActual.isAfter(fechaCierre))) //Comprueba si el alumno se puede matricular del curso 
+					{
+						throw new ApplicationException("No está disponible la inscripción del curso ");
+					}
 					else
 						{
 							int idInscripcion=model.ObtenerIdInscripcion(); //Obtenemos el nuevo id para insertar en la tabla

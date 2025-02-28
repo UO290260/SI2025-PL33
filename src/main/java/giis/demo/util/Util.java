@@ -4,6 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -126,6 +129,19 @@ public class Util {
 		try {
 		return new SimpleDateFormat("yyyy-MM-dd").parse(isoDateString);
 		} catch (ParseException e) {
+			throw new ApplicationException("Formato ISO incorrecto para fecha: "+isoDateString);
+		}
+	}
+	
+	/**
+     * Convierte un String en un LocalDate usando un formato específico.
+     * @param fechaString La fecha en formato String.
+     * @return El LocalDate.
+     */
+	public static LocalDate isoStringToLocalDate(String isoDateString) {
+		try {
+		return LocalDate.parse(isoDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		} catch (DateTimeParseException  e) {
 			throw new ApplicationException("Formato ISO incorrecto para fecha: "+isoDateString);
 		}
 	}
