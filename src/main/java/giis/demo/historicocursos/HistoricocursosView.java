@@ -40,17 +40,14 @@ public class HistoricocursosView {
 		frame.setLocationRelativeTo(null);
 		frame.getContentPane().add(new JLabel("Busca un numero de un colegiado para mostrar los cursos en los que esta inscrito"), "cell 0 0 2 1, growx , wrap");
 
-		//NUMERO DE COLEGIADO
 		frame.add(new JLabel("Número de colegiado:"), "cell 0 1");
 		numerocolegiadotxt = new JTextField(5);
 		HistoricocursosController.soloNumeros(numerocolegiadotxt);
 		frame.add(numerocolegiadotxt, "cell 1 1, growx");
 
-		//BOTON BUSCAR
 		btnBuscar = new JButton("Buscar");
 		frame.add(btnBuscar, "cell 2 1, right");
 
-		//TABLA
 		tabla = new JTable();
 		tabla.setName("tabDetalle");
 		tabla.setRowSelectionAllowed(false);
@@ -59,7 +56,6 @@ public class HistoricocursosView {
 		JScrollPane tableDetallePanel = new JScrollPane(tabla);
 		frame.getContentPane().add(tableDetallePanel, "cell 0 3 2 3, grow");
 
-		//PANEL RESUMEN
 		JPanel panelResumen = new JPanel(new MigLayout("fill, insets 10"));
 		panelResumen.setBorder(BorderFactory.createTitledBorder("Resumen"));
 		panelResumen.add(new JLabel("Total de cursos:"));
@@ -70,16 +66,10 @@ public class HistoricocursosView {
 		panelResumen.add(totalhoras, "wrap");
 		frame.getContentPane().add(panelResumen, "cell 2 3, top, grow");
 	}
-	public JFrame getFrame() { return this.frame; }
-	public void setFrame(JFrame frame) { this.frame = frame; }
-	public JTextField getNumerocolegiadotxt() { return this.numerocolegiadotxt; }
-	public void setNumerocolegiadotxt(JTextField numerocolegiadotxt) { this.numerocolegiadotxt = numerocolegiadotxt; }
-	public JButton getBtnBuscar() { return this.btnBuscar; }
-	public void setBtnBuscar(JButton btnBuscar) { this.btnBuscar = btnBuscar; }
-	public JTable getTabla() { return this.tabla; }
-	public void setTabla(JTable tabla) { this.tabla = tabla; }
-	public JLabel getTotalcursos() { return totalcursos; }
-	public void setTotalcursos(JLabel totalcursos) { this.totalcursos = totalcursos; }
-	public JLabel getTotalhoras() { return totalhoras; }
-	public void setTotalhoras(JLabel totalhoras) { this.totalhoras = totalhoras; }
+	public JFrame getFrame() { return this.frame; } public void setFrame(JFrame frame) { this.frame = frame; }
+	public JTextField getNumerocolegiadotxt() { return this.numerocolegiadotxt; } public void setNumerocolegiadotxt(JTextField numerocolegiadotxt) { this.numerocolegiadotxt = numerocolegiadotxt; }
+	public JButton getBtnBuscar() { return this.btnBuscar; } public void setBtnBuscar(JButton btnBuscar) { this.btnBuscar = btnBuscar; }
+	public JTable getTabla() { return this.tabla; }	public void setTabla(JTable tabla) { this.tabla = tabla; }
+	public JLabel getTotalcursos() { return totalcursos; } public void setTotalcursos(JLabel totalcursos) { this.totalcursos = totalcursos; }
+	public JLabel getTotalhoras() { return totalhoras; } public void setTotalhoras(JLabel totalhoras) { this.totalhoras = totalhoras; }
 }
