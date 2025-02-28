@@ -14,7 +14,7 @@ import com.toedter.calendar.JDateChooser;
 import net.miginfocom.swing.MigLayout;
 
 public class Inscripcion_colegiadosView {
-	
+
 	private JFrame frame;
 	private JTextField nombretxt;
 	private JTextField apellidostxt;
@@ -32,11 +32,11 @@ public class Inscripcion_colegiadosView {
 	public Inscripcion_colegiadosView() {
 		initialize();
 	}
-	
+
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Inscripcion Colegiados");
-		frame.setBounds(0, 0, 1080, 500);
+		frame.setBounds(0, 0, 1065, 500);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("fillx, insets 10", "[right]10[grow,fill]", "[]5[]5[]5[]5[]5[]5[]5[grow]"));
 		frame.setLocationRelativeTo(null);
@@ -75,7 +75,7 @@ public class Inscripcion_colegiadosView {
 		frame.getContentPane().add(new JLabel("(*)Fecha de nacimiento:"), "cell 0 5, right");
 		fechanacimientoDate = new JDateChooser();
 		frame.getContentPane().add(fechanacimientoDate, "cell 1 5, growx");
-		
+
 		//CUENTA BANCARIA
 		frame.getContentPane().add(new JLabel("(*)Cuenta bancaria:"), "cell 0 6, right");
 		cuentatxt = new JTextField(20);
