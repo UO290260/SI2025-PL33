@@ -2,6 +2,7 @@ package giis.demo.inscripcioncursos;
 
 import java.awt.Dimension;
 
+
 import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

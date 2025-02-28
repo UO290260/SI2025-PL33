@@ -165,13 +165,4 @@ public class SwingUtil {
         // Formatear la fecha actual
         return formatter.format(currentDate);
 	}
-	
-	public static LocalDate convertirAFecha(String fechaString) {
-        
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
-            return LocalDate.parse(fechaString, formatter);
-        
-    }
-	
-
 }

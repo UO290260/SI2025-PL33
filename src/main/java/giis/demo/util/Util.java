@@ -133,18 +133,6 @@ public class Util {
 		}
 	}
 	
-	/**
-     * Convierte un String en un LocalDate usando un formato específico.
-     * @param fechaString La fecha en formato String.
-     * @return El LocalDate.
-     */
-	public static LocalDate isoStringToLocalDate(String isoDateString) {
-		try {
-		return LocalDate.parse(isoDateString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		} catch (DateTimeParseException  e) {
-			throw new ApplicationException("Formato ISO incorrecto para fecha: "+isoDateString);
-		}
-	}
 	/** 
 	 * Convierte fecha java a un string formato iso (para display o uso en sql) 
 	 */
