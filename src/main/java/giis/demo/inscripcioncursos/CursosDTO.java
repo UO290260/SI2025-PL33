@@ -5,22 +5,26 @@ public class CursosDTO {
 	 	private int id_curso;
 	    private String titulo;
 	    private String descripcion;
-	    private String fecha_inicio;
-	    private String fecha_fin;
+	    private String fechainicio;
+	    private String fechafin;
 	    private int duracion;
 	    private int plazas;
+	    private String aperturainscripcion;
+	    private String cierreinscripcion;
 	    private String estado;
 	    
 	  public CursosDTO(){};
 	    
-	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas, String estado) {
+	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,String apertura_inscripcion,String cierre_inscripcion, String estado) {
 	        this.id_curso = id_curso;
 	        this.titulo = titulo;
 	        this.descripcion = descripcion;
-	        this.fecha_inicio = fecha_inicio;
-	        this.fecha_fin = fecha_fin;
+	        this.fechainicio = fecha_inicio;
+	        this.fechafin = fecha_fin;
 	        this.duracion = duracion;
 	        this.plazas = plazas;
+	        this.aperturainscripcion=apertura_inscripcion;
+	        this.cierreinscripcion=cierre_inscripcion;
 	        this.estado = estado;
 	    }
 
@@ -54,19 +58,19 @@ public class CursosDTO {
 	
 
 	public String getFecha_inicio() {
-		return fecha_inicio;
+		return fechainicio;
 	}
 
 	public void setFecha_inicio(String fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
+		this.fechainicio = fecha_inicio;
 	}
 
 	public String getFecha_fin() {
-		return fecha_fin;
+		return fechafin;
 	}
 
 	public void setFecha_fin(String fecha_fin) {
-		this.fecha_fin = fecha_fin;
+		this.fechafin = fecha_fin;
 	}
 
 	public int getDuracion() {
@@ -91,6 +95,22 @@ public class CursosDTO {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getApertura_inscripcion() {
+		return aperturainscripcion;
+	}
+
+	public void setApertura_inscripcion(String apertura_inscripcion) {
+		this.aperturainscripcion = apertura_inscripcion;
+	}
+
+	public String getCierre_inscripcion() {
+		return cierreinscripcion;
+	}
+
+	public void setCierre_inscripcion(String cierre_inscripción) {
+		this.cierreinscripcion = cierre_inscripción;
 	}
 	  
 	  

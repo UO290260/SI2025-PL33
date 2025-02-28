@@ -7,12 +7,12 @@ INSERT INTO Colegiados (id_colegiado, nombre, apellidos, DNI, direccion, poblaci
 (4, 'Sara', 'Revolver Revolver', '45678901D', 'Plaza Mayor 5', 'Barcelona', '9/11/1993', 'ES9920002510123456789011', 'Arquitectura', '1/11/2017'),
 (5, 'Ramon', 'Suarez del Valle', '56789012E', 'Calle Luna 14', 'Sevilla', '4/5/1980', 'ES2320891510123456789015', 'Deportes', '10/11/2008');
 delete from Cursos;
-INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, cuota_precolegiado, cuota_colegiado, cuota_otros, estado) VALUES
-(1000, 'Optimización de algoritmos', 'Curso de algoritmos', '3/1/2024', '6/1/2024', 90, 30, 100, 120, 200, 'Disponible'),
-(2000, 'Inteligencia artificial', 'Aprendizaje automático de ordenadores', '7/4/2024', '10/9/2024', 90, 25, 300, 400, NULL, 'Disponible'),
-(3000, 'Ciberseguridad', 'Principios de seguridad en sistemas operativos', '5/10/2024', '8/11/2024', 120, 20, NULL, 250, 250, 'Disponible'),
-(4000, 'Arquitectura urbanística', 'Principios de diseño arquitectónico y urbanismo', '6/10/2024', '9/10/2024', 90, 35, NULL, 200, 220, 'Pendiente'),
-(5000, 'Entrenador', 'Principios de entrenamiento deportivo', '7/1/2024', '10/1/2024', 90, 40, NULL, NULL, 150, 'Pendiente');
+INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, cuota_precolegiado, cuota_colegiado, cuota_otros,apertura_inscripcion,cierre_inscripcion, estado) VALUES
+(1000, 'Optimización de algoritmos', 'Curso de algoritmos', '3/1/2024', '6/1/2024', 90, 30, 100, 120, 200,'10/11/2023','10/12/2023', 'Disponible'),
+(2000, 'Inteligencia artificial', 'Aprendizaje automático de ordenadores', '7/4/2024', '10/9/2024', 90, 25, 300, 400, NULL,'5/2/2024','5/3/2024', 'Disponible'),
+(3000, 'Ciberseguridad', 'Principios de seguridad en sistemas operativos', '5/10/2024', '8/11/2024', 120, 20, NULL, 250, 250, '20/7/2024','20/8/2024', 'Disponible'),
+(4000, 'Arquitectura urbanística', 'Principios de diseño arquitectónico y urbanismo', '6/10/2024', '9/10/2024', 90, 35, NULL, 200, 220,NULL,NULL, 'Pendiente'),
+(5000, 'Entrenador', 'Principios de entrenamiento deportivo', '7/1/2024', '10/1/2024', 90, 40, NULL, NULL, 150,NULL,NULL, 'Pendiente');
 delete from Inscripciones;
 INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion) VALUES
 (10, 1, 1000, '2/15/2024'),  
