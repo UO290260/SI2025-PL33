@@ -2,6 +2,8 @@ package giis.demo.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -163,5 +165,13 @@ public class SwingUtil {
         // Formatear la fecha actual
         return formatter.format(currentDate);
 	}
+	
+	public static LocalDate convertirAFecha(String fechaString) {
+        
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+            return LocalDate.parse(fechaString, formatter);
+        
+    }
+	
 
 }

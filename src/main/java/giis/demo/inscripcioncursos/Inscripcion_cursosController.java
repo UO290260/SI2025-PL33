@@ -80,6 +80,8 @@ public class Inscripcion_cursosController {
 			public void actionPerformed(ActionEvent e) {
 				if(!view.getJTnumero().getText().isEmpty() && view.getTabCurso().getSelectedRow()!=-1) { //Comprueba que la Jtextnumero no se encuentre vacio y se selcciona un curso
 					int cursoId=ListaCursos.get(view.getTabCurso().getSelectedRow()).getId_curso();
+					String fechaapertura=ListaCursos.get(view.getTabCurso().getSelectedRow()).getApertura_inscripcion();
+					String cierre=ListaCursos.get(view.getTabCurso().getSelectedRow()).getCierre_inscripcion();
 					ColegiadoDTO colegiado=Inscripcion_cursosController.this.getDatosColegiados(); //Obtiene el objeto de tipo ColegiadoDTO
 					if(model.Comprobar_Inscripción(colegiado.getId_colegiado(), cursoId)) { //Comprueba si el alumno está o no matriculado
 						 	throw new ApplicationException("El alumno ya está matriculado: ");
