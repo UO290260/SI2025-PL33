@@ -1,6 +1,8 @@
 package giis.demo.util;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.ComboBoxModel;
@@ -12,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import org.apache.commons.beanutils.PropertyUtils;
 
+
+
 /**
  * Metodos de utilidad para interfaces de usuario con swing (poblar tablas a partir de un objeto POJO
  * que ha sido obtenido desde la base de datos, manejo de excepciones para metodos del 
@@ -21,7 +25,6 @@ public class SwingUtil {
 	private SwingUtil() {
 		throw new IllegalStateException("Utility class");
 	}
-
 	/**
 	 * Ejecuta un metodo en respuesta a un evento envolviendolo en un manejador de excepciones estandar
 	 * que muestra un mensaje informativo o mensaje de error en funcion de la excepcion producida
@@ -147,6 +150,18 @@ public class SwingUtil {
 		return cm;
 	}
 	
-	
+	/**
+	 * Obtiene la fecha actual y la trasforma a un formato asequible para la base de datos
+	 * @return la fecha actual en formato cadena
+	 */
+	public static String Obtener_fechaActual() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Obtener la fecha actual
+        Date currentDate = new Date();
+
+        // Formatear la fecha actual
+        return formatter.format(currentDate);
+	}
 
 }
