@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import giis.demo.util.SwingUtil;
+import giis.demo.util.Util;
 
 /**
  * Controlador para la funcionalidad de visualizacion de un formulario
@@ -70,7 +71,7 @@ public class InscripcioncolegiadosController {
 		Date fechanacimiento = vista.getFechanacimientotxt().getDate();
 		String cuenta = vista.getCuentatxt().getText();
 		String titulacion = vista.getTitulaciontxt().getText();
-
+		
 		if (modelo.dniExiste(dni)) {
 			JOptionPane.showMessageDialog(null, "El DNI ya esta en la base de datos"); 
 			return; 
@@ -80,10 +81,9 @@ public class InscripcioncolegiadosController {
 			JOptionPane.showMessageDialog(null, "No estan los campos rellenados");
 			return; 
 		}
-
-		SimpleDateFormat formatear = new SimpleDateFormat("dd/MM/yyyy");
-		String fechanacimiento2 = formatear.format(fechanacimiento);
-		String fechacolegiacion2 = formatear.format(new Date());
+		
+		String fechanacimiento2 = Util.dateToIsoString(fechanacimiento);
+	    String fechacolegiacion2 = Util.dateToIsoString(new Date());
 
 		InscripcioncolegiadosDTO colegiado2 = new InscripcioncolegiadosDTO();
 		colegiado2.setNombre(nombre);
