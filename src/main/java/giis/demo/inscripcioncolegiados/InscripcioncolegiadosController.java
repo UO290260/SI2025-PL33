@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_colegiados;
+package giis.demo.inscripcioncolegiados;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;

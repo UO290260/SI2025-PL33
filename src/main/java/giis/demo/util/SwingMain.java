@@ -8,13 +8,13 @@ import java.awt.event.ActionEvent;
 import giis.demo.historicocursos.HistoricocursosController;
 import giis.demo.historicocursos.HistoricocursosModel;
 import giis.demo.historicocursos.HistoricocursosView;
+import giis.demo.inscripcioncolegiados.InscripcioncolegiadosController;
+import giis.demo.inscripcioncolegiados.InscripcioncolegiadosModel;
+import giis.demo.inscripcioncolegiados.InscripcioncolegiadosView;
 import giis.demo.ofertar_cursos.*;
 import giis.demo.inscripcioncursos.Inscripcion_cursosController;
 import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
 import giis.demo.inscripcioncursos.Inscripcion_cursosView;
-import giis.demo.inscripcion_colegiados.InscripcioncolegiadosController;
-import giis.demo.inscripcion_colegiados.InscripcioncolegiadosModel;
-import giis.demo.inscripcion_colegiados.InscripcioncolegiadosView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 

@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_colegiados;
+package giis.demo.inscripcioncolegiados;
 import java.util.List;
 import javax.swing.JOptionPane;
 import giis.demo.util.Database;

@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_colegiados;
+package giis.demo.inscripcioncolegiados;
 
 /**
  *Clase InscripcioncolegiadosDTO que contiene todos los atributos de la tabla Colegiados

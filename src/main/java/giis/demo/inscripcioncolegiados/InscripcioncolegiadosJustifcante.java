@@ -1,4 +1,4 @@
-package giis.demo.inscripcion_colegiados;
+package giis.demo.inscripcioncolegiados;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
