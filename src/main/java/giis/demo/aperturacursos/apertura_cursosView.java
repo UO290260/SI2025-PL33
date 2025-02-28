@@ -1,4 +1,4 @@
-package aperturacursos;
+package giis.demo.aperturacursos;
 import java.awt.Dimension;
 
 
@@ -23,7 +23,6 @@ public class apertura_cursosView {
 	private JFrame frame;
 	private JDateChooser DateApertura;
 	private JDateChooser DateCierrea;
-	private JButton btnNumero;
 	private JButton btnapertura;
 	private JTable TabCurso;
 	
@@ -81,7 +80,7 @@ public class apertura_cursosView {
 		btnapertura = new JButton("Abrir Curso");
 		fecha_apertura.setLabelFor(btnapertura);
 		frame.getContentPane().add(btnapertura, "cell 1 7,alignx right");
-			
 	    }
+	
 
 }
