@@ -44,4 +44,3 @@ CREATE TABLE Inscripciones (
     FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
 );
 
-

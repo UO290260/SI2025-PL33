@@ -5,17 +5,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import giis.demo.historicocursos.HistoricocursosController;
 import giis.demo.historicocursos.HistoricocursosModel;
 import giis.demo.historicocursos.HistoricocursosView;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
-import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
 import giis.demo.ofertar_cursos.*;
 import giis.demo.inscripcioncursos.Inscripcion_cursosController;
 import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
 import giis.demo.inscripcioncursos.Inscripcion_cursosView;
+import giis.demo.inscripcion_colegiados.InscripcioncolegiadosController;
+import giis.demo.inscripcion_colegiados.InscripcioncolegiadosModel;
+import giis.demo.inscripcion_colegiados.InscripcioncolegiadosView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -64,32 +63,34 @@ public class SwingMain {
 		btnEjecutarTkrun.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				OfertarCursosController controller=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
+
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun);
-		
-		//Historia inscripcion_colegiados
-		JButton btnEjecutarTkrun2 = new JButton("2. Ejecutar de inscripcion_colegiados");
-		btnEjecutarTkrun2.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+
+		//Boton de la historia inscripcion_colegiados
+		JButton btnInscripcion_colegiados = new JButton("2. Ejecutar de inscripcion_colegiados");
+		btnInscripcion_colegiados.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				Inscripcion_colegiadosController controller2=new Inscripcion_colegiadosController(new Inscripcion_colegiadosModel(), new Inscripcion_colegiadosView());
+				InscripcioncolegiadosController controller2=new InscripcioncolegiadosController(new InscripcioncolegiadosModel(), new InscripcioncolegiadosView());
 				controller2.initController();
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnEjecutarTkrun2);
-		
-		JButton btnIncripcióncurso = new JButton("Inscripción de curso"); //Botón que llama a la ventana de inscripción de curso
+		frame.getContentPane().add(btnInscripcion_colegiados);
+
+		//Boton de la historia inscripcion_curso
+		JButton btnIncripcióncurso = new JButton("3. Ejecutar inscricpcion_cursos"); //Botón que llama a la ventana de inscripción de curso
 		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				Inscripcion_cursosController controller=new Inscripcion_cursosController(new Inscripcion_cursosModel(), new Inscripcion_cursosView());
+				Inscripcion_cursosController controller3=new Inscripcion_cursosController(new Inscripcion_cursosModel(), new Inscripcion_cursosView());
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnIncripcióncurso);
-		
-		//Apertura de cursos
+
+		//Boton de la historia apertura_curso
 		/*
 		JButton btnAbrirCurso = new JButton("Apertura Curso"); //Botón que llama a la ventana de inscripción de curso
 		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
@@ -99,20 +100,20 @@ public class SwingMain {
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnAbrirCurso);
-		*/
-		
-		//Historia historico_cursos
-		JButton btnEjecutarTkrun3 = new JButton("3. Ejecutar de historico_cursos");
-		btnEjecutarTkrun3.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+		 */
+
+		//Boton de la historia historico_cursos
+		JButton btnHistoricocurso = new JButton("6. Ejecutar de historico_cursos");
+		btnHistoricocurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				HistoricocursosController controller=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
-				controller.initController();
+				HistoricocursosController controller6=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
+				controller6.initController();
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnEjecutarTkrun3);
-		
-		
+		frame.getContentPane().add(btnHistoricocurso);
+
+
 		/**
 		 * Cargar la base de datos en blanco 
 		 */
@@ -124,7 +125,7 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnInicializarBaseDeDatos);
-		
+
 		/**
 		 * Cargar la base de datos del proyecto	
 		 */
@@ -137,9 +138,9 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnCargarDatosIniciales);
-		
+
 	}
 
 	public JFrame getFrame() { return this.frame;}
-	
+
 }
