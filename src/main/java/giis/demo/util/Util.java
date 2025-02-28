@@ -4,6 +4,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -129,6 +132,7 @@ public class Util {
 			throw new ApplicationException("Formato ISO incorrecto para fecha: "+isoDateString);
 		}
 	}
+	
 	/** 
 	 * Convierte fecha java a un string formato iso (para display o uso en sql) 
 	 */

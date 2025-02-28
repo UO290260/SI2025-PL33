@@ -1,8 +1,5 @@
 package giis.demo.util;
-
 import java.awt.EventQueue;
-
-
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,6 +9,9 @@ import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosController;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosModel;
 import giis.demo.inscripcion_colegiados.Inscripcion_colegiadosView;
 import giis.demo.ofertar_cursos.*;
+import giis.demo.inscripcioncursos.Inscripcion_cursosController;
+import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
+import giis.demo.inscripcioncursos.Inscripcion_cursosView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -21,9 +21,7 @@ import giis.demo.ofertar_cursos.*;
  * de realizar acciones de inicializacion
  */
 public class SwingMain {
-
 	private JFrame frame;
-
 	/**
 	 * Launch the application.
 	 */
@@ -78,6 +76,26 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnEjecutarTkrun2);
 		
+		JButton btnIncripcióncurso = new JButton("Inscripción de curso"); //Botón que llama a la ventana de inscripción de curso
+		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				Inscripcion_cursosController controller=new Inscripcion_cursosController(new Inscripcion_cursosModel(), new Inscripcion_cursosView());
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnIncripcióncurso);
+		
+		//Apertura de cursos
+		/*
+		JButton btnAbrirCurso = new JButton("Apertura Curso"); //Botón que llama a la ventana de inscripción de curso
+		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				Inscripcion_cursosController controller=new Inscripcion_cursosController(new Inscripcion_cursosModel(), new Inscripcion_cursosView());
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnAbrirCurso);
+		*/
 		
 		//Historia visualizacion_cursos
 		/**
