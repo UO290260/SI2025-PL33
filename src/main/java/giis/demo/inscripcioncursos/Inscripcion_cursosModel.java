@@ -95,5 +95,4 @@ public class Inscripcion_cursosModel {
 			return false;
 		}
 	}
-	
 }
