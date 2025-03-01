@@ -1,50 +1,46 @@
-package giis.demo.inscripcion_colegiados;
-
+package giis.demo.inscripcioncolegiados;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import giis.demo.util.SwingUtil;
+import giis.demo.util.Util;
 
-public class Inscripcion_colegiadosController {
+/**
+ * Controlador para la funcionalidad de visualizacion de un formulario
+ * -instancia con la vista y el modelo
+ * -ejecutando initController que instalara los manejadores de los eventos
+ */
+public class InscripcioncolegiadosController {
+	private InscripcioncolegiadosModel modelo; 
+	private InscripcioncolegiadosView vista;
 
-	private Inscripcion_colegiadosModel modelo; 
-	private Inscripcion_colegiadosView vista;
-
-	/**
-	 * Constructor
-	 * @param model
-	 * @param view
-	 */
-	public Inscripcion_colegiadosController(Inscripcion_colegiadosModel model, Inscripcion_colegiadosView view) {
+	public InscripcioncolegiadosController(InscripcioncolegiadosModel model, InscripcioncolegiadosView view) {
 		this.modelo = model;
 		this.vista = view;
 		this.initView();
 	}
 
 	/**
-	 * Inicializo la interfaz
+	 * Inicializacion del controlador
 	 */
+	public void initController() {
+		//Invoco el metodo que responde al listener para que se encargue de generar las exceciones
+		vista.getBtnInscribirColegiado().addActionListener(e -> SwingUtil.exceptionWrapper(() -> inscribirColegiado()));
+	}
+
 	public void initView() {	
+		//Abre la ventana
 		vista.getFrame().setVisible(true);
+		//Inicia los datos de la vista
 		cargarListaColegiados();
 	}
 
 	/**
-	 * Boton de inscribir colegiado , que generara una excepcion en caso de error
-	 */
-	public void initController() {
-		vista.getBtnInscribirColegiado().addActionListener(e -> SwingUtil.exceptionWrapper(() -> inscribirColegiado()));
-	}
-
-	/**
-	 * Valida que los campos no esten vacios
-	 * @return
+	 * Metodo que valida que los campos no esten vacios y sean de la longitud esperada
 	 */
 	private boolean validarCampos() {
 		if (vista.getNombretxt().getText().isEmpty() ||
@@ -63,10 +59,9 @@ public class Inscripcion_colegiadosController {
 	}
 
 	/**
-	 * Inscribir al colegiado en la base de datos
+	 * Metodo que genera un justificante con los datos introducidos en el formulario si los datos han sido rellenados correctamente.
 	 */
 	private void inscribirColegiado() {
-		//RECOJO LOS DATOS INTRODUCIDOS EN LA VISTA
 		String nombre = vista.getNombretxt().getText();
 		String apellidos = vista.getApellidostxt().getText();
 		String dni = vista.getDNItxt().getText();
@@ -75,27 +70,21 @@ public class Inscripcion_colegiadosController {
 		Date fechanacimiento = vista.getFechanacimientotxt().getDate();
 		String cuenta = vista.getCuentatxt().getText();
 		String titulacion = vista.getTitulaciontxt().getText();
-
-
-		//VERIFICO SI EL DNI YA EXISTE EN LA BASE DE DATOS
+		
 		if (modelo.dniExiste(dni)) {
 			JOptionPane.showMessageDialog(null, "El DNI ya esta en la base de datos"); 
 			return; 
 		}
 
-		//VERIFICO SI LOS CAMPOS ESTAN TODOS RELLENADOS
 		if (!validarCampos()) {
 			JOptionPane.showMessageDialog(null, "No estan los campos rellenados");
 			return; 
 		}
+		
+		String fechanacimiento2 = Util.dateToIsoString(fechanacimiento);
+	    String fechacolegiacion2 = Util.dateToIsoString(new Date());
 
-		//FORMATO PARA LAS FECHAS
-		SimpleDateFormat formatear = new SimpleDateFormat("dd/MM/yyyy");
-		String fechanacimiento2 = formatear.format(fechanacimiento);
-		String fechacolegiacion2 = formatear.format(new Date());
-
-		//CREO UN COLEGIADO DTO
-		Inscripcion_colegiadosDTO colegiado2 = new Inscripcion_colegiadosDTO();
+		InscripcioncolegiadosDTO colegiado2 = new InscripcioncolegiadosDTO();
 		colegiado2.setNombre(nombre);
 		colegiado2.setApellidos(apellidos);
 		colegiado2.setDNI(dni);
@@ -106,36 +95,31 @@ public class Inscripcion_colegiadosController {
 		colegiado2.setCuenta_bancaria(cuenta);
 		colegiado2.setTitulacion(titulacion);
 
-		//INSERTO EN LA BASE DE DATOS
 		modelo.insertarColegiado(colegiado2);
 		cargarListaColegiados();
 
-		//CREO EL JUSTIFICANTE CON LOS DATOS RELLENADOS Y MUESTRO EL JUSTIFICANTE POR PANTALLA
 		if (validarCampos()) {
-			inscripcion_colegiadosJustifcante justificante = new inscripcion_colegiadosJustifcante(colegiado2);
+			InscripcioncolegiadosJustifcante justificante = new InscripcioncolegiadosJustifcante(colegiado2);
 		} else {
 			System.out.println(" Hay campos vacíos");
-
 		}
-
 	}
 
 	/**
-	 * Carga la lista de los colegiados
+	 * Obtencion de la lista de colegiados
 	 */
 	public void cargarListaColegiados() {
-		List<Inscripcion_colegiadosDTO> colegiados = modelo.getListaColegiados();
+		List<InscripcioncolegiadosDTO> colegiados = modelo.getListaColegiados();
 		TableModel tmodel = SwingUtil.getTableModelFromPojos(colegiados, new String[]{
 				"id_colegiado", "nombre", "apellidos", "DNI", "direccion", "poblacion",
 				"fecha_nacimiento", "cuenta_bancaria", "titulacion", "fecha_colegiacion"
 		});
-
 		vista.getTabla().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(vista.getTabla());
 	}
 
 	/**
-	 * Metodo que restringe la entrada de numeros
+	 * Metodo que obliga la entrada de letras 
 	 * @param letra
 	 */
 	public static void  soloLetras(JTextField letra) {
@@ -151,7 +135,7 @@ public class Inscripcion_colegiadosController {
 	}
 
 	/**
-	 * Introduce la entrada de caracteres del DNI (debe de ser de 8 digitos y una letra)
+	 * Metodo que permite escribir correctamente un DNI (8 números y una letra)
 	 * @param letra
 	 */
 	public static void validarDNI(JTextField letra) {
@@ -161,13 +145,11 @@ public class Inscripcion_colegiadosController {
 				char c = evt.getKeyChar();
 				String texto = letra.getText();
 
-				//SOLO PERMITE 8 CARACTERES
 				if (texto.length() < 8) {
 					if (!Character.isDigit(c)) {
 						evt.consume(); 
 					}
 				} 
-				//SOLO PERMITE 8 CARACTERES
 				else if (texto.length() == 8) {
 					if (!Character.isLetter(c)) {
 						evt.consume(); 
@@ -176,7 +158,6 @@ public class Inscripcion_colegiadosController {
 						evt.setKeyChar(Character.toUpperCase(c)); 
 					}
 				} 
-				//SI YA HAY 9 CARACTERES , NO PERMITE MAS ENTRADAS
 				else {
 					evt.consume();
 				}
@@ -184,9 +165,8 @@ public class Inscripcion_colegiadosController {
 		});
 	}
 
-
 	/**
-	 * Valida la cuenta bancaria y solo permite 2 letras y 22 digitos
+	 * Metodo que permite escribir correctamente una cuenta bancaria (2 letras y 22 números)
 	 * @param letra
 	 */
 	public static void validarCuentaBancaria(JTextField letra) {
@@ -196,25 +176,20 @@ public class Inscripcion_colegiadosController {
 				char c = evt.getKeyChar();
 				String texto = letra.getText();
 
-				//SOLO PERMITE 2 LETRAS
 				if (texto.length() < 2) {
 					if (!Character.isLetter(c)) {
 						evt.consume(); 
 					} 
 				} 
-				//NUMERO DE CARACTERES MENOR DE 24
 				else if (texto.length() >= 2 && texto.length() < 24) {
 					if (!Character.isDigit(c)) {
 						evt.consume(); 
 					}
 				} 
-				//SI YA ESTA LA CUENTA BANCARIA , NO PERMITE MAS ENTRADAS
 				else {
 					evt.consume();
 				}
 			}
 		});
 	}
-
-
 }
