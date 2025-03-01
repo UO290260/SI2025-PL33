@@ -1,22 +1,12 @@
 package giis.demo.aperturacursos;
 import java.awt.Dimension;
-
-
 import java.awt.SystemColor;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-
 import com.toedter.calendar.JDateChooser;
-
 import net.miginfocom.swing.MigLayout;
 
 public class apertura_cursosView {
@@ -31,7 +21,6 @@ public class apertura_cursosView {
 	}
 	
 	private void iniciate() {
-   	 //Diseñamos una ventana de tamaño 492x422
 	    	frame = new JFrame();
 			frame.setTitle("Apertura de curso");
 			frame.setName("Apertura");
@@ -43,7 +32,7 @@ public class apertura_cursosView {
 			final JLabel lblapertura;
 			final JLabel lblistacursos;
 			lblapertura= new JLabel("Apertura para un nuevo curso");
-			frame.getContentPane().add(lblapertura, "cell 0 0 3 1, center"); // texto explicativo de la ventana
+			frame.getContentPane().add(lblapertura, "cell 0 0 3 1, center"); 
 			
 			final JLabel fecha_apertura;
 			fecha_apertura= new JLabel("Fecha de apertura:");
@@ -78,7 +67,7 @@ public class apertura_cursosView {
 		tableDetallePanelCursos.setPreferredSize(new Dimension(1000,100));
 		frame.getContentPane().add(tableDetallePanelCursos, "cell 0 4 2 1");
 		
-		//Boton para inscribir a un colegiado al curso 
+		 
 		btnapertura = new JButton("Abrir Curso");
 		frame.getContentPane().add(btnapertura, "cell 1 7,alignx right");
 	    }

@@ -46,7 +46,6 @@ public class apertura_cursosController {
 						throw new ApplicationException("La fecha de apertura debe ser distinta de fecha del cierre");
 					}
 					else {
-						
 						model.AbrirCurso(idCurso, apertura, cierre);
 						apertura_cursosController.this.getListaCursos(); //Actualiza la lista de los cursos
 					}	

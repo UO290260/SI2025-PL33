@@ -1,11 +1,9 @@
 package giis.demo.aperturacursos;
 
 import java.util.List;
-
-import giis.demo.inscripcioncursos.ColegiadoDTO;
 import giis.demo.inscripcioncursos.CursosDTO;
 import giis.demo.util.Database;
-import giis.demo.util.Util;
+
 
 public class apertura_cursosModel {
 	
