@@ -9,13 +9,14 @@ public class CursosDTO {
 	    private String fechafin;
 	    private int duracion;
 	    private int plazas;
+	    private int cuotaprecolegiado, cuotacolegiado, cuotaotros;
 	    private String aperturainscripcion;
 	    private String cierreinscripcion;
 	    private String estado;
 	    
 	  public CursosDTO(){};
 	    
-	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,String apertura_inscripcion,String cierre_inscripcion, String estado) {
+	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,int cuota_precolegiado,int cuota_colegiado,int cuota_otros, String apertura_inscripcion,String cierre_inscripcion, String estado) {
 	        this.id_curso = id_curso;
 	        this.titulo = titulo;
 	        this.descripcion = descripcion;
@@ -23,12 +24,39 @@ public class CursosDTO {
 	        this.fechafin = fecha_fin;
 	        this.duracion = duracion;
 	        this.plazas = plazas;
+	        this.cuotaprecolegiado=cuota_precolegiado;
+	        this.cuotacolegiado=cuota_colegiado;
+	        this.cuotaotros=cuota_otros;
 	        this.aperturainscripcion=apertura_inscripcion;
 	        this.cierreinscripcion=cierre_inscripcion;
 	        this.estado = estado;
 	    }
 
 	
+
+	public int getCuota_precolegiado() {
+		return cuotaprecolegiado;
+	}
+
+	public void setCuota_precolegiado(int cuota_precolegiado) {
+		this.cuotaprecolegiado = cuota_precolegiado;
+	}
+
+	public int getCuota_colegiado() {
+		return cuotacolegiado;
+	}
+
+	public void setCuota_colegiado(int cuota_colegiado) {
+		this.cuotacolegiado = cuota_colegiado;
+	}
+
+	public int getCuota_otros() {
+		return cuotaotros;
+	}
+
+	public void setCuota_otros(int cuota_otros) {
+		this.cuotaotros = cuota_otros;
+	}
 
 	public int getId_curso() {
 		return id_curso;

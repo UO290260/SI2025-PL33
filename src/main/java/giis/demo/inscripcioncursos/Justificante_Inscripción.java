@@ -8,6 +8,7 @@ import net.miginfocom.swing.MigLayout;
 public class Justificante_Inscripción extends JFrame {
 	private JFrame frame;
 	private ColegiadoDTO colegiado;
+	private CursosDTO curso;
 	private String fecha;
 	
 	/**
@@ -15,9 +16,10 @@ public class Justificante_Inscripción extends JFrame {
 	 * @param colegiado objeto de tipo DTO
 	 * @param fecha de tipo String
 	 */
-	public Justificante_Inscripción(ColegiadoDTO colegiado, String fecha) {
+	public Justificante_Inscripción(ColegiadoDTO colegiado, String fecha,CursosDTO curso) {
 		this.colegiado=colegiado;
 		this.fecha=fecha;
+		this.curso=curso;
 		init();
 	}
 	
@@ -35,6 +37,8 @@ public class Justificante_Inscripción extends JFrame {
 		frame.getContentPane().add(new JLabel("ColegiadoID : "+colegiado.getId_colegiado()),"wrap");
 		frame.getContentPane().add(new JLabel("Fecha actual de inscripción: : "+fecha),"wrap");
 		frame.getContentPane().add(new JLabel("Cuenta bancaria : "+colegiado.getCuenta_bancaria()),"wrap");
+		frame.getContentPane().add(new JLabel("Cuota precolegiado : "+curso.getCuota_precolegiado()),"wrap");
+		frame.getContentPane().add(new JLabel("Cuota colegiado : "+curso.getCuota_colegiado()),"wrap");
 	}
 
 	public JFrame getFrame() {

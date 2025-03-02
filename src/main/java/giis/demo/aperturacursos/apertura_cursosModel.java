@@ -10,7 +10,7 @@ public class apertura_cursosModel {
 private Database db= new Database();
 	
 	public List<CursosDTO> getListacursos(){
-		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, apertura_inscripcion, cierre_inscripcion, estado "+
+		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado "+
 				"FROM Cursos "+
 				"Where estado='Planificado'";
 		 List<CursosDTO> rows=db.executeQueryPojo(CursosDTO.class,sql); //Envia en forma de List CursoDTO la consulta sql

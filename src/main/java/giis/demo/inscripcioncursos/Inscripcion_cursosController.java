@@ -79,7 +79,8 @@ public class Inscripcion_cursosController {
 		view.getBtnInscripcion().addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
 				if(!view.getJTnumero().getText().isEmpty() && view.getTabCurso().getSelectedRow()!=-1) { //Comprueba que la Jtextnumero no se encuentre vacio y se selcciona un curso
-					int cursoId=ListaCursos.get(view.getTabCurso().getSelectedRow()).getId_curso();
+					CursosDTO curso=ListaCursos.get(view.getTabCurso().getSelectedRow());
+					int cursoId=curso.getId_curso();
 					String fechaapertura=ListaCursos.get(view.getTabCurso().getSelectedRow()).getApertura_inscripcion();
 					String cierre=ListaCursos.get(view.getTabCurso().getSelectedRow()).getCierre_inscripcion();
 					ColegiadoDTO colegiado=Inscripcion_cursosController.this.getDatosColegiados(); //Obtiene el objeto de tipo ColegiadoDTO
@@ -103,7 +104,7 @@ public class Inscripcion_cursosController {
 							int idInscripcion=model.ObtenerIdInscripcion(); //Obtenemos el nuevo id para insertar en la tabla
 							model.InscribirEnCurso(idInscripcion,colegiado,cursoId,SwingUtil.Obtener_fechaActual()); //Inscribimos al alumno en el curso
 							Inscripcion_cursosController.this.getListaCursos(); //Actualizar la lista de cursos
-							Justificante_Inscripción justificante= new Justificante_Inscripción(colegiado,SwingUtil.Obtener_fechaActual());
+							Justificante_Inscripción justificante= new Justificante_Inscripción(colegiado,SwingUtil.Obtener_fechaActual(),curso);
 							justificante.getFrame().setVisible(true);
 						}
 				
@@ -122,7 +123,7 @@ public class Inscripcion_cursosController {
 	 */
 	public void getListaCursos() {
 				ListaCursos=model.getListacursos();
-				TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","apertura_inscripcion","cierre_inscripcion","estado"});
+				TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","cuota_precolegiado", "cuota_colegiado", "cuota_otros","apertura_inscripcion","cierre_inscripcion","estado"});
 				view.getTabCurso().setModel(tmodel);
 				SwingUtil.autoAdjustColumns(view.getTabCurso());			
 	}

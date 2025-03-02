@@ -16,7 +16,7 @@ public class Inscripcion_cursosModel {
 	private Database db= new Database();
 	
 	public List<CursosDTO> getListacursos(){
-		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, apertura_inscripcion, cierre_inscripcion, estado "+
+		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado "+
 				"FROM Cursos "+
 				"Where estado='Disponible'";
 		 List<CursosDTO> rows=db.executeQueryPojo(CursosDTO.class,sql); //Envia en forma de List CursoDTO la consulta sql
@@ -49,10 +49,6 @@ public class Inscripcion_cursosModel {
 		String sql2 = "UPDATE Cursos SET plazas = plazas - 1 WHERE id_curso = ? AND plazas > 0;";
 		db.executeUpdate(sql,InscripciónID,colegiado.getId_colegiado(),cursoID,Util.isoStringToDate(fecha));
 		db.executeUpdate(sql2,cursoID);
-		System.out.println("--------------Justificante de Inscripción------------------ ");
-		System.out.println("Nombre: "+colegiado.getNombre()+" Apellidos: "+colegiado.getApellidos()
-							+"\nColegiadoID: "+colegiado.getId_colegiado()+" Fecha actual de inscripción: "+fecha
-							+"\nCuenta bancaria: "+colegiado.getCuenta_bancaria());
 	}
 	
 	/**
