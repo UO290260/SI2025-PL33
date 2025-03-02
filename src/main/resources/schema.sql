@@ -30,6 +30,8 @@ CREATE TABLE Cursos (
     cuota_precolegiado INT,
     cuota_colegiado INT,
     cuota_otros INT,
+    apertura_inscripcion DATE,
+    cierre_inscripcion DATE,
     estado VARCHAR(15) NOT NULL
 );
 

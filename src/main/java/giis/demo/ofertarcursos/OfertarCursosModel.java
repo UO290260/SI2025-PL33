@@ -8,8 +8,8 @@ public class OfertarCursosModel {
 	private Database db= new Database();
 	
 	public static final String SQL_NUEVO_CURSO = 
-			"INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, cuota_precolegiado, cuota_colegiado, cuota_otros, estado) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Planificado')";
+			"INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, apertura_inscripcion, cierre_inscripcion, cuota_precolegiado, cuota_colegiado, cuota_otros, estado) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, 'Planificado')";
 	
 	void añadirCurso(int id, String titulo, String descr, String fini, String ffin, int duracion, int plazas, int cuota_precolegiado, int cuota_colegiado, int cuota_otros) {
 		db.executeUpdate(SQL_NUEVO_CURSO, id, titulo, descr, fini, ffin, duracion, plazas, cuota_precolegiado==-1 ? null : cuota_precolegiado, cuota_colegiado==-1 ? null : cuota_colegiado, cuota_otros==-1 ? null : cuota_otros);
@@ -25,6 +25,6 @@ public class OfertarCursosModel {
 		if (resultado.isEmpty() || resultado.get(0)[0]==null)
 			return 1;
 		else 
-			return ((Number) resultado.get(0)[0]).intValue() +1;
+			return ((Number) resultado.get(0)[0]).intValue() + 1;
 	}
 }

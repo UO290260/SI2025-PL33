@@ -31,7 +31,7 @@ public class VisualizarCursosView {
 		frame = new JFrame();
 		frame.setTitle("Visualizar Cursos");
 		frame.setName("Visualizar Cursos");
-		frame.setBounds(0, 0, 900, 550);
+		frame.setBounds(0, 0, 1100, 550);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));

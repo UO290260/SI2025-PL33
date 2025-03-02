@@ -8,13 +8,15 @@ public class VisualizarCursosDTO {
 	private String fecha_fin;
 	private int duracion;
 	private int plazas;
+	private String apertura_inscripcion;
+	private String cierre_inscripcion;
 	private int cuota_precolegiado;
 	private int cuota_colegiado;
 	private int cuota_otros;
 	private String estado;
 	
 	public VisualizarCursosDTO() {}
-	public VisualizarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int cuotaPre, int cuotaCol, int cuotaOtros, String est) {
+	public VisualizarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int cuotaPre, int cuotaCol, int cuotaOtros, String apertura, String cierre, String est) {
 		setId_curso(id);
 		setTitulo(tit); 
 		setDescripcion(descr);
@@ -22,6 +24,8 @@ public class VisualizarCursosDTO {
 		setFecha_fin(ffin);
 		setDuracion(dur);
 		setPlazas(plz);
+		setApertura_inscripcion(apertura);
+		setCierre_inscripcion(cierre);
 		setCuota_precolegiado(cuotaPre);
 		setCuota_colegiado(cuotaCol);
 		setCuota_otros(cuotaOtros);
@@ -93,5 +97,17 @@ public class VisualizarCursosDTO {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	public String getApertura_inscripcion() {
+		return apertura_inscripcion;
+	}
+	public void setApertura_inscripcion(String apertura_inscripcion) {
+		this.apertura_inscripcion = apertura_inscripcion;
+	}
+	public String getCierre_inscripcion() {
+		return cierre_inscripcion;
+	}
+	public void setCierre_inscripcion(String cierre_inscripcion) {
+		this.cierre_inscripcion = cierre_inscripcion;
 	}
 }
