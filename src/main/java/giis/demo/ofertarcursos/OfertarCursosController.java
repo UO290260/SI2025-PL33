@@ -140,7 +140,7 @@ public class OfertarCursosController {
             return;
         }
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaIniStr = sdf.format(fechaIni);
 		String fechaFinStr = sdf.format(fechaFin);
 		
