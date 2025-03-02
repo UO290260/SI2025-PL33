@@ -1,24 +1,17 @@
 package giis.demo.inscripcioncursos;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 
-
-
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.TableModel;
 
 import giis.demo.util.ApplicationException;
-import giis.demo.util.Database;
 import giis.demo.util.SwingUtil;
 import giis.demo.util.Util;
 
@@ -48,7 +41,6 @@ public class Inscripcion_cursosController {
                     e.consume(); // Bloquear el carácter
                 }
             }
-          
         });
 		
 		//Este método hará una consulta con el número del colegiado al hacer enter o en su defecto tmb al hacer click en un boton
@@ -57,11 +49,9 @@ public class Inscripcion_cursosController {
             public void keyPressed(KeyEvent e) {
             	if(e.getKeyCode() == KeyEvent.VK_ENTER && !view.getJTnumero().getText().isEmpty()) //Comprueba que la Jtextnumero no se encuentre vacio y si presionamos enter
             	{
-            		
             		Inscripcion_cursosController.this.getDatosColegiados();
                 }
             }
-          
         });
 		
 		view.getBtnNumero().addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
@@ -70,7 +60,6 @@ public class Inscripcion_cursosController {
             	{
             		Inscripcion_cursosController.this.getDatosColegiados();
                 }
-				
 			}
 		});
 		
@@ -92,7 +81,6 @@ public class Inscripcion_cursosController {
 						}
 					if(!model.plazasDisponibles(cursoId)) //Comprueba si hay o no plazas disponibles 
 						{
-
 							throw new ApplicationException("No hay plazas disponibles");
 						}
 					if((fechaActual.before(fechaApertura) || fechaActual.after(fechaCierre))) //Comprueba si el alumno se puede matricular del curso 
@@ -107,14 +95,12 @@ public class Inscripcion_cursosController {
 							Justificante_Inscripción justificante= new Justificante_Inscripción(colegiado,SwingUtil.Obtener_fechaActual(),curso);
 							justificante.getFrame().setVisible(true);
 						}
-				
 				}
 				else
 					{
 						throw new ApplicationException("El campo no debe de estar vacio y debe seleccionar curso: ");
 					}
-			}
-			
+			}	
 		});
 	}
 	

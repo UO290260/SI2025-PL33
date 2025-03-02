@@ -1,4 +1,4 @@
-package giis.demo.ofertar_cursos;
+package giis.demo.ofertarcursos;
 
 import java.awt.Dimension;
 
@@ -40,7 +40,7 @@ public class OfertarCursosView {
 		frame.setName("Ofertar Curso");
 		frame.setBounds(0, 0, 400, 550);
 		frame.setResizable(false);
-		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
 		frame.setLocationRelativeTo(null);
 		

@@ -1,15 +1,10 @@
 package giis.demo.inscripcioncursos;
 
-
-
-
-import java.util.Date;
 import java.util.List;
 
 import giis.demo.util.ApplicationException;
 import giis.demo.util.Database;
 import giis.demo.util.Util;
-
 
 public class Inscripcion_cursosModel {
 	

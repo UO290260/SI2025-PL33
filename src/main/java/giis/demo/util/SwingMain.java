@@ -12,7 +12,12 @@ import giis.demo.historicocursos.HistoricocursosView;
 import giis.demo.inscripcioncolegiados.InscripcioncolegiadosController;
 import giis.demo.inscripcioncolegiados.InscripcioncolegiadosModel;
 import giis.demo.inscripcioncolegiados.InscripcioncolegiadosView;
-import giis.demo.ofertar_cursos.*;
+import giis.demo.ofertarcursos.OfertarCursosController;
+import giis.demo.ofertarcursos.OfertarCursosModel;
+import giis.demo.ofertarcursos.OfertarCursosView;
+import giis.demo.visualizarcursos.VisualizarCursosController;
+import giis.demo.visualizarcursos.VisualizarCursosModel;
+import giis.demo.visualizarcursos.VisualizarCursosView;
 import giis.demo.inscripcioncursos.Inscripcion_cursosController;
 import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
 import giis.demo.inscripcioncursos.Inscripcion_cursosView;
@@ -58,20 +63,20 @@ public class SwingMain {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Main");
-		frame.setBounds(0, 0, 300, 200);
+		frame.setBounds(0, 0, 300, 300);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 
 		//Boton de la historia Ofertar Cursos
-		JButton btnEjecutarTkrun = new JButton("1. Ejecutar ofertar_curso");
-		btnEjecutarTkrun.addActionListener(new ActionListener() { 
+		JButton btnOfertarCursos = new JButton("1. Ejecutar ofertar_curso");
+		btnOfertarCursos.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				OfertarCursosController controller=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
+				OfertarCursosController controllerOfertarCursos=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
 
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnEjecutarTkrun);
+		frame.getContentPane().add(btnOfertarCursos);
 
 		//Boton de la historia inscripcion_colegiados
 		JButton btnInscripcion_colegiados = new JButton("2. Ejecutar de inscripcion_colegiados");
@@ -105,6 +110,17 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnAbrirCurso);
 
+		//Boton de la historia Visualizar Cursos
+				JButton btnVisualizarrCursos = new JButton("5. Ejecutar Visualizar Cursos");
+				btnVisualizarrCursos.addActionListener(new ActionListener() { 
+					public void actionPerformed(ActionEvent e) {
+						VisualizarCursosController controllerVisualizarCursos=new VisualizarCursosController(new VisualizarCursosModel(), new VisualizarCursosView());
+
+					}
+				});
+				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+				frame.getContentPane().add(btnVisualizarrCursos);
+		
 		//Boton de la historia historico_cursos
 				JButton btnHistoricocurso = new JButton("6. Ejecutar de historico_cursos");
 				btnHistoricocurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
@@ -140,7 +156,6 @@ public class SwingMain {
 			}
 		});
 		frame.getContentPane().add(btnCargarDatosIniciales);
-
 	}
 
 	public JFrame getFrame() { return this.frame;}
