@@ -39,7 +39,7 @@ public class Inscripcion_cursosView {
 			frame.setName("Inscripción");
 			frame.setBounds(0, 0, 792, 380);
 			frame.setResizable(false); // para que la ventana no pueda cambiar de tamaño 
-			frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+			frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 			frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]")); //Es el layout que usaremos dividiendolo en filas y columnas
 			
 			final JLabel lblinscripción;
