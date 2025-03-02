@@ -28,7 +28,7 @@ public class OfertarCursosJustificante {
 		frame.setName("Justificante");
 		frame.setBounds(0, 0, 300, 300);
 		frame.setResizable(true);
-		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
 		frame.setLocationRelativeTo(null);
 		

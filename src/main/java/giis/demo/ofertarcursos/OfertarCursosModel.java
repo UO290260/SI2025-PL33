@@ -8,7 +8,7 @@ public class OfertarCursosModel {
 	private Database db= new Database();
 	
 	public static final String SQL_NUEVO_CURSO = 
-			"INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, apertura_inscripcion, cierre_inscripcion, cuota_precolegiado, cuota_colegiado, cuota_otros, estado) "
+			"INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, cuota_precolegiado, cuota_colegiado, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, 'Planificado')";
 	
 	void añadirCurso(int id, String titulo, String descr, String fini, String ffin, int duracion, int plazas, int cuota_precolegiado, int cuota_colegiado, int cuota_otros) {
