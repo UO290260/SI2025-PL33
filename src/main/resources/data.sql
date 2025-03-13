@@ -7,12 +7,12 @@ INSERT INTO Colegiados (id_colegiado, nombre, apellidos, DNI, direccion, poblaci
 (4, 'Sara', 'Revolver Revolver', '45678901D', 'Plaza Mayor 5', 'Barcelona', '1993-11-09', 'ES9920002510123456789011', 'Arquitectura', '2017-11-01' , 'Aprobada'),
 (5, 'Ramon', 'Suarez del Valle', '56789012E', 'Calle Luna 14', 'Sevilla', '1980-05-04', 'ES2320891510123456789015', 'Deportes', '2008-11-10', 'Aprobada');
 delete from Cursos;
-INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, sesiones, cuota_precolegiado, cuota_colegiado, cuota_desempleado, cuota_alumno, cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado) VALUES
-(1, 'Optimización de algoritmos', 'Curso de algoritmos', '2024-01-03', '2024-01-06', 90, 30, 100, 120, 200, 100, 100, 100, 100, '2023-11-10', '2023-12-10', 'Disponible'),
-(2, 'Inteligencia artificial', 'Aprendizaje automático de ordenadores', '2024-04-07', '2024-09-10', 90, 25, 300, 400, NULL, 100, 100, 100, 100, '2024-02-05', '2024-03-05', 'Disponible'),
-(3, 'Ciberseguridad', 'Principios de seguridad en sistemas operativos', '2024-10-05', '2024-11-08', 120, 20, 100, 250, 250, 100, 100, 100, 100, '2024-07-20', '2024-08-20', 'Disponible'),
-(4, 'Arquitectura urbanística', 'Principios de diseño arquitectónico y urbanismo', '2024-10-06', '2024-10-09', 90, 35, 100, 200, 220 ,100, 100, 100, 100, NULL, NULL, 'Pendiente'),
-(5, 'Entrenador', 'Principios de entrenamiento deportivo', '2024-01-07', '2024-01-10', 90, 40, 400, 100, 100, 100, 100, 400, 150, NULL, NULL, 'Pendiente');
+INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, sesiones, cuota_precolegiado, cuota_colegiado, cuota_minusvalido, cuota_desempleado, cuota_empleado, cuota_alumno, cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado) VALUES
+(1, 'Optimización de algoritmos', 'Curso de algoritmos', '2024-01-03', '2024-01-06', 90, 30, 10, 120, 200, 80, 100, 100, 100, 100, 100, '2023-11-10', '2023-12-10', 'Disponible'),
+(2, 'Inteligencia artificial', 'Aprendizaje automático de ordenadores', '2024-04-07', '2024-09-10', 90, 25, 3, 400, NULL, 100, NULL, 100, NULL, 100, 100, '2024-02-05', '2024-03-05', 'Disponible'),
+(3, 'Ciberseguridad', 'Principios de seguridad en sistemas operativos', '2024-10-05', '2024-11-08', 120, 20, 5, 250, 250, 100, NULL, 100, 100, 100, NULL, '2024-07-20', '2024-08-20', 'Disponible'),
+(4, 'Arquitectura urbanística', 'Principios de diseño arquitectónico y urbanismo', '2024-10-06', '2024-10-09', 90, 35, 10, 200, 220 ,100, NULL, 100, 100, 100, NULL, NULL, NULL, 'Pendiente'),
+(5, 'Entrenador', 'Principios de entrenamiento deportivo', '2024-01-07', '2024-01-10', 90, 40, 6, 100, 100, 70, 100, 120, 100, 400, 150, NULL, NULL, 'Pendiente');
 delete from Inscripciones;
 INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion) VALUES
 (1, 1, 1, '2024-02-15'),
