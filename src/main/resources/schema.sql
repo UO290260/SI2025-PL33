@@ -2,12 +2,11 @@
 --(en este caso en cada aplicacion se usa solo una tabla, por lo que no hace falta)
 
 --Para giis.demo.tkrun:
+DROP TABLE IF EXISTS Colegiados;
 DROP TABLE IF EXISTS Inscripciones;
 DROP TABLE IF EXISTS Cursos;
-DROP TABLE IF EXISTS Colegiados;
 DROP TABLE IF EXISTS Sesiones;
-DROP TABLE IF EXISTS Cuotas;
-DROP TABLE IF EXISTS Personas;
+DROP TABLE IF EXISTS Externos;
 DROP TABLE IF EXISTS Peritos;
 
 CREATE TABLE Colegiados (
@@ -21,9 +20,8 @@ CREATE TABLE Colegiados (
     cuenta_bancaria VARCHAR(30),
     titulacion VARCHAR(50),
     fecha_colegiacion DATE,
-    estado VARCHAR(20),
+    estado VARCHAR(20)
 );
-
 CREATE TABLE Cursos (
     id_curso INT PRIMARY KEY,
     titulo VARCHAR(30) NOT NULL,
@@ -38,7 +36,7 @@ CREATE TABLE Cursos (
 	cuota_desempleado INT,
 	cuota_alumno INT,
 	cuota_empresa INT,
-	cuota_otro INT,
+	cuota_otros INT,
     apertura_inscripcion DATE,
     cierre_inscripcion DATE,
     estado VARCHAR(15) NOT NULL
@@ -60,7 +58,7 @@ CREATE TABLE Sesiones (
 	id_sesion INT PRIMARY KEY,
 	id_curso INT NOT NULL,
 	fecha DATE NOT NULL,
-	hora_inicio HOUR,
+	hora_inicio TIME,
 	duracion INT NOT NULL,
 	FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
 );
@@ -83,3 +81,4 @@ CREATE TABLE Peritos (
 	TAP INT UNIQUE,
 	FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE
 );
+
