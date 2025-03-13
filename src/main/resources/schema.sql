@@ -5,6 +5,10 @@
 DROP TABLE IF EXISTS Inscripciones;
 DROP TABLE IF EXISTS Cursos;
 DROP TABLE IF EXISTS Colegiados;
+DROP TABLE IF EXISTS Sesiones;
+DROP TABLE IF EXISTS Cuotas;
+DROP TABLE IF EXISTS Personas;
+DROP TABLE IF EXISTS Peritos;
 
 CREATE TABLE Colegiados (
     id_colegiado INT PRIMARY KEY,
@@ -16,7 +20,8 @@ CREATE TABLE Colegiados (
     fecha_nacimiento DATE,
     cuenta_bancaria VARCHAR(30),
     titulacion VARCHAR(50),
-    fecha_colegiacion DATE
+    fecha_colegiacion DATE,
+    estado VARCHAR(20),
 );
 
 CREATE TABLE Cursos (
@@ -27,9 +32,13 @@ CREATE TABLE Cursos (
     fecha_fin DATE NOT NULL,
     duracion INT NOT NULL,
     plazas INT NOT NULL,
+    sesiones INT NOT NULL,
     cuota_precolegiado INT,
-    cuota_colegiado INT,
-    cuota_otros INT,
+	cuota_colegiado INT,
+	cuota_desempleado INT,
+	cuota_alumno INT,
+	cuota_empresa INT,
+	cuota_otro INT,
     apertura_inscripcion DATE,
     cierre_inscripcion DATE,
     estado VARCHAR(15) NOT NULL
@@ -40,7 +49,37 @@ CREATE TABLE Inscripciones (
     id_colegiado INT NOT NULL,
     id_curso INT NOT NULL,
     fecha_inscripcion DATE,
+    estado VARCHAR (20),
+    cantidad_pagar INT,
+    cantidad_devolver INT,
     FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE,
     FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
 );
 
+CREATE TABLE Sesiones (
+	id_sesion INT PRIMARY KEY,
+	id_curso INT NOT NULL,
+	fecha DATE NOT NULL,
+	hora_inicio HOUR,
+	duracion INT NOT NULL,
+	FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
+);
+
+CREATE TABLE Externos (
+	id_externo INT PRIMARY KEY,
+    nombre VARCHAR(30) NOT NULL,
+    apellidos VARCHAR(30) NOT NULL,
+    DNI VARCHAR(15) NOT NULL,
+    direccion VARCHAR(50) NOT NULL,
+    poblacion VARCHAR(30) NOT NULL,
+    fecha_nacimiento DATE,
+    cuenta_bancaria VARCHAR(30)
+);
+
+CREATE TABLE Peritos (
+	id_colegiado INT PRIMARY KEY,
+	correo VARCHAR(50) NOT NULL,
+	telefono INT NOT NULL,
+	TAP INT UNIQUE,
+	FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE
+);
