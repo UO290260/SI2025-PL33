@@ -88,11 +88,10 @@ public class Inscripcion_cursosController {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		        if (Inscripcion_cursosController.this.comprobar_datos_tarjeta()) {
-		            System.out.println(idInscripcion);
 		            model.InscribirEnCurso(idInscripcion, colegiado, cursoId, SwingUtil.Obtener_fechaActual(), true); // Inscribimos al alumno en el curso con tarjeta
 		            Inscripcion_cursosController.this.getListaCursos(); // Actualizamos la lista de cursos
 		            tarjetaV.getFrame().dispose(); // Cerramos la ventana tras el pago
-		            Justificante_Inscripción justificante = new Justificante_Inscripción(colegiado, SwingUtil.Obtener_fechaActual(), curso);
+		            Justificante_tarjeta justificante = new Justificante_tarjeta(colegiado, SwingUtil.Obtener_fechaActual(), curso,tarjetaV.getTxtNumeroTarjeta().getText());
 		            justificante.getFrame().setVisible(true);
 		        }
 		    }
