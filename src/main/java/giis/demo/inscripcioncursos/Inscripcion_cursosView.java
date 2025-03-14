@@ -3,9 +3,11 @@ package giis.demo.inscripcioncursos;
 import java.awt.Dimension;
 import java.awt.SystemColor;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -21,6 +23,8 @@ public class Inscripcion_cursosView {
 	private JTable TabCurso;
 	private JLabel DatosPersonales;
 	private JTable tabDatos;
+	private JRadioButton rbTarjeta;
+	private JRadioButton rbTransferencia;
 
 	public Inscripcion_cursosView() {
 		iniciate();
@@ -80,10 +84,30 @@ public class Inscripcion_cursosView {
 		tableDetallePanel.setMinimumSize(new Dimension(200,65));
 		tableDetallePanel.setPreferredSize(new Dimension(1000,65));
 		frame.getContentPane().add(tableDetallePanel, "cell 0 6 2 1");
+		
+		 // Agregar los botones de selección de pago
+	    JLabel lblMetodoPago = new JLabel("Seleccione método de pago:");
+	    frame.getContentPane().add(lblMetodoPago, "cell 0 7");
+
+	    rbTarjeta = new JRadioButton("Tarjeta");
+	    rbTarjeta.setName("rbTarjeta");
+	    
+	    rbTransferencia = new JRadioButton("Transferencia");
+	    rbTransferencia.setName("rbTransferencia");
+
+	    // Agrupar los botones para que solo se pueda seleccionar uno
+	    ButtonGroup grupoPago = new ButtonGroup();
+	    grupoPago.add(rbTarjeta);
+	    grupoPago.add(rbTransferencia);
+
+	    // Agregar los botones de pago al frame
+	    frame.getContentPane().add(rbTarjeta, "cell 0 8");
+	    frame.getContentPane().add(rbTransferencia, "cell 0 8");
+		
 		//Boton para inscribir a un colegiado al curso 
 		btnInscripcion = new JButton("Inscribirse");
 		IntroducirNúmero.setLabelFor(btnInscripcion);
-		frame.getContentPane().add(btnInscripcion, "cell 1 7,alignx right");		
+		frame.getContentPane().add(btnInscripcion, "cell 1 9,alignx right");		
 	}
 
 	//los getters y setters de los campos de los atributos
@@ -100,6 +124,9 @@ public class Inscripcion_cursosView {
 	public JLabel getDatosPersonales() {return DatosPersonales;}
 	public void setDatosPersonales(JLabel datosPersonales) {DatosPersonales = datosPersonales;}
 	public JTable getTabDatos() {return tabDatos;}
-	public void setTabDatos(JTable tabDatos) {this.tabDatos = tabDatos;} 
-
+	public void setTabDatos(JTable tabDatos) {this.tabDatos = tabDatos;}
+	public JRadioButton getRbTarjeta() {return rbTarjeta;}
+	public void setRbTarjeta(JRadioButton rbTarjeta) {this.rbTarjeta = rbTarjeta;}
+	public JRadioButton getRbTransferencia() {return rbTransferencia;}
+	public void setRbTransferencia(JRadioButton rbTransferencia) {this.rbTransferencia = rbTransferencia;}
 }

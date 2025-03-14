@@ -1,6 +1,5 @@
 package giis.demo.util;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

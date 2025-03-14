@@ -39,8 +39,14 @@ public class Inscripcion_cursosModel {
 	 * @param cursoID número entero
 	 * @param fecha String de la fecha actual
 	 */
-	public void InscribirEnCurso(int InscripciónID,ColegiadoDTO colegiado,int cursoID,String fecha) {
-		String sql= "INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion) VALUES (?, ?, ?, ?);";
+	public void InscribirEnCurso(int InscripciónID,ColegiadoDTO colegiado,int cursoID,String fecha,boolean tarjeta) {
+		String sql=null;
+		if(tarjeta) {
+			 sql= "INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Matriculado',NULL,NULL);";
+		}
+		else {
+			 sql= "INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Pre-inscrito',NULL,NULL);";
+		}
 		String sql2 = "UPDATE Cursos SET plazas = plazas - 1 WHERE id_curso = ? AND plazas > 0;";
 		db.executeUpdate(sql,InscripciónID,colegiado.getId_colegiado(),cursoID,Util.isoStringToDate(fecha));
 		db.executeUpdate(sql2,cursoID);
