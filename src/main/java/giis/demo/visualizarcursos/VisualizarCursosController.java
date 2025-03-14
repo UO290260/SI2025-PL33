@@ -25,7 +25,6 @@ public class VisualizarCursosController {
 	 */
 	public void initView() {
 		view.getFrame().setVisible(true);
-		
 	}
 	
 	//Cargamos la lista del colectivo solicitado

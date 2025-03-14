@@ -50,7 +50,7 @@ public class VisualizarCursosView {
 		
 		//Tabla para mostrar los cursos
 		tabla = new JTable();
-		tabla.setName("tabDetalle");
+		tabla.setName("tablaCursos");
 		tabla.setRowSelectionAllowed(false);
 		tabla.setDefaultEditor(Object.class, null); 
 		tabla.setBackground(SystemColor.control);

@@ -18,6 +18,9 @@ import giis.demo.ofertarcursos.OfertarCursosView;
 import giis.demo.visualizarcursos.VisualizarCursosController;
 import giis.demo.visualizarcursos.VisualizarCursosModel;
 import giis.demo.visualizarcursos.VisualizarCursosView;
+import giis.demo.visualizarinscritos.VisualizarInscritosController;
+import giis.demo.visualizarinscritos.VisualizarInscritosModel;
+import giis.demo.visualizarinscritos.VisualizarInscritosView;
 import giis.demo.inscripcioncursos.Inscripcion_cursosController;
 import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
 import giis.demo.inscripcioncursos.Inscripcion_cursosView;
@@ -131,6 +134,17 @@ public class SwingMain {
 				});
 				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 				frame.getContentPane().add(btnHistoricocurso);
+				
+				//Boton de la historia Visualizar Inscritos
+				JButton btnVisualizarInscritos = new JButton("7. Visualizar Inscritos");
+				btnVisualizarInscritos.addActionListener(new ActionListener() { 
+					public void actionPerformed(ActionEvent e) {
+						VisualizarInscritosController controllerVisualizarCursos=new VisualizarInscritosController(new VisualizarInscritosModel(), new VisualizarInscritosView());
+
+					}
+				});
+				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+				frame.getContentPane().add(btnVisualizarInscritos);
 
 		/**
 		 * Cargar la base de datos en blanco 
