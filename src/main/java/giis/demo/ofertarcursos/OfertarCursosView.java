@@ -19,10 +19,11 @@ import java.util.Date;
 
 public class OfertarCursosView {
 	private JFrame frame;
-	private JTextField txtTitulo, txtDescripcion, txtDuracion, txtPlazas, txtCuotaPrecolegiado, txtCuotaColegiado, txtCuotaOtros;
+	private JTextField txtTitulo, txtDescripcion, txtDuracion, txtPlazas, txtSesiones, txtCuotaPrecolegiado, txtCuotaColegiado, txtCuotaMinusvalido, 
+	txtCuotaDesempleado, txtCuotaEmpleado, txtCuotaAlumno, txtCuotaEmpresa, txtCuotaOtros;
 	private JDateChooser calFechaIni, calFechaFin;
 	private JButton bConfirmar;
-	private JCheckBox col1, col2, col3;
+	private JCheckBox col1, col2, col3, col4, col5, col6, col7, col8;
 	
 	/**
 	 * Create the application.
@@ -38,7 +39,7 @@ public class OfertarCursosView {
 		frame = new JFrame();
 		frame.setTitle("Ofertar Curso");
 		frame.setName("Ofertar Curso");
-		frame.setBounds(0, 0, 400, 550);
+		frame.setBounds(0, 0, 400, 800);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
@@ -50,8 +51,14 @@ public class OfertarCursosView {
 		final JLabel lblFechaFin;
 		final JLabel lblDuracion;
 		final JLabel lblPlazas;
+		final JLabel lblSesiones;
 		final JLabel lblCuotaPrecolegiado;
 		final JLabel lblCuotaColegiado;
+		final JLabel lblCuotaMinusvalido;
+		final JLabel lblCuotaDesempleado;
+		final JLabel lblCuotaEmpleado;
+		final JLabel lblCuotaAlumno;
+		final JLabel lblCuotaEmpresa;
 		final JLabel lblCuotaOtros;
 		final JLabel lblColectivos;
 		
@@ -111,14 +118,22 @@ public class OfertarCursosView {
 		txtPlazas = new JTextField();
 		txtPlazas.setName("txtPlazas");
 		
+		// Numero de sesiones
+		lblSesiones = new JLabel("Sesiones*");
+						
+		txtSesiones = new JTextField();
+		txtSesiones.setName("txtSesiones");
+		
 		//Panel para organizar Duración y plazas
 		JPanel panelDatos = new JPanel();
 		frame.getContentPane().add(panelDatos, "wrap");
-		panelDatos.setLayout(new GridLayout(2, 2, 70, 10));
+		panelDatos.setLayout(new GridLayout(3, 2, 70, 10));
 		panelDatos.add(lblDuracion);
 		panelDatos.add(txtDuracion);
 		panelDatos.add(lblPlazas);
 		panelDatos.add(txtPlazas);
+		panelDatos.add(lblSesiones);
+		panelDatos.add(txtSesiones);
 		panelDatos.setBorder(new EmptyBorder(0,0,15,0));
 		
 		// Cuotas
@@ -132,6 +147,31 @@ public class OfertarCursosView {
 		txtCuotaColegiado = new JTextField();
 		txtCuotaColegiado.setName("txtCuotaColegiado");
 		
+		lblCuotaMinusvalido = new JLabel("Cuota Minusvalidos");
+		
+		txtCuotaMinusvalido = new JTextField();
+		txtCuotaMinusvalido.setName("txtCuotaMinusvalido");
+		
+		lblCuotaDesempleado = new JLabel("Cuota Desempleados");
+		
+		txtCuotaDesempleado = new JTextField();
+		txtCuotaDesempleado.setName("txtCuotaDesempleado");
+		
+		lblCuotaEmpleado = new JLabel("Cuota Empleados");
+		
+		txtCuotaEmpleado = new JTextField();
+		txtCuotaEmpleado.setName("txtCuotaEmpleado");
+		
+		lblCuotaAlumno = new JLabel("Cuota Alumnos");
+		
+		txtCuotaAlumno = new JTextField();
+		txtCuotaAlumno.setName("txtCuotaAlumno");
+		
+		lblCuotaEmpresa = new JLabel("Cuota Empresas");
+		
+		txtCuotaEmpresa = new JTextField();
+		txtCuotaEmpresa.setName("txtCuotaEmpresa");
+		
 		lblCuotaOtros = new JLabel("Cuota Otros");
 		
 		txtCuotaOtros = new JTextField();
@@ -139,12 +179,22 @@ public class OfertarCursosView {
 		
 		JPanel panelCuotas = new JPanel();
 		frame.getContentPane().add(panelCuotas, "wrap");
-		panelCuotas.setLayout(new GridLayout(3, 2, 70, 10));
+		panelCuotas.setLayout(new GridLayout(8, 2, 70, 10));
 
 		panelCuotas.add(lblCuotaPrecolegiado);
         panelCuotas.add(txtCuotaPrecolegiado);
         panelCuotas.add(lblCuotaColegiado);
         panelCuotas.add(txtCuotaColegiado);
+        panelCuotas.add(lblCuotaMinusvalido);
+        panelCuotas.add(txtCuotaMinusvalido);
+        panelCuotas.add(lblCuotaDesempleado);
+        panelCuotas.add(txtCuotaDesempleado);
+        panelCuotas.add(lblCuotaEmpleado);
+        panelCuotas.add(txtCuotaEmpleado);
+        panelCuotas.add(lblCuotaAlumno);
+        panelCuotas.add(txtCuotaAlumno);
+        panelCuotas.add(lblCuotaEmpresa);
+        panelCuotas.add(txtCuotaEmpresa);
         panelCuotas.add(lblCuotaOtros);
         panelCuotas.add(txtCuotaOtros);
 		
@@ -154,14 +204,24 @@ public class OfertarCursosView {
 		frame.getContentPane().add(lblColectivos, "growx, wrap");
 		
 		JPanel colectivos = new JPanel();
-		colectivos.setLayout(new BoxLayout(colectivos, BoxLayout.Y_AXIS)); // Acomoda en columna
+		colectivos.setLayout(new GridLayout(4, 2, 20, 10)); 
         col1 = new JCheckBox("Colegiados");
         col2 = new JCheckBox("Precolegiados");
-        col3 = new JCheckBox("Otros");
+        col3 = new JCheckBox("Minusvalidos");
+        col4 = new JCheckBox("Desempleados");
+        col5 = new JCheckBox("Empleados");
+        col6 = new JCheckBox("Alumnos");
+        col7 = new JCheckBox("Empresas");
+        col8 = new JCheckBox("Otros");
 
         colectivos.add(col1);
         colectivos.add(col2);
         colectivos.add(col3);
+        colectivos.add(col4);
+        colectivos.add(col5);
+        colectivos.add(col6);
+        colectivos.add(col7);
+        colectivos.add(col8);
 
         frame.getContentPane().add(colectivos, "wrap");
         
@@ -175,9 +235,15 @@ public class OfertarCursosView {
 	public JFrame getFrame() { return this.frame; }
 	public JTextField getCuotaPrecolegiado() { return txtCuotaPrecolegiado; }
 	public JTextField getCuotaColegiado() { return txtCuotaColegiado; }
+	public JTextField getCuotaMinusvalido() { return txtCuotaMinusvalido; }
+	public JTextField getCuotaDesempleado() { return txtCuotaDesempleado; }
+	public JTextField getCuotaEmpleado() { return txtCuotaEmpleado; }
+	public JTextField getCuotaAlumno() { return txtCuotaAlumno; }
+	public JTextField getCuotaEmpresa() { return txtCuotaEmpresa; }
 	public JTextField getCuotaOtros() { return txtCuotaOtros; }
 	public JTextField getDuracion() { return txtDuracion; }
 	public JTextField getPlazas() { return txtPlazas; }
+	public JTextField getSesiones() { return txtSesiones; }
 	public Date getFechaIni() { return calFechaIni.getDate(); }
 	public Date getFechaFin() { return calFechaFin.getDate(); }
 	public JButton getBoton() { return bConfirmar; }
@@ -185,5 +251,10 @@ public class OfertarCursosView {
 	public JTextField getDescripcion() {return txtDescripcion; }
 	public JCheckBox getCheckPrecolegiado() {return col1; }
 	public JCheckBox getCheckColegiado() {return col2; }
-	public JCheckBox getCheckOtros() {return col3; }
+	public JCheckBox getCheckMinusvalido() {return col3; }
+	public JCheckBox getCheckDesempleado() {return col4; }
+	public JCheckBox getCheckEmpleado() {return col5; }
+	public JCheckBox getCheckAlumno() {return col6; }
+	public JCheckBox getCheckEmpresa() {return col7; }
+	public JCheckBox getCheckOtros() {return col8; }
 }
