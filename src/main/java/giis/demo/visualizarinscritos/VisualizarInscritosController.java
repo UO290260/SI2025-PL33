@@ -1,5 +1,5 @@
 package giis.demo.visualizarinscritos;
-
+	
 import java.util.List;
 
 import javax.swing.table.TableModel;
@@ -15,6 +15,8 @@ public class VisualizarInscritosController {
 		this.view = v;
 		
 		this.initView();
+		mostrarCursos();
+		mostrarInscritos();
 	}
 	
 	public void initView() {
@@ -32,7 +34,7 @@ public class VisualizarInscritosController {
 		SwingUtil.autoAdjustColumns(view.getTablaCursos());
 	}
 	
-	public void mostrarInscripciones() {
+	public void getListaInscritos() {
 		List<InscripcionDTO> inscripciones = model.getListaInscritos((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
 		
 		TableModel modelInscriciones = SwingUtil.getTableModelFromPojos(inscripciones, new String[]{
@@ -41,5 +43,13 @@ public class VisualizarInscritosController {
 		
 		view.getTablaInscritos().setModel(modelInscriciones);
 		SwingUtil.autoAdjustColumns(view.getTablaInscritos());
+	}
+	
+	public void mostrarInscritos() {
+		 view.getTablaCursos().getSelectionModel().addListSelectionListener(e -> {
+	            if (!e.getValueIsAdjusting()) {
+	                getListaInscritos();  // Llamamos al método que aplica el filtro.
+	            }
+	        });
 	}
 }

@@ -12,6 +12,8 @@ public class CursoDTO {
 		setDescripcion(descr);
 		setEstado(est);
 	}
+	
+	public CursoDTO() {}
 
 	public int getId_curso() {
 		return id_curso;

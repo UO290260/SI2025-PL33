@@ -7,10 +7,9 @@ import giis.demo.util.Database;
 public class VisualizarInscritosModel {
 private Database db= new Database();
 	
- 	//Obtiene la lista de cursos para el colectivo seleccionado
 	public List<InscripcionDTO> getListaInscritos(int id_curso) {
 		String sql = "SELECT i.id_inscripcion, c.nombre, c.apellidos, c.dni, i.estado FROM Colegiados AS c INNER JOIN Inscripciones AS i "
-				+ "USING(c.id_colegiado = i.id_colegiado) WHERE i.id_curso =" + id_curso;
+				+ "USING(id_colegiado) WHERE i.id_curso = " + id_curso;
 		return db.executeQueryPojo(InscripcionDTO.class, sql);
 	}
 	

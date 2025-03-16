@@ -15,6 +15,8 @@ public class InscripcionDTO {
 		setEstado(est);
 	}
 	
+	public InscripcionDTO() {}
+	
 	public int getId_inscripcion() {
 		return id_inscripcion;
 	}

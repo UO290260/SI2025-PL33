@@ -3,6 +3,7 @@ package giis.demo.visualizarinscritos;
 import java.awt.SystemColor;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -18,14 +19,21 @@ public class VisualizarInscritosView {
 	
 	private void initialize() {
 		
+		JLabel lblCurso;
+		JLabel lblInscritos;
+		
 		frame = new JFrame();
 		frame.setTitle("Visualizar Inscritos");
 		frame.setName("Visualizar Inscritos");
-		frame.setBounds(0, 0, 800, 500);
+		frame.setBounds(0, 0, 795, 528);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
 		frame.setLocationRelativeTo(null);
+		frame.getContentPane().setLayout(null);
+		
+		lblCurso = new JLabel("Selecciona un curso:");
+		lblCurso.setBounds(7, 7, 400, 14);
+		frame.getContentPane().add(lblCurso);
 		
 		tablaCursos = new JTable();
 		tablaCursos.setName("tablaInscritos");
@@ -33,7 +41,12 @@ public class VisualizarInscritosView {
 		tablaCursos.setDefaultEditor(Object.class, null); 
 		tablaCursos.setBackground(SystemColor.control);
 		JScrollPane panelCursos = new JScrollPane(tablaCursos);
-		frame.getContentPane().add(panelCursos, "cell 0 4 2 1, grow, wrap");
+		panelCursos.setBounds(7, 32, 770, 200);
+		frame.getContentPane().add(panelCursos);
+		
+		lblInscritos = new JLabel("Inscritos en el curso seleccionado:");
+		lblInscritos.setBounds(7, 243, 400, 14);
+		frame.getContentPane().add(lblInscritos);
 		
 		tablaInscritos = new JTable();
 		tablaInscritos.setName("tablaInscritos");
@@ -41,7 +54,8 @@ public class VisualizarInscritosView {
 		tablaInscritos.setDefaultEditor(Object.class, null); 
 		tablaInscritos.setBackground(SystemColor.control);
 		JScrollPane panelInscritos = new JScrollPane(tablaInscritos);
-		frame.getContentPane().add(panelInscritos, "cell 0 5 2 1, grow, wrap");
+		panelInscritos.setBounds(7, 268, 770, 200);
+		frame.getContentPane().add(panelInscritos);
 	}
 	
 	public JFrame getFrame() { return frame; }
