@@ -26,7 +26,10 @@ public class InscripcionlistaTAPController {
 		vista.getBtnBuscar().addActionListener(e -> SwingUtil.exceptionWrapper(() ->  buscarColegiado()));
 		vista.getBtnGuardar().addActionListener(e -> SwingUtil.exceptionWrapper(() -> guardarCambios()));
 	}
-
+	
+	/**
+	 * Inicializacion del controlador
+	 */
 	public void initView() {	
 		vista.getFrame().setVisible(true);
 		cargarListaPeritos();
