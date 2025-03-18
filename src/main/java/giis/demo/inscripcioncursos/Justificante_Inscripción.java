@@ -10,7 +10,7 @@ public class Justificante_Inscripción extends JFrame {
 	private ColegiadoDTO colegiado;
 	private CursosDTO curso;
 	private String fecha;
-	
+
 	/**
 	 * Clase Justificante utilizada por Inscripcion_cursosController para imprimir datos del justificante
 	 * @param colegiado objeto de tipo DTO
@@ -22,7 +22,7 @@ public class Justificante_Inscripción extends JFrame {
 		this.curso=curso;
 		init();
 	}
-	
+
 	public void init () {
 		frame= new JFrame();
 		frame.setTitle("Justificante de Inscripción del curso");

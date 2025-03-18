@@ -110,26 +110,26 @@ public class SwingMain {
 		frame.getContentPane().add(btnAbrirCurso);
 
 		//Boton de la historia Visualizar Cursos
-				JButton btnVisualizarrCursos = new JButton("5. Ejecutar Visualizar Cursos");
-				btnVisualizarrCursos.addActionListener(new ActionListener() { 
-					public void actionPerformed(ActionEvent e) {
-						VisualizarCursosController controllerVisualizarCursos=new VisualizarCursosController(new VisualizarCursosModel(), new VisualizarCursosView());
+		JButton btnVisualizarrCursos = new JButton("5. Ejecutar Visualizar Cursos");
+		btnVisualizarrCursos.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				VisualizarCursosController controllerVisualizarCursos=new VisualizarCursosController(new VisualizarCursosModel(), new VisualizarCursosView());
 
-					}
-				});
-				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-				frame.getContentPane().add(btnVisualizarrCursos);
-		
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnVisualizarrCursos);
+
 		//Boton de la historia historico_cursos
-				JButton btnHistoricocurso = new JButton("6. Ejecutar de historico_cursos");
-				btnHistoricocurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-					public void actionPerformed(ActionEvent e) {
-						HistoricocursosController controller6=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
-						controller6.initController();
-					}
-				});
-				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-				frame.getContentPane().add(btnHistoricocurso);
+		JButton btnHistoricocurso = new JButton("6. Ejecutar de historico_cursos");
+		btnHistoricocurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				HistoricocursosController controller6=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
+				controller6.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnHistoricocurso);
 
 		/**
 		 * Cargar la base de datos en blanco 

@@ -2,7 +2,6 @@ package giis.demo.inscripcioncursos;
 
 import java.awt.Dimension;
 import java.awt.SystemColor;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,7 +10,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
 import net.miginfocom.swing.MigLayout;
 
 public class Inscripcion_cursosView {
@@ -84,26 +82,26 @@ public class Inscripcion_cursosView {
 		tableDetallePanel.setMinimumSize(new Dimension(200,65));
 		tableDetallePanel.setPreferredSize(new Dimension(1000,65));
 		frame.getContentPane().add(tableDetallePanel, "cell 0 6 2 1");
-		
-		 // Agregar los botones de selección de pago
-	    JLabel lblMetodoPago = new JLabel("Seleccione método de pago:");
-	    frame.getContentPane().add(lblMetodoPago, "cell 0 7");
 
-	    rbTarjeta = new JRadioButton("Tarjeta");
-	    rbTarjeta.setName("rbTarjeta");
-	    
-	    rbTransferencia = new JRadioButton("Transferencia");
-	    rbTransferencia.setName("rbTransferencia");
+		// Agregar los botones de selección de pago
+		JLabel lblMetodoPago = new JLabel("Seleccione método de pago:");
+		frame.getContentPane().add(lblMetodoPago, "cell 0 7");
 
-	    // Agrupar los botones para que solo se pueda seleccionar uno
-	    ButtonGroup grupoPago = new ButtonGroup();
-	    grupoPago.add(rbTarjeta);
-	    grupoPago.add(rbTransferencia);
+		rbTarjeta = new JRadioButton("Tarjeta");
+		rbTarjeta.setName("rbTarjeta");
 
-	    // Agregar los botones de pago al frame
-	    frame.getContentPane().add(rbTarjeta, "cell 0 8");
-	    frame.getContentPane().add(rbTransferencia, "cell 0 8");
-		
+		rbTransferencia = new JRadioButton("Transferencia");
+		rbTransferencia.setName("rbTransferencia");
+
+		// Agrupar los botones para que solo se pueda seleccionar uno
+		ButtonGroup grupoPago = new ButtonGroup();
+		grupoPago.add(rbTarjeta);
+		grupoPago.add(rbTransferencia);
+
+		// Agregar los botones de pago al frame
+		frame.getContentPane().add(rbTarjeta, "cell 0 8");
+		frame.getContentPane().add(rbTransferencia, "cell 0 8");
+
 		//Boton para inscribir a un colegiado al curso 
 		btnInscripcion = new JButton("Inscribirse");
 		IntroducirNúmero.setLabelFor(btnInscripcion);
