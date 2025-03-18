@@ -16,9 +16,9 @@ CREATE TABLE Colegiados (
     fecha_nacimiento DATE,
     cuenta_bancaria VARCHAR(30),
     titulacion VARCHAR(50),
-    fecha_colegiacion DATE
+    fecha_colegiacion DATE,
+    estado VARCHAR(20)
 );
-
 CREATE TABLE Cursos (
     id_curso INT PRIMARY KEY,
     titulo VARCHAR(30) NOT NULL,
@@ -27,9 +27,13 @@ CREATE TABLE Cursos (
     fecha_fin DATE NOT NULL,
     duracion INT NOT NULL,
     plazas INT NOT NULL,
+    sesiones INT NOT NULL,
     cuota_precolegiado INT,
-    cuota_colegiado INT,
-    cuota_otros INT,
+	cuota_colegiado INT,
+	cuota_desempleado INT,
+	cuota_alumno INT,
+	cuota_empresa INT,
+	cuota_otros INT,
     apertura_inscripcion DATE,
     cierre_inscripcion DATE,
     estado VARCHAR(15) NOT NULL
@@ -40,6 +44,9 @@ CREATE TABLE Inscripciones (
     id_colegiado INT NOT NULL,
     id_curso INT NOT NULL,
     fecha_inscripcion DATE,
+    estado VARCHAR (20),
+    cantidad_pagar INT,
+    cantidad_devolver INT,
     FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE,
     FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
 );
