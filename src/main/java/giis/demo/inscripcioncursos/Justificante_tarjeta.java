@@ -27,8 +27,8 @@ public class Justificante_tarjeta extends JFrame {
 	
 	public void init () {
 		frame= new JFrame();
-		frame.setTitle("Justificante");
-		frame.setName("Justificante");
+		frame.setTitle("Justificante de Inscripción de curso");
+		frame.setName("Justificante Inscripción");
 		frame.setBounds(0, 0, 592, 200);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]")); //Es el layout que usaremos dividiendolo en filas y columnas
@@ -39,6 +39,7 @@ public class Justificante_tarjeta extends JFrame {
 		frame.getContentPane().add(new JLabel("ColegiadoID : "+colegiado.getId_colegiado()),"wrap");
 		frame.getContentPane().add(new JLabel("Fecha actual de inscripción:  "+fecha),"wrap");
 		frame.getContentPane().add(new JLabel("Número de la tarjeta:  "+numeroTarjeta),"wrap");
+		frame.getContentPane().add(new JLabel("Curso : "+curso.getTitulo()),"wrap");
 		frame.getContentPane().add(new JLabel("Cuota precolegiado : "+curso.getCuota_precolegiado()),"wrap");
 		frame.getContentPane().add(new JLabel("Cuota colegiado : "+curso.getCuota_colegiado()),"wrap");
 	}

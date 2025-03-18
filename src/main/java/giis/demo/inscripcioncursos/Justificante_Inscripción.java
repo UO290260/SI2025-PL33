@@ -25,7 +25,7 @@ public class Justificante_Inscripción extends JFrame {
 	
 	public void init () {
 		frame= new JFrame();
-		frame.setTitle("Justificante");
+		frame.setTitle("Justificante de Inscripción del curso");
 		frame.setName("Justificante");
 		frame.setBounds(0, 0, 592, 200);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
