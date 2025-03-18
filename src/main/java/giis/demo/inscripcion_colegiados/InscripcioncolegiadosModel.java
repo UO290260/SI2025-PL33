@@ -13,7 +13,7 @@ public class InscripcioncolegiadosModel {
 	 * Obtiene toda la informacion de la lista de colegiados necesaria
 	 */
 	public List<InscripcioncolegiadosDTO> getListaColegiados() {
-		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria, titulacion, fecha_colegiacion FROM Colegiados";
+		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria, titulacion, fecha_colegiacion, estado FROM Colegiados WHERE estado='Aprobada'";
 		return db.executeQueryPojo(InscripcioncolegiadosDTO.class, sql);
 	}
 
