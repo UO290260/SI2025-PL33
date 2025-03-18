@@ -1,6 +1,9 @@
 package giis.demo.inscripcioncursos;
 
+import java.util.Calendar;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import giis.demo.util.ApplicationException;
 import giis.demo.util.Database;
@@ -91,5 +94,14 @@ public class Inscripcion_cursosModel {
 		}else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Comprueba si la fecha que se psa en la tarjeta es correcta o por el contrario está caducada
+	 * @return
+	 */
+	public boolean Comrpobar_fechaTarjeta(Calendar calActual,Calendar calSel) {
+		if((calActual.get(Calendar.YEAR) > calSel.get(Calendar.YEAR)) || (calActual.get(Calendar.YEAR) == calSel.get(Calendar.YEAR) && calActual.get(Calendar.MONTH) > calSel.get(Calendar.MONTH))) return false;
+		else return true;
 	}
 }

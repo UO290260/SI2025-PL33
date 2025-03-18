@@ -257,11 +257,10 @@ public class Inscripcion_cursosController {
             return false;
         }
         
-        if((calActual.get(Calendar.YEAR) > calSel.get(Calendar.YEAR)) || (calActual.get(Calendar.YEAR) == calSel.get(Calendar.YEAR) && calActual.get(Calendar.MONTH) > calSel.get(Calendar.MONTH)))
-        	{
+        if(!model.Comrpobar_fechaTarjeta(calActual, calSel)) {
         	JOptionPane.showMessageDialog(tarjetaV.getFrame(), "La fecha de la tarjeta ha caducado.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        	} //cOMPRUEBA SI LA FECHA ACTUAL ES IGUAL O O INFERIOR A LA FECHA DE CADUCIDAD SINÓ NO DEJARÁ MATRICULARSE
+        	return false;
+        }
 
         return true;
 	}
