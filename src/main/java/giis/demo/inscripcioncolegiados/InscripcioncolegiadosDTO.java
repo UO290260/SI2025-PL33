@@ -15,12 +15,13 @@ public class InscripcioncolegiadosDTO {
 	private String cuentabancaria;
 	private String titulacion;
 	private String fechacolegiacion;
+	private String estado;
 
 	public InscripcioncolegiadosDTO() {}
 
 	public InscripcioncolegiadosDTO(int id_colegiado, String nombre, String apellidos, String dNI, String direccion,
 			String poblacion, String fecha_nacimiento, String cuenta_bancaria, String titulacion,
-			String fecha_colegiacion) {
+			String fecha_colegiacion , String estado) {
 		this.idcolegiado = id_colegiado;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -31,6 +32,7 @@ public class InscripcioncolegiadosDTO {
 		this.cuentabancaria = cuenta_bancaria;
 		this.titulacion = titulacion;
 		this.fechacolegiacion = fecha_colegiacion;
+		this.estado=estado;
 	}
 	public int getId_colegiado() { return this.idcolegiado; } public void setId_colegiado(int id_colegiado) { this.idcolegiado = id_colegiado; }
 	public String getNombre() { return this.nombre; } public void setNombre(String nombre) { this.nombre = nombre; }
@@ -42,4 +44,5 @@ public class InscripcioncolegiadosDTO {
 	public String getCuenta_bancaria() { return this.cuentabancaria; } public void setCuenta_bancaria(String cuenta_bancaria) { this.cuentabancaria = cuenta_bancaria; }
 	public String getTitulacion() { return this.titulacion; } public void setTitulacion(String titulacion) { this.titulacion = titulacion; }
 	public String getFecha_colegiacion() { return this.fechacolegiacion; } public void setFecha_colegiacion(String fecha_colegiacion) { this.fechacolegiacion = fecha_colegiacion; }
+	public String getEstado() { return this.estado;}public void setEstado(String estado) {this.estado = estado; }
 }

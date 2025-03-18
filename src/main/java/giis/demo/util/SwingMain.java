@@ -146,7 +146,7 @@ public class SwingMain {
 		frame.getContentPane().add(btnVisualizarInscritos);
 
 		//Boton de la historia inscripcion_lista_TAP
-		JButton prueba = new JButton("7. Ejecutar de inscripcion_lista_TAP");
+		JButton prueba = new JButton("8. Ejecutar de inscripcion_lista_TAP");
 		prueba.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
 				InscripcionlistaTAPController controller8=new InscripcionlistaTAPController(new InscripcionlistaTAPModel(), new InscripcionlistaTAPView());
