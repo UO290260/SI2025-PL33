@@ -23,7 +23,9 @@ public class VisualizarInscritosController {
 	public void initView() {
 		view.getFrame().setVisible(true);
 	}
-	
+	/**
+	 * Metodo que obtiene los cursos de la base de datos para cargarlos en la tabla de la interfaz
+	 */
 	public void mostrarCursos () {
 		List<CursoDTO> cursos = model.getListaCursos();
 		
@@ -34,7 +36,10 @@ public class VisualizarInscritosController {
 		view.getTablaCursos().setModel(modelCursos);
 		SwingUtil.autoAdjustColumns(view.getTablaCursos());
 	}
-	
+	/**
+	 * Método que obtiene la lista de inscritos de un curso 
+	 * a partir del id del curso seleccionado
+	 */
 	public void getListaInscritos() {
 		List<InscripcionDTO> inscripciones = model.getListaInscritos((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
 		
@@ -49,8 +54,7 @@ public class VisualizarInscritosController {
 	}
 	
 	/**
-	 * Método que obtiene la lista de inscritos de un curso 
-	 * a partir del id del curso seleccionado
+	 * Método que carga los inscritos en la tabla de la interfaz
 	 */
 	public void mostrarInscritos() {
 		 view.getTablaCursos().getSelectionModel().addListSelectionListener(e -> {
