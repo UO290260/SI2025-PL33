@@ -46,5 +46,4 @@ public class CursoDTO {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
 }
