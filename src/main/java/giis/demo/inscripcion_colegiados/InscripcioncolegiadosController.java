@@ -112,7 +112,7 @@ public class InscripcioncolegiadosController {
 		List<InscripcioncolegiadosDTO> colegiados = modelo.getListaColegiados();
 		TableModel tmodel = SwingUtil.getTableModelFromPojos(colegiados, new String[]{
 				"id_colegiado", "nombre", "apellidos", "DNI", "direccion", "poblacion",
-				"fecha_nacimiento", "cuenta_bancaria", "titulacion", "fecha_colegiacion"
+				"fecha_nacimiento", "cuenta_bancaria", "titulacion", "fecha_colegiacion" , "estado"
 		});
 		vista.getTabla().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(vista.getTabla());
