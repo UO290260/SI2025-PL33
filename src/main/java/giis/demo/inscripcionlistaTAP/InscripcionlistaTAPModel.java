@@ -19,7 +19,7 @@ public class InscripcionlistaTAPModel {
 	        return lista.get(0);
 	    }
 	}
-
+	
 	/**
 	 * Metodo que inserta al Perito en la base de datos y añade el estado "Pendiente"
 	 * @param colegiado
@@ -69,9 +69,20 @@ public class InscripcionlistaTAPModel {
 	 * @param id_colegiado
 	 * @return
 	 */
-	public boolean existeColegiado(int id_colegiado) {
+	public boolean existeColegiadoenPeritos(int id_colegiado) {
 		String sql = "SELECT COUNT(*) FROM Peritos WHERE id_colegiado = ?";
 		List<Object[]> resultado = db.executeQueryArray(sql, id_colegiado);
 		return (resultado.get(0)[0] != null && ((Number) resultado.get(0)[0]).intValue() > 0);
+	}
+	
+	/**
+	 * Metodo que comprueba si el id_colegiado buscado no es un colegiado
+	 * @param dni
+	 */
+	public boolean existeColegiadoenColegiados(int id_colegiado) {
+		String sql = "SELECT COUNT(*) FROM Colegiados WHERE id_colegiado = ?";
+		List<Object[]> result = db.executeQueryArray(sql, id_colegiado);
+		//Si es mayor a 0 retornara true , en caso contrario false
+		return ((Number) result.get(0)[0]).intValue() > 0;
 	}
 }

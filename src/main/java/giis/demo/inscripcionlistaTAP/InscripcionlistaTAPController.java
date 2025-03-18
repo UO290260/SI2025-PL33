@@ -123,6 +123,10 @@ public class InscripcionlistaTAPController {
 		else {
 			telefono = Integer.parseInt(telefonoText);
 		} 
+		if (fechaNacimiento == null) {
+	        JOptionPane.showMessageDialog(null, "Debes añadir una fecha.");
+	        return;
+	    }
 
 		String añoText = vista.getAñotxt().getText();
 		String fechasolicitud = Util.dateToIsoString(new Date()); 
@@ -145,6 +149,7 @@ public class InscripcionlistaTAPController {
 		}
 
 		String fechaNacimientoStr = Util.dateToIsoString(fechaNacimiento); 
+		
 		ColegiadosDTO colegiado = new ColegiadosDTO();
 		colegiado.setId_colegiado(idColegiado);
 		colegiado.setNombre(nombre);
@@ -172,8 +177,12 @@ public class InscripcionlistaTAPController {
 		if (!correo.endsWith("@gmail.com")) {
 			JOptionPane.showMessageDialog(null, "El correo introducido no acaba por @gmail.com");
 		} 
-		if (modelo.existeColegiado(colegiado.getId_colegiado())) {
+		if (modelo.existeColegiadoenPeritos(colegiado.getId_colegiado())) {
 			JOptionPane.showMessageDialog(null, "El colegiado ya es un Perito , no se puede volver a añadir");
+			return;
+		}
+		if (!modelo.existeColegiadoenColegiados(colegiado.getId_colegiado())) {
+			JOptionPane.showMessageDialog(null, "El colegiado buscado no es un colegiado");
 			return;
 		}
 		else {
