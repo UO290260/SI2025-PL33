@@ -23,6 +23,9 @@ import giis.demo.visualizarinscritos.VisualizarInscritosView;
 import giis.demo.inscripcioncursos.Inscripcion_cursosController;
 import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
 import giis.demo.inscripcioncursos.Inscripcion_cursosView;
+import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPController;
+import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPModel;
+import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPView;
 import giis.demo.aperturacursos.apertura_cursosController;
 import giis.demo.aperturacursos.apertura_cursosModel;
 import giis.demo.aperturacursos.apertura_cursosView;
@@ -74,7 +77,6 @@ public class SwingMain {
 		btnOfertarCursos.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				OfertarCursosController controllerOfertarCursos=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
-
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
@@ -102,7 +104,6 @@ public class SwingMain {
 		frame.getContentPane().add(btnIncripcióncurso);
 
 		//Boton de la historia apertura_curso
-		//Apertura de cursos
 		JButton btnAbrirCurso = new JButton("4. Apertura Curso"); //Botón que llama a la ventana de inscripción de curso
 		btnAbrirCurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
@@ -124,25 +125,36 @@ public class SwingMain {
 		frame.getContentPane().add(btnVisualizarrCursos);
 
 		//Boton de la historia historico_cursos
-				JButton btnHistoricocurso = new JButton("6. Ejecutar de historico_cursos");
-				btnHistoricocurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-					public void actionPerformed(ActionEvent e) {
-						HistoricocursosController controller6=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
-						controller6.initController();
-					}
-				});
-				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-				frame.getContentPane().add(btnHistoricocurso);
-				
-				//Boton de la historia Visualizar Inscritos
-				JButton btnVisualizarInscritos = new JButton("7. Visualizar Inscritos");
-				btnVisualizarInscritos.addActionListener(new ActionListener() { 
-					public void actionPerformed(ActionEvent e) {
-						VisualizarInscritosController controllerVisualizarCursos=new VisualizarInscritosController(new VisualizarInscritosModel(), new VisualizarInscritosView());
-					}
-				});
-				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-				frame.getContentPane().add(btnVisualizarInscritos);
+		JButton btnHistoricocurso = new JButton("6. Ejecutar de historico_cursos");
+		btnHistoricocurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				HistoricocursosController controller6=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
+				controller6.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnHistoricocurso);
+
+		//Boton de la historia Visualizar Inscritos
+		JButton btnVisualizarInscritos = new JButton("7. Visualizar Inscritos");
+		btnVisualizarInscritos.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				VisualizarInscritosController controllerVisualizarCursos=new VisualizarInscritosController(new VisualizarInscritosModel(), new VisualizarInscritosView());
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnVisualizarInscritos);
+
+		//Boton de la historia inscripcion_lista_TAP
+		JButton prueba = new JButton("7. Ejecutar de inscripcion_lista_TAP");
+		prueba.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				InscripcionlistaTAPController controller8=new InscripcionlistaTAPController(new InscripcionlistaTAPModel(), new InscripcionlistaTAPView());
+				controller8.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(prueba);
 
 		/**
 		 * Cargar la base de datos en blanco 

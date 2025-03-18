@@ -36,9 +36,8 @@ INSERT INTO Externos (id_externo, nombre, apellidos, DNI, direccion, poblacion, 
 (3, 'Javier', 'Ruiz López', '90123456J', 'Avenida de Andalucía 30', 'Valencia', '1980-03-22', 'ES3320568712345678901234'),
 (4, 'Marta', 'López García', '89012345H', 'Avenida de la Ciencia 20', 'Barcelona', '1995-05-18', 'ES4420231145123456789013');
 delete from Peritos;
-INSERT INTO Peritos (id_colegiado, correo, telefono, TAP) VALUES
-(1, 'alejandro.torre@gmail.com', '600123456', 101),
-(2, 'pablo.santos@gmail.com', '612345678', 102),
-(3, 'alejandro.pineiro@gmail.com', '623456789', 103),
-(4, 'sara.revolver@gmail.com', '634567890', 104),
-(5, 'ramon.suarez@gmail.com', '654321987', 105);
+INSERT INTO Peritos (id_colegiado, correo, telefono, fecha , año , tap ,estado) VALUES
+(1, 'alejandro.torre@gmail.com', '600123456', '2012-01-09' , 2011 , 101 , 'Inscrito'),
+(3, 'alejandro.pineiro@gmail.com', '623456789', '2019-11-07' , 2018 , 102 , 'Inscrito'),
+(4, 'sara.revolver@gmail.com', '634567890', '2018-11-01' , 2017, 103 , 'Inscrito'),
+(5, 'ramon.suarez@gmail.com', '654321987', '2019-11-01' , 2018, 104 , 'Inscrito');
