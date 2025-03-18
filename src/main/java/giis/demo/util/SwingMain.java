@@ -139,7 +139,6 @@ public class SwingMain {
 				btnVisualizarInscritos.addActionListener(new ActionListener() { 
 					public void actionPerformed(ActionEvent e) {
 						VisualizarInscritosController controllerVisualizarCursos=new VisualizarInscritosController(new VisualizarInscritosModel(), new VisualizarInscritosView());
-
 					}
 				});
 				frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
