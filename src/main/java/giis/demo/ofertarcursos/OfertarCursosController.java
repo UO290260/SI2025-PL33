@@ -30,6 +30,11 @@ public class OfertarCursosController {
 		//Para que los cuadros de texto comiencen en el mismo estado que sus checkBox
 		view.getCuotaPrecolegiado().setEnabled(false);
 		view.getCuotaColegiado().setEnabled(false);
+		view.getCuotaMinusvalido().setEnabled(false);
+		view.getCuotaDesempleado().setEnabled(false);
+		view.getCuotaEmpleado().setEnabled(false);
+		view.getCuotaAlumno().setEnabled(false);
+		view.getCuotaEmpresa().setEnabled(false);
 		view.getCuotaOtros().setEnabled(false);
 		
 		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
@@ -119,6 +124,46 @@ public class OfertarCursosController {
                 if (!view.getCuotaColegiado().isEnabled()) view.getCuotaColegiado().setText("");
             }
         });
+		
+		view.getCheckMinusvalido().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.getCuotaMinusvalido().setEnabled(view.getCheckMinusvalido().isSelected());
+                if (!view.getCuotaMinusvalido().isEnabled()) view.getCuotaMinusvalido().setText("");
+            }
+        });
+		
+		view.getCheckDesempleado().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.getCuotaDesempleado().setEnabled(view.getCheckDesempleado().isSelected());
+                if (!view.getCuotaDesempleado().isEnabled()) view.getCuotaDesempleado().setText("");
+            }
+        });
+		
+		view.getCheckEmpleado().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.getCuotaEmpleado().setEnabled(view.getCheckEmpleado().isSelected());
+                if (!view.getCuotaEmpleado().isEnabled()) view.getCuotaEmpleado().setText("");
+            }
+        });
+		
+		view.getCheckAlumno().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.getCuotaAlumno().setEnabled(view.getCheckAlumno().isSelected());
+                if (!view.getCuotaAlumno().isEnabled()) view.getCuotaAlumno().setText("");
+            }
+        });
+		
+		view.getCheckEmpresa().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.getCuotaEmpresa().setEnabled(view.getCheckEmpresa().isSelected());
+                if (!view.getCuotaEmpresa().isEnabled()) view.getCuotaEmpresa().setText("");
+            }
+        });
 
 	}
 	/**
@@ -148,17 +193,29 @@ public class OfertarCursosController {
 		//detectados mas adelante
 		int duracion = -1;
 		int plazas = -1;
+		int sesiones = -1;
 		int cuotaPre = -1;
 		int cuotaCol = -1;
+		int cuotaMinus = -1;
+		int cuotaDes = -1;
+		int cuotaEmpl = -1;
+		int cuotaAlu = -1;
+		int cuotaEmpr = -1;
 		int cuotaOtr = -1;
 		if (!view.getDuracion().getText().isBlank()) duracion = Integer.parseInt(view.getDuracion().getText());
 		if (!view.getPlazas().getText().isBlank()) plazas = Integer.parseInt(view.getPlazas().getText());
+		if (!view.getPlazas().getText().isBlank()) sesiones = Integer.parseInt(view.getSesiones().getText());
 		if (!view.getCuotaPrecolegiado().getText().isBlank()) cuotaPre = Integer.parseInt(view.getCuotaPrecolegiado().getText());
 		if (!view.getCuotaColegiado().getText().isBlank()) cuotaCol = Integer.parseInt(view.getCuotaColegiado().getText());
+		if (!view.getCuotaMinusvalido().getText().isBlank()) cuotaMinus = Integer.parseInt(view.getCuotaMinusvalido().getText());
+		if (!view.getCuotaDesempleado().getText().isBlank()) cuotaDes = Integer.parseInt(view.getCuotaDesempleado().getText());
+		if (!view.getCuotaEmpleado().getText().isBlank()) cuotaEmpl = Integer.parseInt(view.getCuotaEmpleado().getText());
+		if (!view.getCuotaAlumno().getText().isBlank()) cuotaAlu = Integer.parseInt(view.getCuotaAlumno().getText());
+		if (!view.getCuotaEmpresa().getText().isBlank()) cuotaEmpr = Integer.parseInt(view.getCuotaEmpresa().getText());
 		if (!view.getCuotaOtros().getText().isBlank()) cuotaOtr = Integer.parseInt(view.getCuotaOtros().getText());
 		
 		OfertarCursosDTO curso = new OfertarCursosDTO( model.incrementarID(), view.getTitulo().getText(), view.getDescripcion().getText(),
-				fechaIniStr, fechaFinStr, duracion, plazas, cuotaPre, cuotaCol,	cuotaOtr);
+				fechaIniStr, fechaFinStr, duracion, plazas, sesiones, cuotaPre, cuotaCol, cuotaMinus, cuotaDes, cuotaEmpl, cuotaAlu, cuotaEmpr, cuotaOtr);
 		
 		//Comprobaciones para que el formulario sea correcto
 		if (fechaFin.before(fechaIni)) {
@@ -187,7 +244,8 @@ public class OfertarCursosController {
         }
 		
 		model.añadirCurso(curso.getId_curso(), curso.getTitulo(), curso.getDescripcion(), curso.getFecha_inicio(), curso.getFecha_fin(), curso.getDuracion(),
-				curso.getPlazas(), curso.getCuota_precolegiado(), curso.getCuota_colegiado(), curso.getCuota_otros());
+				curso.getPlazas(), curso.getSesiones(), curso.getCuota_precolegiado(), curso.getCuota_colegiado(), curso.getCuota_minusvalido(), curso.getCuota_desempleado(), 
+				curso.getCuota_empleado(), curso.getCuota_alumno(), curso.getCuota_empresa(), curso.getCuota_otros());
 		view.getFrame().setVisible(false);
 		justificante = new OfertarCursosJustificante(curso);
 	}
