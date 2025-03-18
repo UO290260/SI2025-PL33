@@ -1,5 +1,4 @@
 package giis.demo.inscripcionlistaTAP;
-import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
@@ -9,6 +8,7 @@ public class InscripcionlistaTAPJustificante extends JFrame {
 
 	public InscripcionlistaTAPJustificante(ColegiadosDTO colegiado , PeritosDTO perito) {
 		frame = new JFrame();
+		frame.setTitle("Justificante");
 		frame.setSize(600, 600); 
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
@@ -27,9 +27,6 @@ public class InscripcionlistaTAPJustificante extends JFrame {
 		frame.getContentPane().add(new JLabel("Cuenta bancaria: " + colegiado.getCuenta_bancaria()), "growx, wrap");
 		frame.getContentPane().add(new JLabel("Titulación: " + colegiado.getTitulacion()), "growx, wrap");
 
-		String[] nombres = {"Pedro", "María", "Carlos"};
-		String nombreAleatorio = nombres[new Random().nextInt(nombres.length)];
-		frame.getContentPane().add(new JLabel("Este justificante lo ha realizado " + nombreAleatorio + " y falta una comprobacion por parte del responsable de servicios profesionales"), "growx, wrap");
 		frame.setVisible(true);
 		frame.pack();
 	}

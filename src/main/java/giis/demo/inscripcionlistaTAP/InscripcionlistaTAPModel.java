@@ -33,7 +33,7 @@ public class InscripcionlistaTAPModel {
 	}
 
 	/**
-	 * Metodo que busca el maximo del tap y si lo encuentra lo aumenta en 1 y sino empeiza en 1
+	 * Metodo que busca el maximo del tap y si lo encuentra lo aumenta en 1 y sino empieza en 1
 	 * @return
 	 */
 	public int incrementarTap() {
@@ -56,7 +56,7 @@ public class InscripcionlistaTAPModel {
 	}
 	
 	/**
-	 * Muestra para ver todo mas claro en una tabla
+	 * Muestra para ver todo mas claro en una tabla (se puede eliminar)
 	 * @return
 	 */
 	public List<PeritosDTO> getListaPeritos() {
@@ -69,7 +69,7 @@ public class InscripcionlistaTAPModel {
 	 * @param id_colegiado
 	 * @return
 	 */
-	public boolean existeIdColegiadoEnPeritos(int id_colegiado) {
+	public boolean existeColegiado(int id_colegiado) {
 		String sql = "SELECT COUNT(*) FROM Peritos WHERE id_colegiado = ?";
 		List<Object[]> resultado = db.executeQueryArray(sql, id_colegiado);
 		return (resultado.get(0)[0] != null && ((Number) resultado.get(0)[0]).intValue() > 0);

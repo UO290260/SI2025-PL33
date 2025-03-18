@@ -30,7 +30,6 @@ public class InscripcionlistaTAPController {
 	public void initView() {	
 		vista.getFrame().setVisible(true);
 		cargarListaPeritos();
-
 	}
 
 	/**
@@ -170,7 +169,7 @@ public class InscripcionlistaTAPController {
 		if (!correo.endsWith("@gmail.com")) {
 			JOptionPane.showMessageDialog(null, "El correo introducido no acaba por @gmail.com");
 		} 
-		if (modelo.existeIdColegiadoEnPeritos(colegiado.getId_colegiado())) {
+		if (modelo.existeColegiado(colegiado.getId_colegiado())) {
 			JOptionPane.showMessageDialog(null, "El colegiado ya es un Perito , no se puede volver a añadir");
 			return;
 		}
@@ -183,7 +182,7 @@ public class InscripcionlistaTAPController {
 	}
 
 	/**
-	 * Tabla para visualizar todo mejor y para ver que esta correctamente
+	 * Tabla para visualizar todo mejor y para ver que esta correctamente (se puede eliminar)
 	 */
 	public void cargarListaPeritos() {
 		List<PeritosDTO> peritos = modelo.getListaPeritos();
