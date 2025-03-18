@@ -37,6 +37,7 @@ public class Justificante_Inscripción extends JFrame {
 		frame.getContentPane().add(new JLabel("ColegiadoID : "+colegiado.getId_colegiado()),"wrap");
 		frame.getContentPane().add(new JLabel("Fecha actual de inscripción: : "+fecha),"wrap");
 		frame.getContentPane().add(new JLabel("Cuenta bancaria : "+colegiado.getCuenta_bancaria()),"wrap");
+		frame.getContentPane().add(new JLabel("Curso : "+curso.getTitulo()),"wrap");
 		frame.getContentPane().add(new JLabel("Cuota precolegiado : "+curso.getCuota_precolegiado()),"wrap");
 		frame.getContentPane().add(new JLabel("Cuota colegiado : "+curso.getCuota_colegiado()),"wrap");
 	}

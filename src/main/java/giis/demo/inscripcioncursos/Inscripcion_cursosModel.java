@@ -3,9 +3,6 @@ package giis.demo.inscripcioncursos;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import giis.demo.util.ApplicationException;
 import giis.demo.util.Database;
 import giis.demo.util.Util;
@@ -62,7 +59,7 @@ public class Inscripcion_cursosModel {
 	 */
 	public int ObtenerIdInscripcion() {
 		String sql="SELECT COUNT(*) FROM Inscripciones;";
-		List<Object[]>lista= db.executeQueryArray(sql, null);
+		List<Object[]>lista= db.executeQueryArray(sql);
 		return (1+Integer.parseInt(lista.get(0)[0].toString()))*10;
 	}
 
