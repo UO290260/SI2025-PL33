@@ -12,11 +12,16 @@ public class VisualizarCursosDTO {
 	private String cierre_inscripcion;
 	private int cuota_precolegiado;
 	private int cuota_colegiado;
+	private int cuota_minusvalido;
+	private int cuota_desempleado;
+	private int cuota_empleado;
+	private int cuota_alumno;
+	private int cuota_empresa;
 	private int cuota_otros;
 	private String estado;
 	
 	public VisualizarCursosDTO() {}
-	public VisualizarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int cuotaPre, int cuotaCol, int cuotaOtros, String apertura, String cierre, String est) {
+	public VisualizarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int cuotaPre, int cuotaCol, int cuotaMinus, int coutaDes, int cuotaEmpl, int cuotaAlu, int cuotaEmpr, int cuotaOtros, String apertura, String cierre, String est) {
 		setId_curso(id);
 		setTitulo(tit); 
 		setDescripcion(descr);
@@ -28,6 +33,11 @@ public class VisualizarCursosDTO {
 		setCierre_inscripcion(cierre);
 		setCuota_precolegiado(cuotaPre);
 		setCuota_colegiado(cuotaCol);
+		setCuota_minusvalido(cuotaMinus);
+		setCuota_desempleado(coutaDes);
+		setCuota_empleado(cuotaEmpl);
+		setCuota_alumno(cuotaAlu);
+		setCuota_empresa(cuotaEmpr);
 		setCuota_otros(cuotaOtros);
 		setEstado(est);
 	}
@@ -109,5 +119,35 @@ public class VisualizarCursosDTO {
 	}
 	public void setCierre_inscripcion(String cierre_inscripcion) {
 		this.cierre_inscripcion = cierre_inscripcion;
+	}
+	public int getCuota_minusvalido() {
+		return cuota_minusvalido;
+	}
+	public void setCuota_minusvalido(int cuota_minusvalido) {
+		this.cuota_minusvalido = cuota_minusvalido;
+	}
+	public int getCuota_desempleado() {
+		return cuota_desempleado;
+	}
+	public void setCuota_desempleado(int cuota_desempleado) {
+		this.cuota_desempleado = cuota_desempleado;
+	}
+	public int getCuota_empleado() {
+		return cuota_empleado;
+	}
+	public void setCuota_empleado(int cuota_empleado) {
+		this.cuota_empleado = cuota_empleado;
+	}
+	public int getCuota_alumno() {
+		return cuota_alumno;
+	}
+	public void setCuota_alumno(int cuota_alumno) {
+		this.cuota_alumno = cuota_alumno;
+	}
+	public int getCuota_empresa() {
+		return cuota_empresa;
+	}
+	public void setCuota_empresa(int cuota_empresa) {
+		this.cuota_empresa = cuota_empresa;
 	}
 }

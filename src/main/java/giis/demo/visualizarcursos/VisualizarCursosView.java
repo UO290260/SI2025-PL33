@@ -29,7 +29,7 @@ public class VisualizarCursosView {
 		frame = new JFrame();
 		frame.setTitle("Visualizar Cursos");
 		frame.setName("Visualizar Cursos");
-		frame.setBounds(0, 0, 1400, 300);
+		frame.setBounds(0, 0, 1400, 550);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
@@ -43,7 +43,7 @@ public class VisualizarCursosView {
 		lblColectivo = new JLabel("Escoge colectivo");
 		panel.add(lblColectivo);
 		
-		String[] colectivos = {"Todos", "Precolegiados", "Colegiados", "Otros"};
+		String[] colectivos = {"Todos", "Precolegiados", "Colegiados", "Minusválidos", "Desempleados", "Empleados", "Alumnos", "Empresas", "Otros"};
 		boxColectivos = new JComboBox<>(colectivos);
 		panel.add(boxColectivos);
 				
@@ -55,7 +55,7 @@ public class VisualizarCursosView {
 		tabla.setDefaultEditor(Object.class, null); 
 		tabla.setBackground(SystemColor.control);
 		JScrollPane tableDetallePanel = new JScrollPane(tabla);
-		frame.getContentPane().add(tableDetallePanel, "cell 0 8 2 1, grow, wrap");
+		frame.getContentPane().add(tableDetallePanel, "cell 0 13 2 1, grow, wrap");
 		
 	}
 	
