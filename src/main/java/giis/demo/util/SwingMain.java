@@ -14,6 +14,9 @@ import giis.demo.inscripcioncolegiados.InscripcioncolegiadosView;
 import giis.demo.ofertarcursos.OfertarCursosController;
 import giis.demo.ofertarcursos.OfertarCursosModel;
 import giis.demo.ofertarcursos.OfertarCursosView;
+import giis.demo.solicitudcolegiado.SolicitudColegiadoController;
+import giis.demo.solicitudcolegiado.SolicitudColegiadoModel;
+import giis.demo.solicitudcolegiado.SolicitudColegiadoView;
 import giis.demo.visualizarcursos.VisualizarCursosController;
 import giis.demo.visualizarcursos.VisualizarCursosModel;
 import giis.demo.visualizarcursos.VisualizarCursosView;
@@ -155,6 +158,18 @@ public class SwingMain {
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(prueba);
+
+
+		//Boton de la historia inscripcion_lista_TAP
+		JButton btnSolicitud = new JButton("10. Ejecutar solicitud_colegiado");
+		btnSolicitud.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				SolicitudColegiadoController controller10=new SolicitudColegiadoController(new SolicitudColegiadoModel(), new SolicitudColegiadoView());
+				controller10.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnSolicitud);
 
 		/**
 		 * Cargar la base de datos en blanco 
