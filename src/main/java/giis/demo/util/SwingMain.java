@@ -14,6 +14,9 @@ import giis.demo.inscripcioncolegiados.InscripcioncolegiadosView;
 import giis.demo.ofertarcursos.OfertarCursosController;
 import giis.demo.ofertarcursos.OfertarCursosModel;
 import giis.demo.ofertarcursos.OfertarCursosView;
+import giis.demo.planificarsesiones.PlanificarSesionesController;
+import giis.demo.planificarsesiones.PlanificarSesionesModel;
+import giis.demo.planificarsesiones.PlanificarSesionesView;
 import giis.demo.visualizarcursos.VisualizarCursosController;
 import giis.demo.visualizarcursos.VisualizarCursosModel;
 import giis.demo.visualizarcursos.VisualizarCursosView;
@@ -156,6 +159,16 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(prueba);
 
+		//Boton de la historia Planificar sesiones
+		JButton btnPlanificarSesiones = new JButton("8. Planificar Sesiones");
+		btnPlanificarSesiones.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				PlanificarSesionesController controllerPlanificarSesiones=new PlanificarSesionesController(new PlanificarSesionesModel(), new PlanificarSesionesView());
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnPlanificarSesiones);
+		
 		/**
 		 * Cargar la base de datos en blanco 
 		 */

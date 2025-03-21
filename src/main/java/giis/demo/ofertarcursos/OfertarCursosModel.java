@@ -10,7 +10,25 @@ public class OfertarCursosModel {
 	public static final String SQL_NUEVO_CURSO = 
 			"INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, sesiones, cuota_precolegiado, cuota_colegiado, cuota_minusvalido, cuota_desempleado, cuota_empleado, cuota_alumno, cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado) "
 			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, 'Planificado')";
-	
+	/**
+	 * Consulta para añadir un nuevo curso a la base de datos
+	 * @param id
+	 * @param titulo
+	 * @param descr
+	 * @param fini
+	 * @param ffin
+	 * @param duracion
+	 * @param plazas
+	 * @param sesiones
+	 * @param cuota_precolegiado
+	 * @param cuota_colegiado
+	 * @param cuota_minusvalido
+	 * @param cuota_desempleado
+	 * @param cuota_empleado
+	 * @param cuota_alumno
+	 * @param cuota_empresa
+	 * @param cuota_otros
+	 */
 	void añadirCurso(int id, String titulo, String descr, String fini, String ffin, int duracion, int plazas, int sesiones, int cuota_precolegiado, int cuota_colegiado, int cuota_minusvalido, int cuota_desempleado, int cuota_empleado, int cuota_alumno, int cuota_empresa,  int cuota_otros) {
 		db.executeUpdate(SQL_NUEVO_CURSO, id, titulo, descr, fini, ffin, duracion, plazas, sesiones, 
 				cuota_precolegiado==-1 ? null : cuota_precolegiado, cuota_colegiado==-1 ? null : cuota_colegiado, cuota_minusvalido==-1 ? null : cuota_minusvalido,
