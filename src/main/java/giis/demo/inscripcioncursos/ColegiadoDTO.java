@@ -5,6 +5,7 @@ public class ColegiadoDTO {
 	private int idcolegiado;
     private String nombre;
     private String apellidos;
+    private String DNI;
     private String direccion;
     private String poblacion;
     private String titulacion;
@@ -16,10 +17,11 @@ public class ColegiadoDTO {
      */
     public ColegiadoDTO() { }
     
-    public ColegiadoDTO(int id_colegiado, String nombre, String apellidos, String direccion, String poblacion, String titulacion, String fecha_colegiacion, String cuenta_bancaria) {
+    public ColegiadoDTO(int id_colegiado, String nombre, String apellidos,String DNI, String direccion, String poblacion, String titulacion, String fecha_colegiacion, String cuenta_bancaria) {
         this.idcolegiado = id_colegiado;
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.DNI=DNI;
         this.direccion = direccion;
         this.poblacion = poblacion;
         this.titulacion = titulacion;
@@ -49,6 +51,14 @@ public class ColegiadoDTO {
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
+	}
+	
+	public String getDNI() {
+		return DNI;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
 	}
 
 	public String getDireccion() {

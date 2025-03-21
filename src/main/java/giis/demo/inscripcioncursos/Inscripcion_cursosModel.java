@@ -1,16 +1,56 @@
 package giis.demo.inscripcioncursos;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+
 import java.util.Date;
 import java.util.List;
-import giis.demo.util.ApplicationException;
 import giis.demo.util.Database;
 import giis.demo.util.Util;
 
 public class Inscripcion_cursosModel {
 
 	private Database db= new Database();
-
+	
+	public List<String> cargarCuotas(int idcurso){
+		// Definimos la consulta SQL
+	    String sql = "SELECT " +
+	             "CASE WHEN cuota_precolegiado IS NOT NULL THEN 'cuota_precolegiado: ' || cuota_precolegiado ELSE NULL END || " +
+	             "CASE WHEN cuota_colegiado IS NOT NULL THEN ' | cuota_colegiado: ' || cuota_colegiado ELSE '' END || " +
+	             "CASE WHEN cuota_minusvalido IS NOT NULL THEN ' | cuota_minusvalido: ' || cuota_minusvalido ELSE '' END || " +
+	             "CASE WHEN cuota_desempleado IS NOT NULL THEN ' | cuota_desempleado: ' || cuota_desempleado ELSE '' END || " +
+	             "CASE WHEN cuota_empleado IS NOT NULL THEN ' | cuota_empleado: ' || cuota_empleado ELSE '' END || " +
+	             "CASE WHEN cuota_alumno IS NOT NULL THEN ' | cuota_alumno: ' || cuota_alumno ELSE '' END || " +
+	             "CASE WHEN cuota_empresa IS NOT NULL THEN ' | cuota_empresa: ' || cuota_empresa ELSE '' END || " +
+	             "CASE WHEN cuota_otros IS NOT NULL THEN ' | cuota_otros: ' || cuota_otros ELSE '' END AS item " +
+	             "FROM Cursos WHERE id_curso = ?";
+	    
+	    // Ejecutamos la consulta y obtenemos los resultados (una lista de una fila con varias columnas)
+	    List<Object[]> result = db.executeQueryArray(sql, idcurso);
+	    
+	    // Lista para almacenar las cuotas no nulas
+	    List<String> cuotasNoNulas = new ArrayList<>();
+	    
+	    // Si el resultado no está vacío, procesamos la primera fila
+	    if (result != null && !result.isEmpty()) {
+	    	
+	    	Object[] cuotas = result.get(0);
+	        String cuotasJuntas = cuotas[0].toString();
+	        //Separamos la consulta que es un único STRING en | para almacenarlo como elemento separados
+	        String[] cuotasSeparadas = cuotasJuntas.split(" \\| ");
+	        
+	        for (String cuota : cuotasSeparadas) {
+	            if (cuota != null) {
+	                // Convertimos la cuota a String y la agregamos a la lista
+	                cuotasNoNulas.add(cuota.toString()+" €");
+	            }
+	        }
+	    }
+	    
+	    // Devolvemos la lista de cuotas no nulas
+	    return cuotasNoNulas;
+	}
+	
 	public List<CursosDTO> getListacursos(){
 		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado "+
 				"FROM Cursos "+
@@ -19,16 +59,26 @@ public class Inscripcion_cursosModel {
 		return rows;
 	}
 
-	/**Obtiene los datos del colegiado al que qeremos acceder a través de su ID y los almacena en una clase llamada colegiadoDTO 
+	/**Obtiene los datos del colegiado al que qeremos acceder a través de su DNI y los almacena en una clase llamada colegiadoDTO 
 	 * @param id del colegiado
 	 * @return objeto tipo ColegiadoDTO
 	 *  */
-	public ColegiadoDTO getDatosColegiado(int id_colegiado){
-		String sql="Select id_colegiado, nombre, apellidos, direccion, poblacion, titulacion, fecha_colegiacion, cuenta_bancaria "
-				+"FROM Colegiados WHERE id_colegiado=?";
-		List<ColegiadoDTO>rows=db.executeQueryPojo(ColegiadoDTO.class, sql,id_colegiado); //Obtenemos una listade objetos de clase ColegiadoDTO que será solo un objeto
+	public ColegiadoDTO getDatosColegiado(String dni){
+		String sql="Select id_colegiado, nombre, apellidos,DNI, direccion, poblacion, titulacion, fecha_colegiacion, cuenta_bancaria "
+				+"FROM Colegiados WHERE DNI=?";
+		List<ColegiadoDTO>rows=db.executeQueryPojo(ColegiadoDTO.class, sql,dni); //Obtenemos una listade objetos de clase ColegiadoDTO que será solo un objeto
 		if (rows.isEmpty())
-			throw new ApplicationException("Id de colegiado no encontrado: ");
+			return null;
+		else
+			return rows.get(0);
+	}
+		
+	public ExternoDTO getDatosExterno(String dni){
+		String sql="Select id_externo, nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria "
+				+"FROM Externos WHERE DNI=?";
+		List<ExternoDTO>rows=db.executeQueryPojo(ExternoDTO.class, sql,dni); //Obtenemos una listade objetos de clase ExternaDTO que será solo un objeto
+		if (rows.isEmpty())
+			return null;
 		else
 			return rows.get(0);
 	}
@@ -40,16 +90,16 @@ public class Inscripcion_cursosModel {
 	 * @param cursoID número entero
 	 * @param fecha String de la fecha actual
 	 */
-	public void InscribirEnCurso(int InscripciónID,ColegiadoDTO colegiado,int cursoID,String fecha,boolean tarjeta) {
+	public void InscribirEnCurso(int InscripciónID,String DNI,int cursoID,String fecha,boolean tarjeta) {
 		String sql=null;
 		if(tarjeta) {
-			sql= "INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Matriculado',NULL,NULL);";
+			sql= "INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Matriculado',NULL,NULL);";
 		}
 		else {
-			sql= "INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Pre-inscrito',NULL,NULL);";
+			sql= "INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Pre-inscrito',NULL,NULL);";
 		}
 		String sql2 = "UPDATE Cursos SET plazas = plazas - 1 WHERE id_curso = ? AND plazas > 0;";
-		db.executeUpdate(sql,InscripciónID,colegiado.getId_colegiado(),cursoID,Util.isoStringToDate(fecha));
+		db.executeUpdate(sql,InscripciónID,DNI,cursoID,Util.isoStringToDate(fecha));
 		db.executeUpdate(sql2,cursoID);
 	}
 
@@ -83,10 +133,10 @@ public class Inscripcion_cursosModel {
 	 * @param cursoID Identificador del curso de tipo entero
 	 * @return true si ya ha sido matriculado y false en caso contrario
 	 */
-	public boolean Comprobar_Inscripción(int colegiadoID, int cursoID){
-		String sql="SELECT COUNT(*) FROM Inscripciones WHERE id_colegiado = ? AND id_curso = ?;";
+	public boolean Comprobar_Inscripción(String DNI ,int cursoID){
+		String sql="SELECT COUNT(*) FROM Inscripciones WHERE DNI = ? AND id_curso = ?;";
 
-		List<Object[]>NInscripciones= db.executeQueryArray(sql,colegiadoID,cursoID);
+		List<Object[]>NInscripciones= db.executeQueryArray(sql,DNI,cursoID);
 		if(Integer.parseInt(NInscripciones.get(0)[0].toString())>0) {
 			return true;
 		}else {

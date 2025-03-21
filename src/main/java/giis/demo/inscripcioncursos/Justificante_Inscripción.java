@@ -7,17 +7,22 @@ import net.miginfocom.swing.MigLayout;
 
 public class Justificante_Inscripción extends JFrame {
 	private JFrame frame;
-	private ColegiadoDTO colegiado;
 	private CursosDTO curso;
 	private String fecha;
+	private String nombre,apellidos,cuenta,cuota,DNI;
+	
+
 
 	/**
 	 * Clase Justificante utilizada por Inscripcion_cursosController para imprimir datos del justificante
 	 * @param colegiado objeto de tipo DTO
 	 * @param fecha de tipo String
 	 */
-	public Justificante_Inscripción(ColegiadoDTO colegiado, String fecha,CursosDTO curso) {
-		this.colegiado=colegiado;
+	public Justificante_Inscripción(String nombre,String apellidos,String DNI,String cuenta, String fecha,CursosDTO curso,String cuota) {
+		this.nombre=nombre;
+		this.apellidos=apellidos;
+		this.DNI=DNI;
+		this.cuota=cuota;
 		this.fecha=fecha;
 		this.curso=curso;
 		init();
@@ -32,14 +37,13 @@ public class Justificante_Inscripción extends JFrame {
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]")); //Es el layout que usaremos dividiendolo en filas y columnas
 		frame.setResizable(false);
 		//Contenido de la ventana
-		frame.getContentPane().add(new JLabel("Nombre : "+colegiado.getNombre()), "growx,wrap");
-		frame.getContentPane().add(new JLabel("Apellidos : "+colegiado.getApellidos()),"wrap");
-		frame.getContentPane().add(new JLabel("ColegiadoID : "+colegiado.getId_colegiado()),"wrap");
+		frame.getContentPane().add(new JLabel("Nombre : "+nombre), "growx,wrap");
+		frame.getContentPane().add(new JLabel("Apellidos : "+apellidos),"wrap");
+		frame.getContentPane().add(new JLabel("DNI del solicitante : "+DNI),"wrap");
 		frame.getContentPane().add(new JLabel("Fecha actual de inscripción: : "+fecha),"wrap");
-		frame.getContentPane().add(new JLabel("Cuenta bancaria : "+colegiado.getCuenta_bancaria()),"wrap");
+		frame.getContentPane().add(new JLabel("Cuenta bancaria : "+cuenta),"wrap");
 		frame.getContentPane().add(new JLabel("Curso : "+curso.getTitulo()),"wrap");
-		frame.getContentPane().add(new JLabel("Cuota precolegiado : "+curso.getCuota_precolegiado()),"wrap");
-		frame.getContentPane().add(new JLabel("Cuota colegiado : "+curso.getCuota_colegiado()),"wrap");
+		frame.getContentPane().add(new JLabel(cuota),"wrap");
 	}
 
 	public JFrame getFrame() {
@@ -50,12 +54,12 @@ public class Justificante_Inscripción extends JFrame {
 		this.frame = frame;
 	}
 
-	public ColegiadoDTO getColegiado() {
-		return colegiado;
+	public CursosDTO getCurso() {
+		return curso;
 	}
 
-	public void setColegiado(ColegiadoDTO colegiado) {
-		this.colegiado = colegiado;
+	public void setCurso(CursosDTO curso) {
+		this.curso = curso;
 	}
 
 	public String getFecha() {
@@ -64,5 +68,45 @@ public class Justificante_Inscripción extends JFrame {
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getCuenta() {
+		return cuenta;
+	}
+
+	public void setCuenta(String cuenta) {
+		this.cuenta = cuenta;
+	}
+
+	public String getDNI() {
+		return DNI;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+
+	public String getCuota() {
+		return cuota;
+	}
+
+	public void setCuota(String cuota) {
+		this.cuota = cuota;
 	}
 }

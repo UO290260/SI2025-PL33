@@ -4,9 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.table.TableModel;
@@ -23,12 +28,14 @@ public class Inscripcion_cursosController {
 	private int  idInscripcion;
 	private int cursoId;
 	private ColegiadoDTO colegiado;
+	private ExternoDTO externo;
 	private CursosDTO curso;
 	private String fechaapertura;
 	private String cierre;
 	private Date fechaActual;
 	private Date fechaApertura;
 	private Date fechaCierre;
+
 
 	public Inscripcion_cursosController(Inscripcion_cursosModel m, Inscripcion_cursosView v) {
 		this.model = m;
@@ -42,33 +49,48 @@ public class Inscripcion_cursosController {
 		view.getFrame().setVisible(true);
 		tarjetaV= new tarjetaView();
 		// Agregar KeyListener para restringir la entrada y solo se pueden incluir caracteres numéricos
-		view.getJTnumero().addKeyListener(new KeyAdapter() {
+		view.getJTDNI().addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) { //keytyped registra el evento de teclado y llama al método
+			public void keyTyped(KeyEvent e) {
 				char c = e.getKeyChar();
-				// Permitir solo números y borrar (backspace)
-				if (!Character.isDigit(c) && c != '\b') { //verifica si el caracter introducido es un número o espacio en blanco(solo borrado)
-					e.consume(); // Bloquear el carácter
-				}
-			}
-		});
+				String text = view.getJTDNI().getText();
 
-		//Este método hará una consulta con el número del colegiado al hacer enter o en su defecto tmb al hacer click en un boton
-		view.getJTnumero().addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER && !view.getJTnumero().getText().isEmpty()) //Comprueba que la Jtextnumero no se encuentre vacio y si presionamos enter
-				{
-					Inscripcion_cursosController.this.getDatosColegiados();
+				// Si es número y aún no hay 8 dígitos, lo deja escribir
+				if (Character.isDigit(c)) {
+					if (text.length() >= 8) {
+						e.consume(); // Bloquea si ya hay 8 números
+					}
+				} 
+				// Si es letra y está en la posición 9 (después de 8 números)
+				else if (Character.isLetter(c) && text.length() == 8) {
+					if (!Character.isUpperCase(c)) {
+						e.setKeyChar(Character.toUpperCase(c)); // Convierte a mayúscula automáticamente
+					}
+				} 
+				// Bloquea cualquier otro caso (más de 9 caracteres, letras en posiciones incorrectas, etc.)
+				else {
+					e.consume();
 				}
 			}
 		});
 
 		view.getBtnNumero().addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				if(!view.getJTnumero().getText().isEmpty()) //Comprueba que la Jtextnumero no se encuentre vacio
+
+				if(view.getJTDNI().getText().isEmpty()) //Comprueba que la Jtextnumero no se encuentre vacio
 				{
-					Inscripcion_cursosController.this.getDatosColegiados();
+					JOptionPane.showMessageDialog(view.getFrame(), "El campo DNI no debe estar vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else if(!view.getJTDNI().getText().matches("\\d{8}[A-Za-z]"))
+				{
+					JOptionPane.showMessageDialog(view.getFrame(), "El DNI debe contener 8 digitos y una letra.", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else 
+				{
+					Inscripcion_cursosController.this.getDatos();
+					if(colegiado ==null && externo==null){
+						JOptionPane.showMessageDialog(view.getFrame(), "No hay nadie registrado con ese DNI.", "Error", JOptionPane.WARNING_MESSAGE);
+					}
 				}
 			}
 		});
@@ -80,65 +102,84 @@ public class Inscripcion_cursosController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (Inscripcion_cursosController.this.comprobar_datos_tarjeta()) {
-					model.InscribirEnCurso(idInscripcion, colegiado, cursoId, SwingUtil.Obtener_fechaActual(), true); // Inscribimos al alumno en el curso con tarjeta
-					Inscripcion_cursosController.this.getListaCursos(); // Actualizamos la lista de cursos
-					tarjetaV.getFrame().dispose(); // Cerramos la ventana tras el pago
-					Justificante_tarjeta justificante = new Justificante_tarjeta(colegiado, SwingUtil.Obtener_fechaActual(), curso,tarjetaV.getTxtNumeroTarjeta().getText());
-					justificante.getFrame().setVisible(true);
+					String dni = (colegiado != null) ? colegiado.getDNI() : externo.getDNI();
+					String nombre = (colegiado != null) ? colegiado.getNombre() : externo.getNombre();
+					String apellidos = (colegiado != null) ? colegiado.getApellidos() : externo.getApellidos();
+					Justificante_tarjeta justificante = new Justificante_tarjeta(nombre,apellidos,dni, SwingUtil.Obtener_fechaActual(), curso,tarjetaV.getTxtNumeroTarjeta().getText(),view.getLstcuotas().getSelectedItem().toString());
+					justificante.getFrame().setVisible(true);	
 				}
 			}
 		};
 
 		view.getBtnInscripcion().addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				if(Inscripcion_cursosController.this.comprobar_campos()) { //Comprueba que la Jtextnumero no se encuentre vacio y se selcciona un curso
+				if(Inscripcion_cursosController.this.comprobar_campos()) { //Comprueba que la Jtextnumero no se encuentre vacio y se selciona un curso
 					curso=ListaCursos.get(view.getTabCurso().getSelectedRow());
 					cursoId=curso.getId_curso();
 					fechaapertura=ListaCursos.get(view.getTabCurso().getSelectedRow()).getApertura_inscripcion();
 					cierre=ListaCursos.get(view.getTabCurso().getSelectedRow()).getCierre_inscripcion();
-					colegiado=Inscripcion_cursosController.this.getDatosColegiados(); //Obtiene el objeto de tipo ColegiadoDTO
+					Inscripcion_cursosController.this.getDatos(); //Obtiene el objeto de tipo ColegiadoDTO u externoDTO
 					fechaActual = Util.isoStringToDate(SwingUtil.Obtener_fechaActual()); // Convierte la fecha actual a LocalDate
 					fechaApertura = Util.isoStringToDate(fechaapertura); // Convierte la fecha de apertura de inscripción a LocalDate
 					fechaCierre = Util.isoStringToDate(cierre); // Convierte la fecha de cierre de inscripción a LocalDate
-					if(model.Comprobar_Inscripción(colegiado.getId_colegiado(), cursoId)) { //Comprueba si el alumno está o no matriculado
-						JOptionPane.showMessageDialog(view.getFrame(), "El alumno ya está matriculado.", "Error", JOptionPane.ERROR_MESSAGE);
-						throw new ApplicationException("El alumno ya está matriculado: ");
-					}
-					if(!model.plazasDisponibles(cursoId)) //Comprueba si hay o no plazas disponibles 
-					{
-						JOptionPane.showMessageDialog(view.getFrame(), "No hay plazas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
-						throw new ApplicationException("No hay plazas disponibles");
-					}
-					if(model.ComprobarFechaApertura(fechaActual, fechaApertura, fechaCierre)) //Comprueba si el alumno se puede matricular del curso 
-					{
+					// Verificar si la inscripción está abierta
+					if (model.ComprobarFechaApertura(fechaActual, fechaApertura, fechaCierre)) {
 						JOptionPane.showMessageDialog(view.getFrame(), "No está disponible la inscripción del curso.", "Error", JOptionPane.ERROR_MESSAGE);
 						throw new ApplicationException("No está disponible la inscripción del curso ");
 					}
-					else
-					{
-						idInscripcion=model.ObtenerIdInscripcion(); //Obtenemos el nuevo id para insertar en la tabla
-						if(view.getRbTarjeta().isSelected())
-						{
-							tarjetaV.getFrame().setVisible(true);
 
-							// Remover cualquier ActionListener previamente agregado al botón de pago
-							tarjetaV.getBtnPagar().removeActionListener(actionListenerPago);
-
-							// Agregar el ActionListener para el botón de pagar
-							tarjetaV.getBtnPagar().addActionListener(actionListenerPago);
-						}
-						else
-						{
-							model.InscribirEnCurso(idInscripcion,colegiado,cursoId,SwingUtil.Obtener_fechaActual(),false); //Inscribimos al alumno en el curso con transferencia
-							Inscripcion_cursosController.this.getListaCursos(); //Actualizar la lista de cursos
-							Justificante_Inscripción justificante= new Justificante_Inscripción(colegiado,SwingUtil.Obtener_fechaActual(),curso);
-							justificante.getFrame().setVisible(true);
-						}
+					// Verificar si hay plazas disponibles
+					if (!model.plazasDisponibles(cursoId)) {
+						JOptionPane.showMessageDialog(view.getFrame(), "No hay plazas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
+						throw new ApplicationException("No hay plazas disponibles");
 					}
-				}
-				else
-				{
-					throw new ApplicationException("El campo no debe de estar vacio y debe seleccionar  e método de pago: ");
+
+					// Comprobar si el usuario ya está inscrito (colegiado o externo)
+					if (colegiado != null && model.Comprobar_Inscripción(colegiado.getDNI(), cursoId)) {
+						JOptionPane.showMessageDialog(view.getFrame(), "El alumno ya está matriculado.", "Error", JOptionPane.ERROR_MESSAGE);
+						throw new ApplicationException("El alumno ya está matriculado.");
+					}
+
+					if (externo != null && model.Comprobar_Inscripción(externo.getDNI(), cursoId)) {
+						JOptionPane.showMessageDialog(view.getFrame(), "El alumno ya está matriculado.", "Error", JOptionPane.ERROR_MESSAGE);
+						throw new ApplicationException("El alumno ya está matriculado.");
+					}
+
+					// Verificar si un externo tiene una cuota de colegiado (error de inscripción)
+					if (externo != null && !Inscripcion_cursosController.this.ComprobarCuotaAplicada()) {
+						JOptionPane.showMessageDialog(view.getFrame(), "No se puede aplicar cuota de colegiados o precolegiados a externo.", "Error", JOptionPane.ERROR_MESSAGE);
+						return; // No lanzamos excepción, solo detenemos el proceso
+					}
+
+					// Obtener un nuevo ID de inscripción
+					idInscripcion = model.ObtenerIdInscripcion();
+
+					// Manejo de pago con tarjeta
+					if (view.getRbTarjeta().isSelected()) {
+						tarjetaV.getFrame().setVisible(true);
+
+						// Remover cualquier ActionListener previamente agregado al botón de pago
+						tarjetaV.getBtnPagar().removeActionListener(actionListenerPago);
+
+						// Agregar el ActionListener para el botón de pagar
+						tarjetaV.getBtnPagar().addActionListener(actionListenerPago);
+					} 
+					else {
+						// Determinar el tipo de usuario e inscribirlo
+						String dni = (colegiado != null) ? colegiado.getDNI() : externo.getDNI();
+						String nombre = (colegiado != null) ? colegiado.getNombre() : externo.getNombre();
+						String apellidos = (colegiado != null) ? colegiado.getApellidos() : externo.getApellidos();
+						String cuentaBancaria = (colegiado != null) ? colegiado.getCuenta_bancaria() : externo.getCuenta_bancaria();
+
+						model.InscribirEnCurso(idInscripcion, dni, cursoId, SwingUtil.Obtener_fechaActual(), false);
+						Inscripcion_cursosController.this.getListaCursos(); // Actualizar la lista de cursos
+
+						// Generar justificante
+						Justificante_Inscripción justificante = new Justificante_Inscripción(
+								nombre, apellidos, dni, cuentaBancaria, SwingUtil.Obtener_fechaActual(), curso, view.getLstcuotas().getSelectedItem().toString()
+								);
+						justificante.getFrame().setVisible(true);
+					}
 				}
 			}	
 		});
@@ -174,6 +215,16 @@ public class Inscripcion_cursosController {
 				}
 			}
 		});
+
+		view.getTabCurso().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				curso=ListaCursos.get(view.getTabCurso().getSelectedRow());
+				cursoId=curso.getId_curso();
+				List<String> cuotasCurso=model.cargarCuotas(cursoId);
+				ComboBoxModel<Object> lmodel=new DefaultComboBoxModel<>(cuotasCurso.toArray(new String[0]));
+				view.getLstcuotas().setModel(lmodel);
+			}
+		});
 	}
 
 	/**
@@ -190,20 +241,34 @@ public class Inscripcion_cursosController {
 	 * Obtiene los datoS y los almacena en una clase llamada ColegiadoDTO y crea una tabla para mostrar los datos correspondientes
 	 * @return El objeto de la clase ColeegiadoDTO
 	 */
-	public ColegiadoDTO getDatosColegiados() {
-		ColegiadoDTO colegiado=model.getDatosColegiado(Integer.parseInt(view.getJTnumero().getText()));
-		TableModel tmodel=SwingUtil.getTableModelFromPojos(List.of(colegiado), new String[] {"id_colegiado", "nombre", "apellidos","direccion", "poblacion", "titulacion","fecha_colegiacion","cuenta_bancaria"});
-		view.getTabDatos().setModel(tmodel);
-		SwingUtil.autoAdjustColumns(view.getTabDatos());
-		return colegiado;
+	public void getDatos() {
+		colegiado=model.getDatosColegiado(view.getJTDNI().getText());
+		externo=model.getDatosExterno(view.getJTDNI().getText());
+		if(colegiado!=null)
+		{
+			TableModel tmodel=SwingUtil.getTableModelFromPojos(List.of(colegiado), new String[] {"id_colegiado", "nombre", "apellidos","DNI","direccion", "poblacion", "titulacion","fecha_colegiacion","cuenta_bancaria"});
+			view.getTabDatos().setModel(tmodel);
+			SwingUtil.autoAdjustColumns(view.getTabDatos());
+		}
+		else if (externo !=null)
+		{
+			TableModel tmodel=SwingUtil.getTableModelFromPojos(List.of(externo), new String[] {"id_externo", "nombre", "apellidos","DNI","direccion", "poblacion","fecha_nacimiento","cuenta_bancaria"});
+			view.getTabDatos().setModel(tmodel);
+			SwingUtil.autoAdjustColumns(view.getTabDatos());
+		}
 	}
 	/**
 	 * Si el campo de busqueda id no está vacio , un curso está seleccionado, y algun método de pago tambien devolverá true sino false
 	 * @return booleano
 	 */
 	boolean comprobar_campos() {
-		if(view.getJTnumero().getText().isEmpty()) {
-			JOptionPane.showMessageDialog(view.getFrame(), "Debe ingresar su identificdor.", "Error", JOptionPane.WARNING_MESSAGE);
+		if(view.getJTDNI().getText().isEmpty()) {
+			JOptionPane.showMessageDialog(view.getFrame(), "El campo DNI no debe estar vacio.", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(!view.getJTDNI().getText().matches("\\d{8}[A-Za-z]"))
+		{
+			JOptionPane.showMessageDialog(view.getFrame(), "El DNI debe contener 8 digitos y una letra.", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		if(view.getTabCurso().getSelectedRow()==-1) {
@@ -212,6 +277,12 @@ public class Inscripcion_cursosController {
 		}
 		if(!view.getRbTarjeta().isSelected() && !view.getRbTransferencia().isSelected()) {
 			JOptionPane.showMessageDialog(view.getFrame(), "Debe seleccionar método de pago.", "Error", JOptionPane.WARNING_MESSAGE);
+			return false;
+		}
+
+		this.getDatos(); //Actualizamos en busqueda de si existe o no la persona buscada
+		if(colegiado==null && externo==null){
+			JOptionPane.showMessageDialog(view.getFrame(), "No hay nadie registrado con ese DNI.", "Error", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 		return true;
@@ -253,8 +324,14 @@ public class Inscripcion_cursosController {
 			JOptionPane.showMessageDialog(tarjetaV.getFrame(), "La fecha de la tarjeta ha caducado.", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-
 		return true;
+	}
+
+	public boolean ComprobarCuotaAplicada() {
+		String cuotacompleta=view.getLstcuotas().getSelectedItem().toString();
+		String [] cuota=cuotacompleta.split(" ");
+		if(cuota[0].equals("cuota_precolegiado:") || cuota[0].equals("cuota_colegiado:"))return false;
+		else return true;		
 	}
 
 }
