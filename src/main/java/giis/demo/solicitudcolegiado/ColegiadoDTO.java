@@ -10,9 +10,7 @@ public class ColegiadoDTO {
 
 	public ColegiadoDTO() {}
 
-	public ColegiadoDTO(int id_colegiado, String nombre, String apellidos, String dNI, 
-			String titulacion,
-			String estado) {
+	public ColegiadoDTO(int id_colegiado, String nombre, String apellidos, String dNI,String titulacion,String estado) {
 		this.idcolegiado = id_colegiado;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
