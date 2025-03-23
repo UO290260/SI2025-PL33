@@ -13,6 +13,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PlanificarSesionesView {
 	JFrame frame;
@@ -20,6 +23,7 @@ public class PlanificarSesionesView {
 	JTable tablaCursos;
 	JTextField txtHora, txtDuracion;
 	JDateChooser fecha;
+	JButton boton;
 	
 	public PlanificarSesionesView() {
 		initialize();
@@ -53,32 +57,40 @@ public class PlanificarSesionesView {
 		frame.getContentPane().add(panelCursos);
 		
 		panelSesiones = new JPanel();
-		panelSesiones.setLayout(new GridLayout(3, 2, 50, 10));
-		panelSesiones.setBounds(7, 232, 400, 150);
+		panelSesiones.setLayout(new GridLayout(2,3,50,10));
+		panelSesiones.setBounds(7, 210, 668, 95);
 		
 		lblFecha = new JLabel("Fecha de la sesión: ");
 		panelSesiones.add(lblFecha);
+		lblHora = new JLabel("Hora de inicio: ");
+		panelSesiones.add(lblHora);
+		lblDuracion = new JLabel("Duración: ");
+		panelSesiones.add(lblDuracion);
+		
 		fecha = new JDateChooser();
         fecha.setPreferredSize(new Dimension(100,24));
         panelSesiones.add(fecha);
-		
-		lblHora = new JLabel("Hora de inicio: ");
-		panelSesiones.add(lblHora);
 		txtHora = new JTextField();
 		txtHora.setName("txtHora");
+		txtHora.setPreferredSize(new Dimension(100,24));
 		panelSesiones.add(txtHora);
-		
-		lblDuracion = new JLabel("Duración: ");
-		panelSesiones.add(lblDuracion);
 		txtDuracion = new JTextField();
 		txtDuracion.setName("txtDuracion");
+		txtDuracion.setPreferredSize(new Dimension(100,24));
 		panelSesiones.add(txtDuracion);
 		
 		frame.getContentPane().add(panelSesiones, "wrap");
+		
+		boton = new JButton("Planificar sesion");
+		boton.setBounds(278, 350, 129, 23);
+		frame.getContentPane().add(boton);
 	}
 	
 	public JFrame getFrame() { return frame; }
 	public JTable getTablaCursos() { return tablaCursos; }
 	public JTextField getDuracion() {return txtDuracion; }
+	public JTextField getHoraInicio() {return txtHora; }
+	public JDateChooser getCalendario() { return fecha; }
 	public Date getFecha() { return fecha.getDate(); }
+	public JButton getBoton() { return boton; }
 }

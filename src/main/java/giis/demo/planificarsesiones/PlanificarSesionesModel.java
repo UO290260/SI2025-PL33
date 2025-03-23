@@ -1,9 +1,7 @@
 package giis.demo.planificarsesiones;
 
 import java.util.List;
-
 import giis.demo.util.Database;
-import giis.demo.visualizarinscritos.CursoDTO;
 
 public class PlanificarSesionesModel {
 	Database db = new Database();
@@ -12,9 +10,9 @@ public class PlanificarSesionesModel {
 	 * Consulta que selecciona todos los cursos de la base de datos
 	 * @return lista de los cursos en formato CursoDTO
 	 */
-	public List<CursoDTO> getListaCursos() {
-		String sql = "SELECT id_curso, titulo, descripcion, estado FROM Cursos";
-		return db.executeQueryPojo(CursoDTO.class, sql);
+	public List<PlanificarSesionesDTO> getListaCursos() {
+		String sql = "SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, sesiones, estado FROM Cursos";
+		return db.executeQueryPojo(PlanificarSesionesDTO.class, sql);
 	}
 	
 	/**
@@ -25,9 +23,14 @@ public class PlanificarSesionesModel {
 	 * @param hora
 	 * @param duracion
 	 */
-	public void añadirSesion(int id, int idcurso, String fecha, int hora, int duracion) {
+	public void añadirSesion(int id, int idcurso, String fecha, String hora, int duracion) {
 		String sql = "INSERT INTO Sesiones (id_sesion, id_curso, fecha, hora_inicio, duracion) VALUES (?, ?, ?, ?, ?)";
 		db.executeUpdate(sql, id, idcurso, fecha, hora, duracion);
+	}
+	
+	public List<SesionDTO> listaSesiones(int idCurso) {
+		String sql = "SELECT id_sesion FROM Sesiones WHERE id_curso = " + idCurso;
+		return db.executeQueryPojo(SesionDTO.class, sql);
 	}
 	
 	/**
@@ -35,7 +38,7 @@ public class PlanificarSesionesModel {
 	 * @return la nueva id
 	 */
 	public int incrementarID() {
-		String sql = "SELECT MAX(id_curso) FROM Cursos";
+		String sql = "SELECT MAX(id_sesion) FROM Sesiones";
 		List<Object[]> resultado = db.executeQueryArray(sql);
 		if (resultado.isEmpty() || resultado.get(0)[0]==null)
 			return 1;
