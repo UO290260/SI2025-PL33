@@ -32,7 +32,10 @@ public class SolicitudColegiadoController {
 		//Invoco el metodo que responde al listener para que se encargue de generar las exceciones
 		vista.getBtnEnviar().addActionListener(e -> SwingUtil.exceptionWrapper(() -> enviarSeleccionados()));
 	}
-
+	
+	/**
+	 * Inicializacion del controlador
+	 */
 	public void initView() {
 		//Abre la ventana
 		vista.getFrame().setVisible(true);
