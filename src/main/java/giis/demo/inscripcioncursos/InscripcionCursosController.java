@@ -169,7 +169,6 @@ public class InscripcionCursosController {
 						String nombre = (colegiado != null) ? colegiado.getNombre() : externo.getNombre();
 						String apellidos = (colegiado != null) ? colegiado.getApellidos() : externo.getApellidos();
 						String cuentaBancaria = (colegiado != null) ? colegiado.getCuenta_bancaria() : externo.getCuenta_bancaria();
-
 						model.InscribirEnCurso(idInscripcion, dni, cursoId, SwingUtil.Obtener_fechaActual(), false);
 						InscripcionCursosController.this.getListaCursos(); // Actualizar la lista de cursos
 

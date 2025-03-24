@@ -22,6 +22,7 @@ public class JustificanteInscripción extends JFrame {
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.DNI=DNI;
+		this.cuenta=cuenta;
 		this.cuota=cuota;
 		this.fecha=fecha;
 		this.curso=curso;
