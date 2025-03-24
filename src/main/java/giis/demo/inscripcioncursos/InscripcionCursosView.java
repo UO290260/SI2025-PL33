@@ -13,7 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
-public class Inscripcion_cursosView {
+public class InscripcionCursosView {
 
 	private JFrame frame;
 	private JTextField  JTDNI;
@@ -25,9 +25,9 @@ public class Inscripcion_cursosView {
 	private JRadioButton rbTarjeta;
 	private JRadioButton rbTransferencia;
 	private JComboBox <Object> lstcuotas;
-	
 
-	public Inscripcion_cursosView() {
+
+	public InscripcionCursosView() {
 		iniciate();
 	}
 

@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 
-public class Justificante_tarjeta extends JFrame {
+public class JustificanteTarjeta extends JFrame {
 	private JFrame frame;
 	private CursosDTO curso;
 	private String fecha;
@@ -17,7 +17,7 @@ public class Justificante_tarjeta extends JFrame {
 	 * @param colegiado objeto de tipo DTO
 	 * @param fecha de tipo String
 	 */
-	public Justificante_tarjeta(String nombre,String apellidos,String DNI, String fecha,CursosDTO curso,String numeroTarjeta,String cuota) {
+	public JustificanteTarjeta(String nombre,String apellidos,String DNI, String fecha,CursosDTO curso,String numeroTarjeta,String cuota) {
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.DNI=DNI;

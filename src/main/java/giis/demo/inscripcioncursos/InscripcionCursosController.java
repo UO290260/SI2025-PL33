@@ -20,9 +20,9 @@ import giis.demo.util.SwingUtil;
 import giis.demo.util.Util;
 
 //Clase controller que actua como intermediario entre la interfaz y el modelo
-public class Inscripcion_cursosController {
-	private Inscripcion_cursosModel model;
-	private Inscripcion_cursosView view;
+public class InscripcionCursosController {
+	private InscripcionCursosModel model;
+	private InscripcionCursosView view;
 	private tarjetaView tarjetaV;
 	private List<CursosDTO> ListaCursos;
 	private int  idInscripcion;
@@ -37,7 +37,7 @@ public class Inscripcion_cursosController {
 	private Date fechaCierre;
 
 
-	public Inscripcion_cursosController(Inscripcion_cursosModel m, Inscripcion_cursosView v) {
+	public InscripcionCursosController(InscripcionCursosModel m, InscripcionCursosView v) {
 		this.model = m;
 		this.view = v;
 		//no hay inicializacion especifica del modelo, solo de la vista
@@ -87,7 +87,7 @@ public class Inscripcion_cursosController {
 				}
 				else 
 				{
-					Inscripcion_cursosController.this.getDatos();
+					InscripcionCursosController.this.getDatos();
 					if(colegiado ==null && externo==null){
 						JOptionPane.showMessageDialog(view.getFrame(), "No hay nadie registrado con ese DNI.", "Error", JOptionPane.WARNING_MESSAGE);
 					}
@@ -101,11 +101,11 @@ public class Inscripcion_cursosController {
 		ActionListener actionListenerPago = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (Inscripcion_cursosController.this.comprobar_datos_tarjeta()) {
+				if (InscripcionCursosController.this.comprobar_datos_tarjeta()) {
 					String dni = (colegiado != null) ? colegiado.getDNI() : externo.getDNI();
 					String nombre = (colegiado != null) ? colegiado.getNombre() : externo.getNombre();
 					String apellidos = (colegiado != null) ? colegiado.getApellidos() : externo.getApellidos();
-					Justificante_tarjeta justificante = new Justificante_tarjeta(nombre,apellidos,dni, SwingUtil.Obtener_fechaActual(), curso,tarjetaV.getTxtNumeroTarjeta().getText(),view.getLstcuotas().getSelectedItem().toString());
+					JustificanteTarjeta justificante = new JustificanteTarjeta(nombre,apellidos,dni, SwingUtil.Obtener_fechaActual(), curso,tarjetaV.getTxtNumeroTarjeta().getText(),view.getLstcuotas().getSelectedItem().toString());
 					justificante.getFrame().setVisible(true);	
 				}
 			}
@@ -113,12 +113,12 @@ public class Inscripcion_cursosController {
 
 		view.getBtnInscripcion().addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				if(Inscripcion_cursosController.this.comprobar_campos()) { //Comprueba que la Jtextnumero no se encuentre vacio y se selciona un curso
+				if(InscripcionCursosController.this.comprobar_campos()) { //Comprueba que la Jtextnumero no se encuentre vacio y se selciona un curso
 					curso=ListaCursos.get(view.getTabCurso().getSelectedRow());
 					cursoId=curso.getId_curso();
 					fechaapertura=ListaCursos.get(view.getTabCurso().getSelectedRow()).getApertura_inscripcion();
 					cierre=ListaCursos.get(view.getTabCurso().getSelectedRow()).getCierre_inscripcion();
-					Inscripcion_cursosController.this.getDatos(); //Obtiene el objeto de tipo ColegiadoDTO u externoDTO
+					InscripcionCursosController.this.getDatos(); //Obtiene el objeto de tipo ColegiadoDTO u externoDTO
 					fechaActual = Util.isoStringToDate(SwingUtil.Obtener_fechaActual()); // Convierte la fecha actual a LocalDate
 					fechaApertura = Util.isoStringToDate(fechaapertura); // Convierte la fecha de apertura de inscripción a LocalDate
 					fechaCierre = Util.isoStringToDate(cierre); // Convierte la fecha de cierre de inscripción a LocalDate
@@ -146,7 +146,7 @@ public class Inscripcion_cursosController {
 					}
 
 					// Verificar si un externo tiene una cuota de colegiado (error de inscripción)
-					if (externo != null && !Inscripcion_cursosController.this.ComprobarCuotaAplicada()) {
+					if (externo != null && InscripcionCursosController.this.esCuotaColegiada()) {
 						JOptionPane.showMessageDialog(view.getFrame(), "No se puede aplicar cuota de colegiados o precolegiados a externo.", "Error", JOptionPane.ERROR_MESSAGE);
 						return; // No lanzamos excepción, solo detenemos el proceso
 					}
@@ -172,10 +172,10 @@ public class Inscripcion_cursosController {
 						String cuentaBancaria = (colegiado != null) ? colegiado.getCuenta_bancaria() : externo.getCuenta_bancaria();
 
 						model.InscribirEnCurso(idInscripcion, dni, cursoId, SwingUtil.Obtener_fechaActual(), false);
-						Inscripcion_cursosController.this.getListaCursos(); // Actualizar la lista de cursos
+						InscripcionCursosController.this.getListaCursos(); // Actualizar la lista de cursos
 
 						// Generar justificante
-						Justificante_Inscripción justificante = new Justificante_Inscripción(
+						JustificanteInscripción justificante = new JustificanteInscripción(
 								nombre, apellidos, dni, cuentaBancaria, SwingUtil.Obtener_fechaActual(), curso, view.getLstcuotas().getSelectedItem().toString()
 								);
 						justificante.getFrame().setVisible(true);
@@ -184,6 +184,7 @@ public class Inscripcion_cursosController {
 			}	
 		});
 
+		//comprueba que solo se puedan meter digitos y de tamaño 16 
 		tarjetaV.getTxtNumeroTarjeta().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) { //keytyped registra el evento de teclado y llama al método
@@ -199,6 +200,7 @@ public class Inscripcion_cursosController {
 			}
 		});
 
+		//Comprueba que solo se puedan meter 3 dígitos
 		tarjetaV.getTxtCVV().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) { //keytyped registra el evento de teclado y llama al método
@@ -216,6 +218,7 @@ public class Inscripcion_cursosController {
 			}
 		});
 
+		//Al selecciona un curso se carga en el combobox
 		view.getTabCurso().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				curso=ListaCursos.get(view.getTabCurso().getSelectedRow());
@@ -327,11 +330,15 @@ public class Inscripcion_cursosController {
 		return true;
 	}
 
-	public boolean ComprobarCuotaAplicada() {
+	/**
+	 * Comprueba si la cuota es colegiada o precolegiada 
+	 * @return true si es y false en caso contrario
+	 */
+	public boolean esCuotaColegiada() {
 		String cuotacompleta=view.getLstcuotas().getSelectedItem().toString();
 		String [] cuota=cuotacompleta.split(" ");
-		if(cuota[0].equals("cuota_precolegiado:") || cuota[0].equals("cuota_colegiado:"))return false;
-		else return true;		
+		if(cuota[0].equals("cuota_precolegiado:") || cuota[0].equals("cuota_colegiado:"))return true;
+		else return false;		
 	}
 
 }

@@ -2,57 +2,65 @@ package giis.demo.inscripcioncursos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-
 import java.util.Date;
 import java.util.List;
 import giis.demo.util.Database;
 import giis.demo.util.Util;
 
-public class Inscripcion_cursosModel {
+public class InscripcionCursosModel {
 
 	private Database db= new Database();
-	
+
+	/**
+	 * Método que devuelve en una consulta todas las cuotas de un curso y las separa y añade en un arraylist
+	 * @param idcurso de tipo entero 
+	 * @return lista de String s de las cuotas de un curso
+	 */
 	public List<String> cargarCuotas(int idcurso){
 		// Definimos la consulta SQL
-	    String sql = "SELECT " +
-	             "CASE WHEN cuota_precolegiado IS NOT NULL THEN 'cuota_precolegiado: ' || cuota_precolegiado ELSE NULL END || " +
-	             "CASE WHEN cuota_colegiado IS NOT NULL THEN ' | cuota_colegiado: ' || cuota_colegiado ELSE '' END || " +
-	             "CASE WHEN cuota_minusvalido IS NOT NULL THEN ' | cuota_minusvalido: ' || cuota_minusvalido ELSE '' END || " +
-	             "CASE WHEN cuota_desempleado IS NOT NULL THEN ' | cuota_desempleado: ' || cuota_desempleado ELSE '' END || " +
-	             "CASE WHEN cuota_empleado IS NOT NULL THEN ' | cuota_empleado: ' || cuota_empleado ELSE '' END || " +
-	             "CASE WHEN cuota_alumno IS NOT NULL THEN ' | cuota_alumno: ' || cuota_alumno ELSE '' END || " +
-	             "CASE WHEN cuota_empresa IS NOT NULL THEN ' | cuota_empresa: ' || cuota_empresa ELSE '' END || " +
-	             "CASE WHEN cuota_otros IS NOT NULL THEN ' | cuota_otros: ' || cuota_otros ELSE '' END AS item " +
-	             "FROM Cursos WHERE id_curso = ?";
-	    
-	   
-	    
-	    // Ejecutamos la consulta y obtenemos los resultados (una lista de una fila con varias columnas)
-	    List<Object[]> result = db.executeQueryArray(sql, idcurso);
-	    
-	    // Lista para almacenar las cuotas no nulas
-	    List<String> cuotasNoNulas = new ArrayList<>();
-	    
-	    // Si el resultado no está vacío, procesamos la primera fila
-	    if (result != null && !result.isEmpty()) {
-	    	
-	    	Object[] cuotas = result.get(0);
-	        String cuotasJuntas = cuotas[0].toString();
-	        //Separamos la consulta que es un único STRING en | para almacenarlo como elemento separados
-	        String[] cuotasSeparadas = cuotasJuntas.split(" \\| ");
-	        
-	        for (String cuota : cuotasSeparadas) {
-	            if (cuota != null) {
-	                // Convertimos la cuota a String y la agregamos a la lista
-	                cuotasNoNulas.add(cuota.toString()+" €");
-	            }
-	        }
-	    }
-	    
-	    // Devolvemos la lista de cuotas no nulas
-	    return cuotasNoNulas;
+		String sql = "SELECT " +
+				"CASE WHEN cuota_precolegiado IS NOT NULL THEN 'cuota_precolegiado: ' || cuota_precolegiado ELSE NULL END || " +
+				"CASE WHEN cuota_colegiado IS NOT NULL THEN ' | cuota_colegiado: ' || cuota_colegiado ELSE '' END || " +
+				"CASE WHEN cuota_minusvalido IS NOT NULL THEN ' | cuota_minusvalido: ' || cuota_minusvalido ELSE '' END || " +
+				"CASE WHEN cuota_desempleado IS NOT NULL THEN ' | cuota_desempleado: ' || cuota_desempleado ELSE '' END || " +
+				"CASE WHEN cuota_empleado IS NOT NULL THEN ' | cuota_empleado: ' || cuota_empleado ELSE '' END || " +
+				"CASE WHEN cuota_alumno IS NOT NULL THEN ' | cuota_alumno: ' || cuota_alumno ELSE '' END || " +
+				"CASE WHEN cuota_empresa IS NOT NULL THEN ' | cuota_empresa: ' || cuota_empresa ELSE '' END || " +
+				"CASE WHEN cuota_otros IS NOT NULL THEN ' | cuota_otros: ' || cuota_otros ELSE '' END AS item " +
+				"FROM Cursos WHERE id_curso = ?";
+
+
+
+		// Ejecutamos la consulta y obtenemos los resultados (una lista de una fila con varias columnas)
+		List<Object[]> result = db.executeQueryArray(sql, idcurso);
+
+		// Lista para almacenar las cuotas no nulas
+		List<String> cuotasNoNulas = new ArrayList<>();
+
+		// Si el resultado no está vacío, procesamos la primera fila
+		if (result != null && !result.isEmpty()) {
+
+			Object[] cuotas = result.get(0);
+			String cuotasJuntas = cuotas[0].toString();
+			//Separamos la consulta que es un único STRING en | para almacenarlo como elemento separados
+			String[] cuotasSeparadas = cuotasJuntas.split(" \\| ");
+
+			for (String cuota : cuotasSeparadas) {
+				if (cuota != null) {
+					// Convertimos la cuota a String y la agregamos a la lista
+					cuotasNoNulas.add(cuota.toString()+" €");
+				}
+			}
+		}
+
+		// Devolvemos la lista de cuotas no nulas
+		return cuotasNoNulas;
 	}
-	
+
+	/**
+	 * En via una lista de cursos disponibles
+	 * @return una lista de CuroDTO
+	 */
 	public List<CursosDTO> getListacursos(){
 		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado,cuota_minusvalido,cuota_desempleado,cuota_empleado,cuota_alumno,cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado "+
 				"FROM Cursos "+
@@ -74,7 +82,12 @@ public class Inscripcion_cursosModel {
 		else
 			return rows.get(0);
 	}
-		
+
+	/**
+	 * Devuelve en una consulta la persona externa a partir de su DNI
+	 * @param dni
+	 * @return objeto tipo ExternoDTO 
+	 */
 	public ExternoDTO getDatosExterno(String dni){
 		String sql="Select id_externo, nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria "
 				+"FROM Externos WHERE DNI=?";

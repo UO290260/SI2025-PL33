@@ -20,9 +20,9 @@ import giis.demo.visualizarcursos.VisualizarCursosView;
 import giis.demo.visualizarinscritos.VisualizarInscritosController;
 import giis.demo.visualizarinscritos.VisualizarInscritosModel;
 import giis.demo.visualizarinscritos.VisualizarInscritosView;
-import giis.demo.inscripcioncursos.Inscripcion_cursosController;
-import giis.demo.inscripcioncursos.Inscripcion_cursosModel;
-import giis.demo.inscripcioncursos.Inscripcion_cursosView;
+import giis.demo.inscripcioncursos.InscripcionCursosController;
+import giis.demo.inscripcioncursos.InscripcionCursosModel;
+import giis.demo.inscripcioncursos.InscripcionCursosView;
 import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPController;
 import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPModel;
 import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPView;
@@ -97,7 +97,7 @@ public class SwingMain {
 		JButton btnIncripcióncurso = new JButton("3. Ejecutar inscricpcion_cursos"); //Botón que llama a la ventana de inscripción de curso
 		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				Inscripcion_cursosController controller3=new Inscripcion_cursosController(new Inscripcion_cursosModel(), new Inscripcion_cursosView());
+				InscripcionCursosController controller3=new InscripcionCursosController(new InscripcionCursosModel(), new InscripcionCursosView());
 			}
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));

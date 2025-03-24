@@ -5,12 +5,12 @@ import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 
-public class Justificante_Inscripción extends JFrame {
+public class JustificanteInscripción extends JFrame {
 	private JFrame frame;
 	private CursosDTO curso;
 	private String fecha;
 	private String nombre,apellidos,cuenta,cuota,DNI;
-	
+
 
 
 	/**
@@ -18,7 +18,7 @@ public class Justificante_Inscripción extends JFrame {
 	 * @param colegiado objeto de tipo DTO
 	 * @param fecha de tipo String
 	 */
-	public Justificante_Inscripción(String nombre,String apellidos,String DNI,String cuenta, String fecha,CursosDTO curso,String cuota) {
+	public JustificanteInscripción(String nombre,String apellidos,String DNI,String cuenta, String fecha,CursosDTO curso,String cuota) {
 		this.nombre=nombre;
 		this.apellidos=apellidos;
 		this.DNI=DNI;
