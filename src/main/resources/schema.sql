@@ -13,7 +13,7 @@ CREATE TABLE Colegiados (
     id_colegiado INT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     apellidos VARCHAR(30) NOT NULL,
-    DNI VARCHAR(15) NOT NULL,
+    DNI VARCHAR(15) NOT NULL UNIQUE,
     direccion VARCHAR(50) NOT NULL,
     poblacion VARCHAR(30) NOT NULL,
     fecha_nacimiento DATE,
@@ -46,13 +46,12 @@ CREATE TABLE Cursos (
 
 CREATE TABLE Inscripciones (
     id_inscripcion INT PRIMARY KEY,
-    id_colegiado INT NOT NULL,
+    DNI VARCHAR(15) NOT NULL,
     id_curso INT NOT NULL,
     fecha_inscripcion DATE,
     estado VARCHAR (20),
     cantidad_pagar INT,
     cantidad_devolver INT,
-    FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE,
     FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
 );
 
@@ -69,7 +68,7 @@ CREATE TABLE Externos (
 	id_externo INT PRIMARY KEY,
     nombre VARCHAR(30) NOT NULL,
     apellidos VARCHAR(30) NOT NULL,
-    DNI VARCHAR(15) NOT NULL,
+    DNI VARCHAR(15) NOT NULL UNIQUE,
     direccion VARCHAR(50) NOT NULL,
     poblacion VARCHAR(30) NOT NULL,
     fecha_nacimiento DATE,

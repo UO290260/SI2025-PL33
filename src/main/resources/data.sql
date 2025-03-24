@@ -16,13 +16,13 @@ INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, dura
 (4, 'Arquitectura urbanística', 'Principios de diseño arquitectónico y urbanismo', '2024-10-06', '2024-10-09', 90, 35, 10, 200, 220 ,100, NULL, 100, 100, 100, NULL, NULL, NULL, 'Pendiente'),
 (5, 'Entrenador', 'Principios de entrenamiento deportivo', '2024-01-07', '2024-01-10', 90, 40, 6, 100, 100, 70, 100, 120, 100, 400, 150, NULL, NULL, 'Pendiente');
 delete from Inscripciones;
-INSERT INTO Inscripciones (id_inscripcion, id_colegiado, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES
-(1, 1, 1, '2024-02-15','Matriculado',NULL,NULL),
-(2, 2, 2, '2024-03-01','Matriculado',NULL,NULL),
-(3, 3, 3, '2024-03-05','Matriculado',NULL,NULL),
-(4, 4, 4, '2024-04-01','Matriculado',NULL,NULL),
-(5, 5, 5, '2024-04-10','Matriculado',NULL,NULL),
-(6, 1, 3, '2024-06-10','Matriculado',NULL,NULL);
+INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES
+(1, '12345678A', 1, '2024-02-15','Matriculado',NULL,NULL),
+(2, '23456789B', 2, '2024-03-01','Matriculado',NULL,NULL),
+(3, '34567890C', 3, '2024-03-05','Matriculado',NULL,NULL),
+(4, '45678901D', 4, '2024-04-01','Matriculado',NULL,NULL),
+(5, '56789012E', 5, '2024-04-10','Matriculado',NULL,NULL),
+(6, '12345678A', 3, '2024-06-10','Matriculado',NULL,NULL);
 delete from Sesiones;
 INSERT INTO Sesiones (id_sesion, id_curso, fecha, hora_inicio, duracion) VALUES
 (1, 1, '2024-01-03', '09:00', 3),
