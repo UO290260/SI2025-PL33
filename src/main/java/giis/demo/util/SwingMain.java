@@ -17,6 +17,9 @@ import giis.demo.ofertarcursos.OfertarCursosView;
 import giis.demo.planificarsesiones.PlanificarSesionesController;
 import giis.demo.planificarsesiones.PlanificarSesionesModel;
 import giis.demo.planificarsesiones.PlanificarSesionesView;
+import giis.demo.solicitudcolegiado.SolicitudColegiadoController;
+import giis.demo.solicitudcolegiado.SolicitudColegiadoModel;
+import giis.demo.solicitudcolegiado.SolicitudColegiadoView;
 import giis.demo.visualizarcursos.VisualizarCursosController;
 import giis.demo.visualizarcursos.VisualizarCursosModel;
 import giis.demo.visualizarcursos.VisualizarCursosView;
@@ -71,7 +74,7 @@ public class SwingMain {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setTitle("Main");
-		frame.setBounds(0, 0, 300, 300);
+		frame.setBounds(0, 0, 500, 500);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 
@@ -159,6 +162,7 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(prueba);
 
+
 		//Boton de la historia Planificar sesiones
 		JButton btnPlanificarSesiones = new JButton("9. Planificar Sesiones");
 		btnPlanificarSesiones.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
@@ -169,6 +173,19 @@ public class SwingMain {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnPlanificarSesiones);
 		
+
+		//Boton de la historia inscripcion_lista_TAP
+		JButton btnSolicitud = new JButton("10. Ejecutar solicitud_colegiado");
+		btnSolicitud.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				SolicitudColegiadoController controller10=new SolicitudColegiadoController(new SolicitudColegiadoModel(), new SolicitudColegiadoView());
+				controller10.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnSolicitud);
+
+
 		/**
 		 * Cargar la base de datos en blanco 
 		 */
