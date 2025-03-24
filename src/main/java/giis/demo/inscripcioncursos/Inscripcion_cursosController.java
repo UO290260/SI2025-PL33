@@ -232,7 +232,7 @@ public class Inscripcion_cursosController {
 	 */
 	public void getListaCursos() {
 		ListaCursos=model.getListacursos();
-		TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","cuota_precolegiado", "cuota_colegiado", "cuota_otros","apertura_inscripcion","cierre_inscripcion","estado"});
+		TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","cuota_precolegiado", "cuota_colegiado","cuota_minusvalido","cuota_desempleado","cuota_empleado","cuota_alumno","cuota_empresa", "cuota_otros","apertura_inscripcion","cierre_inscripcion","estado"});
 		view.getTabCurso().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(view.getTabCurso());			
 	}

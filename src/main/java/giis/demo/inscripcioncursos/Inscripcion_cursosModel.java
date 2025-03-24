@@ -25,6 +25,8 @@ public class Inscripcion_cursosModel {
 	             "CASE WHEN cuota_otros IS NOT NULL THEN ' | cuota_otros: ' || cuota_otros ELSE '' END AS item " +
 	             "FROM Cursos WHERE id_curso = ?";
 	    
+	   
+	    
 	    // Ejecutamos la consulta y obtenemos los resultados (una lista de una fila con varias columnas)
 	    List<Object[]> result = db.executeQueryArray(sql, idcurso);
 	    
@@ -52,7 +54,7 @@ public class Inscripcion_cursosModel {
 	}
 	
 	public List<CursosDTO> getListacursos(){
-		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado "+
+		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado,cuota_minusvalido,cuota_desempleado,cuota_empleado,cuota_alumno,cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado "+
 				"FROM Cursos "+
 				"Where estado='Disponible'";
 		List<CursosDTO> rows=db.executeQueryPojo(CursosDTO.class,sql); //Envia en forma de List CursoDTO la consulta sql
