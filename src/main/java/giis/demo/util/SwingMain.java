@@ -160,7 +160,7 @@ public class SwingMain {
 		frame.getContentPane().add(prueba);
 
 		//Boton de la historia Planificar sesiones
-		JButton btnPlanificarSesiones = new JButton("8. Planificar Sesiones");
+		JButton btnPlanificarSesiones = new JButton("9. Planificar Sesiones");
 		btnPlanificarSesiones.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
 				PlanificarSesionesController controllerPlanificarSesiones=new PlanificarSesionesController(new PlanificarSesionesModel(), new PlanificarSesionesView());

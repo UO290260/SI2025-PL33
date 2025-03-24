@@ -77,6 +77,9 @@ public class PlanificarSesionesController {
 		}
 		model.añadirSesion(model.incrementarID(), cursoSel.getId_curso(), fechaStr, view.getHoraInicio().getText(), Integer.parseInt(view.getDuracion().getText()));
 			JOptionPane.showMessageDialog(null, "Se ha añadido la sesión correctamente");
+		view.getHoraInicio().setText("");
+		view.getDuracion().setText("");
+		view.getCalendario().setDate(null);
 		
 	}
 	
