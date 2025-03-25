@@ -13,12 +13,12 @@ public class HistoricocursosModel {
 	 * @param idColegiado
 	 * @return lista de cursos
 	 */
-	public List<HistoricocursosDTO> getListaCursos(int idColegiado) {
-		String sql = "SELECT c2.id_colegiado, c1.id_curso, c1.titulo, c1.fecha_inicio, c1.fecha_fin, c1.duracion, c1.estado " +
+	public List<HistoricocursosDTO> getListaCursos(String idColegiado) {
+		String sql = "SELECT c2.DNI, c1.id_curso, c1.titulo, c1.fecha_inicio, c1.fecha_fin, c1.duracion, c1.estado " +
 				"FROM Colegiados c2 " +
-				"JOIN Inscripciones i ON c2.id_colegiado = i.id_colegiado " +  
+				"JOIN Inscripciones i ON c2.DNI = i.DNI " +  
 				"JOIN Cursos c1 ON i.id_curso = c1.id_curso " + 
-				"WHERE c2.id_colegiado = ?";
+				"WHERE c2.DNI = ?";
 		return db.executeQueryPojo(HistoricocursosDTO.class, sql, idColegiado);
 	}
 
@@ -27,8 +27,8 @@ public class HistoricocursosModel {
 	 * @param idColegiado
 	 * @return numero de cursos
 	 */
-	public int getTotalCursos(int idColegiado) {
-		String sql = "SELECT COUNT(*) FROM Inscripciones WHERE id_colegiado = ?";
+	public int getTotalCursos(String idColegiado) {
+		String sql = "SELECT COUNT(*) FROM Inscripciones WHERE DNI = ?";
 		List<Object[]> result = db.executeQueryArray(sql, idColegiado);
 
 		if (!result.isEmpty() && result.get(0)[0] != null) {
@@ -42,12 +42,12 @@ public class HistoricocursosModel {
 	 * @param idColegiado
 	 * @return 
 	 */
-	public int getTotalHoras(int idColegiado) {
+	public int getTotalHoras(String idColegiado) {
 		String sql = "SELECT SUM(c1.duracion) " +
 				"FROM Colegiados c2 " +
-				"JOIN Inscripciones i ON c2.id_colegiado = i.id_colegiado " +
+				"JOIN Inscripciones i ON c2.DNI = i.DNI " +
 				"JOIN Cursos c1 ON i.id_curso = c1.id_curso " +
-				"WHERE c2.id_colegiado = ?";
+				"WHERE c2.DNI = ?";
 
 		List<Object[]> result = db.executeQueryArray(sql, idColegiado);
 

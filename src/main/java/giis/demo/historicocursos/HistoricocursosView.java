@@ -15,7 +15,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class HistoricocursosView {
 	private JFrame frame;
-	private JTextField numerocolegiadotxt;
+	private JTextField dnicolegiadotxt;
 	private JButton btnBuscar;
 	private JTable tabla;
 	private JLabel totalcursos;
@@ -38,12 +38,12 @@ public class HistoricocursosView {
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("fillx, insets 10", "[right]10[grow,fill]10[right]", "[]5[]5[]5[]5[grow][]"));
 		frame.setLocationRelativeTo(null);
-		frame.getContentPane().add(new JLabel("Busca un numero de un colegiado para mostrar los cursos en los que esta inscrito"), "cell 0 0 2 1, growx , wrap");
+		frame.getContentPane().add(new JLabel("Busca un dni de un colegiado para mostrar los cursos en los que esta inscrito"), "cell 0 0 2 1, growx , wrap");
 
 		frame.add(new JLabel("Número de colegiado:"), "cell 0 1");
-		numerocolegiadotxt = new JTextField(5);
-		HistoricocursosController.soloNumeros(numerocolegiadotxt);
-		frame.add(numerocolegiadotxt, "cell 1 1, growx");
+		dnicolegiadotxt = new JTextField(5);
+		HistoricocursosController.validarDNI(dnicolegiadotxt);
+		frame.add(dnicolegiadotxt, "cell 1 1, growx");
 
 		btnBuscar = new JButton("Buscar");
 		frame.add(btnBuscar, "cell 2 1, right");
@@ -67,7 +67,7 @@ public class HistoricocursosView {
 		frame.getContentPane().add(panelResumen, "cell 2 3, top, grow");
 	}
 	public JFrame getFrame() { return this.frame; } public void setFrame(JFrame frame) { this.frame = frame; }
-	public JTextField getNumerocolegiadotxt() { return this.numerocolegiadotxt; } public void setNumerocolegiadotxt(JTextField numerocolegiadotxt) { this.numerocolegiadotxt = numerocolegiadotxt; }
+	public JTextField getNDnicolegiadotxt() { return this.dnicolegiadotxt; } public void setNDnicolegiadotxt(JTextField dnicolegiadotxt) { this.dnicolegiadotxt = dnicolegiadotxt; }
 	public JButton getBtnBuscar() { return this.btnBuscar; } public void setBtnBuscar(JButton btnBuscar) { this.btnBuscar = btnBuscar; }
 	public JTable getTabla() { return this.tabla; }	public void setTabla(JTable tabla) { this.tabla = tabla; }
 	public JLabel getTotalcursos() { return totalcursos; } public void setTotalcursos(JLabel totalcursos) { this.totalcursos = totalcursos; }

@@ -42,43 +42,58 @@ public class HistoricocursosController {
 	 * Obtencion de la lista de cursos que necesita la lista de objetos del modelo y muestra tambien los resumenes.
 	 */
 	public void cargarListaCursos() {
-		String numeroColegiadovista = vista.getNumerocolegiadotxt().getText();
+		String numeroColegiadovista = vista.getNDnicolegiadotxt().getText();
 		if (numeroColegiadovista.isEmpty()) { 
-			JOptionPane.showMessageDialog(null, "Introduzca un número de colegiado");
+			JOptionPane.showMessageDialog(null, "Introduzca un dni de un colegiado");
 			return;
 		}
 
-		int idColegiado = Integer.parseInt(numeroColegiadovista);
-		List<HistoricocursosDTO> cursos = modelo.getListaCursos(idColegiado);
+		
+		List<HistoricocursosDTO> cursos = modelo.getListaCursos(numeroColegiadovista);
 		if (cursos.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "El colegiado numero " + idColegiado + " no está inscrito en ningún curso.");
+			JOptionPane.showMessageDialog(null, "El colegiado  " + numeroColegiadovista + " no está inscrito en ningún curso.");
 			return;
 		}
 
 		TableModel tmodel = SwingUtil.getTableModelFromPojos(cursos, new String[]{
-				"id_colegiado" ,"id_curso", "titulo", "fecha_inicio", "fecha_fin", "duracion", "estado"
+				"DNI" ,"id_curso", "titulo", "fecha_inicio", "fecha_fin", "duracion", "estado"
 		});
 
 		vista.getTabla().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(vista.getTabla());
 
-		int totalCursos = modelo.getTotalCursos(idColegiado);
-		int totalHoras = modelo.getTotalHoras(idColegiado);
+		int totalCursos = modelo.getTotalCursos(numeroColegiadovista);
+		int totalHoras = modelo.getTotalHoras(numeroColegiadovista);
 		vista.getTotalcursos().setText(String.valueOf(totalCursos));
 		vista.getTotalhoras().setText(String.valueOf(totalHoras));
 	}
 
 	/**
-	 * Método para que solo puedas introducir números 
+	 * Metodo que permite escribir correctamente un DNI (8 números y una letra)
 	 * @param letra
 	 */
-	public static void soloNumeros(JTextField numero) {
-		numero.addKeyListener(new KeyAdapter() {
+	public static void validarDNI(JTextField letra) {
+		letra.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent evt) {
 				char c = evt.getKeyChar();
-				if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
-					evt.consume(); 
+				String texto = letra.getText();
+
+				if (texto.length() < 8) {
+					if (!Character.isDigit(c)) {
+						evt.consume(); 
+					}
+				} 
+				else if (texto.length() == 8) {
+					if (!Character.isLetter(c)) {
+						evt.consume(); 
+					}
+					else {
+						evt.setKeyChar(Character.toUpperCase(c)); 
+					}
+				} 
+				else {
+					evt.consume();
 				}
 			}
 		});
