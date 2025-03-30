@@ -36,6 +36,8 @@ public class OfertarCursosController {
 		view.getCuotaAlumno().setEnabled(false);
 		view.getCuotaEmpresa().setEnabled(false);
 		view.getCuotaOtros().setEnabled(false);
+		view.getPorcentaje().setEnabled(false);
+		view.getCalFechaCancel().setEnabled(false);
 		
 		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getCuotaPrecolegiado().addKeyListener(new KeyAdapter() {
@@ -50,6 +52,61 @@ public class OfertarCursosController {
 		
 		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getCuotaColegiado().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) { 
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c) && c != '\b') { 
+					e.consume();
+				}
+			}
+		});
+		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
+		view.getCuotaMinusvalido().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) { 
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c) && c != '\b') { 
+					e.consume();
+				}
+			}
+		});
+		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
+		view.getCuotaDesempleado().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) { 
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c) && c != '\b') { 
+					e.consume();
+				}
+			}
+		});
+				
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
+		view.getCuotaEmpleado().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) { 
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c) && c != '\b') { 
+					e.consume();
+				}
+			}
+		});
+				
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
+		view.getCuotaAlumno().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) { 
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c) && c != '\b') { 
+					e.consume();
+				}
+			}
+		});
+			
+				//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
+		view.getCuotaEmpresa().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) { 
 				char c = e.getKeyChar();
@@ -83,6 +140,17 @@ public class OfertarCursosController {
 		
 		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
 		view.getDuracion().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) { 
+				char c = e.getKeyChar();
+				if (!Character.isDigit(c) && c != '\b') { 
+					e.consume();
+				}
+			}
+		});
+		
+		//Cambiamos el método que registra las teclas pulsadas para que solo acepte formátos numéricos
+		view.getPorcentaje().addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) { 
 				char c = e.getKeyChar();
@@ -164,6 +232,16 @@ public class OfertarCursosController {
                 if (!view.getCuotaEmpresa().isEnabled()) view.getCuotaEmpresa().setText("");
             }
         });
+		
+		view.getCheckCancelable().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.getPorcentaje().setEnabled(view.getCheckCancelable().isSelected());
+                view.getCalFechaCancel().setEnabled(view.getCheckCancelable().isSelected());
+                if (!view.getPorcentaje().isEnabled()) view.getPorcentaje().setText("");
+                if (!view.getCalFechaCancel().isEnabled()) view.getCalFechaCancel().setDate(null);
+            }
+        });
 
 	}
 	/**
@@ -174,6 +252,7 @@ public class OfertarCursosController {
 		//Pasar las fechas al formato de la base de datos
 		Date fechaIni = view.getFechaIni();
 		Date fechaFin = view.getFechaFin();
+		Date fechaCancel = view.getFechaCancel();
 		
 		if (fechaIni == null) {
             JOptionPane.showMessageDialog(null, "La fecha de inicio no puede ser nula.");
@@ -188,6 +267,10 @@ public class OfertarCursosController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String fechaIniStr = sdf.format(fechaIni);
 		String fechaFinStr = sdf.format(fechaFin);
+		String fechaCancelStr = null;
+		if (fechaCancel != null) {
+			fechaCancelStr = sdf.format(fechaCancel);
+        }
 		
 		//Codigo para poder permitir campos nulos y que sean
 		//detectados mas adelante
@@ -202,6 +285,7 @@ public class OfertarCursosController {
 		int cuotaAlu = -1;
 		int cuotaEmpr = -1;
 		int cuotaOtr = -1;
+		int porcentaje = -1;
 		if (!view.getDuracion().getText().isBlank()) duracion = Integer.parseInt(view.getDuracion().getText());
 		if (!view.getPlazas().getText().isBlank()) plazas = Integer.parseInt(view.getPlazas().getText());
 		if (!view.getPlazas().getText().isBlank()) sesiones = Integer.parseInt(view.getSesiones().getText());
@@ -213,9 +297,11 @@ public class OfertarCursosController {
 		if (!view.getCuotaAlumno().getText().isBlank()) cuotaAlu = Integer.parseInt(view.getCuotaAlumno().getText());
 		if (!view.getCuotaEmpresa().getText().isBlank()) cuotaEmpr = Integer.parseInt(view.getCuotaEmpresa().getText());
 		if (!view.getCuotaOtros().getText().isBlank()) cuotaOtr = Integer.parseInt(view.getCuotaOtros().getText());
+		if (!view.getPorcentaje().getText().isBlank()) porcentaje = Integer.parseInt(view.getPorcentaje().getText());
 		
 		OfertarCursosDTO curso = new OfertarCursosDTO( model.incrementarID(), view.getTitulo().getText(), view.getDescripcion().getText(),
-				fechaIniStr, fechaFinStr, duracion, plazas, sesiones, cuotaPre, cuotaCol, cuotaMinus, cuotaDes, cuotaEmpl, cuotaAlu, cuotaEmpr, cuotaOtr);
+				fechaIniStr, fechaFinStr, duracion, plazas, sesiones, cuotaPre, cuotaCol, cuotaMinus, cuotaDes, cuotaEmpl, cuotaAlu, cuotaEmpr, cuotaOtr, 
+				view.getCheckCancelable().isEnabled(), porcentaje, fechaCancelStr, view.getCheckEspera().isEnabled());
 		
 		//Comprobaciones para que el formulario sea correcto
 		if (fechaFin.before(fechaIni)) {
@@ -243,9 +329,15 @@ public class OfertarCursosController {
             return;
         }
 		
+		if (fechaCancelStr != null && fechaCancel.after(fechaIni)) {
+			JOptionPane.showMessageDialog(null, "La fecha de cancelación debe ser anterior a la fecha de inicio");
+            return;
+		}
+		
 		model.añadirCurso(curso.getId_curso(), curso.getTitulo(), curso.getDescripcion(), curso.getFecha_inicio(), curso.getFecha_fin(), curso.getDuracion(),
 				curso.getPlazas(), curso.getSesiones(), curso.getCuota_precolegiado(), curso.getCuota_colegiado(), curso.getCuota_minusvalido(), curso.getCuota_desempleado(), 
-				curso.getCuota_empleado(), curso.getCuota_alumno(), curso.getCuota_empresa(), curso.getCuota_otros());
+				curso.getCuota_empleado(), curso.getCuota_alumno(), curso.getCuota_empresa(), curso.getCuota_otros(), curso.isCancelable(), curso.getPorcentaje_devolucion(),
+				curso.getFecha_cancelacion(), curso.isLista_espera());
 		view.getFrame().setVisible(false);
 		justificante = new OfertarCursosJustificante(curso);
 	}

@@ -41,6 +41,10 @@ CREATE TABLE Cursos (
 	cuota_otros INT,
     apertura_inscripcion DATE,
     cierre_inscripcion DATE,
+    cancelable BOOLEAN,
+    porcentaje_devolucion INT,
+    fecha_cancelacion DATE,
+    lista_espera BOOLEAN,
     estado VARCHAR(15) NOT NULL
 );
 

@@ -17,9 +17,15 @@ public class OfertarCursosDTO {
 	private int cuota_alumno;
 	private int cuota_empresa;
 	private int cuota_otros;
+	private boolean cancelable;
+	private String fecha_cancelacion; 
+	private int porcentaje_devolucion;
+	private boolean lista_espera;
+	
 	
 	public OfertarCursosDTO() {}
-	public OfertarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int ses, int cuotaPre, int cuotaCol, int cuotaMinus, int cuotaDes, int cuotaEmpl, int cuotaAlu, int cuotaEmpr, int cuotaOtros) {
+	public OfertarCursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int ses, int cuotaPre, int cuotaCol, int cuotaMinus, int cuotaDes, 
+			int cuotaEmpl, int cuotaAlu, int cuotaEmpr, int cuotaOtros, boolean cancel, int porc, String fcancel, boolean espera) {
 		setId_curso(id);
 		setTitulo(tit); 
 		setDescripcion(descr);
@@ -36,6 +42,10 @@ public class OfertarCursosDTO {
 		setCuota_alumno(cuotaAlu);
 		setCuota_empresa(cuotaEmpr);
 		setCuota_otros(cuotaOtros);
+		setCancelable(cancel);
+		setFecha_cancelacion(fcancel);
+		setPorcentaje_devolucion(porc);
+		setLista_espera(espera);
 	}
 	
 	public int getId_curso() {
@@ -133,6 +143,30 @@ public class OfertarCursosDTO {
 	}
 	public void setSesiones(int sesiones) {
 		this.sesiones = sesiones;
+	}
+	public boolean isCancelable() {
+		return cancelable;
+	}
+	public void setCancelable(boolean cancelable) {
+		this.cancelable = cancelable;
+	}
+	public String getFecha_cancelacion() {
+		return fecha_cancelacion;
+	}
+	public void setFecha_cancelacion(String fecha_cancelacion) {
+		this.fecha_cancelacion = fecha_cancelacion;
+	}
+	public int getPorcentaje_devolucion() {
+		return porcentaje_devolucion;
+	}
+	public void setPorcentaje_devolucion(int porcentaje_devoluciob) {
+		this.porcentaje_devolucion = porcentaje_devoluciob;
+	}
+	public boolean isLista_espera() {
+		return lista_espera;
+	}
+	public void setLista_espera(boolean lista_espera) {
+		this.lista_espera = lista_espera;
 	}
 	
 	
