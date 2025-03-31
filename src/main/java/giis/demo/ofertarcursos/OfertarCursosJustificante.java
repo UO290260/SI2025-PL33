@@ -16,7 +16,8 @@ public class OfertarCursosJustificante {
 	}
 	
 	JFrame frame;
-	private JLabel txtTitulo, txtDescripcion, txtFechaIni, txtFechaFin, txtDuracion, txtPlazas, txtCuotaPrecolegiado, txtCuotaColegiado, txtCuotaOtros;
+	private JLabel txtTitulo, txtDescripcion, txtFechaIni, txtFechaFin, txtDuracion, txtPlazas, txtCuotaPrecolegiado, txtCuotaColegiado, txtCuotaMinusvalido, txtCuotaDesempleado,
+	txtCuotaEmpleado, txtCuotaAlumno, txtCuotaEmpresa, txtCuotaOtros, txtCancelable, txtPorcentaje, txtFechaCancel, txtEspera;
 	OfertarCursosDTO curso;
 	
 	/**
@@ -26,7 +27,7 @@ public class OfertarCursosJustificante {
 		frame = new JFrame();
 		frame.setTitle("Justificante");
 		frame.setName("Justificante");
-		frame.setBounds(0, 0, 300, 300);
+		frame.setBounds(0, 0, 600, 300);
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
@@ -41,7 +42,16 @@ public class OfertarCursosJustificante {
 		final JLabel lblPlazas;
 		final JLabel lblCuotaPrecolegiado;
 		final JLabel lblCuotaColegiado;
+		final JLabel lblCuotaMinusvalido;
+		final JLabel lblCuotaDesempleado;
+		final JLabel lblCuotaEmpleado;
+		final JLabel lblCuotaAlumno;
+		final JLabel lblCuotaEmpresa;
 		final JLabel lblCuotaOtros;
+		final JLabel lblCancelable;
+		final JLabel lblPorcentaje;
+		final JLabel lblFechaCancel;
+		final JLabel lblEspera;
 		
 		
 		lblInicio = new JLabel("Justificante del curso añadido");
@@ -98,14 +108,68 @@ public class OfertarCursosJustificante {
 		lblCuotaColegiado = new JLabel("Cuota Colegiado");
 		panel.add(lblCuotaColegiado, "growx, wrap");
 		txtCuotaColegiado = new JLabel(String.valueOf(curso.getCuota_colegiado()));
-		txtCuotaColegiado.setName("CuotaColegiado");
+		txtCuotaColegiado.setName("txtCuotaColegiado");
 		panel.add(txtCuotaColegiado, "growx, wrap");
+		
+		lblCuotaMinusvalido = new JLabel("Cuota Minusvalido");
+		panel.add(lblCuotaMinusvalido, "growx, wrap");
+		txtCuotaMinusvalido = new JLabel(String.valueOf(curso.getCuota_minusvalido()));
+		txtCuotaMinusvalido.setName("txtCuotaMinusvalido");
+		panel.add(txtCuotaMinusvalido, "growx, wrap");
+		
+		lblCuotaDesempleado = new JLabel("Cuota Desempleado");
+		panel.add(lblCuotaDesempleado, "growx, wrap");
+		txtCuotaDesempleado = new JLabel(String.valueOf(curso.getCuota_desempleado()));
+		txtCuotaDesempleado.setName("txtCuotaDesempleado");
+		panel.add(txtCuotaDesempleado, "growx, wrap");
+		
+		lblCuotaEmpleado = new JLabel("Cuota Empleado");
+		panel.add(lblCuotaEmpleado, "growx, wrap");
+		txtCuotaEmpleado = new JLabel(String.valueOf(curso.getCuota_empleado()));
+		txtCuotaEmpleado.setName("txtCuotaEmpleado");
+		panel.add(txtCuotaEmpleado, "growx, wrap");
+		
+		lblCuotaAlumno = new JLabel("Cuota Alumno");
+		panel.add(lblCuotaAlumno, "growx, wrap");
+		txtCuotaAlumno = new JLabel(String.valueOf(curso.getCuota_alumno()));
+		txtCuotaAlumno.setName("txtCuotaAlumno");
+		panel.add(txtCuotaAlumno, "growx, wrap");
+		
+		lblCuotaEmpresa = new JLabel("Cuota Empresa");
+		panel.add(lblCuotaEmpresa, "growx, wrap");
+		txtCuotaEmpresa = new JLabel(String.valueOf(curso.getCuota_empresa()));
+		txtCuotaEmpresa.setName("txtCuotaEmpresa");
+		panel.add(txtCuotaEmpresa, "growx, wrap");
 		
 		lblCuotaOtros = new JLabel("CuotaOtros");
 		panel.add(lblCuotaOtros, "growx, wrap");
 		txtCuotaOtros = new JLabel(String.valueOf(curso.getCuota_otros()));
 		txtCuotaOtros.setName("CuotaOtros");
 		panel.add(txtCuotaOtros, "growx, wrap");
+		
+		lblCancelable = new JLabel("Cancelable");
+		panel.add(lblCancelable, "growx, wrap");
+		txtCancelable = new JLabel(String.valueOf(curso.isCancelable()));
+		txtCancelable.setName("txtCancelable");
+		panel.add(txtCancelable, "growx, wrap");
+		
+		lblPorcentaje = new JLabel("Porcentaje de devolucion: ");
+		panel.add(lblPorcentaje, "growx, wrap");
+		txtPorcentaje = new JLabel(String.valueOf(curso.getPorcentaje_devolucion()));
+		txtPorcentaje.setName("txtPorcentaje");
+		panel.add(txtPorcentaje, "growx, wrap");
+		
+		lblFechaCancel = new JLabel("Fecha de Cancelacion");
+		panel.add(lblFechaCancel, "growx, wrap");
+		txtFechaCancel = new JLabel(curso.getFecha_cancelacion());
+		txtFechaCancel.setName("txtFechaFin");
+		panel.add(txtFechaCancel, "growx, wrap");
+		
+		lblEspera = new JLabel("Lista de espera: ");
+		panel.add(lblEspera, "growx, wrap");
+		txtEspera = new JLabel(String.valueOf(curso.isCancelable()));
+		txtEspera.setName("txtEspera");
+		panel.add(txtEspera, "growx, wrap");
 		
 		frame.setVisible(true);
 		frame.pack();

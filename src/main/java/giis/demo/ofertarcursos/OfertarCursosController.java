@@ -334,6 +334,21 @@ public class OfertarCursosController {
             return;
 		}
 		
+		if (fechaCancelStr == null && curso.isCancelable()) {
+			JOptionPane.showMessageDialog(null, "La fecha de cancelación no puede ser nula");
+            return;
+		}
+		
+		if (curso.getPorcentaje_devolucion() == -1 && curso.isCancelable()) {
+			JOptionPane.showMessageDialog(null, "El porcentaje de devolución no puede ser nulo");
+            return;
+		}
+		
+		if ((curso.getPorcentaje_devolucion() > 100 || curso.getPorcentaje_devolucion() < 0) && curso.isCancelable()) {
+			JOptionPane.showMessageDialog(null, "El porcentaje de devolución debe estar entre 0 y 100");
+            return;
+		}
+		
 		model.añadirCurso(curso.getId_curso(), curso.getTitulo(), curso.getDescripcion(), curso.getFecha_inicio(), curso.getFecha_fin(), curso.getDuracion(),
 				curso.getPlazas(), curso.getSesiones(), curso.getCuota_precolegiado(), curso.getCuota_colegiado(), curso.getCuota_minusvalido(), curso.getCuota_desempleado(), 
 				curso.getCuota_empleado(), curso.getCuota_alumno(), curso.getCuota_empresa(), curso.getCuota_otros(), curso.isCancelable(), curso.getPorcentaje_devolucion(),
