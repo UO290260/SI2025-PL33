@@ -41,6 +41,10 @@ CREATE TABLE Cursos (
 	cuota_otros INT,
     apertura_inscripcion DATE,
     cierre_inscripcion DATE,
+    cancelable BOOLEAN, 
+    porcentaje_devolucion INT,
+    fecha_cancelacion DATE,
+    lista_espera BOOLEAN,
     estado VARCHAR(15) NOT NULL
 );
 
@@ -52,6 +56,8 @@ CREATE TABLE Inscripciones (
     estado VARCHAR (20),
     cantidad_pagar INT,
     cantidad_devolver INT,
+    lista_espera BOOLEAN,
+    posicion INT,
     FOREIGN KEY (id_curso) REFERENCES Cursos(id_curso) ON DELETE CASCADE
 );
 
@@ -85,3 +91,23 @@ CREATE TABLE Peritos (
 	estado VARCHAR (10) NOT NULL,
 	FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE
 );
+
+CREATE TABLE Periciales (
+	id_pericial INT PRIMARY KEY,
+	id_colegiado INT,
+	nombre VARCHAR (20),
+	solicitante VARCHAR(40),
+	fecha DATE,
+	urgencia VARCHAR(20),
+	estado VARCHAR(20),
+	FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE,
+	FOREIGN KEY (nombre) REFERENCES Colegiados(nombre) ON DELETE CASCADE
+);
+
+CREATE TABLE Asignacion (
+	id_perito INT,
+	id_pericial INT,
+	fecha DATE,
+	estado VARCHAR(20),
+	PRIMARY KEY (id_perito, id_pericial)
+)
