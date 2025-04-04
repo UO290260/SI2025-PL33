@@ -19,10 +19,10 @@ import java.util.Date;
 public class OfertarCursosView {
 	private JFrame frame;
 	private JTextField txtTitulo, txtDescripcion, txtDuracion, txtPlazas, txtSesiones, txtCuotaPrecolegiado, txtCuotaColegiado, txtCuotaMinusvalido, 
-	txtCuotaDesempleado, txtCuotaEmpleado, txtCuotaAlumno, txtCuotaEmpresa, txtCuotaOtros;
-	private JDateChooser calFechaIni, calFechaFin;
+	txtCuotaDesempleado, txtCuotaEmpleado, txtCuotaAlumno, txtCuotaEmpresa, txtCuotaOtros, txtPorcentaje;
+	private JDateChooser calFechaIni, calFechaFin, calFechaCancel;
 	private JButton bConfirmar;
-	private JCheckBox col1, col2, col3, col4, col5, col6, col7, col8;
+	private JCheckBox col1, col2, col3, col4, col5, col6, col7, col8, cancelable, espera;
 	
 	/**
 	 * Create the application.
@@ -38,7 +38,7 @@ public class OfertarCursosView {
 		frame = new JFrame();
 		frame.setTitle("Ofertar Curso");
 		frame.setName("Ofertar Curso");
-		frame.setBounds(0, 0, 400, 800);
+		frame.setBounds(0, 0, 750, 750);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
@@ -60,6 +60,9 @@ public class OfertarCursosView {
 		final JLabel lblCuotaEmpresa;
 		final JLabel lblCuotaOtros;
 		final JLabel lblColectivos;
+		final JLabel lblOpcionesExtra;
+		final JLabel lblFechaCancelacion;
+		final JLabel lblPorcentaje;
 		
 
 		//Indicamos que accion vamos a realizar
@@ -72,7 +75,8 @@ public class OfertarCursosView {
 		
 		txtTitulo = new JTextField();
 		txtTitulo.setName("txtTitulo");
-		frame.getContentPane().add(txtTitulo, "growx, wrap");
+		txtTitulo.setPreferredSize(new Dimension(350,30));
+		frame.getContentPane().add(txtTitulo, "wrap");
 		
 		//Descripcion del curso
 		JLabel lblDescripcion = new JLabel("Descripción del curso*");
@@ -119,14 +123,13 @@ public class OfertarCursosView {
 		
 		// Numero de sesiones
 		lblSesiones = new JLabel("Sesiones*");
-						
 		txtSesiones = new JTextField();
 		txtSesiones.setName("txtSesiones");
 		
 		//Panel para organizar Duración y plazas
 		JPanel panelDatos = new JPanel();
 		frame.getContentPane().add(panelDatos, "wrap");
-		panelDatos.setLayout(new GridLayout(3, 2, 70, 10));
+		panelDatos.setLayout(new GridLayout(1, 6, 20, 10));
 		panelDatos.add(lblDuracion);
 		panelDatos.add(txtDuracion);
 		panelDatos.add(lblPlazas);
@@ -178,7 +181,7 @@ public class OfertarCursosView {
 		
 		JPanel panelCuotas = new JPanel();
 		frame.getContentPane().add(panelCuotas, "wrap");
-		panelCuotas.setLayout(new GridLayout(8, 2, 70, 10));
+		panelCuotas.setLayout(new GridLayout(4, 4, 70, 10));
 
 		panelCuotas.add(lblCuotaPrecolegiado);
         panelCuotas.add(txtCuotaPrecolegiado);
@@ -203,7 +206,7 @@ public class OfertarCursosView {
 		frame.getContentPane().add(lblColectivos, "growx, wrap");
 		
 		JPanel colectivos = new JPanel();
-		colectivos.setLayout(new GridLayout(4, 2, 20, 10)); 
+		colectivos.setLayout(new GridLayout(2, 4, 20, 10)); 
         col1 = new JCheckBox("Colegiados");
         col2 = new JCheckBox("Precolegiados");
         col3 = new JCheckBox("Minusvalidos");
@@ -223,6 +226,37 @@ public class OfertarCursosView {
         colectivos.add(col8);
 
         frame.getContentPane().add(colectivos, "wrap");
+        colectivos.setBorder(new EmptyBorder(0,0,20,0));
+        
+        //Opciones adicionales
+        lblOpcionesExtra = new JLabel("Opciones adicionales: ");
+        frame.getContentPane().add(lblOpcionesExtra, "wrap");
+        
+        JPanel panelChecks = new JPanel(new GridLayout(1, 2, 20, 10));
+        frame.getContentPane().add(panelChecks, "wrap");
+        panelChecks.setBorder(new EmptyBorder(0,0,10,0));
+        
+        cancelable = new JCheckBox("Curso Cancelable");
+        panelChecks.add(cancelable, "wrap");
+        espera = new JCheckBox("Habilitar Lista de espera");
+        panelChecks.add(espera, "wrap");
+        
+        JPanel panelOpciones = new JPanel(new GridLayout(2, 2, 20, 10));
+        frame.getContentPane().add(panelOpciones, "wrap");
+        
+        lblFechaCancelacion = new JLabel("Fecha de cancelación");
+        panelOpciones.add(lblFechaCancelacion, "wrap");
+		calFechaCancel = new JDateChooser();
+		calFechaCancel.setPreferredSize(new Dimension(100,24));
+		panelOpciones.add(calFechaCancel, "wrap");
+        
+        lblPorcentaje = new JLabel("Porcentaje de devolución");
+        panelOpciones.add(lblPorcentaje, "wrap");
+        txtPorcentaje = new JTextField();
+        txtPorcentaje.setName("txtPorcentaje");
+        txtPorcentaje.setPreferredSize(new Dimension(100,24));
+        panelOpciones.add(txtPorcentaje, "wrap");
+        panelOpciones.setBorder(new EmptyBorder(0,0,20,0));
         
 		//Boton para confirmar el curso
 		bConfirmar = new JButton("Confirmar");
@@ -248,12 +282,17 @@ public class OfertarCursosView {
 	public JButton getBoton() { return bConfirmar; }
 	public JTextField getTitulo() {return txtTitulo; }
 	public JTextField getDescripcion() {return txtDescripcion; }
-	public JCheckBox getCheckPrecolegiado() {return col1; }
-	public JCheckBox getCheckColegiado() {return col2; }
+	public JCheckBox getCheckPrecolegiado() {return col2; }
+	public JCheckBox getCheckColegiado() {return col1; }
 	public JCheckBox getCheckMinusvalido() {return col3; }
 	public JCheckBox getCheckDesempleado() {return col4; }
 	public JCheckBox getCheckEmpleado() {return col5; }
 	public JCheckBox getCheckAlumno() {return col6; }
 	public JCheckBox getCheckEmpresa() {return col7; }
 	public JCheckBox getCheckOtros() {return col8; }
+	public JCheckBox getCheckCancelable() { return cancelable; }
+	public JCheckBox getCheckEspera() { return espera; }
+	public JTextField getPorcentaje() {return txtPorcentaje; }
+	public Date getFechaCancel() { return calFechaCancel.getDate(); }
+	public JDateChooser getCalFechaCancel() { return calFechaCancel; }
 }

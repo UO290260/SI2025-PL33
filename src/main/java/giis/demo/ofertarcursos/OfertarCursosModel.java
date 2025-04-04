@@ -8,8 +8,9 @@ public class OfertarCursosModel {
 	private Database db= new Database();
 	
 	public static final String SQL_NUEVO_CURSO = 
-			"INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, sesiones, cuota_precolegiado, cuota_colegiado, cuota_minusvalido, cuota_desempleado, cuota_empleado, cuota_alumno, cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado) "
-			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, 'Planificado')";
+			"INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, sesiones, cuota_precolegiado, cuota_colegiado, cuota_minusvalido, cuota_desempleado, cuota_empleado, cuota_alumno, cuota_empresa, cuota_otros, "
+			+ "apertura_inscripcion, cierre_inscripcion, cancelable, porcentaje_devolucion, fecha_cancelacion, lista_espera, estado) "
+			+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?, 'Planificado')";
 	/**
 	 * Consulta para añadir un nuevo curso a la base de datos
 	 * @param id
@@ -29,11 +30,12 @@ public class OfertarCursosModel {
 	 * @param cuota_empresa
 	 * @param cuota_otros
 	 */
-	void añadirCurso(int id, String titulo, String descr, String fini, String ffin, int duracion, int plazas, int sesiones, int cuota_precolegiado, int cuota_colegiado, int cuota_minusvalido, int cuota_desempleado, int cuota_empleado, int cuota_alumno, int cuota_empresa,  int cuota_otros) {
+	void añadirCurso(int id, String titulo, String descr, String fini, String ffin, int duracion, int plazas, int sesiones, int cuota_precolegiado, int cuota_colegiado, 
+			int cuota_minusvalido, int cuota_desempleado, int cuota_empleado, int cuota_alumno, int cuota_empresa,  int cuota_otros, boolean cancelable, int porcentaje, String fcancel, boolean espera) {
 		db.executeUpdate(SQL_NUEVO_CURSO, id, titulo, descr, fini, ffin, duracion, plazas, sesiones, 
 				cuota_precolegiado==-1 ? null : cuota_precolegiado, cuota_colegiado==-1 ? null : cuota_colegiado, cuota_minusvalido==-1 ? null : cuota_minusvalido,
 						cuota_desempleado==-1 ? null : cuota_desempleado, cuota_empleado==-1 ? null : cuota_empleado, cuota_alumno==-1 ? null : cuota_alumno,
-								cuota_empresa==-1 ? null : cuota_empresa, cuota_otros==-1 ? null : cuota_otros);
+								cuota_empresa==-1 ? null : cuota_empresa, cuota_otros==-1 ? null : cuota_otros, cancelable, porcentaje==-1 ? null : cuota_empresa, fcancel, espera);
 	}
 	
 	/**
