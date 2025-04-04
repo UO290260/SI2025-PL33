@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS Cursos;
 DROP TABLE IF EXISTS Sesiones;
 DROP TABLE IF EXISTS Externos;
 DROP TABLE IF EXISTS Peritos;
+DROP TABLE IF EXISTS Periciales;
+DROP TABLE IF EXISTS Asignacion;
 
 CREATE TABLE Colegiados (
     id_colegiado INT PRIMARY KEY,
@@ -110,4 +112,6 @@ CREATE TABLE Asignacion (
 	fecha DATE,
 	estado VARCHAR(20),
 	PRIMARY KEY (id_perito, id_pericial)
-)
+	FOREIGN KEY (id_perito) REFERENCES Peritos(id_colegiado) ON DELETE CASCADE,
+	FOREIGN KEY (id_pericial) REFERENCES Periciales(id_pericial) ON DELETE CASCADE
+);

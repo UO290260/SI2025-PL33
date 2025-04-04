@@ -16,13 +16,13 @@ INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, dura
 (4, 'Arquitectura urbanística', 'Principios de diseño arquitectónico y urbanismo', '2024-10-06', '2024-10-09', 90, 35, 10, 200, 220 ,100, NULL, 100, 100, 100, NULL, NULL, NULL, 'Pendiente'),
 (5, 'Entrenador', 'Principios de entrenamiento deportivo', '2024-01-07', '2024-01-10', 90, 40, 6, 100, 100, 70, 100, 120, 100, 400, 150, NULL, NULL, 'Pendiente');
 delete from Inscripciones;
-INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES
-(1, '12345678A', 1, '2024-02-15','Matriculado',NULL,NULL),
-(2, '23456789B', 2, '2024-03-01','Matriculado',NULL,NULL),
-(3, '34567890C', 3, '2024-03-05','Matriculado',NULL,NULL),
-(4, '45678901D', 4, '2024-04-01','Matriculado',NULL,NULL),
-(5, '56789012E', 5, '2024-04-10','Matriculado',NULL,NULL),
-(6, '12345678A', 3, '2024-06-10','Matriculado',NULL,NULL);
+INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver,lista_espera,posicion) VALUES
+(1, '12345678A', 1, '2024-02-15','Matriculado',NULL,NULL,FALSE,NULL),
+(2, '23456789B', 2, '2024-03-01','Matriculado',NULL,NULL,FALSE,NULL),
+(3, '34567890C', 3, '2024-03-05','Matriculado',NULL,NULL,FALSE,NULL),
+(4, '45678901D', 4, '2024-04-01','Matriculado',NULL,NULL,FALSE,NULL),
+(5, '56789012E', 5, '2024-04-10','Matriculado',NULL,NULL,FALSE,NULL),
+(6, '12345678A', 3, '2024-06-10','Matriculado',NULL,NULL,FALSE,NULL);
 delete from Sesiones;
 INSERT INTO Sesiones (id_sesion, id_curso, fecha, hora_inicio, duracion) VALUES
 (1, 1, '2024-01-03', '09:00', 3),
@@ -43,3 +43,13 @@ INSERT INTO Peritos (id_colegiado, correo, telefono, fecha , año , tap ,estado)
 (3, 'alejandro.pineiro@gmail.com', '623456789', '2019-11-07' , 2018 , 102 , 'Inscrito'),
 (4, 'sara.revolver@gmail.com', '634567890', '2018-11-01' , 2017, 103 , 'Inscrito'),
 (5, 'ramon.suarez@gmail.com', '654321987', '2019-11-01' , 2018, 104 , 'Inscrito');
+delete from Periciales;
+INSERT INTO Periciales (id_pericial,id_colegiado,nombre,solicitante,fecha,urgencia,estado) VALUES
+(1,1,'Alejandro','Chemaastur','2024-11-01','Grave','Pendiente'),
+(2,1,'Alejandro','Uniovi','2025-03-12','Moderada','Pendiente'),
+(3,2,'Pablo','Atur Feito','2023-09-25','Moderada','Pendiente');
+delete from Asignacion;
+INSERT INTO Asignacion (id_perito,id_pericial,fecha,estado) VALUES
+(1,1,'2025-04-04','Aceptado'),
+(1,2,'2025-05-13','Aceptado'),
+(2,3,'20025-11-24','Rechazado');
