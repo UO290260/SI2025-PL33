@@ -29,8 +29,6 @@ public class InscripcionCursosModel {
 				"CASE WHEN cuota_otros IS NOT NULL THEN ' | cuota_otros: ' || cuota_otros ELSE '' END AS item " +
 				"FROM Cursos WHERE id_curso = ?";
 
-
-
 		// Ejecutamos la consulta y obtenemos los resultados (una lista de una fila con varias columnas)
 		List<Object[]> result = db.executeQueryArray(sql, idcurso);
 
@@ -62,7 +60,7 @@ public class InscripcionCursosModel {
 	 * @return una lista de CuroDTO
 	 */
 	public List<CursosDTO> getListacursos(){
-		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado,cuota_minusvalido,cuota_desempleado,cuota_empleado,cuota_alumno,cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion, estado "+
+		String sql="SELECT id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas,cuota_precolegiado, cuota_colegiado,cuota_minusvalido,cuota_desempleado,cuota_empleado,cuota_alumno,cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion,lista_espera,estado "+
 				"FROM Cursos "+
 				"Where estado='Disponible'";
 		List<CursosDTO> rows=db.executeQueryPojo(CursosDTO.class,sql); //Envia en forma de List CursoDTO la consulta sql
@@ -108,10 +106,10 @@ public class InscripcionCursosModel {
 	public void InscribirEnCurso(int InscripciónID,String DNI,int cursoID,String fecha,boolean tarjeta) {
 		String sql=null;
 		if(tarjeta) {
-			sql= "INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Matriculado',NULL,NULL);";
+			sql= "INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver,lista_espera,posicion) VALUES (?, ?, ?, ?,'Matriculado',NULL,NULL,FALSE,NULL);";
 		}
 		else {
-			sql= "INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver) VALUES (?, ?, ?, ?,'Pre-inscrito',NULL,NULL);";
+			sql= "INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver,lista_espera,posicion) VALUES (?, ?, ?, ?,'Pre-inscrito',NULL,NULL,FALSE,NULL);";
 		}
 		String sql2 = "UPDATE Cursos SET plazas = plazas - 1 WHERE id_curso = ? AND plazas > 0;";
 		db.executeUpdate(sql,InscripciónID,DNI,cursoID,Util.isoStringToDate(fecha));
@@ -125,7 +123,7 @@ public class InscripcionCursosModel {
 	public int ObtenerIdInscripcion() {
 		String sql="SELECT COUNT(*) FROM Inscripciones;";
 		List<Object[]>lista= db.executeQueryArray(sql);
-		return (1+Integer.parseInt(lista.get(0)[0].toString()))*10;
+		return (1+Integer.parseInt(lista.get(0)[0].toString()));
 	}
 
 	/**
@@ -142,6 +140,41 @@ public class InscripcionCursosModel {
 			return false;
 		}
 	}
+	/**
+	 * Por defecto la lista de espera de un curso está desactivada hasta que las plazas se aagotan y si puede está activada la lista de espera , entonces se actualiza el dato
+	 * @param cursoID
+	 */
+	public void activarlistaEspera(int cursoID)
+	{
+		String sql1="UPDATE Inscripciones SET lista_espera = TRUE WHERE id_curso = ?;";
+		db.executeUpdate(sql1,cursoID);
+	}
+	
+	/**
+	 * Obtiene la posición de la lista de espera disponible 
+	 * @param cursoID
+	 * @return
+	 */
+	public int ObtenerPosListaEspera(int cursoID) {
+		String sql="SELECT COUNT(*) FROM Inscripciones WHERE id_curso= ? AND lista_espera=TRUE;";
+		List<Object[]>lista= db.executeQueryArray(sql,cursoID);
+		return (Integer.parseInt(lista.get(0)[0].toString()));
+	}
+	
+	/**
+	 * Mete en la lista de espera del curso a la perosna que se quiere matricular
+	 * @param InscripciónID
+	 * @param DNI
+	 * @param cursoID
+	 * @param fecha
+	 * @param pos
+	 */
+	public void MeterEnlistaEspera(int InscripciónID,String DNI,int cursoID,String fecha,int pos)
+	{
+		String sql1="INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver,lista_espera,posicion) VALUES (?, ?, ?, ?,'Matriculado',NULL,NULL,TRUE,?);";
+		db.executeUpdate(sql1,InscripciónID,DNI,cursoID,Util.isoStringToDate(fecha),pos);
+	}
+	
 	/**
 	 * Comprueba si el colegiado o precolegiado ha sido ya matriculado en el curso
 	 * @param colegiadoID Identificador de colegiado o pre de tipo entero
@@ -167,6 +200,7 @@ public class InscripcionCursosModel {
 		if((calActual.get(Calendar.YEAR) > calSel.get(Calendar.YEAR)) || (calActual.get(Calendar.YEAR) == calSel.get(Calendar.YEAR) && calActual.get(Calendar.MONTH) > calSel.get(Calendar.MONTH))) return false;
 		else return true;
 	}
+	
 	/**
 	 * Comrprueba si la fecha actual está entre la apertura de inscripción y cierre
 	 * @param fechaActual
