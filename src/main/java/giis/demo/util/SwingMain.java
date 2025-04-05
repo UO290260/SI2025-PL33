@@ -35,6 +35,9 @@ import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPView;
 import giis.demo.aperturacursos.apertura_cursosController;
 import giis.demo.aperturacursos.apertura_cursosModel;
 import giis.demo.aperturacursos.apertura_cursosView;
+import giis.demo.asignarpericiales.AsignarPericialesController;
+import giis.demo.asignarpericiales.AsignarPericialesModel;
+import giis.demo.asignarpericiales.AsignarPericialesView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -184,6 +187,16 @@ public class SwingMain {
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnSolicitud);
+		
+		//Boton de la historia inscripcion_lista_TAP
+		JButton btnAsignarPericial = new JButton("10. Ejecutar Asignar Periciales");
+		btnAsignarPericial.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				AsignarPericialesController controllerAsignarPericial=new AsignarPericialesController(new AsignarPericialesModel(), new AsignarPericialesView());
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnAsignarPericial);
 
 
 		/**

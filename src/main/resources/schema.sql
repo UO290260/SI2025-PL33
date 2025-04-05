@@ -96,14 +96,10 @@ CREATE TABLE Peritos (
 
 CREATE TABLE Periciales (
 	id_pericial INT PRIMARY KEY,
-	id_colegiado INT,
-	nombre VARCHAR (20),
 	solicitante VARCHAR(40),
 	fecha DATE,
 	urgencia VARCHAR(20),
-	estado VARCHAR(20),
-	FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE,
-	FOREIGN KEY (nombre) REFERENCES Colegiados(nombre) ON DELETE CASCADE
+	estado VARCHAR(20)
 );
 
 CREATE TABLE Asignacion (

@@ -44,10 +44,10 @@ INSERT INTO Peritos (id_colegiado, correo, telefono, fecha , año , tap ,estado)
 (4, 'sara.revolver@gmail.com', '634567890', '2018-11-01' , 2017, 103 , 'Inscrito'),
 (5, 'ramon.suarez@gmail.com', '654321987', '2019-11-01' , 2018, 104 , 'Inscrito');
 delete from Periciales;
-INSERT INTO Periciales (id_pericial,id_colegiado,nombre,solicitante,fecha,urgencia,estado) VALUES
-(1,1,'Alejandro','Chemaastur','2024-11-01','Grave','Pendiente'),
-(2,1,'Alejandro','Uniovi','2025-03-12','Moderada','Pendiente'),
-(3,2,'Pablo','Atur Feito','2023-09-25','Moderada','Pendiente');
+INSERT INTO Periciales (id_pericial,solicitante,fecha,urgencia,estado) VALUES
+(1,'Chemaastur','2024-11-01','Grave','Pendiente'),
+(2,'Uniovi','2025-03-12','Moderada','Pendiente'),
+(3,'Atur Feito','2023-09-25','Moderada','Pendiente');
 delete from Asignacion;
 INSERT INTO Asignacion (id_perito,id_pericial,fecha,estado) VALUES
 (1,1,'2025-04-04','Aceptado'),
