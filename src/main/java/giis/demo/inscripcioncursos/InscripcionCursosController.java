@@ -147,9 +147,6 @@ public class InscripcionCursosController {
 							int pos =model.ObtenerPosListaEspera(cursoId);//obtiene la posición de llegada 
 							idInscripcion = model.ObtenerIdInscripcion(); //obtiene la id de la inscripción
 							String dni = (colegiado != null) ? colegiado.getDNI() : externo.getDNI();
-							String nombre = (colegiado != null) ? colegiado.getNombre() : externo.getNombre();
-							String apellidos = (colegiado != null) ? colegiado.getApellidos() : externo.getApellidos();
-							String cuentaBancaria = (colegiado != null) ? colegiado.getCuenta_bancaria() : externo.getCuenta_bancaria();
 							model.MeterEnlistaEspera(idInscripcion, dni, cursoId, SwingUtil.Obtener_fechaActual(), pos);
 							String mensaje = "Estás en lista de espera para el curso: " + curso.getTitulo() +
 			                         "\nTu posición es: " + pos;
