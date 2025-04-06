@@ -89,7 +89,7 @@ CREATE TABLE Peritos (
 	telefono INT NOT NULL,
 	fecha DATE,
 	año INT NOT NULL,
-	tap INT UNIQUE,
+	tap INT,
 	estado VARCHAR (10) NOT NULL,
 	FOREIGN KEY (id_colegiado) REFERENCES Colegiados(id_colegiado) ON DELETE CASCADE
 );

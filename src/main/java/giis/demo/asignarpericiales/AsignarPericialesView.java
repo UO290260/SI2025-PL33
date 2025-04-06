@@ -65,4 +65,5 @@ public class AsignarPericialesView {
 	public JFrame getFrame() { return frame; }
 	public JTable getTablaPericiales() { return tablaPericiales; }
 	public JTable getTablaPeritos() { return tablaPeritos; }
+	public JButton getBoton() { return boton; }
 }
