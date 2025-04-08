@@ -153,7 +153,7 @@ public class InscripcionCursosModel {
 	/**
 	 * Obtiene la posición de la lista de espera disponible 
 	 * @param cursoID
-	 * @return
+	 * @return 
 	 */
 	public int ObtenerPosListaEspera(int cursoID) {
 		String sql="SELECT COUNT(*) FROM Inscripciones WHERE id_curso= ? AND lista_espera=TRUE;";
