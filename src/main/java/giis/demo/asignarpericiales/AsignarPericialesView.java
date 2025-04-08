@@ -17,13 +17,16 @@ public class AsignarPericialesView {
 		initialize();
 	}
 	
+	/**
+	 * Metodo que inicializa la ventana 
+	 */
 	public void initialize() {
 		
 		JLabel lblPericiales;
 		JLabel lblPeritos;
 		
 		frame = new JFrame();
-		frame.setBounds(0, 0, 1000, 529);
+		frame.setBounds(0, 0, 999, 360);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -31,8 +34,8 @@ public class AsignarPericialesView {
 		frame.setTitle("Asignar Periciales");
 		frame.setName("Asignar Periciales");
 		
-		lblPericiales = new JLabel("Escoge periciales:");
-		lblPericiales.setBounds(182, 35, 109, 14);
+		lblPericiales = new JLabel("Escoge pericial");
+		lblPericiales.setBounds(182, 35, 97, 14);
 		frame.getContentPane().add(lblPericiales);
 		
 		tablaPericiales = new JTable();
@@ -41,11 +44,11 @@ public class AsignarPericialesView {
 		tablaPericiales.setDefaultEditor(Object.class, null); 
 		tablaPericiales.setBackground(SystemColor.control);
 		JScrollPane panelPericiales = new JScrollPane(tablaPericiales);
-		panelPericiales.setBounds(10, 60, 452, 346);
+		panelPericiales.setBounds(10, 60, 440, 200);
 		frame.getContentPane().add(panelPericiales);
 		
-		lblPeritos = new JLabel("Escoge peritos");
-		lblPeritos.setBounds(693, 35, 109, 14);
+		lblPeritos = new JLabel("Escoge perito");
+		lblPeritos.setBounds(680, 35, 89, 14);
 		frame.getContentPane().add(lblPeritos);
 		
 		tablaPeritos = new JTable();
@@ -54,11 +57,11 @@ public class AsignarPericialesView {
 		tablaPeritos.setDefaultEditor(Object.class, null); 
 		tablaPeritos.setBackground(SystemColor.control);
 		JScrollPane panelPeritos = new JScrollPane(tablaPeritos);
-		panelPeritos.setBounds(522, 60, 452, 346);
+		panelPeritos.setBounds(500, 60, 452, 200);
 		frame.getContentPane().add(panelPeritos);
 		
-		boton = new JButton("BotonAsignar");
-		boton.setBounds(449, 435, 89, 23);
+		boton = new JButton("Asignar");
+		boton.setBounds(433, 287, 89, 23);
 		frame.getContentPane().add(boton);	
 	}
 	
