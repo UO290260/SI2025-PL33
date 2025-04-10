@@ -144,10 +144,10 @@ public class InscripcionCursosModel {
 	 * Por defecto la lista de espera de un curso está desactivada hasta que las plazas se aagotan y si puede está activada la lista de espera , entonces se actualiza el dato
 	 * @param cursoID
 	 */
-	public void activarlistaEspera(int cursoID)
+	public void activarlistaEspera(int cursoID,String dni)
 	{
-		String sql1="UPDATE Inscripciones SET lista_espera = TRUE WHERE id_curso = ?;";
-		db.executeUpdate(sql1,cursoID);
+		String sql1="UPDATE Inscripciones SET lista_espera = TRUE WHERE id_curso = ? AND dni=?;";
+		db.executeUpdate(sql1,cursoID,dni);
 	}
 	
 	/**
@@ -158,7 +158,7 @@ public class InscripcionCursosModel {
 	public int ObtenerPosListaEspera(int cursoID) {
 		String sql="SELECT COUNT(*) FROM Inscripciones WHERE id_curso= ? AND lista_espera=TRUE;";
 		List<Object[]>lista= db.executeQueryArray(sql,cursoID);
-		return (Integer.parseInt(lista.get(0)[0].toString()));
+		return (Integer.parseInt(lista.get(0)[0].toString()))+1;
 	}
 	
 	/**
@@ -171,7 +171,7 @@ public class InscripcionCursosModel {
 	 */
 	public void MeterEnlistaEspera(int InscripciónID,String DNI,int cursoID,String fecha,int pos)
 	{
-		String sql1="INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver,lista_espera,posicion) VALUES (?, ?, ?, ?,'Matriculado',NULL,NULL,TRUE,?);";
+		String sql1="INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver,lista_espera,posicion) VALUES (?, ?, ?, ?,'En espera',NULL,NULL,TRUE,?);";
 		db.executeUpdate(sql1,InscripciónID,DNI,cursoID,Util.isoStringToDate(fecha),pos);
 	}
 	

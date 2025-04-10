@@ -5,13 +5,15 @@ public class InscripcionDTO {
 	private String nombre;
 	private String apellidos;
 	private String dni;
+	private int posicion;
 	private String estado;
 	
-	public InscripcionDTO(int id, String nom, String ap, String dni, String est) {
+	public InscripcionDTO(int id, String nom, String ap, String dni,int posicion, String est) {
 		setId_inscripcion(id);
 		setNombre(nom);
 		setApellidos(ap);
 		setDni(dni);
+		setPosicion(posicion);
 		setEstado(est);
 	}
 	
@@ -47,4 +49,13 @@ public class InscripcionDTO {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+
+	public int getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(int posicion) {
+		this.posicion = posicion;
+	}
+	
 }
