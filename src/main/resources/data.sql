@@ -1,13 +1,16 @@
 --Para giis.demo.tkrun:
 delete from Colegiados;
 INSERT INTO Colegiados (id_colegiado, nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria, titulacion, fecha_colegiacion , estado) VALUES
-(1, 'Alejandro', 'Torre Llorente', '12345678A', 'Calle Mayor 12', 'Asturias', '1985-10-06', 'ES7621000813610123456789', 'Ingeniería Informática', '2010-01-09' , 'Aprobada'),
-(2, 'Pablo', 'Santos Gómez', '23456789B', 'Avenida de la Paz 8', 'Asturias', '1990-10-03', 'ES9820381600140001234567', 'Ingeniería Informática', '2015-10-05' , 'Aprobada'),
-(3, 'Alejandro', 'Piñeiro Méndez', '34567890C', 'Calle del Sol 25', 'Asturias', '1988-11-11', 'ES5520481310123456789012', 'Ingeniería Informática', '2012-11-07' ,  'Aprobada'),
-(4, 'Sara', 'Revolver Revolver', '45678901D', 'Plaza Mayor 5', 'Barcelona', '1993-11-09', 'ES9920002510123456789011', 'Arquitectura', '2017-11-01' , 'Aprobada'),
-(5, 'Ramon', 'Suarez del Valle', '56789012E', 'Calle Luna 14', 'Sevilla', '1980-05-04', 'ES2320891510123456789015', 'Deportes', '2008-11-10', 'Aprobada'),
-(6, 'Tommy', 'Miller Fernandez', '58796050F', 'Calle Sol 14', 'Sevilla', '1980-05-04', 'ES9920002510123456789015', 'Marinero', '2010-11-01' , 'Pendiente'),
-(7, 'Joel', 'Miller Fernandez', '58796050P', 'Calle Sol 14', 'Sevilla', '1980-05-04', 'ES2320891510123456789018', 'Golf', '2010-11-10', 'Pendiente');
+(1, 'Alejandro', 'Torre Llorente', '12345678A', 'Calle Mayor 12', 'Asturias', '1985-10-06', 'ES7621000813610123456789', 'Ingenieria Informatica', '2010-01-09' , 'Aprobada'),
+(2, 'Pablo', 'Santos Gómez', '23456789B', 'Avenida de la Paz 8', 'Asturias', '1990-10-03', 'ES9820381600140001234567', 'Ingenieria Informatica', '2015-10-05' , 'Aprobada'),
+(3, 'Alejandro', 'Piñeiro Méndez', '34567890C', 'Calle del Sol 25', 'Asturias', '1988-11-11', 'ES5520481310123456789012', 'Ingenieria Informatica', '2012-11-07' ,  'Aprobada'),
+(4, 'Sara', 'Revolver Revolver', '45678901D', 'Plaza Mayor 5', 'Barcelona', '1993-11-09', 'ES9920002510123456789011', 'Ingenieria Informatica', '2017-11-01' , 'Aprobada'),
+(5, 'Ramon', 'Suarez del Valle', '56789012E', 'Calle Luna 14', 'Sevilla', '1980-05-04', 'ES2320891510123456789015', 'Ingenieria Informatica', '2008-11-10', 'Aprobada'),
+(6, 'Tommy', 'Miller Fernandez', '58796050F', 'Calle Sol 14', 'Sevilla', '1980-05-04', 'ES9920002510123456789015', 'Master Ingenieria Informatica', '2010-11-01' , 'Pendiente'),
+(7, 'Joel', 'Miller Fernandez', '58796050P', 'Calle Sol 14', 'Sevilla', '1980-05-04', 'ES2320891510123456789018', 'Golf', '2010-11-10', 'Pendiente'),
+(8, 'Carlos', 'Sainz Vazquez', '51796050P', 'Calle Madrid 14', 'Madrid', '1980-05-04', 'ES2347891510123456789018', 'Licenciatura Informatica', '2012-11-10', 'Pendiente'),
+(9, 'Fernando', 'Alonso Diaz', '52796050P', 'Calle Uria 33', 'Oviedo', '1998-05-04', 'ES2320451510123456789018', 'Ingenieria Informatica', '2013-11-10', 'Pendiente');
+
 delete from Cursos;
 INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, duracion, plazas, sesiones, cuota_precolegiado, cuota_colegiado, cuota_minusvalido, cuota_desempleado, cuota_empleado, cuota_alumno, cuota_empresa, cuota_otros, apertura_inscripcion, cierre_inscripcion,cancelable, porcentaje_devolucion, fecha_cancelacion, lista_espera, estado) VALUES
 (1, 'Optimización de algoritmos', 'Curso de algoritmos', '2024-01-03', '2024-01-06', 90, 30, 10, 120, 200, 80, 100, 100, 100, 100, 100, '2023-11-10', '2023-12-10', TRUE, 100, '2023-12-30', FALSE, 'Disponible'),
