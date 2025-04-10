@@ -132,7 +132,6 @@ public class SolicitudColegiadoController {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		int resultado = chooser.showSaveDialog(null);
-
 		if (resultado == JFileChooser.APPROVE_OPTION) {
 			String rutaCarpeta = chooser.getSelectedFile().getAbsolutePath();
 
@@ -250,7 +249,7 @@ public class SolicitudColegiadoController {
 
 						String dni = campos[3];
 
-						//Compruebo si el dni existe y si su estado es distino a enviado
+						//Compruebo si el dni existe y si su estado es distinto a enviado
 						if (modelo.dniEstado(dni)) {
 							JOptionPane.showMessageDialog(null, "Carga cancelada. El DNI " + dni + " ya existe en el sistema.");
 							return new ArrayList<>();
@@ -306,7 +305,7 @@ public class SolicitudColegiadoController {
 		List<ColegiadoDTO> colegiadosEnviados = modelo.getListaColegiadosEnviados();
 		for (int linea_actual = 0; linea_actual < lineasTabla; linea_actual++) {
 			String estado = (String) vista.getTablaEnviados().getValueAt(linea_actual, 5);
-			if (!"Enviado".equals(estado)) {
+			if (!estado.equals("Enviado")) {
 				continue;
 			}
 
@@ -331,7 +330,6 @@ public class SolicitudColegiadoController {
 				} else {
 					colegiado.setEstado("Cancelado");
 				}
-
 				modelo.actualizarEstadoColegiado(colegiado, colegiado.getEstado());
 			}
 		}
