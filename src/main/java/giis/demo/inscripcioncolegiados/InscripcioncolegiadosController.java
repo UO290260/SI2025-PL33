@@ -52,7 +52,7 @@ public class InscripcioncolegiadosController {
 				vista.getFechanacimientotxt().getDate() == null ||  
 				vista.getCuentatxt().getText().isEmpty() ||
 				vista.getCuentatxt().getText().length()!=24 ||
-				vista.getTitulaciontxt().getText().isEmpty()) {
+				vista.getTitulacionComboBox().getSelectedItem() == null) {
 			return false;
 		}
 		return true; 
@@ -69,7 +69,7 @@ public class InscripcioncolegiadosController {
 		String poblacion = vista.getPoblaciontxt().getText();
 		Date fechanacimiento = vista.getFechanacimientotxt().getDate();
 		String cuenta = vista.getCuentatxt().getText();
-		String titulacion = vista.getTitulaciontxt().getText();
+		String titulacion = (String) vista.getTitulacionComboBox().getSelectedItem();
 		
 		if (modelo.dniExiste(dni)) {
 			JOptionPane.showMessageDialog(null, "El DNI ya esta en la base de datos"); 
