@@ -39,7 +39,8 @@ private Database db= new Database();
 		           + "LEFT JOIN Colegiados AS c ON i.dni = c.dni "
 		           + "LEFT JOIN Externos AS e ON i.dni = e.dni "
 		           + "WHERE i.id_curso = " + id_curso+ " "
-				   + "AND i.lista_espera=TRUE;";
+				   + "AND i.lista_espera=TRUE "
+				   + "ORDER BY i.posicion ASC;";
 		return db.executeQueryPojo(InscripcionDTO.class, sql);
 	}
 	
