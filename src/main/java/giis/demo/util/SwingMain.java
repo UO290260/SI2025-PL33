@@ -32,6 +32,9 @@ import giis.demo.inscripcioncursos.InscripcionCursosView;
 import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPController;
 import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPModel;
 import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPView;
+import giis.demo.memoriaAnualPericiales.MemoriaAnualesPericialesController;
+import giis.demo.memoriaAnualPericiales.MemoriaAnualesPericialesModel;
+import giis.demo.memoriaAnualPericiales.MemoriaAnualesPericialesView;
 import giis.demo.aperturacursos.apertura_cursosController;
 import giis.demo.aperturacursos.apertura_cursosModel;
 import giis.demo.aperturacursos.apertura_cursosView;
@@ -197,6 +200,16 @@ public class SwingMain {
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnAsignarPericial);
+		
+		//Boton mostrar pericialesanuales
+		JButton btnmostrarPericiales = new JButton("11. Mostrar Periciales anuales");
+		btnmostrarPericiales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				MemoriaAnualesPericialesController controllerAsignarPericial=new MemoriaAnualesPericialesController(new MemoriaAnualesPericialesView(), new MemoriaAnualesPericialesModel());
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnmostrarPericiales);
 
 
 		/**

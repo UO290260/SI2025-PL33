@@ -1,11 +1,12 @@
 package giis.demo.visualizarinscritos;
 
 import java.awt.SystemColor;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.Component;
+
 
 public class VisualizarInscritosView {
 	private JFrame frame;
