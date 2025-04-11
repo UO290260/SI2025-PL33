@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS Externos;
 DROP TABLE IF EXISTS Peritos;
 DROP TABLE IF EXISTS Periciales;
 DROP TABLE IF EXISTS Asignacion;
+DROP TABLE IF EXISTS Recibos;
 
 CREATE TABLE Colegiados (
     id_colegiado INT PRIMARY KEY,
@@ -114,4 +115,12 @@ CREATE TABLE Asignacion (
 	PRIMARY KEY (id_perito, id_pericial)
 	FOREIGN KEY (id_perito) REFERENCES Peritos(id_colegiado) ON DELETE CASCADE,
 	FOREIGN KEY (id_pericial) REFERENCES Periciales(id_pericial) ON DELETE CASCADE
+);
+
+CREATE TABLE Recibos (
+    id_recibo INT PRIMARY KEY,
+    DNI VARCHAR(15) NOT NULL UNIQUE,
+    cuota_pagar INT, 
+    fecha_recibo DATE,
+    estado VARCHAR(20)  
 );

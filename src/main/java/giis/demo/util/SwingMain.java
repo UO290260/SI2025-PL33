@@ -35,6 +35,9 @@ import giis.demo.inscripcionlistaTAP.InscripcionlistaTAPView;
 import giis.demo.aperturacursos.apertura_cursosController;
 import giis.demo.aperturacursos.apertura_cursosModel;
 import giis.demo.aperturacursos.apertura_cursosView;
+import giis.demo.generarrecibos.GenerarrecibosController;
+import giis.demo.generarrecibos.GenerarrecibosModel;
+import giis.demo.generarrecibos.GenerarrecibosView;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -172,7 +175,7 @@ public class SwingMain {
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnPlanificarSesiones);
-		
+
 
 		//Boton de la historia inscripcion_lista_TAP
 		JButton btnSolicitud = new JButton("10. Ejecutar solicitud_colegiado");
@@ -184,6 +187,18 @@ public class SwingMain {
 		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.getContentPane().add(btnSolicitud);
+
+
+		//Boton de la historia generar_recibos
+		JButton btnRecibos = new JButton("12. Ejecutar generar_recibos");
+		btnRecibos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				GenerarrecibosController controller12=new GenerarrecibosController(new GenerarrecibosModel(), new GenerarrecibosView());
+				controller12.initController();
+			}
+		});
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().add(btnRecibos);
 
 
 		/**
