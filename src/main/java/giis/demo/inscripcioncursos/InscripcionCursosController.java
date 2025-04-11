@@ -121,27 +121,43 @@ public class InscripcionCursosController {
 					fechaActual = Util.isoStringToDate(SwingUtil.Obtener_fechaActual()); // Convierte la fecha actual a LocalDate
 					fechaApertura = Util.isoStringToDate(fechaapertura); // Convierte la fecha de apertura de inscripción a LocalDate
 					fechaCierre = Util.isoStringToDate(cierre); // Convierte la fecha de cierre de inscripción a LocalDate
+					boolean listaEspera=curso.isLista_espera(); //obtiene si se ha activado la lista de espera del curso
 					// Verificar si la inscripción está abierta
 					if (model.ComprobarFechaApertura(fechaActual, fechaApertura, fechaCierre)) {
 						JOptionPane.showMessageDialog(view.getFrame(), "No está disponible la inscripción del curso.", "Error", JOptionPane.ERROR_MESSAGE);
-						throw new ApplicationException("No está disponible la inscripción del curso ");
-					}
-
-					// Verificar si hay plazas disponibles
-					if (!model.plazasDisponibles(cursoId)) {
-						JOptionPane.showMessageDialog(view.getFrame(), "No hay plazas disponibles.", "Error", JOptionPane.ERROR_MESSAGE);
-						throw new ApplicationException("No hay plazas disponibles");
+						return;
 					}
 
 					// Comprobar si el usuario ya está inscrito (colegiado o externo)
 					if (colegiado != null && model.Comprobar_Inscripción(colegiado.getDNI(), cursoId)) {
 						JOptionPane.showMessageDialog(view.getFrame(), "El alumno ya está matriculado.", "Error", JOptionPane.ERROR_MESSAGE);
-						throw new ApplicationException("El alumno ya está matriculado.");
+						return;
 					}
 
 					if (externo != null && model.Comprobar_Inscripción(externo.getDNI(), cursoId)) {
-						JOptionPane.showMessageDialog(view.getFrame(), "El alumno ya está matriculado.", "Error", JOptionPane.ERROR_MESSAGE);
-						throw new ApplicationException("El alumno ya está matriculado.");
+						JOptionPane.showMessageDialog(view.getFrame(), "El alumno ya está matriculado ya solicitó el curso.", "Error", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
+					// Verificar si hay plazas disponibles
+					if (!model.plazasDisponibles(cursoId)) {
+						if(listaEspera) //si se ha activado la lista de espera los matricula pero con una posición en la lista de espera
+						{
+							model.activarlistaEspera(cursoId); //activa el campo lista espera de la inscripción
+							int pos =model.ObtenerPosListaEspera(cursoId);//obtiene la posición de llegada 
+							idInscripcion = model.ObtenerIdInscripcion(); //obtiene la id de la inscripción
+							String dni = (colegiado != null) ? colegiado.getDNI() : externo.getDNI();
+							model.MeterEnlistaEspera(idInscripcion, dni, cursoId, SwingUtil.Obtener_fechaActual(), pos);
+							String mensaje = "Estás en lista de espera para el curso: " + curso.getTitulo() +
+			                         "\nTu posición es: " + pos;
+							JOptionPane.showMessageDialog(null, mensaje, "Lista de Espera", JOptionPane.INFORMATION_MESSAGE); //Muestra el curso y la posición de la lista de espera
+							return;
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(view.getFrame(), "No hay plazas disponibles.", "Error", JOptionPane.ERROR_MESSAGE); //simplemente muestra que no hay plazas disponibles
+							return;
+						}
 					}
 
 					// Verificar si un externo tiene una cuota de colegiado (error de inscripción)
@@ -233,7 +249,7 @@ public class InscripcionCursosController {
 	 */
 	public void getListaCursos() {
 		ListaCursos=model.getListacursos();
-		TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","cuota_precolegiado", "cuota_colegiado","cuota_minusvalido","cuota_desempleado","cuota_empleado","cuota_alumno","cuota_empresa", "cuota_otros","apertura_inscripcion","cierre_inscripcion","estado"});
+		TableModel tmodel=SwingUtil.getTableModelFromPojos(ListaCursos, new String[] {"id_curso","titulo","descripcion","fecha_inicio","fecha_fin","duracion","plazas","cuota_precolegiado", "cuota_colegiado","cuota_minusvalido","cuota_desempleado","cuota_empleado","cuota_alumno","cuota_empresa", "cuota_otros","apertura_inscripcion","cierre_inscripcion","lista_espera","estado"});
 		view.getTabCurso().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(view.getTabCurso());			
 	}

@@ -1,6 +1,7 @@
 package giis.demo.inscripcioncolegiados;
 import java.awt.SystemColor;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -22,7 +23,7 @@ public class InscripcioncolegiadosView {
 	private JDateChooser fechanacimientoDate;
 	private JDateChooser fechasolicitudDate;
 	private JTextField cuentatxt;
-	private JTextField titulaciontxt;
+	private JComboBox<String> titulacionComboBox;
 	private JButton btnInscribir;
 	private JTable tabla;
 
@@ -79,9 +80,13 @@ public class InscripcioncolegiadosView {
 		frame.getContentPane().add(cuentatxt, "cell 1 6, growx");
 
 		frame.getContentPane().add(new JLabel("(*)Titulación:"), "cell 0 7, right");
-		titulaciontxt = new JTextField(20);
-		InscripcioncolegiadosController.soloLetras(titulaciontxt);
-		frame.getContentPane().add(titulaciontxt, "cell 1 7, growx");
+		String[] titulaciones = {
+			"Licenciatura Informatica",
+			"Ingenieria Informatica",
+			"Master Ingenieria Informatica"
+		};
+		titulacionComboBox = new JComboBox<>(titulaciones); 
+		frame.getContentPane().add(titulacionComboBox, "cell 1 7, growx");
 
 		tabla = new JTable();
 		tabla.setName("tabDetalle");
@@ -105,6 +110,7 @@ public class InscripcioncolegiadosView {
 	public JDateChooser getFechanacimientotxt() { return this.fechanacimientoDate; } public void setFechanacimientotxt(JDateChooser fechanacimientoDate) { this.fechanacimientoDate = fechanacimientoDate; }
 	public JDateChooser getFechasolicitudtxt() { return this.fechasolicitudDate; } public void setFechasolicitudtxt(JDateChooser fechasolicitudDate) { this.fechasolicitudDate = fechasolicitudDate; }
 	public JTextField getCuentatxt() { return this.cuentatxt; }	public void setCuentatxt(JTextField cuentatxt) { this.cuentatxt = cuentatxt; }
-	public JTextField getTitulaciontxt() { return this.titulaciontxt; } public void setTitulaciontxt(JTextField titulaciontxt) { this.titulaciontxt = titulaciontxt; }
+	public void setTitulacionComboBox(JComboBox<String> titulacionComboBox) {this.titulacionComboBox = titulacionComboBox;}
+	public JComboBox<String> getTitulacionComboBox() {return titulacionComboBox;}
 	public JButton getBtnInscribirColegiado() { return this.btnInscribir; }
 }

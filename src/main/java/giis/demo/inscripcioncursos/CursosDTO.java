@@ -12,11 +12,12 @@ public class CursosDTO {
 	    private int cuotaprecolegiado, cuotacolegiado, cuotaotros, cuotaminusvalido, cuotadesempleado, cuotaempleado, cuotalumno, cuotaempresa;
 	    private String aperturainscripcion;
 	    private String cierreinscripcion;
+	    private boolean listaEspera;
 	    private String estado;
 	    
 	  public CursosDTO(){};
 	    
-	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,int cuota_precolegiado,int cuota_colegiado,int cuota_minusvalido,int cuota_desempleado, int cuota_empleado,int cuota_alumno,int cuota_empresa,int cuota_otros, String apertura_inscripcion,String cierre_inscripcion, String estado) {
+	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,int cuota_precolegiado,int cuota_colegiado,int cuota_minusvalido,int cuota_desempleado, int cuota_empleado,int cuota_alumno,int cuota_empresa,int cuota_otros, String apertura_inscripcion,String cierre_inscripcion,boolean lista_espera ,String estado) {
 	        this.id_curso = id_curso;
 	        this.titulo = titulo;
 	        this.descripcion = descripcion;
@@ -35,6 +36,7 @@ public class CursosDTO {
 	        this.cuotaempleado=cuota_empleado;
 	        this.cuotaminusvalido=cuota_minusvalido;
 	        this.cuotaempresa=cuota_empresa;
+	        this.listaEspera=lista_espera;
 	    }
 
 	
@@ -184,6 +186,110 @@ public class CursosDTO {
 
 	public void setCuota_empresa(int cuota_empresa) {
 		this.cuotaempresa = cuota_empresa;
+	}
+
+	public String getFechainicio() {
+		return fechainicio;
+	}
+
+	public void setFechainicio(String fechainicio) {
+		this.fechainicio = fechainicio;
+	}
+
+	public String getFechafin() {
+		return fechafin;
+	}
+
+	public void setFechafin(String fechafin) {
+		this.fechafin = fechafin;
+	}
+
+	public int getCuotaprecolegiado() {
+		return cuotaprecolegiado;
+	}
+
+	public void setCuotaprecolegiado(int cuotaprecolegiado) {
+		this.cuotaprecolegiado = cuotaprecolegiado;
+	}
+
+	public int getCuotacolegiado() {
+		return cuotacolegiado;
+	}
+
+	public void setCuotacolegiado(int cuotacolegiado) {
+		this.cuotacolegiado = cuotacolegiado;
+	}
+
+	public int getCuotaotros() {
+		return cuotaotros;
+	}
+
+	public void setCuotaotros(int cuotaotros) {
+		this.cuotaotros = cuotaotros;
+	}
+
+	public int getCuotaminusvalido() {
+		return cuotaminusvalido;
+	}
+
+	public void setCuotaminusvalido(int cuotaminusvalido) {
+		this.cuotaminusvalido = cuotaminusvalido;
+	}
+
+	public int getCuotadesempleado() {
+		return cuotadesempleado;
+	}
+
+	public void setCuotadesempleado(int cuotadesempleado) {
+		this.cuotadesempleado = cuotadesempleado;
+	}
+
+	public int getCuotaempleado() {
+		return cuotaempleado;
+	}
+
+	public void setCuotaempleado(int cuotaempleado) {
+		this.cuotaempleado = cuotaempleado;
+	}
+
+	public int getCuotalumno() {
+		return cuotalumno;
+	}
+
+	public void setCuotalumno(int cuotalumno) {
+		this.cuotalumno = cuotalumno;
+	}
+
+	public int getCuotaempresa() {
+		return cuotaempresa;
+	}
+
+	public void setCuotaempresa(int cuotaempresa) {
+		this.cuotaempresa = cuotaempresa;
+	}
+
+	public String getAperturainscripcion() {
+		return aperturainscripcion;
+	}
+
+	public void setAperturainscripcion(String aperturainscripcion) {
+		this.aperturainscripcion = aperturainscripcion;
+	}
+
+	public String getCierreinscripcion() {
+		return cierreinscripcion;
+	}
+
+	public void setCierreinscripcion(String cierreinscripcion) {
+		this.cierreinscripcion = cierreinscripcion;
+	}
+
+	public boolean isLista_espera() {
+		return listaEspera;
+	}
+
+	public void setLista_espera(boolean lista_espera) {
+		this.listaEspera = lista_espera;
 	}
 	   
 

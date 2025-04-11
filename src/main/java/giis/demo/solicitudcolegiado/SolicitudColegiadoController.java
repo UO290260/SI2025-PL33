@@ -1,5 +1,7 @@
 package giis.demo.solicitudcolegiado;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,8 +33,10 @@ public class SolicitudColegiadoController {
 	public void initController() {
 		//Invoco el metodo que responde al listener para que se encargue de generar las exceciones
 		vista.getBtnEnviar().addActionListener(e -> SwingUtil.exceptionWrapper(() -> enviarSeleccionados()));
+		vista.getBtnCargar().addActionListener(e -> SwingUtil.exceptionWrapper(() -> cargarCSV()));
+		vista.getBtnComprobar().addActionListener(e -> SwingUtil.exceptionWrapper(() -> comprobar()));
 	}
-	
+
 	/**
 	 * Inicializacion del controlador
 	 */
@@ -41,7 +45,7 @@ public class SolicitudColegiadoController {
 		vista.getFrame().setVisible(true);
 		//Inicia los datos de la vista
 		cargarListaPendientes();
-		cargarListaEnviados();
+		cargarListaAprobadosYCancelados();
 	}
 
 	/**
@@ -85,7 +89,6 @@ public class SolicitudColegiadoController {
 			if (archivoGenerado) {
 				//Si se envia el archivo,se actualizan las tablas
 				cargarListaPendientes();
-				cargarListaEnviados();
 				JOptionPane.showMessageDialog(null, "Los colegiados seleccionados han sido enviados.");
 			} else {
 				//Si el archivo no se generó , se cancela
@@ -107,11 +110,11 @@ public class SolicitudColegiadoController {
 	}
 
 	/**
-	 * Tabla de los Colegiados con estado Enviado
+	 * Tabla de los Colegiados con estado de solicitud Aprobada y Cancelado
 	 */
-	private void cargarListaEnviados() {
-		List<ColegiadoDTO> colegiadosEnviados = modelo.getListaColegiadosEnviados();
-		TableModel tmodelEnviados = SwingUtil.getTableModelFromPojos(colegiadosEnviados, new String[]{
+	private void cargarListaAprobadosYCancelados() {
+		List<ColegiadoDTO> colegiadosAprobadosCancelados = modelo.getListaColegiadosAprobadosCancelados();
+		TableModel tmodelEnviados = SwingUtil.getTableModelFromPojos(colegiadosAprobadosCancelados, new String[]{
 				"id_colegiado", "nombre", "apellidos", "DNI", "titulacion", "estado"
 		});
 		vista.getTablaEnviados().setModel(tmodelEnviados);
@@ -129,7 +132,6 @@ public class SolicitudColegiadoController {
 		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		int resultado = chooser.showSaveDialog(null);
-
 		if (resultado == JFileChooser.APPROVE_OPTION) {
 			String rutaCarpeta = chooser.getSelectedFile().getAbsolutePath();
 
@@ -185,5 +187,155 @@ public class SolicitudColegiadoController {
 		} else {
 			tabla.clearSelection(); 
 		}
+	}
+
+	/**
+	 * Metodo para cargar en la tabla un archivo csv
+	 */
+	private void cargarCSV() {
+		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogTitle("Seleccionar archivo CSV");
+		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+		int resultado = chooser.showOpenDialog(null);
+
+		if (resultado == JFileChooser.APPROVE_OPTION) {
+			File archivo = chooser.getSelectedFile();
+			List<ColegiadoDTO> colegiados = leerCSV(archivo);
+
+			if (colegiados != null && !colegiados.isEmpty()) {
+				TableModel tmodel = SwingUtil.getTableModelFromPojos(colegiados, new String[] {
+						"id_colegiado", "nombre", "apellidos", "DNI", "titulacion", "estado"
+				});
+
+				vista.getTablaEnviados().setModel(tmodel);
+				SwingUtil.autoAdjustColumns(vista.getTablaEnviados());
+				JOptionPane.showMessageDialog(null, "Archivo CSV cargado correctamente.");
+				JOptionPane.showMessageDialog(null, "Comprueba los datos con el boton comprobar.");
+
+			} else {
+				JOptionPane.showMessageDialog(null, "El archivo CSV no contiene datos válidos.");
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Se cancelo la carga del archivo");
+		}
+	}
+
+	/**
+	 * Metodo para leer los archivos csv
+	 * @param archivo
+	 * @return
+	 */
+	private List<ColegiadoDTO> leerCSV(File archivo) {
+		List<ColegiadoDTO> colegiados = new ArrayList<>();
+
+		try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+			String linea;
+			boolean primera = true;
+
+			while ((linea = br.readLine()) != null) {
+				//Me salto la primera linea del fichero que quiero leer
+				if (primera) {
+					primera = false;
+					continue;
+				}
+
+				String[] campos = linea.split(",");
+				if (campos.length == 6) {
+					try {
+						for (int i = 0; i < campos.length; i++) {
+							campos[i] = campos[i].trim();
+						}
+
+						String dni = campos[3];
+
+						//Compruebo si el dni existe y si su estado es distinto a enviado
+						if (modelo.dniEstado(dni)) {
+							JOptionPane.showMessageDialog(null, "Carga cancelada. El DNI " + dni + " ya existe en el sistema.");
+							return new ArrayList<>();
+						}
+
+						ColegiadoDTO colegiado = new ColegiadoDTO();
+						colegiado.setId_colegiado(Integer.parseInt(campos[0]));
+						colegiado.setNombre(campos[1]);
+						colegiado.setApellidos(campos[2]);
+						colegiado.setDNI(campos[3]);
+						colegiado.setTitulacion(campos[4]);
+						colegiado.setEstado(campos[5]);
+						colegiados.add(colegiado);
+
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(null, "Error en el formato del archivo CSV. Verifique los datos.");
+						e.printStackTrace();
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error al leer el archivo CSV.");
+		}
+
+		return colegiados;
+	}
+
+	/**
+	 * Metodo que comprueba las titulaciones de los colegiados
+	 */
+	private void comprobar() {
+		int lineasTabla= vista.getTablaEnviados().getRowCount();
+		if (lineasTabla == 0) {
+			JOptionPane.showMessageDialog(null, "No hay datos que comprobar , carga un archivo.");
+			return;
+		}
+
+		boolean enviados = false;
+		for (int linea_actual = 0; linea_actual < lineasTabla; linea_actual++) {
+			String estado = (String) vista.getTablaEnviados().getValueAt(linea_actual, 5);
+			if (estado.equals("Enviado")) {
+				enviados = true;
+				break;
+			}
+		}
+
+		if (!enviados) {
+			JOptionPane.showMessageDialog(null, "No hay colegiados con estado 'Enviado' para comprobar.");
+			return;
+		}
+
+		List<ColegiadoDTO> colegiadosEnviados = modelo.getListaColegiadosEnviados();
+		for (int linea_actual = 0; linea_actual < lineasTabla; linea_actual++) {
+			String estado = (String) vista.getTablaEnviados().getValueAt(linea_actual, 5);
+			if (!estado.equals("Enviado")) {
+				continue;
+			}
+
+			String dni = (String) vista.getTablaEnviados().getValueAt(linea_actual, 3);
+			String titulacion = (String) vista.getTablaEnviados().getValueAt(linea_actual, 4);
+
+			ColegiadoDTO colegiado = null;
+			for (int i = 0; i < colegiadosEnviados.size(); i++) {
+				if (colegiadosEnviados.get(i).getDNI().equals(dni)) {
+					colegiado = colegiadosEnviados.get(i);
+					break;
+				}
+			}
+
+			if (colegiado != null) {
+				String titulacion_aux = titulacion;
+
+				if (titulacion_aux.equals("Licenciatura Informatica") ||
+						titulacion_aux.equals("Ingenieria Informatica") ||
+						titulacion_aux.equals("Master Ingenieria Informatica")) {
+					colegiado.setEstado("Aprobada");
+				} else {
+					colegiado.setEstado("Cancelado");
+				}
+				modelo.actualizarEstadoColegiado(colegiado, colegiado.getEstado());
+			}
+		}
+
+		//Actualizo los datos de la tabla
+		cargarListaAprobadosYCancelados();
+		JOptionPane.showMessageDialog(null, "Los estados de todos los colegiados han sido actualizados.");
 	}
 }
