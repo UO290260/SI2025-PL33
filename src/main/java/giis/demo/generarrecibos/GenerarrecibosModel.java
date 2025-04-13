@@ -1,35 +1,41 @@
 package giis.demo.generarrecibos;
-
 import java.util.List;
 import giis.demo.util.Database;
 
 public class GenerarrecibosModel {
-
 	private Database db = new Database();
+
 	/**
-	 * Obtener lista de colegiados pendientes
+	 * Obtiene la lista de colegiados con estado 'Aprobada' y recibos con estado 'No Emitido'.
 	 * @return
 	 */
 	public List<ColegiadosRecibosDTO> getListaColegiados() {
-		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, titulacion, estado FROM Colegiados WHERE estado = 'Aprobada'";
+		String sql = "SELECT c.id_colegiado, c.nombre, c.apellidos, c.DNI, r.cuota_pagar, c.cuenta_bancaria, c.estado " +
+				"FROM Colegiados c " +
+				"JOIN Recibos r ON c.DNI = r.DNI " +
+				"WHERE c.estado = 'Aprobada' AND r.estado = 'No Emitido'";
 		return db.executeQueryPojo(ColegiadosRecibosDTO.class, sql);
 	}
 
-	public List<RecibosDTO> getListaRecibos() {
-	    String sql = "SELECT id_recibo, DNI, cuota_pagar, fecha_recibo, estado FROM Recibos WHERE estado = 'Emitido'";
+	/**
+	 * Obtencion de la lista de recibos con estado emitido
+	 * @return
+	 */
+	public List<ColegiadosRecibosDTO> getListaRecibos() {
+		String sql = "SELECT r.id_recibo, c.nombre, c.apellidos, c.DNI, r.cuota_pagar, r.fecha_recibo, c.cuenta_bancaria, r.estado " +
+				"FROM Recibos r " +
+				"JOIN Colegiados c ON r.DNI = c.DNI " +
+				"WHERE r.estado = 'Emitido'";
+		return db.executeQueryPojo(ColegiadosRecibosDTO.class, sql);
+	}
 
-	    // Ejecuta la consulta y mapea los resultados a objetos de tipo RecibosDTO
-	    return db.executeQueryPojo(RecibosDTO.class, sql);
-	}
-	
-	public void actualizarEstadoColegiadoReal(ColegiadosRecibosDTO colegiado, String estado) {
-		String sql = "UPDATE Colegiados SET estado = ? WHERE id_colegiado = ?";
-		db.executeUpdate(sql, estado, colegiado.getId_colegiado());
-	}
-	
+	/**
+	 * Actualiza el estado de un recibo
+	 * @param dni
+	 * @param estado
+	 */
 	public void actualizarEstadoRecibo(String dni, String estado) {
 		String sql = "UPDATE Recibos SET estado = ? WHERE DNI = ?";
 		db.executeUpdate(sql, estado, dni);
 	}
-	
 }

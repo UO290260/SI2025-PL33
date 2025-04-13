@@ -1,6 +1,8 @@
 package giis.demo.solicitudcolegiado;
+import java.util.Date;
 import java.util.List;
 import giis.demo.util.Database;
+import giis.demo.util.Util;
 
 public class SolicitudColegiadoModel {
 	private Database db = new Database();
@@ -52,5 +54,39 @@ public class SolicitudColegiadoModel {
 	public List<ColegiadoDTO> getListaColegiadosAprobadosCancelados() {
 		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, titulacion, estado FROM Colegiados WHERE estado IN ('Aprobada', 'Cancelado')";
 		return db.executeQueryPojo(ColegiadoDTO.class, sql);
+	}
+
+	/**
+	 * Metodo que incremneta en uno el numero de los recibos
+	 * @return
+	 */
+	private int incrementarIDRecibo() {
+		String sql = "SELECT MAX(id_recibo) FROM Recibos";
+		List<Object[]> result = db.executeQueryArray(sql);
+
+		if (result.isEmpty() || result.get(0)[0] == null) {
+			return 1;
+		} else {
+			return ((Number) result.get(0)[0]).intValue() + 1;
+		}
+	}
+
+	/**
+	 * Metodo que inserta en la base de datos un recibo
+	 * @param colegiado
+	 */
+	public void insertarRecibo(ColegiadoDTO colegiado) {
+		String sql = "INSERT INTO Recibos (id_recibo, DNI, cuota_pagar, fecha_recibo, estado) VALUES (?, ?, ?, ?, ?)";
+		int nuevoId = incrementarIDRecibo();
+		int num_random = (int)(Math.random() * 100);
+		double cuota;
+		if (num_random < 50) {
+			cuota = 100.00;
+		} else {
+			cuota = 200.00;
+		}
+		String estado = "No Emitido";
+		String fecha_recibo2 = Util.dateToIsoString(new Date());
+		db.executeUpdate(sql, nuevoId, colegiado.getDNI(), cuota, fecha_recibo2, estado);
 	}
 }

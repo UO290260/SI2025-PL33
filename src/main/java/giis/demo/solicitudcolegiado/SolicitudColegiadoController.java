@@ -274,7 +274,6 @@ public class SolicitudColegiadoController {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Error al leer el archivo CSV.");
 		}
-
 		return colegiados;
 	}
 
@@ -322,11 +321,11 @@ public class SolicitudColegiadoController {
 
 			if (colegiado != null) {
 				String titulacion_aux = titulacion;
-
 				if (titulacion_aux.equals("Licenciatura Informatica") ||
 						titulacion_aux.equals("Ingenieria Informatica") ||
 						titulacion_aux.equals("Master Ingenieria Informatica")) {
 					colegiado.setEstado("Aprobada");
+					modelo.insertarRecibo(colegiado); 
 				} else {
 					colegiado.setEstado("Cancelado");
 				}
