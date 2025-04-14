@@ -38,4 +38,13 @@ public class GenerarrecibosModel {
 		String sql = "UPDATE Recibos SET estado = ? WHERE DNI = ?";
 		db.executeUpdate(sql, estado, dni);
 	}
+	
+	/**
+	 * Actualiza todos los campos del recibo
+	 * @param recibo
+	 */
+	public void actualizarRecibo(ColegiadosRecibosDTO recibo) {
+	    String sql = "UPDATE Recibos SET cuota_pagar = ?, fecha_recibo = ?, estado = ? WHERE DNI = ?";
+	    db.executeUpdate(sql,recibo.getCuota_pagar(),recibo.getFecha_recibo(),recibo.getEstado(),recibo.getDNI());
+	}
 }
