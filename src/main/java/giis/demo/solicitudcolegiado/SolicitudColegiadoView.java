@@ -15,6 +15,8 @@ public class SolicitudColegiadoView {
 	private JTable tabla;
 	private JTable tablaEnviados;
 	private JButton btnEnviar;
+	private JButton btnCargar;
+	private JButton btnComprobar;
 	private JCheckBox checkSeleccionarTodos;
 
 	/**
@@ -50,10 +52,10 @@ public class SolicitudColegiadoView {
 		panelTablaPendientes.add(scrollPane, BorderLayout.CENTER);
 		tabla.setDefaultEditor(Object.class, null);
 
-		//Tabla enviados
+		//Tabla Enviados/Aprobados/Cancelados
 		tablaEnviados = new JTable();
 		JScrollPane scrollPaneEnviados = new JScrollPane(tablaEnviados);
-		panelTablaEnviados.add(new JLabel("Colegiados Enviados"), BorderLayout.NORTH);
+		panelTablaEnviados.add(new JLabel("Colegiados Enviados/Aprobados/Cancelados"), BorderLayout.NORTH);
 		panelTablaEnviados.add(scrollPaneEnviados, BorderLayout.CENTER);
 		tablaEnviados.setDefaultEditor(Object.class, null);
 
@@ -64,8 +66,12 @@ public class SolicitudColegiadoView {
 		JPanel panelControles = new JPanel();
 		checkSeleccionarTodos = new JCheckBox("Seleccionar todos");
 		btnEnviar = new JButton("Enviar");
+		btnCargar = new JButton("Cargar");
+		btnComprobar = new JButton ("Comprobar");
 		panelControles.add(checkSeleccionarTodos);
 		panelControles.add(btnEnviar);
+		panelControles.add(btnCargar);
+		panelControles.add(btnComprobar);
 		panelTablaPendientes.add(panelControles, BorderLayout.SOUTH);
 
 		//Funcion del checkbox
@@ -75,5 +81,7 @@ public class SolicitudColegiadoView {
 	public JTable getTabla() { return this.tabla; }
 	public JTable getTablaEnviados() { return this.tablaEnviados; }
 	public JButton getBtnEnviar() { return this.btnEnviar; }
+	public JButton getBtnCargar() { return this.btnCargar; }
+	public JButton getBtnComprobar() { return this.btnComprobar; }
 	public JCheckBox getCheckSeleccionarTodos() { return this.checkSeleccionarTodos; }
 }
