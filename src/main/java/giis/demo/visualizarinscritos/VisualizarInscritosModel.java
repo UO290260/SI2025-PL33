@@ -13,8 +13,34 @@ private Database db= new Database();
 	 * @return Lista de los datos de la consulta en formato InscripcionDTO
 	 */
 	public List<InscripcionDTO> getListaInscritos(int id_curso) {
-		String sql = "SELECT i.id_inscripcion, c.nombre, c.apellidos, c.dni, i.estado FROM Colegiados "
-				+ "AS c INNER JOIN Inscripciones AS i USING(id_colegiado) WHERE i.id_curso = " + id_curso;
+		String sql = "SELECT i.id_inscripcion, "
+		           + "COALESCE(c.nombre, e.nombre) AS nombre, "
+		           + "COALESCE(c.apellidos, e.apellidos) AS apellidos, "
+		           + "i.dni, i.estado "
+		           + "FROM Inscripciones AS i "
+		           + "LEFT JOIN Colegiados AS c ON i.dni = c.dni "
+		           + "LEFT JOIN Externos AS e ON i.dni = e.dni "
+		           + "WHERE i.id_curso = " + id_curso+ " "
+				   + "AND i.lista_espera=FALSE;";
+		return db.executeQueryPojo(InscripcionDTO.class, sql);
+	}
+	
+	/**
+	 * Consulta que selecciona los campos de las lista de espera y sus inscripciones correspondientes
+	 * @param id_curso
+	 * @return Lista de los datos de la consulta en formato InscripcionDTO
+	 */
+	public List<InscripcionDTO> getListaEspera(int id_curso) {
+		String sql = "SELECT i.id_inscripcion, "
+		           + "COALESCE(c.nombre, e.nombre) AS nombre, "
+		           + "COALESCE(c.apellidos, e.apellidos) AS apellidos, "
+		           + "i.dni, i.posicion, i.estado "
+		           + "FROM Inscripciones AS i "
+		           + "LEFT JOIN Colegiados AS c ON i.dni = c.dni "
+		           + "LEFT JOIN Externos AS e ON i.dni = e.dni "
+		           + "WHERE i.id_curso = " + id_curso+ " "
+				   + "AND i.lista_espera=TRUE "
+				   + "ORDER BY i.posicion ASC;";
 		return db.executeQueryPojo(InscripcionDTO.class, sql);
 	}
 	

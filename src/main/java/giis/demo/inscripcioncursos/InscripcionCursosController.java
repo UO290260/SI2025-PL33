@@ -143,10 +143,10 @@ public class InscripcionCursosController {
 					if (!model.plazasDisponibles(cursoId)) {
 						if(listaEspera) //si se ha activado la lista de espera los matricula pero con una posición en la lista de espera
 						{
-							model.activarlistaEspera(cursoId); //activa el campo lista espera de la inscripción
+							String dni = (colegiado != null) ? colegiado.getDNI() : externo.getDNI();
+							model.activarlistaEspera(cursoId,dni); //activa el campo lista espera de la inscripción
 							int pos =model.ObtenerPosListaEspera(cursoId);//obtiene la posición de llegada 
 							idInscripcion = model.ObtenerIdInscripcion(); //obtiene la id de la inscripción
-							String dni = (colegiado != null) ? colegiado.getDNI() : externo.getDNI();
 							model.MeterEnlistaEspera(idInscripcion, dni, cursoId, SwingUtil.Obtener_fechaActual(), pos);
 							String mensaje = "Estás en lista de espera para el curso: " + curso.getTitulo() +
 			                         "\nTu posición es: " + pos;

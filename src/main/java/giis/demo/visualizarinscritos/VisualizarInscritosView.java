@@ -1,15 +1,18 @@
 package giis.demo.visualizarinscritos;
 
 import java.awt.SystemColor;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+
 public class VisualizarInscritosView {
 	private JFrame frame;
 	private JTable tablaCursos, tablaInscritos;
-	private JLabel lblNumero;
+	private JLabel lblNumero,lblesperaNumero;
+	private JTable tablaEspera;
 	
 	public VisualizarInscritosView() {
 		initialize();
@@ -23,7 +26,7 @@ public class VisualizarInscritosView {
 		frame = new JFrame();
 		frame.setTitle("Visualizar Inscritos");
 		frame.setName("Visualizar Inscritos");
-		frame.setBounds(0, 0, 795, 440);
+		frame.setBounds(0, 0, 795, 550);
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
@@ -52,16 +55,37 @@ public class VisualizarInscritosView {
 		tablaInscritos.setDefaultEditor(Object.class, null); 
 		tablaInscritos.setBackground(SystemColor.control);
 		JScrollPane panelInscritos = new JScrollPane(tablaInscritos);
-		panelInscritos.setBounds(7, 218, 770, 150);
+		panelInscritos.setBounds(7, 218, 770, 84);
 		frame.getContentPane().add(panelInscritos);
 		
+		
+		tablaEspera = new JTable();
+		tablaEspera.setName("tablaInscritos");
+		tablaEspera.setRowSelectionAllowed(false);
+		tablaEspera.setDefaultEditor(Object.class, null); 
+		tablaEspera.setBackground(SystemColor.control);
+		JScrollPane panelEspera = new JScrollPane(tablaEspera);
+		panelEspera.setBounds(7, 362, 770, 84);
+		frame.getContentPane().add(panelEspera);
+		
 		lblNumero = new JLabel("");
-		lblNumero.setBounds(7, 376, 400, 14);
+		lblNumero.setBounds(7, 488, 400, 14);
 		frame.getContentPane().add(lblNumero);
+		
+		JLabel lblInespera = new JLabel("Inscritos en la lista de espera del curso seleccionado:");
+		lblInespera.setBounds(10, 337, 400, 14);
+		frame.getContentPane().add(lblInespera);
+		
+		lblesperaNumero = new JLabel("");
+		lblesperaNumero.setBounds(377, 488, 400, 14);
+		frame.getContentPane().add(lblesperaNumero);
 	}
 	
 	public JFrame getFrame() { return frame; }
 	public JTable getTablaInscritos() { return tablaInscritos; }
 	public JTable getTablaCursos() { return tablaCursos; }
 	public JLabel getLblNumero() { return lblNumero; }
+	public JLabel getLblesperaNumero() {return lblesperaNumero;}
+	public JTable getTablaEspera() {return tablaEspera;}
+	
 }

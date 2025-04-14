@@ -54,12 +54,30 @@ public class VisualizarInscritosController {
 	}
 	
 	/**
+	 * Método que obtiene la lista de espera de un curso 
+	 * a partir del id del curso seleccionado
+	 */
+	public void getListaEspera() {
+		List<InscripcionDTO> inscripcionesEspera = model.getListaEspera((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
+		
+		TableModel modelInscricionesEspera = SwingUtil.getTableModelFromPojos(inscripcionesEspera, new String[]{
+				"id_inscripcion", "nombre", "apellidos", "dni", "posicion", "estado"}
+		);
+		
+		view.getLblesperaNumero().setText("Numero de Lista de espera en el curso: " + inscripcionesEspera.size());
+		
+		view.getTablaEspera().setModel(modelInscricionesEspera);
+		SwingUtil.autoAdjustColumns(view.getTablaEspera());
+	}
+	
+	/**
 	 * Método que carga los inscritos en la tabla de la interfaz
 	 */
 	public void mostrarInscritos() {
 		 view.getTablaCursos().getSelectionModel().addListSelectionListener(e -> {
 	            if (!e.getValueIsAdjusting()) {
-	                getListaInscritos(); 
+	                getListaInscritos();
+	                getListaEspera();
 	            }
 	        });
 	}
