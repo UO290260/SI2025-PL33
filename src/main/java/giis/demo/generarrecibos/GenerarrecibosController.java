@@ -70,7 +70,7 @@ public class GenerarrecibosController {
 			colegiado.setNombre(vista.getTablaColegiados().getValueAt(fila, 1).toString());
 			colegiado.setApellidos(vista.getTablaColegiados().getValueAt(fila, 2).toString());
 			colegiado.setDNI(vista.getTablaColegiados().getValueAt(fila, 3).toString());
-			colegiado.setCuota_pagar(Double.parseDouble(vista.getTablaColegiados().getValueAt(fila, 4).toString()));
+			colegiado.setCuota_pagar(Integer.parseInt(vista.getTablaColegiados().getValueAt(fila, 4).toString()));
 			colegiado.setFecha_recibo(fechaSolicitud); 
 			colegiado.setCuenta_bancaria(vista.getTablaColegiados().getValueAt(fila, 5).toString());
 			colegiado.setEstado("Emitido");
@@ -278,7 +278,7 @@ public class GenerarrecibosController {
 						ColegiadosRecibosDTO recibo = new ColegiadosRecibosDTO();
 						recibo.setId_recibo(Integer.parseInt(campos[0]));
 						recibo.setDNI(campos[1]);
-						recibo.setCuota_pagar(Double.parseDouble(campos[2]));
+						recibo.setCuota_pagar(Integer.parseInt(campos[2]));
 						recibo.setFecha_recibo(campos[3]);
 						recibo.setEstado(campos[4]);
 

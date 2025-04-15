@@ -9,14 +9,14 @@ public class ColegiadosRecibosDTO {
     private String nombre;
     private String apellidos;
     private String DNI;
-    private double cuota_pagar;
+    private int cuota_pagar;
     private String fecha_recibo;
     private String cuenta_bancaria;
     private String estado;
 
     public ColegiadosRecibosDTO() { }
 
-    public ColegiadosRecibosDTO(int id_recibo, int id_colegiado, String nombre, String apellidos, String DNI, double cuota_pagar, String fecha_recibo, String cuenta_bancaria, String estado) {
+    public ColegiadosRecibosDTO(int id_recibo, int id_colegiado, String nombre, String apellidos, String DNI, int cuota_pagar, String fecha_recibo, String cuenta_bancaria, String estado) {
         this.id_recibo = id_recibo;
         this.id_colegiado = id_colegiado;
         this.nombre = nombre;
@@ -33,7 +33,7 @@ public class ColegiadosRecibosDTO {
     public String getNombre() { return nombre; } public void setNombre(String nombre) { this.nombre = nombre; }
     public String getApellidos() { return apellidos; } public void setApellidos(String apellidos) { this.apellidos = apellidos; }
     public String getDNI() { return DNI; } public void setDNI(String DNI) { this.DNI = DNI; }
-    public double getCuota_pagar() { return cuota_pagar; } public void setCuota_pagar(double cuota_pagar) { this.cuota_pagar = cuota_pagar; }
+    public int getCuota_pagar() { return cuota_pagar; } public void setCuota_pagar(int cuota_pagar) { this.cuota_pagar = cuota_pagar; }
     public String getFecha_recibo() { return fecha_recibo; } public void setFecha_recibo(String fecha_recibo) { this.fecha_recibo = fecha_recibo; }
     public String getCuenta_bancaria() { return cuenta_bancaria; } public void setCuenta_bancaria(String cuenta_bancaria) { this.cuenta_bancaria = cuenta_bancaria; }
     public String getEstado() { return estado; } public void setEstado(String estado) { this.estado = estado; }
