@@ -14,7 +14,7 @@ public class InscripcioncolegiadosJustifcante extends JFrame {
 	public InscripcioncolegiadosJustifcante(InscripcioncolegiadosDTO colegiado) {
 		frame = new JFrame();
 		frame.setTitle("Justificante de Inscripción");
-		frame.setBounds(0, 0, 400, 275);
+		frame.setBounds(0, 0, 400, 225);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][grow][][][][][][][][]"));
 		frame.setLocationRelativeTo(null);
