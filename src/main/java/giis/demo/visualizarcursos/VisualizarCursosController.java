@@ -72,26 +72,32 @@ public class VisualizarCursosController {
 		view.getTablaCursos().setModel(tmodel);
 		SwingUtil.autoAdjustColumns(view.getTablaCursos());
 		
-		view.getBoton().addActionListener(new ActionListener() {
+		ActionListener accionBoton = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (view.getTablaCursos().getSelectedRow()==-1) {
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un curso para cancelar");
 		            return;
 				}
-				if (view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0) == "En Curso") {
+				if (view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 17).equals("En Curso")) {
 					JOptionPane.showMessageDialog(null, "El curso no puede haber iniciado");
 		            return;
 				}
 				
-				if (view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0) == "Cancelado") {
-					JOptionPane.showMessageDialog(null, "El curso no puede haber iniciado");
+				if (view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 17).equals("Cancelado")) {
+					JOptionPane.showMessageDialog(null, "No se puede cancelar un curso ya cancelado");
 		            return;
 				}
 				cancelarCurso();
 				elegirListaCursos();
 			}
-		});
+		};
+
+		for (ActionListener al : view.getBoton().getActionListeners()) {
+			view.getBoton().removeActionListener(al);
+		}
+
+		view.getBoton().addActionListener(accionBoton);
 	}
 	
 	public void agregarCursos() {
@@ -105,6 +111,7 @@ public class VisualizarCursosController {
 	public void cancelarCurso () {
 		model.cancelarCurso((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
 		model.actualizarInscritos((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
+		JOptionPane.showMessageDialog(null, "El curso ha sido cancelado correctamente");
 	}
 	
 	public void mostrarInscritos () {
