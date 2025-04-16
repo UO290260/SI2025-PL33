@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
+import giis.demo.inscripcioncolegiados.InscripcioncolegiadosDTO;
 import giis.demo.util.SwingUtil;
 import giis.demo.util.Util;
 
@@ -65,26 +66,32 @@ public class GenerarrecibosController {
 		String fechaSolicitud = Util.dateToIsoString(new Date());
 
 		for (int fila = 0; fila < totalFilas; fila++) {
-			ColegiadosRecibosDTO colegiado = new ColegiadosRecibosDTO();
-			colegiado.setId_recibo(Integer.parseInt(vista.getTablaColegiados().getValueAt(fila, 0).toString()));
+			InscripcioncolegiadosDTO colegiado = new InscripcioncolegiadosDTO();
 			colegiado.setNombre(vista.getTablaColegiados().getValueAt(fila, 1).toString());
 			colegiado.setApellidos(vista.getTablaColegiados().getValueAt(fila, 2).toString());
 			colegiado.setDNI(vista.getTablaColegiados().getValueAt(fila, 3).toString());
-			colegiado.setCuota_pagar(Integer.parseInt(vista.getTablaColegiados().getValueAt(fila, 4).toString()));
-			colegiado.setFecha_recibo(fechaSolicitud); 
 			colegiado.setCuenta_bancaria(vista.getTablaColegiados().getValueAt(fila, 5).toString());
-			colegiado.setEstado("Emitido");
-			modelo.actualizarEstadoRecibo(colegiado.getDNI(), "Emitido");
 
+			RecibosDTO recibo = new RecibosDTO();
+			recibo.setId_recibo(Integer.parseInt(vista.getTablaColegiados().getValueAt(fila, 0).toString()));
+			recibo.setDNI(colegiado.getDNI());
+			recibo.setFecha_recibo(fechaSolicitud);
+			modelo.actualizarEstadoRecibo(colegiado.getDNI(), "Emitido");
+			recibo.setEstado("Emitido");
+			
+			//Obtener cuota
+			int cuota_pagar = modelo.obtenerCuota(colegiado.getDNI());  
+	        recibo.setCuota_pagar(cuota_pagar);
+	        
 			datosSeleccionados.add(new String[] {
-					String.valueOf(colegiado.getId_recibo()),
+					String.valueOf(recibo.getId_recibo()),
 					colegiado.getNombre(),
 					colegiado.getApellidos(),
 					colegiado.getDNI(),
-					String.valueOf(colegiado.getCuota_pagar()),
-					colegiado.getFecha_recibo(),
+					String.valueOf(recibo.getCuota_pagar()),
+					recibo.getFecha_recibo(),
 					colegiado.getCuenta_bancaria(),
-					colegiado.getEstado()
+					recibo.getEstado()
 			});
 		}
 
@@ -110,9 +117,9 @@ public class GenerarrecibosController {
 	 * Obtencion de la lista de los colegiados con estado de inscripcion Aprobada y estado de recibo No Emitido 
 	 */
 	private void cargarListaColegiados() {
-		List<ColegiadosRecibosDTO> colegiadosPendientes = modelo.getListaColegiados();
+		List<InscripcioncolegiadosDTO> colegiadosPendientes = modelo.getListaColegiados();
 		TableModel tmodelColegiados = SwingUtil.getTableModelFromPojos(colegiadosPendientes, new String[]{
-				"id_colegiado", "nombre", "apellidos", "DNI", "cuota_pagar", "cuenta_bancaria", "estado"  
+				"id_colegiado", "nombre", "apellidos", "DNI", "cuenta_bancaria", "estado"  
 		});
 		vista.getTablaColegiados().setModel(tmodelColegiados);
 		SwingUtil.autoAdjustColumns(vista.getTablaColegiados());
@@ -122,9 +129,9 @@ public class GenerarrecibosController {
 	 * Obtencion de la lista de los recibos con estado Emitido y No Cobrado/Cobrado
 	 */
 	private void cargarListaRecibos() {
-		List<ColegiadosRecibosDTO> recibos = modelo.getListaRecibos();
+		List<RecibosDTO> recibos = modelo.getListaRecibos();
 		TableModel tmodelRecibos = SwingUtil.getTableModelFromPojos(recibos, new String[]{
-				"id_recibo", "nombre", "apellidos", "DNI", "cuota_pagar", "fecha_recibo", "cuenta_bancaria", "estado"
+				"id_recibo", "cuota_pagar", "fecha_recibo", "estado"
 		});
 		vista.getTablaRecibos().setModel(tmodelRecibos);
 		SwingUtil.autoAdjustColumns(vista.getTablaRecibos());
@@ -231,7 +238,7 @@ public class GenerarrecibosController {
 
 		if (resultado == JFileChooser.APPROVE_OPTION) {
 			File archivo = chooser.getSelectedFile();
-			List<ColegiadosRecibosDTO> recibos = leerCSV(archivo);
+			List<RecibosDTO> recibos = leerCSV(archivo);
 
 			if (recibos != null && !recibos.isEmpty()) {
 				TableModel tmodel = SwingUtil.getTableModelFromPojos(recibos, new String[] {
@@ -254,8 +261,8 @@ public class GenerarrecibosController {
 	 * @param archivo
 	 * @return
 	 */
-	private List<ColegiadosRecibosDTO> leerCSV(File archivo) {
-		List<ColegiadosRecibosDTO> recibos = new ArrayList<>();
+	private List<RecibosDTO> leerCSV(File archivo) {
+		List<RecibosDTO> recibos = new ArrayList<>();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
 			String linea;
@@ -275,7 +282,7 @@ public class GenerarrecibosController {
 							campos[i] = campos[i].trim();
 						}
 
-						ColegiadosRecibosDTO recibo = new ColegiadosRecibosDTO();
+						RecibosDTO recibo = new RecibosDTO();
 						recibo.setId_recibo(Integer.parseInt(campos[0]));
 						recibo.setDNI(campos[1]);
 						recibo.setCuota_pagar(Integer.parseInt(campos[2]));
