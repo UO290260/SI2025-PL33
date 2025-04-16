@@ -1,11 +1,15 @@
 package giis.demo.visualizarcursos;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
 import giis.demo.util.SwingUtil;
+import giis.demo.visualizarinscritos.InscripcionDTO;
 
 public class VisualizarCursosController {
 	
@@ -18,6 +22,7 @@ public class VisualizarCursosController {
 		
 		this.initView();
 		this.agregarCursos();
+		this.mostrarInscritos();
 	}
 	
 	/**
@@ -64,8 +69,29 @@ public class VisualizarCursosController {
 				"cuota_otros", "apertura_inscripcion", "cierre_inscripcion", "estado"}
 		);
 		
-		view.getTabla().setModel(tmodel);
-		SwingUtil.autoAdjustColumns(view.getTabla());
+		view.getTablaCursos().setModel(tmodel);
+		SwingUtil.autoAdjustColumns(view.getTablaCursos());
+		
+		view.getBoton().addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (view.getTablaCursos().getSelectedRow()==-1) {
+					JOptionPane.showMessageDialog(null, "Debe seleccionar un curso para cancelar");
+		            return;
+				}
+				if (view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0) == "En Curso") {
+					JOptionPane.showMessageDialog(null, "El curso no puede haber iniciado");
+		            return;
+				}
+				
+				if (view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0) == "Cancelado") {
+					JOptionPane.showMessageDialog(null, "El curso no puede haber iniciado");
+		            return;
+				}
+				cancelarCurso();
+				elegirListaCursos();
+			}
+		});
 	}
 	
 	public void agregarCursos() {
@@ -76,5 +102,25 @@ public class VisualizarCursosController {
 	        });
 	}
 	
+	public void cancelarCurso () {
+		model.cancelarCurso((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
+		model.actualizarInscritos((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
+	}
+	
+	public void mostrarInscritos () {
+		view.getTablaCursos().getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+            	if ((int) view.getTablaCursos().getSelectedRow() != -1) {
+            		List<InscripcionDTO> inscripciones = model.getListaInscritos((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
+                	TableModel modelInscriciones = SwingUtil.getTableModelFromPojos(inscripciones, new String[]{
+            				"id_inscripcion", "nombre", "apellidos", "dni", "estado"}
+            		);
+            		
+            		view.getTablaInscritos().setModel(modelInscriciones);
+            		SwingUtil.autoAdjustColumns(view.getTablaInscritos());
+                }
+            	} 	
+        });
+	}
 }
 	
