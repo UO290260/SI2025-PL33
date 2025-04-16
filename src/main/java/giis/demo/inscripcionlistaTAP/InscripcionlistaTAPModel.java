@@ -85,4 +85,16 @@ public class InscripcionlistaTAPModel {
 		//Si es mayor a 0 retornara true , en caso contrario false
 		return ((Number) result.get(0)[0]).intValue() > 0;
 	}
+
+	/**
+	 * Metodo que comprueba si el colegiado es un colegiado con estado de inscripcion aprobada
+	 * @param idColegiado
+	 * @return
+	 */
+	public boolean estadoColegiado(int idColegiado) {
+		String sql = "SELECT COUNT(*) FROM Colegiados WHERE id_colegiado = ? AND estado = 'Aprobada'";
+	    List<Object[]> resultado = db.executeQueryArray(sql, idColegiado);
+		//Si es mayor a 0 retornara true , en caso contrario false
+	    return ((Number) resultado.get(0)[0]).intValue() > 0;
+	}
 }

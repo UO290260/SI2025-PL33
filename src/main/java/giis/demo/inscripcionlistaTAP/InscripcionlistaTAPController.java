@@ -185,6 +185,10 @@ public class InscripcionlistaTAPController {
 			JOptionPane.showMessageDialog(null, "El colegiado buscado no es un colegiado");
 			return;
 		}
+		if (!modelo.estadoColegiado(idColegiado)) {
+			JOptionPane.showMessageDialog(null, "Solo se pueden inscribir a colegiados con estado de inscripcion aprobada");
+			return;
+		}
 		else {
 			modelo.actualizarColegiado(colegiado);  
 			modelo.insertarPerito(colegiado , perito); 
