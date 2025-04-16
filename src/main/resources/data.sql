@@ -59,7 +59,7 @@ INSERT INTO Asignacion (id_perito,id_pericial,fecha,estado) VALUES
 delete from Recibos;
 INSERT INTO Recibos (id_recibo, DNI, cuota_pagar, fecha_recibo, estado) VALUES 
 (1, '12345678A', 100, '2024-01-01', 'Emitido'),
-(2, '23456789B', 100, '2024-01-01', 'Emitido'),
+(2, '23456789B', 100, '2024-01-01', 'No Emitido'),
 (3, '34567890C', 100, '2024-01-01', 'Emitido'),
 (4, '45678901D', 200, '2024-01-01', 'Emitido'),
 (5, '56789012E', 200, '2024-01-01', 'Emitido'),
