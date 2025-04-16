@@ -1,6 +1,7 @@
 package giis.demo.util;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -44,6 +45,12 @@ import giis.demo.generarrecibos.GenerarrecibosView;
 import giis.demo.asignarpericiales.AsignarPericialesController;
 import giis.demo.asignarpericiales.AsignarPericialesModel;
 import giis.demo.asignarpericiales.AsignarPericialesView;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 /**
  * Punto de entrada principal que incluye botones para la ejecucion de las pantallas 
@@ -69,11 +76,17 @@ public class SwingMain {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the application.
 	 */
 	public SwingMain() {
+		try {
+		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 		initialize();
 	}
 
@@ -82,167 +95,93 @@ public class SwingMain {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setTitle("Main");
-		frame.setBounds(0, 0, 500, 500);
+		frame.setBounds(0, 0, 692, 387);
 		frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
-
-		//Boton de la historia Ofertar Cursos
-		JButton btnOfertarCursos = new JButton("1. Ejecutar ofertar_curso");
-		btnOfertarCursos.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				OfertarCursosController controllerOfertarCursos=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
-			}
-		});
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setLayout(null);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnOfertarCursos);
-
-		//Boton de la historia inscripcion_colegiados
-		JButton btnInscripcion_colegiados = new JButton("2. Ejecutar de inscripcion_colegiados");
-		btnInscripcion_colegiados.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				InscripcioncolegiadosController controller2=new InscripcioncolegiadosController(new InscripcioncolegiadosModel(), new InscripcioncolegiadosView());
-				controller2.initController();
-			}
-		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnInscripcion_colegiados);
-
-		//Boton de la historia inscripcion_curso
-		JButton btnIncripcióncurso = new JButton("3. Ejecutar inscricpcion_cursos"); //Botón que llama a la ventana de inscripción de curso
-		btnIncripcióncurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				InscripcionCursosController controller3=new InscripcionCursosController(new InscripcionCursosModel(), new InscripcionCursosView());
-			}
-		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnIncripcióncurso);
-
-		//Boton de la historia apertura_curso
-		JButton btnAbrirCurso = new JButton("4. Apertura Curso"); //Botón que llama a la ventana de inscripción de curso
-		btnAbrirCurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				apertura_cursosController controller4=new apertura_cursosController(new apertura_cursosModel(), new apertura_cursosView());
-			}
-		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnAbrirCurso);
-
-		//Boton de la historia Visualizar Cursos
-		JButton btnVisualizarrCursos = new JButton("5. Ejecutar Visualizar Cursos");
-		btnVisualizarrCursos.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				VisualizarCursosController controllerVisualizarCursos=new VisualizarCursosController(new VisualizarCursosModel(), new VisualizarCursosView());
-
-			}
-		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnVisualizarrCursos);
-
-		//Boton de la historia historico_cursos
-		JButton btnHistoricocurso = new JButton("6. Ejecutar de historico_cursos");
-		btnHistoricocurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				HistoricocursosController controller6=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
-				controller6.initController();
-			}
-		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnHistoricocurso);
-
-		//Boton de la historia Visualizar Inscritos
-		JButton btnVisualizarInscritos = new JButton("7. Visualizar Inscritos");
-		btnVisualizarInscritos.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				VisualizarInscritosController controllerVisualizarCursos=new VisualizarInscritosController(new VisualizarInscritosModel(), new VisualizarInscritosView());
-			}
-		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnVisualizarInscritos);
-
-		//Boton de la historia inscripcion_lista_TAP
-		JButton prueba = new JButton("8. Ejecutar de inscripcion_lista_TAP");
-		prueba.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				InscripcionlistaTAPController controller8=new InscripcionlistaTAPController(new InscripcionlistaTAPModel(), new InscripcionlistaTAPView());
-				controller8.initController();
-			}
-		});
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(prueba);
-
-
-		//Boton de la historia Planificar sesiones
-		JButton btnPlanificarSesiones = new JButton("9. Planificar Sesiones");
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 10, 10);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JPanel panelCursos = new JPanel();
+		panelCursos.setBounds(10, 11, 179, 204);
+		panelCursos.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Acciones de Cursos", TitledBorder.LEFT, TitledBorder.TOP));
+		panel.add(panelCursos);
+		
+		JButton btnOfertarCurso = new JButton("Ofertar curso");
+		btnOfertarCurso.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+			OfertarCursosController controllerOfertarCursos=new OfertarCursosController(new OfertarCursosModel(), new OfertarCursosView());
+			}
+			});
+		panelCursos.add(btnOfertarCurso);
+		
+		JButton btnInscricpcionACursos = new JButton(" Inscricpcion a cursos");
+		btnInscricpcionACursos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+			InscripcionCursosController controller3=new InscripcionCursosController(new InscripcionCursosModel(), new InscripcionCursosView());
+			}
+			});
+		panelCursos.add(btnInscricpcionACursos);
+		
+		JButton btnAperturaCurso = new JButton("Apertura Curso");
+		btnAperturaCurso.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+			apertura_cursosController controller4=new apertura_cursosController(new apertura_cursosModel(), new apertura_cursosView());
+			}
+			});
+		panelCursos.add(btnAperturaCurso);
+		
+		JButton btnVisualizarCursos = new JButton("Visualizar Cursos");
+		btnVisualizarCursos.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+			VisualizarCursosController controllerVisualizarCursos=new VisualizarCursosController(new VisualizarCursosModel(), new VisualizarCursosView());
+			}
+			});
+		panelCursos.add(btnVisualizarCursos);
+		
+		JButton btnHistoricocursos = new JButton("Historico cursos");
+		btnHistoricocursos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+			HistoricocursosController controller6=new HistoricocursosController(new HistoricocursosModel(), new HistoricocursosView());
+			controller6.initController();
+			}
+			});
+		panelCursos.add(btnHistoricocursos);
+		
+		JButton btnPlanificarSesiones = new JButton("Planificar Sesiones");
 		btnPlanificarSesiones.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
 			public void actionPerformed(ActionEvent e) {
-				PlanificarSesionesController controllerPlanificarSesiones=new PlanificarSesionesController(new PlanificarSesionesModel(), new PlanificarSesionesView());
+			PlanificarSesionesController controllerPlanificarSesiones=new PlanificarSesionesController(new PlanificarSesionesModel(), new PlanificarSesionesView());
 			}
-		});
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnPlanificarSesiones);
-
-
-		//Boton de la historia inscripcion_lista_TAP
-		JButton btnSolicitud = new JButton("10. Ejecutar solicitud_colegiado");
-		btnSolicitud.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				SolicitudColegiadoController controller10=new SolicitudColegiadoController(new SolicitudColegiadoModel(), new SolicitudColegiadoView());
-				controller10.initController();
-			}
-		});
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnSolicitud);
+			});
+		panelCursos.add(btnPlanificarSesiones);
 		
-		//Boton de la historia inscripcion_lista_TAP
-		JButton btnAsignarPericial = new JButton("10. Ejecutar Asignar Periciales");
-		btnAsignarPericial.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				AsignarPericialesController controllerAsignarPericial=new AsignarPericialesController(new AsignarPericialesModel(), new AsignarPericialesView());
-			}
-		});
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnAsignarPericial);
 		
-		//Boton mostrar pericialesanuales
-		JButton btnmostrarPericiales = new JButton("11. Mostrar Periciales anuales");
-		btnmostrarPericiales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				MemoriaAnualesPericialesController controllerAsignarPericial=new MemoriaAnualesPericialesController(new MemoriaAnualesPericialesView(), new MemoriaAnualesPericialesModel());
-			}
-		});
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnmostrarPericiales);
-
-
-		//Boton de la historia generar_recibos
-		JButton btnRecibos = new JButton("12. Ejecutar generar_recibos");
-		btnRecibos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				GenerarrecibosController controller12=new GenerarrecibosController(new GenerarrecibosModel(), new GenerarrecibosView());
-				controller12.initController();
-			}
-		});
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		frame.getContentPane().add(btnRecibos);
-
-
-		/**
-		 * Cargar la base de datos en blanco 
-		 */
-		JButton btnInicializarBaseDeDatos = new JButton("Inicializar Base de Datos en Blanco");
-		btnInicializarBaseDeDatos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
-			public void actionPerformed(ActionEvent e) {
-				Database db=new Database();
-				db.createDatabase(false);
-			}
-		});
-		frame.getContentPane().add(btnInicializarBaseDeDatos);
-
-		/**
-		 * Cargar la base de datos del proyecto	
-		 */
+		JPanel PanelBases = new JPanel();
+		PanelBases.setBounds(10, 250, 656, 79);
+		PanelBases.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Base de datos", TitledBorder.LEFT, TitledBorder.TOP));
+		panel.add(PanelBases);
+		PanelBases.setLayout(null);
+		
 		JButton btnCargarDatosIniciales = new JButton("Cargar Datos Iniciales para Pruebas");
+		btnCargarDatosIniciales.setBounds(10, 33, 263, 23);
 		btnCargarDatosIniciales.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				Database db=new Database();
@@ -250,9 +189,95 @@ public class SwingMain {
 				db.loadDatabase();
 			}
 		});
-		frame.getContentPane().add(btnCargarDatosIniciales);
+		PanelBases.add(btnCargarDatosIniciales);
+		
+		JButton btnInicializarBaseDeDatos = new JButton("Inicializar Base de Datos en Blanco");
+		btnInicializarBaseDeDatos.setBounds(361, 33, 254, 23);
+		btnInicializarBaseDeDatos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				Database db=new Database();
+				db.createDatabase(false);
+			}
+		});
+		PanelBases.add(btnInicializarBaseDeDatos);
+		
+		JPanel PanelColegiados = new JPanel();
+		PanelColegiados.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Colegiados y externos", TitledBorder.LEFT, TitledBorder.TOP));
+		PanelColegiados.setBounds(214, 11, 179, 114);
+		panel.add(PanelColegiados);
+		
+		JButton btnInscripcion_colegiados = new JButton("Inscripcion colegiados");
+		btnInscripcion_colegiados.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+			InscripcioncolegiadosController InscripcionColegiadoscontroller=new InscripcioncolegiadosController(new InscripcioncolegiadosModel(), new InscripcioncolegiadosView());
+			InscripcionColegiadoscontroller.initController();
+			}
+			});
+		PanelColegiados.add(btnInscripcion_colegiados);
+		
+		JButton btnVisualizarInscritos = new JButton("Visualizar Inscritos");
+		btnVisualizarInscritos.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+			VisualizarInscritosController controllerVisualizarCursos=new VisualizarInscritosController(new VisualizarInscritosModel(), new VisualizarInscritosView());
+			}
+			});
+		PanelColegiados.add(btnVisualizarInscritos);
+		
+		JButton btnSolicitudColegiado = new JButton(" Solicitud colegiado");
+		btnSolicitudColegiado.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				SolicitudColegiadoController controller10=new SolicitudColegiadoController(new SolicitudColegiadoModel(), new SolicitudColegiadoView());
+				controller10.initController();
+			}
+		});
+		PanelColegiados.add(btnSolicitudColegiado);
+		
+		JPanel panelPeritos = new JPanel();
+		panelPeritos.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Peritos", TitledBorder.LEFT, TitledBorder.TOP));
+		panelPeritos.setBounds(429, 11, 179, 114);
+		panel.add(panelPeritos);
+		
+		JButton btnInscripcionListaTap = new JButton("Inscripcion lista TAP");
+		btnInscripcionListaTap.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+			InscripcionlistaTAPController controller8=new InscripcionlistaTAPController(new InscripcionlistaTAPModel(), new InscripcionlistaTAPView());
+			controller8.initController();
+			}
+			});
+		panelPeritos.add(btnInscripcionListaTap);
+		
+		JButton btnAsignarPericiales = new JButton("Asignar Periciales");
+		btnAsignarPericiales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				AsignarPericialesController controllerAsignarPericial=new AsignarPericialesController(new AsignarPericialesModel(), new AsignarPericialesView());
+			}
+		});
+		panelPeritos.add(btnAsignarPericiales);
+		
+		JButton btnMostrarPericialesAnuales = new JButton("Periciales anuales");
+		btnMostrarPericialesAnuales.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+			public void actionPerformed(ActionEvent e) {
+				MemoriaAnualesPericialesController controllerAsignarPericial=new MemoriaAnualesPericialesController(new MemoriaAnualesPericialesView(), new MemoriaAnualesPericialesModel());
+			}
+		});
+		panelPeritos.add(btnMostrarPericialesAnuales);
+		
+		JPanel panelOtros = new JPanel();
+		panelOtros.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Otros", TitledBorder.LEFT, TitledBorder.TOP));
+		panelOtros.setLayout(null);
+		panelOtros.setBounds(216, 136, 392, 79);
+		panel.add(panelOtros);
+		
+		JButton btnEjecutarGenerarRecibos = new JButton("Generar recibos");
+		btnEjecutarGenerarRecibos.setBounds(10, 28, 173, 23);
+		btnEjecutarGenerarRecibos.addActionListener(new ActionListener() { //NOSONAR codigo autogenerado
+            public void actionPerformed(ActionEvent e) {
+                GenerarrecibosController controller12=new GenerarrecibosController(new GenerarrecibosModel(), new GenerarrecibosView());
+                controller12.initController();
+            }
+        });
+		panelOtros.add(btnEjecutarGenerarRecibos);
 	}
 
 	public JFrame getFrame() { return this.frame;}
-
 }
