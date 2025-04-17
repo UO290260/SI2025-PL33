@@ -3,6 +3,7 @@ package giis.demo.inscripcioncursos;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import giis.demo.dto.CursosDTO;
 import net.miginfocom.swing.MigLayout;
 
 public class JustificanteTarjeta extends JFrame {

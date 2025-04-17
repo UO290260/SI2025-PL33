@@ -1,45 +1,63 @@
-package giis.demo.inscripcioncursos;
+package giis.demo.dto;
 
 //Clase CursoDTO usada en controller para implementar los datos de la clase Cursos a una tabla
 public class CursosDTO {
-	 	private int id_curso;
-	    private String titulo;
-	    private String descripcion;
-	    private String fechainicio;
-	    private String fechafin;
-	    private int duracion;
-	    private int plazas;
-	    private int cuotaprecolegiado, cuotacolegiado, cuotaotros, cuotaminusvalido, cuotadesempleado, cuotaempleado, cuotalumno, cuotaempresa;
-	    private String aperturainscripcion;
-	    private String cierreinscripcion;
-	    private boolean listaEspera;
-	    private String estado;
-	    
-	  public CursosDTO(){};
-	    
-	  public CursosDTO(int id_curso, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,int cuota_precolegiado,int cuota_colegiado,int cuota_minusvalido,int cuota_desempleado, int cuota_empleado,int cuota_alumno,int cuota_empresa,int cuota_otros, String apertura_inscripcion,String cierre_inscripcion,boolean lista_espera ,String estado) {
-	        this.id_curso = id_curso;
-	        this.titulo = titulo;
-	        this.descripcion = descripcion;
-	        this.fechainicio = fecha_inicio;
-	        this.fechafin = fecha_fin;
-	        this.duracion = duracion;
-	        this.plazas = plazas;
-	        this.cuotaprecolegiado=cuota_precolegiado;
-	        this.cuotacolegiado=cuota_colegiado;
-	        this.cuotaotros=cuota_otros;
-	        this.aperturainscripcion=apertura_inscripcion;
-	        this.cierreinscripcion=cierre_inscripcion;
-	        this.estado = estado;
-	        this.cuotalumno=cuota_alumno;
-	        this.cuotadesempleado=cuota_desempleado;
-	        this.cuotaempleado=cuota_empleado;
-	        this.cuotaminusvalido=cuota_minusvalido;
-	        this.cuotaempresa=cuota_empresa;
-	        this.listaEspera=lista_espera;
-	    }
+	private int id_curso;
+	private String DNI;
+	private String titulo;
+	private String descripcion;
+	private String fechainicio;
+	private String fechafin;
+	private int duracion;
+	private int plazas;
+	private int cuotaprecolegiado, cuotacolegiado, cuotaotros, cuotaminusvalido, cuotadesempleado, cuotaempleado, cuotalumno, cuotaempresa;
+	private String aperturainscripcion;
+	private String cierreinscripcion;
+	private boolean listaEspera;
+	private String estado;
 
-	
+	public CursosDTO(){};
+
+	public CursosDTO(int id_curso, String DNI, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,int cuota_precolegiado,int cuota_colegiado,int cuota_minusvalido,int cuota_desempleado, int cuota_empleado,int cuota_alumno,int cuota_empresa,int cuota_otros, String apertura_inscripcion,String cierre_inscripcion,boolean lista_espera ,String estado) {
+		this.id_curso = id_curso;
+		this.DNI = DNI;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.fechainicio = fecha_inicio;
+		this.fechafin = fecha_fin;
+		this.duracion = duracion;
+		this.plazas = plazas;
+		this.cuotaprecolegiado=cuota_precolegiado;
+		this.cuotacolegiado=cuota_colegiado;
+		this.cuotaotros=cuota_otros;
+		this.aperturainscripcion=apertura_inscripcion;
+		this.cierreinscripcion=cierre_inscripcion;
+		this.estado = estado;
+		this.cuotalumno=cuota_alumno;
+		this.cuotadesempleado=cuota_desempleado;
+		this.cuotaempleado=cuota_empleado;
+		this.cuotaminusvalido=cuota_minusvalido;
+		this.cuotaempresa=cuota_empresa;
+		this.listaEspera=lista_espera;
+	}
+
+
+
+	public String getDNI() {
+		return DNI;
+	}
+
+	public void setDNI(String dNI) {
+		DNI = dNI;
+	}
+
+	public boolean isListaEspera() {
+		return listaEspera;
+	}
+
+	public void setListaEspera(boolean listaEspera) {
+		this.listaEspera = listaEspera;
+	}
 
 	public int getCuota_precolegiado() {
 		return cuotaprecolegiado;
@@ -90,7 +108,7 @@ public class CursosDTO {
 		this.descripcion = descripcion;
 	}
 
-	
+
 
 	public String getFecha_inicio() {
 		return fechainicio;
@@ -291,6 +309,6 @@ public class CursosDTO {
 	public void setLista_espera(boolean lista_espera) {
 		this.listaEspera = lista_espera;
 	}
-	   
+
 
 }

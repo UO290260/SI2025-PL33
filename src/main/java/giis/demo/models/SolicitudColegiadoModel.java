@@ -1,6 +1,8 @@
-package giis.demo.solicitudcolegiado;
+package giis.demo.models;
 import java.util.Date;
 import java.util.List;
+
+import giis.demo.dto.ColegiadosDTO;
 import giis.demo.util.Database;
 import giis.demo.util.Util;
 
@@ -11,18 +13,18 @@ public class SolicitudColegiadoModel {
 	 * Obtener lista de colegiados pendientes
 	 * @return
 	 */
-	public List<ColegiadoDTO> getListaPendientes() {
+	public List<ColegiadosDTO> getListaPendientes() {
 		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, titulacion, estado FROM Colegiados WHERE estado = 'Pendiente'";
-		return db.executeQueryPojo(ColegiadoDTO.class, sql);
+		return db.executeQueryPojo(ColegiadosDTO.class, sql);
 	}
 
 	/**
 	 * Obtener lista de colegiados enviados
 	 * @return
 	 */
-	public List<ColegiadoDTO> getListaColegiadosEnviados() {
+	public List<ColegiadosDTO> getListaColegiadosEnviados() {
 		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, titulacion, estado FROM Colegiados WHERE estado = 'Enviado'";
-		return db.executeQueryPojo(ColegiadoDTO.class, sql);
+		return db.executeQueryPojo(ColegiadosDTO.class, sql);
 	}
 
 	/**
@@ -30,9 +32,9 @@ public class SolicitudColegiadoModel {
 	 * @param colegiado
 	 * @param estado
 	 */
-	public void actualizarEstadoColegiado(ColegiadoDTO colegiado, String estado) {
+	public void actualizarEstadoColegiado(ColegiadosDTO colegiado, String estado) {
 		String sql = "UPDATE Colegiados SET estado = ? WHERE DNI = ?";
-		db.executeUpdate(sql, estado, colegiado.getDNI());
+		db.executeUpdate(sql, estado, colegiado.getDni());
 	}
 
 	/**
@@ -51,9 +53,9 @@ public class SolicitudColegiadoModel {
 	 * Obtener la lista de colegiados con estado Aprobados y Cancelados
 	 * @return
 	 */
-	public List<ColegiadoDTO> getListaColegiadosAprobadosCancelados() {
+	public List<ColegiadosDTO> getListaColegiadosAprobadosCancelados() {
 		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, titulacion, estado FROM Colegiados WHERE estado IN ('Aprobada', 'Cancelado')";
-		return db.executeQueryPojo(ColegiadoDTO.class, sql);
+		return db.executeQueryPojo(ColegiadosDTO.class, sql);
 	}
 
 	/**
@@ -75,7 +77,7 @@ public class SolicitudColegiadoModel {
 	 * Metodo que inserta en la base de datos un recibo
 	 * @param colegiado
 	 */
-	public void insertarRecibo(ColegiadoDTO colegiado) {
+	public void insertarRecibo(ColegiadosDTO colegiado) {
 		String sql = "INSERT INTO Recibos (id_recibo, DNI, cuota_pagar, fecha_recibo, estado) VALUES (?, ?, ?, ?, ?)";
 		int nuevoId = incrementarIDRecibo();
 		int num_random = (int)(Math.random() * 100);
@@ -87,6 +89,6 @@ public class SolicitudColegiadoModel {
 		}
 		String estado = "No Emitido";
 		String fecha_recibo2 = Util.dateToIsoString(new Date());
-		db.executeUpdate(sql, nuevoId, colegiado.getDNI(), cuota, fecha_recibo2, estado);
+		db.executeUpdate(sql, nuevoId, colegiado.getDni(), cuota, fecha_recibo2, estado);
 	}
 }

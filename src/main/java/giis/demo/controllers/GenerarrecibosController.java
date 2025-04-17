@@ -1,4 +1,4 @@
-package giis.demo.generarrecibos;
+package giis.demo.controllers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,9 +10,13 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
-import giis.demo.inscripcioncolegiados.InscripcioncolegiadosDTO;
+
+import giis.demo.dto.ColegiadosDTO;
+import giis.demo.dto.RecibosDTO;
+import giis.demo.models.GenerarrecibosModel;
 import giis.demo.util.SwingUtil;
 import giis.demo.util.Util;
+import giis.demo.views.GenerarrecibosView;
 
 /**
  * Controlador para la funcionalidad de visualizacion de las tablas para enviar recibos
@@ -66,28 +70,28 @@ public class GenerarrecibosController {
 		String fechaSolicitud = Util.dateToIsoString(new Date());
 
 		for (int fila = 0; fila < totalFilas; fila++) {
-			InscripcioncolegiadosDTO colegiado = new InscripcioncolegiadosDTO();
+			ColegiadosDTO colegiado = new ColegiadosDTO();
 			colegiado.setNombre(vista.getTablaColegiados().getValueAt(fila, 1).toString());
 			colegiado.setApellidos(vista.getTablaColegiados().getValueAt(fila, 2).toString());
-			colegiado.setDNI(vista.getTablaColegiados().getValueAt(fila, 3).toString());
+			colegiado.setDni(vista.getTablaColegiados().getValueAt(fila, 3).toString());
 			colegiado.setCuenta_bancaria(vista.getTablaColegiados().getValueAt(fila, 5).toString());
 
 			RecibosDTO recibo = new RecibosDTO();
 			recibo.setId_recibo(Integer.parseInt(vista.getTablaColegiados().getValueAt(fila, 0).toString()));
-			recibo.setDNI(colegiado.getDNI());
+			recibo.setDNI(colegiado.getDni());
 			recibo.setFecha_recibo(fechaSolicitud);
-			modelo.actualizarEstadoRecibo(colegiado.getDNI(), "Emitido");
+			modelo.actualizarEstadoRecibo(colegiado.getDni(), "Emitido");
 			recibo.setEstado("Emitido");
 			
 			//Obtener cuota
-			int cuota_pagar = modelo.obtenerCuota(colegiado.getDNI());  
+			int cuota_pagar = modelo.obtenerCuota(colegiado.getDni());  
 	        recibo.setCuota_pagar(cuota_pagar);
 	        
 			datosSeleccionados.add(new String[] {
 					String.valueOf(recibo.getId_recibo()),
 					colegiado.getNombre(),
 					colegiado.getApellidos(),
-					colegiado.getDNI(),
+					colegiado.getDni(),
 					String.valueOf(recibo.getCuota_pagar()),
 					recibo.getFecha_recibo(),
 					colegiado.getCuenta_bancaria(),
@@ -117,9 +121,9 @@ public class GenerarrecibosController {
 	 * Obtencion de la lista de los colegiados con estado de inscripcion Aprobada y estado de recibo No Emitido 
 	 */
 	private void cargarListaColegiados() {
-		List<InscripcioncolegiadosDTO> colegiadosPendientes = modelo.getListaColegiados();
+		List<ColegiadosDTO> colegiadosPendientes = modelo.getListaColegiados();
 		TableModel tmodelColegiados = SwingUtil.getTableModelFromPojos(colegiadosPendientes, new String[]{
-				"id_colegiado", "nombre", "apellidos", "DNI", "cuenta_bancaria", "estado"  
+				"id_colegiado", "nombre", "apellidos", "dni", "cuenta_bancaria", "estado"  
 		});
 		vista.getTablaColegiados().setModel(tmodelColegiados);
 		SwingUtil.autoAdjustColumns(vista.getTablaColegiados());

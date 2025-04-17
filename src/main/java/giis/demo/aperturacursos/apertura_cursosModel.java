@@ -1,7 +1,8 @@
 package giis.demo.aperturacursos;
 
 import java.util.List;
-import giis.demo.inscripcioncursos.CursosDTO;
+
+import giis.demo.dto.CursosDTO;
 import giis.demo.util.Database;
 
 

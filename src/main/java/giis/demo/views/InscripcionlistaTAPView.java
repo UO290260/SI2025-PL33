@@ -1,4 +1,4 @@
-package giis.demo.inscripcionlistaTAP;
+package giis.demo.views;
 import java.awt.SystemColor;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -7,6 +7,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import giis.demo.controllers.InscripcionlistaTAPController;
 import net.miginfocom.swing.MigLayout;
 
 public class InscripcionlistaTAPView {
@@ -23,7 +25,7 @@ public class InscripcionlistaTAPView {
 	public InscripcionlistaTAPView() {
 		frame = new JFrame();
 		frame.setTitle("Justificante de Inscripción de Peritos");
-		frame.setBounds(0, 0, 600, 400);
+		frame.setBounds(0, 0, 600, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("fillx, insets 10", "[right]10[grow,fill]", "[]5[]5[]5[]5[]5[]5[]5[]5[grow]"));
 		frame.setLocationRelativeTo(null);

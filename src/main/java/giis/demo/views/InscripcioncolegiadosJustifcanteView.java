@@ -1,17 +1,19 @@
-package giis.demo.inscripcioncolegiados;
+package giis.demo.views;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import giis.demo.dto.ColegiadosDTO;
 import net.miginfocom.swing.MigLayout;
 
 /**
  * Vista de la pantalla que muestra el justificante
  */
-public class InscripcioncolegiadosJustifcante extends JFrame {
+public class InscripcioncolegiadosJustifcanteView extends JFrame {
 	private JFrame frame;
 	private JButton btnCerrar;
 
-	public InscripcioncolegiadosJustifcante(InscripcioncolegiadosDTO colegiado) {
+	public InscripcioncolegiadosJustifcanteView(ColegiadosDTO colegiado) {
 		frame = new JFrame();
 		frame.setTitle("Justificante de Inscripción");
 		frame.setBounds(0, 0, 400, 225);
@@ -22,7 +24,7 @@ public class InscripcioncolegiadosJustifcante extends JFrame {
 
 		frame.getContentPane().add(new JLabel("Nombre:" + colegiado.getNombre()), "growx, wrap");
 		frame.getContentPane().add(new JLabel("Apellidos:" + colegiado.getApellidos()), "growx, wrap");
-		frame.getContentPane().add(new JLabel("DNI:" + colegiado.getDNI()), "growx, wrap");
+		frame.getContentPane().add(new JLabel("DNI:" + colegiado.getDni()), "growx, wrap");
 		frame.getContentPane().add(new JLabel("Dirección:" + colegiado.getDireccion()), "growx, wrap");
 		frame.getContentPane().add(new JLabel("Población:" + colegiado.getPoblacion()), "growx, wrap");
 		frame.getContentPane().add(new JLabel("Fecha de nacimiento:" + colegiado.getFecha_nacimiento()), "growx, wrap");

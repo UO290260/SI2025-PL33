@@ -1,4 +1,4 @@
-package giis.demo.inscripcionlistaTAP;
+package giis.demo.dto;
 
 public class PeritosDTO {
 	private int id_colegiado;

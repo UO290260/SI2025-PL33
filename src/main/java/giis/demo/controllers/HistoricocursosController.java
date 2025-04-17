@@ -1,11 +1,15 @@
-package giis.demo.historicocursos;
+package giis.demo.controllers;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
+
+import giis.demo.dto.CursosDTO;
+import giis.demo.models.HistoricocursosModel;
 import giis.demo.util.SwingUtil;
+import giis.demo.views.HistoricocursosView;
 
 /**
  * Controlador para la funcionalidad de visualizacion de los cursos de un colegiado
@@ -49,7 +53,7 @@ public class HistoricocursosController {
 		}
 
 		
-		List<HistoricocursosDTO> cursos = modelo.getListaCursos(numeroColegiadovista);
+		List<CursosDTO> cursos = modelo.getListaCursos(numeroColegiadovista);
 		if (cursos.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "El colegiado  " + numeroColegiadovista + " no está inscrito en ningún curso.");
 			return;

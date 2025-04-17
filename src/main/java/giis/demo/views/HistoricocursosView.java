@@ -1,4 +1,4 @@
-package giis.demo.historicocursos;
+package giis.demo.views;
 import java.awt.SystemColor;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+
+import giis.demo.controllers.HistoricocursosController;
 import net.miginfocom.swing.MigLayout;
 
 /**

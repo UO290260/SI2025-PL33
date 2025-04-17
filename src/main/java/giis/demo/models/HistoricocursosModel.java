@@ -1,5 +1,7 @@
-package giis.demo.historicocursos;
+package giis.demo.models;
 import java.util.List;
+
+import giis.demo.dto.CursosDTO;
 import giis.demo.util.Database;
 
 /**
@@ -13,13 +15,13 @@ public class HistoricocursosModel {
 	 * @param idColegiado
 	 * @return lista de cursos
 	 */
-	public List<HistoricocursosDTO> getListaCursos(String idColegiado) {
+	public List<CursosDTO> getListaCursos(String idColegiado) {
 		String sql = "SELECT c2.DNI, c1.id_curso, c1.titulo, c1.fecha_inicio, c1.fecha_fin, c1.duracion, c1.estado " +
 				"FROM Colegiados c2 " +
 				"JOIN Inscripciones i ON c2.DNI = i.DNI " +  
 				"JOIN Cursos c1 ON i.id_curso = c1.id_curso " + 
 				"WHERE c2.DNI = ?";
-		return db.executeQueryPojo(HistoricocursosDTO.class, sql, idColegiado);
+		return db.executeQueryPojo(CursosDTO.class, sql, idColegiado);
 	}
 
 	/**

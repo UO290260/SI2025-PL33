@@ -1,6 +1,8 @@
-package giis.demo.generarrecibos;
+package giis.demo.models;
 import java.util.List;
-import giis.demo.inscripcioncolegiados.InscripcioncolegiadosDTO;
+
+import giis.demo.dto.ColegiadosDTO;
+import giis.demo.dto.RecibosDTO;
 import giis.demo.util.Database;
 
 public class GenerarrecibosModel {
@@ -10,12 +12,12 @@ public class GenerarrecibosModel {
 	 * Obtiene la lista de colegiados con estado 'Aprobada' y recibos con estado 'No Emitido'.
 	 * @return
 	 */
-	public List<InscripcioncolegiadosDTO> getListaColegiados() {
+	public List<ColegiadosDTO> getListaColegiados() {
 		String sql = "SELECT c.id_colegiado, c.nombre, c.apellidos, c.DNI, r.cuota_pagar, c.cuenta_bancaria, c.estado " +
 				"FROM Colegiados c " +
 				"JOIN Recibos r ON c.DNI = r.DNI " +
 				"WHERE c.estado = 'Aprobada' AND r.estado = 'No Emitido'";
-		return db.executeQueryPojo(InscripcioncolegiadosDTO.class, sql);
+		return db.executeQueryPojo(ColegiadosDTO.class, sql);
 	}
 
 	/**

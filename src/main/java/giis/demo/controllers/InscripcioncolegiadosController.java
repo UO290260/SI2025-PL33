@@ -1,4 +1,4 @@
-package giis.demo.inscripcioncolegiados;
+package giis.demo.controllers;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
@@ -6,8 +6,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
+
+import giis.demo.dto.ColegiadosDTO;
+import giis.demo.models.InscripcioncolegiadosModel;
 import giis.demo.util.SwingUtil;
 import giis.demo.util.Util;
+import giis.demo.views.InscripcioncolegiadosJustifcanteView;
+import giis.demo.views.InscripcioncolegiadosView;
 
 /**
  * Controlador para la funcionalidad de visualizacion de un formulario
@@ -84,10 +89,10 @@ public class InscripcioncolegiadosController {
 		String fechanacimiento2 = Util.dateToIsoString(fechanacimiento);
 	    String fechacolegiacion2 = Util.dateToIsoString(new Date());
 
-		InscripcioncolegiadosDTO colegiado2 = new InscripcioncolegiadosDTO();
+		ColegiadosDTO colegiado2 = new ColegiadosDTO();
 		colegiado2.setNombre(nombre);
 		colegiado2.setApellidos(apellidos);
-		colegiado2.setDNI(dni);
+		colegiado2.setDni(dni);
 		colegiado2.setDireccion(direccion);
 		colegiado2.setPoblacion(poblacion);
 		colegiado2.setFecha_nacimiento(fechanacimiento2);
@@ -99,7 +104,7 @@ public class InscripcioncolegiadosController {
 		cargarListaColegiados();
 
 		if (validarCampos()) {
-			InscripcioncolegiadosJustifcante justificante = new InscripcioncolegiadosJustifcante(colegiado2);
+			InscripcioncolegiadosJustifcanteView justificante = new InscripcioncolegiadosJustifcanteView(colegiado2);
 		} else {
 			System.out.println(" Hay campos vacíos");
 		}
@@ -109,9 +114,9 @@ public class InscripcioncolegiadosController {
 	 * Obtencion de la lista de colegiados
 	 */
 	public void cargarListaColegiados() {
-		List<InscripcioncolegiadosDTO> colegiados = modelo.getListaColegiados();
+		List<ColegiadosDTO> colegiados = modelo.getListaColegiados();
 		TableModel tmodel = SwingUtil.getTableModelFromPojos(colegiados, new String[]{
-				"id_colegiado", "nombre", "apellidos", "DNI", "direccion", "poblacion",
+				"id_colegiado", "nombre", "apellidos", "dni", "direccion", "poblacion",
 				"fecha_nacimiento", "cuenta_bancaria", "titulacion", "fecha_colegiacion" , "estado"
 		});
 		vista.getTabla().setModel(tmodel);

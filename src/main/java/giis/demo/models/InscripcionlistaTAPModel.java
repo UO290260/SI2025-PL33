@@ -1,5 +1,8 @@
-package giis.demo.inscripcionlistaTAP;
+package giis.demo.models;
 import java.util.List;
+
+import giis.demo.dto.ColegiadosDTO;
+import giis.demo.dto.PeritosDTO;
 import giis.demo.util.Database;
 
 public class InscripcionlistaTAPModel {
@@ -92,7 +95,7 @@ public class InscripcionlistaTAPModel {
 	 * @return
 	 */
 	public boolean estadoColegiado(int idColegiado) {
-		String sql = "SELECT COUNT(*) FROM Colegiados WHERE id_colegiado = ? AND estado = 'Aprobada'";
+		String sql = "SELECT COUNT(*) FROM Colegiados WHERE id_colegiado = ? AND estado = 'Pendiente'";
 	    List<Object[]> resultado = db.executeQueryArray(sql, idColegiado);
 		//Si es mayor a 0 retornara true , en caso contrario false
 	    return ((Number) resultado.get(0)[0]).intValue() > 0;

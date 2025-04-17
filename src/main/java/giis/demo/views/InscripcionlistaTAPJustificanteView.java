@@ -1,12 +1,15 @@
-package giis.demo.inscripcionlistaTAP;
+package giis.demo.views;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import giis.demo.dto.ColegiadosDTO;
+import giis.demo.dto.PeritosDTO;
 import net.miginfocom.swing.MigLayout;
 
-public class InscripcionlistaTAPJustificante extends JFrame {
+public class InscripcionlistaTAPJustificanteView extends JFrame {
 	private JFrame frame;
 
-	public InscripcionlistaTAPJustificante(ColegiadosDTO colegiado , PeritosDTO perito) {
+	public InscripcionlistaTAPJustificanteView(ColegiadosDTO colegiado , PeritosDTO perito) {
 		frame = new JFrame();
 		frame.setTitle("Justificante");
 		frame.setSize(600, 600); 

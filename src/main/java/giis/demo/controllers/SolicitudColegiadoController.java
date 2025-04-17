@@ -1,4 +1,4 @@
-package giis.demo.solicitudcolegiado;
+package giis.demo.controllers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,7 +10,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
+
+import giis.demo.dto.ColegiadosDTO;
+import giis.demo.models.SolicitudColegiadoModel;
 import giis.demo.util.SwingUtil;
+import giis.demo.views.SolicitudColegiadoView;
 
 /**
  * Controlador para la funcionalidad de solicitudes de colegiados
@@ -63,11 +67,11 @@ public class SolicitudColegiadoController {
 		for (int i = 0; i < filasSeleccionadas.length; i++) {
 			int fila = filasSeleccionadas[i];
 			if (fila < vista.getTabla().getRowCount()) {
-				ColegiadoDTO colegiado = new ColegiadoDTO();
+				ColegiadosDTO colegiado = new ColegiadosDTO();
 				colegiado.setId_colegiado(Integer.parseInt(vista.getTabla().getValueAt(fila, 0).toString()));
 				colegiado.setNombre(vista.getTabla().getValueAt(fila, 1).toString());
 				colegiado.setApellidos(vista.getTabla().getValueAt(fila, 2).toString());
-				colegiado.setDNI(vista.getTabla().getValueAt(fila, 3).toString());
+				colegiado.setDni(vista.getTabla().getValueAt(fila, 3).toString());
 				colegiado.setTitulacion(vista.getTabla().getValueAt(fila, 4).toString());
 				colegiado.setEstado("Enviado");
 				modelo.actualizarEstadoColegiado(colegiado, "Enviado");
@@ -76,7 +80,7 @@ public class SolicitudColegiadoController {
 						String.valueOf(colegiado.getId_colegiado()),
 						colegiado.getNombre(),
 						colegiado.getApellidos(),
-						colegiado.getDNI(),
+						colegiado.getDni(),
 						colegiado.getTitulacion(),
 						colegiado.getEstado()
 				});
@@ -101,9 +105,9 @@ public class SolicitudColegiadoController {
 	 * Tabla de los Colegiados con estado Pendiente
 	 */
 	private void cargarListaPendientes() {
-		List<ColegiadoDTO> colegiadosPendientes = modelo.getListaPendientes();
+		List<ColegiadosDTO> colegiadosPendientes = modelo.getListaPendientes();
 		TableModel tmodelPendientes = SwingUtil.getTableModelFromPojos(colegiadosPendientes, new String[]{
-				"id_colegiado", "nombre", "apellidos", "DNI", "titulacion", "estado"
+				"id_colegiado", "nombre", "apellidos", "dni", "titulacion", "estado"
 		});
 		vista.getTabla().setModel(tmodelPendientes);
 		SwingUtil.autoAdjustColumns(vista.getTabla());
@@ -113,9 +117,9 @@ public class SolicitudColegiadoController {
 	 * Tabla de los Colegiados con estado de solicitud Aprobada y Cancelado
 	 */
 	private void cargarListaAprobadosYCancelados() {
-		List<ColegiadoDTO> colegiadosAprobadosCancelados = modelo.getListaColegiadosAprobadosCancelados();
+		List<ColegiadosDTO> colegiadosAprobadosCancelados = modelo.getListaColegiadosAprobadosCancelados();
 		TableModel tmodelEnviados = SwingUtil.getTableModelFromPojos(colegiadosAprobadosCancelados, new String[]{
-				"id_colegiado", "nombre", "apellidos", "DNI", "titulacion", "estado"
+				"id_colegiado", "nombre", "apellidos", "dni", "titulacion", "estado"
 		});
 		vista.getTablaEnviados().setModel(tmodelEnviados);
 		SwingUtil.autoAdjustColumns(vista.getTablaEnviados());
@@ -201,11 +205,11 @@ public class SolicitudColegiadoController {
 
 		if (resultado == JFileChooser.APPROVE_OPTION) {
 			File archivo = chooser.getSelectedFile();
-			List<ColegiadoDTO> colegiados = leerCSV(archivo);
+			List<ColegiadosDTO> colegiados = leerCSV(archivo);
 
 			if (colegiados != null && !colegiados.isEmpty()) {
 				TableModel tmodel = SwingUtil.getTableModelFromPojos(colegiados, new String[] {
-						"id_colegiado", "nombre", "apellidos", "DNI", "titulacion", "estado"
+						"id_colegiado", "nombre", "apellidos", "dni", "titulacion", "estado"
 				});
 
 				vista.getTablaEnviados().setModel(tmodel);
@@ -226,8 +230,8 @@ public class SolicitudColegiadoController {
 	 * @param archivo
 	 * @return
 	 */
-	private List<ColegiadoDTO> leerCSV(File archivo) {
-		List<ColegiadoDTO> colegiados = new ArrayList<>();
+	private List<ColegiadosDTO> leerCSV(File archivo) {
+		List<ColegiadosDTO> colegiados = new ArrayList<>();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
 			String linea;
@@ -255,11 +259,11 @@ public class SolicitudColegiadoController {
 							return new ArrayList<>();
 						}
 
-						ColegiadoDTO colegiado = new ColegiadoDTO();
+						ColegiadosDTO colegiado = new ColegiadosDTO();
 						colegiado.setId_colegiado(Integer.parseInt(campos[0]));
 						colegiado.setNombre(campos[1]);
 						colegiado.setApellidos(campos[2]);
-						colegiado.setDNI(campos[3]);
+						colegiado.setDni(campos[3]);
 						colegiado.setTitulacion(campos[4]);
 						colegiado.setEstado(campos[5]);
 						colegiados.add(colegiado);
@@ -301,7 +305,7 @@ public class SolicitudColegiadoController {
 			return;
 		}
 
-		List<ColegiadoDTO> colegiadosEnviados = modelo.getListaColegiadosEnviados();
+		List<ColegiadosDTO> colegiadosEnviados = modelo.getListaColegiadosEnviados();
 		for (int linea_actual = 0; linea_actual < lineasTabla; linea_actual++) {
 			String estado = (String) vista.getTablaEnviados().getValueAt(linea_actual, 5);
 			if (!estado.equals("Enviado")) {
@@ -311,9 +315,9 @@ public class SolicitudColegiadoController {
 			String dni = (String) vista.getTablaEnviados().getValueAt(linea_actual, 3);
 			String titulacion = (String) vista.getTablaEnviados().getValueAt(linea_actual, 4);
 
-			ColegiadoDTO colegiado = null;
+			ColegiadosDTO colegiado = null;
 			for (int i = 0; i < colegiadosEnviados.size(); i++) {
-				if (colegiadosEnviados.get(i).getDNI().equals(dni)) {
+				if (colegiadosEnviados.get(i).getDni().equals(dni)) {
 					colegiado = colegiadosEnviados.get(i);
 					break;
 				}

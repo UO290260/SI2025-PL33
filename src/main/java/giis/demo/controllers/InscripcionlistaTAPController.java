@@ -1,4 +1,4 @@
-package giis.demo.inscripcionlistaTAP;
+package giis.demo.controllers;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Date;
@@ -6,8 +6,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
+
+import giis.demo.dto.ColegiadosDTO;
+import giis.demo.dto.PeritosDTO;
+import giis.demo.models.InscripcionlistaTAPModel;
 import giis.demo.util.SwingUtil;
 import giis.demo.util.Util;
+import giis.demo.views.InscripcionlistaTAPJustificanteView;
+import giis.demo.views.InscripcionlistaTAPView;
 
 public class InscripcionlistaTAPController {
 	private InscripcionlistaTAPModel modelo;
@@ -185,7 +191,7 @@ public class InscripcionlistaTAPController {
 			JOptionPane.showMessageDialog(null, "El colegiado buscado no es un colegiado");
 			return;
 		}
-		if (!modelo.estadoColegiado(idColegiado)) {
+		if (modelo.estadoColegiado(idColegiado)) {
 			JOptionPane.showMessageDialog(null, "Solo se pueden inscribir a colegiados con estado de inscripcion aprobada");
 			return;
 		}
@@ -193,7 +199,7 @@ public class InscripcionlistaTAPController {
 			modelo.actualizarColegiado(colegiado);  
 			modelo.insertarPerito(colegiado , perito); 
 			JOptionPane.showMessageDialog(null, "Datos actualizados correctamente.");
-			InscripcionlistaTAPJustificante justificante = new InscripcionlistaTAPJustificante(colegiado, perito);
+			InscripcionlistaTAPJustificanteView justificante = new InscripcionlistaTAPJustificanteView(colegiado, perito);
 		}
 	}
 

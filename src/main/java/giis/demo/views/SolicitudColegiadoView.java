@@ -1,4 +1,4 @@
-package giis.demo.solicitudcolegiado;
+package giis.demo.views;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import giis.demo.controllers.SolicitudColegiadoController;
 import net.miginfocom.swing.MigLayout;
 
 public class SolicitudColegiadoView {

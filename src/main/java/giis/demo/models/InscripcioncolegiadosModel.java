@@ -1,6 +1,8 @@
-package giis.demo.inscripcioncolegiados;
+package giis.demo.models;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import giis.demo.dto.ColegiadosDTO;
 import giis.demo.util.Database;
 
 /**
@@ -12,24 +14,24 @@ public class InscripcioncolegiadosModel {
 	/**
 	 * Obtiene toda la informacion de la lista de colegiados necesaria
 	 */
-	public List<InscripcioncolegiadosDTO> getListaColegiados() {
+	public List<ColegiadosDTO> getListaColegiados() {
 		String sql = "SELECT id_colegiado, nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria, titulacion, fecha_colegiacion , estado FROM Colegiados";
-		return db.executeQueryPojo(InscripcioncolegiadosDTO.class, sql);
+		return db.executeQueryPojo(ColegiadosDTO.class, sql);
 	}
 
 	/**
 	 * Metodo que inserta en la base de datos el colegiado
 	 * @param colegiado
 	 */
-	public void insertarColegiado(InscripcioncolegiadosDTO colegiado) {
-		if (dniExiste(colegiado.getDNI())) {
+	public void insertarColegiado(ColegiadosDTO colegiado) {
+		if (dniExiste(colegiado.getDni())) {
 			JOptionPane.showMessageDialog(null, "El DNI ya existe en la base de datos");
 			return;
 		}
 		colegiado.setEstado("Pendiente");
 		String sql="INSERT INTO Colegiados (id_colegiado ,nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria, titulacion, fecha_colegiacion ,estado) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 		int nuevoId= incrementarID();
-		db.executeUpdate(sql,nuevoId,colegiado.getNombre(),colegiado.getApellidos(),colegiado.getDNI(),colegiado.getDireccion(),colegiado.getPoblacion(),colegiado.getFecha_nacimiento(),colegiado.getCuenta_bancaria(),colegiado.getTitulacion(),colegiado.getFecha_colegiacion(),colegiado.getEstado());
+		db.executeUpdate(sql,nuevoId,colegiado.getNombre(),colegiado.getApellidos(),colegiado.getDni(),colegiado.getDireccion(),colegiado.getPoblacion(),colegiado.getFecha_nacimiento(),colegiado.getCuenta_bancaria(),colegiado.getTitulacion(),colegiado.getFecha_colegiacion(),colegiado.getEstado());
 	}
 
 	/**

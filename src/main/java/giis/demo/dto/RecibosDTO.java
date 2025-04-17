@@ -1,4 +1,4 @@
-package giis.demo.generarrecibos;
+package giis.demo.dto;
 
 /**
  *Clase RecibosDTO que contiene todos los atributos de la tabla Colegiados y Recibos

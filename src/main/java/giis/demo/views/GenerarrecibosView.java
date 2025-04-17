@@ -1,4 +1,4 @@
-package giis.demo.generarrecibos;
+package giis.demo.views;
 import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

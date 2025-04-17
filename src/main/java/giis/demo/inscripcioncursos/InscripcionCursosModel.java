@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import giis.demo.dto.CursosDTO;
 import giis.demo.util.Database;
 import giis.demo.util.Util;
 
