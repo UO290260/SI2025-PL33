@@ -7,12 +7,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import giis.demo.util.SwingUtil;
 import giis.demo.visualizarinscritos.CursoDTO;
+import giis.demo.visualizarinscritos.InscripcionDTO;
 
 public class PlanificarSesionesController {
 	
@@ -25,6 +27,7 @@ public class PlanificarSesionesController {
 		
 		initView();
 		mostrarCursos();
+		mostrarSesiones();
 	}
 	
 	/**
@@ -42,6 +45,25 @@ public class PlanificarSesionesController {
 	}
 	
 	/**
+	 * Funcion que carga las sesiones de un curso en la tabla
+	 */
+	public void mostrarSesiones () {
+		view.getTablaCursos().getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+            	if ((int) view.getTablaCursos().getSelectedRow() != -1) {
+            		List<SesionDTO> sesiones = model.listaSesiones((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
+                	TableModel modelSesiones = SwingUtil.getTableModelFromPojos(sesiones, new String[]{
+            				"id_sesion", "id_curso", "fecha", "hora_inicio", "duracion"}
+            		);
+            		
+            		view.getTablaSesiones().setModel(modelSesiones);
+            		SwingUtil.autoAdjustColumns(view.getTablaSesiones());
+                }
+          	} 	
+        });
+	}
+	
+	/**
 	 * Método que inserta en la base de datos una sesión
 	 * 
 	 */
@@ -51,6 +73,14 @@ public class PlanificarSesionesController {
 		
 		PlanificarSesionesDTO cursoSel = model.getListaCursos().get((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0) - 1);
 		
+		LocalDate fechaIni = LocalDate.parse(cursoSel.getFecha_inicio());
+		LocalDate fechaFin = LocalDate.parse(cursoSel.getFecha_fin());
+		LocalDate fecha = LocalDate.parse(fechaStr);
+		
+		if (cursoSel.getEstado().equals("Cancelado")) {
+			JOptionPane.showMessageDialog(null, "No se puede planificar una sesion para un curso cancelado");
+            return;
+		}
 		if (view.getFecha() == null) {
             JOptionPane.showMessageDialog(null, "La fecha no puede ser nula.");
             return;
@@ -71,17 +101,31 @@ public class PlanificarSesionesController {
 			JOptionPane.showMessageDialog(null, "La ultima sesión debe coincidir con la fecha de fin");
             return;
 		}
+		if (fecha.isAfter(fechaFin) || fecha.isBefore(fechaIni)) {
+			JOptionPane.showMessageDialog(null, "La fecha debe estar dentro del plazo del curso");
+            return;
+		}
 		if (model.listaSesiones(cursoSel.getId_curso()).size() == cursoSel.getSesiones()) {
 			JOptionPane.showMessageDialog(null, "Este curso tiene todas las sesiones planificiadas");
             return;
 		}
+		
+		//Controlamos el solapamiento de sesiones
+		/* List<SesionDTO> listaSesiones = model.listaSesiones(cursoSel.getId_curso());
+		for (int i = 0; i < listaSesiones.size(); i++) {
+			SesionDTO aux = listaSesiones.get(i);
+			if ( + aux.getDuracion()) {
+				
+			}
+		}
+		*/
+		
 		model.añadirSesion(model.incrementarID(), cursoSel.getId_curso(), fechaStr, view.getHoraInicio().getText(), Integer.parseInt(view.getDuracion().getText()));
 			JOptionPane.showMessageDialog(null, "Se ha añadido la sesión correctamente");
 		view.getHoraInicio().setText("");
 		view.getDuracion().setText("");
 		view.getCalendario().setDate(null);
-		
-	}
+	} 
 	
 	/**
 	 * Método para inicializar la ventana

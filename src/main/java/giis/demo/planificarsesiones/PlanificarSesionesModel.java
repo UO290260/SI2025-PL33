@@ -28,8 +28,13 @@ public class PlanificarSesionesModel {
 		db.executeUpdate(sql, id, idcurso, fecha, hora, duracion);
 	}
 	
+	/**
+	 * Funcion que obtiene todas las sesiones planificadas para un curso
+	 * @param idCurso: id del curso del que queremos obtener las sesiones
+	 * @return
+	 */
 	public List<SesionDTO> listaSesiones(int idCurso) {
-		String sql = "SELECT id_sesion FROM Sesiones WHERE id_curso = " + idCurso;
+		String sql = "SELECT id_sesion, id_curso, fecha, hora_inicio, duracion FROM Sesiones WHERE id_curso = " + idCurso;
 		return db.executeQueryPojo(SesionDTO.class, sql);
 	}
 	
