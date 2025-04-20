@@ -8,13 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import giis.demo.util.SwingUtil;
-import giis.demo.visualizarinscritos.CursoDTO;
-import giis.demo.visualizarinscritos.InscripcionDTO;
 
 public class PlanificarSesionesController {
 	
@@ -111,14 +109,20 @@ public class PlanificarSesionesController {
 		}
 		
 		//Controlamos el solapamiento de sesiones
-		/* List<SesionDTO> listaSesiones = model.listaSesiones(cursoSel.getId_curso());
-		for (int i = 0; i < listaSesiones.size(); i++) {
-			SesionDTO aux = listaSesiones.get(i);
-			if ( + aux.getDuracion()) {
-				
+		List<SesionDTO> listaSesiones = model.listaSesiones(cursoSel.getId_curso());
+		for (SesionDTO s : listaSesiones) {
+			if (s.getFecha().equals(fechaStr)) {
+				LocalTime horaIni = LocalTime.parse(s.getHora_inicio());
+				LocalTime horaFin = horaIni.plusMinutes(s.getDuracion()*60);
+				LocalTime nuevaHoraIni = LocalTime.parse(view.getHoraInicio().getText());
+				LocalTime nuevaHoraFin = nuevaHoraIni.plusMinutes(Integer.parseInt(view.getDuracion().getText())*60);
+			    
+				if (nuevaHoraIni.isBefore(horaFin) && nuevaHoraFin.isAfter(horaIni)) {
+					JOptionPane.showMessageDialog(null, "La sesión se solapa con otra ya planificada");
+		            return;
+				}
 			}
 		}
-		*/
 		
 		model.añadirSesion(model.incrementarID(), cursoSel.getId_curso(), fechaStr, view.getHoraInicio().getText(), Integer.parseInt(view.getDuracion().getText()));
 			JOptionPane.showMessageDialog(null, "Se ha añadido la sesión correctamente");
@@ -202,8 +206,6 @@ public class PlanificarSesionesController {
 			public void actionPerformed(ActionEvent e) {
 					insertarSesion();
 			}
-		});
-	
+		});	
 	}
-
 }
