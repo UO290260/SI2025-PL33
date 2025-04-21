@@ -10,15 +10,21 @@ public class CursosDTO {
 	private String fechafin;
 	private int duracion;
 	private int plazas;
+	private int sesiones;
 	private int cuotaprecolegiado, cuotacolegiado, cuotaotros, cuotaminusvalido, cuotadesempleado, cuotaempleado, cuotalumno, cuotaempresa;
 	private String aperturainscripcion;
 	private String cierreinscripcion;
 	private boolean listaEspera;
 	private String estado;
+	private boolean cancelable;
+	private String fecha_cancelacion; 
+	private int porcentaje_devolucion;
 
 	public CursosDTO(){};
 
-	public CursosDTO(int id_curso, String DNI, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas,int cuota_precolegiado,int cuota_colegiado,int cuota_minusvalido,int cuota_desempleado, int cuota_empleado,int cuota_alumno,int cuota_empresa,int cuota_otros, String apertura_inscripcion,String cierre_inscripcion,boolean lista_espera ,String estado) {
+	public CursosDTO(int id_curso, String DNI, String titulo, String descripcion, String fecha_inicio, String fecha_fin, int duracion, int plazas, int sesiones, int cuota_precolegiado,int cuota_colegiado,
+			int cuota_minusvalido,int cuota_desempleado, int cuota_empleado,int cuota_alumno,int cuota_empresa,int cuota_otros, String apertura_inscripcion,String cierre_inscripcion,
+			boolean lista_espera, String estado, boolean canc, String fecha_canc, int porc) {
 		this.id_curso = id_curso;
 		this.DNI = DNI;
 		this.titulo = titulo;
@@ -27,6 +33,7 @@ public class CursosDTO {
 		this.fechafin = fecha_fin;
 		this.duracion = duracion;
 		this.plazas = plazas;
+		this.sesiones = sesiones;
 		this.cuotaprecolegiado=cuota_precolegiado;
 		this.cuotacolegiado=cuota_colegiado;
 		this.cuotaotros=cuota_otros;
@@ -39,10 +46,73 @@ public class CursosDTO {
 		this.cuotaminusvalido=cuota_minusvalido;
 		this.cuotaempresa=cuota_empresa;
 		this.listaEspera=lista_espera;
+		this.cancelable = canc;
+		this.fecha_cancelacion = fecha_canc;
+		this.porcentaje_devolucion = porc;
 	}
 
+	public CursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int ses, int cuotaPre, int cuotaCol, int cuotaMinus, int cuotaDes, 
+			int cuotaEmpl, int cuotaAlu, int cuotaEmpr, int cuotaOtros, boolean cancel, int porc, String fcancel, boolean espera) {
+		setId_curso(id);
+		setTitulo(tit); 
+		setDescripcion(descr);
+		setFecha_inicio(fini);
+		setFecha_fin(ffin);
+		setDuracion(dur);
+		setPlazas(plz);
+		setSesiones(ses);
+		setCuota_precolegiado(cuotaPre);
+		setCuota_colegiado(cuotaCol);
+		setCuota_minusvalido(cuotaMinus);
+		setCuota_desempleado(cuotaDes);
+		setCuota_empleado(cuotaEmpl);
+		setCuota_alumno(cuotaAlu);
+		setCuota_empresa(cuotaEmpr);
+		setCuota_otros(cuotaOtros);
+		setCancelable(cancel);
+		setFecha_cancelacion(fcancel);
+		setPorcentaje_devolucion(porc);
+		setLista_espera(espera);
+	}
+	
+	public CursosDTO(int id, String tit, String descr, String fini, String ffin, int ses, String est) {
+		setId_curso(id);
+		setTitulo(tit);
+		setDescripcion(descr);
+		setFecha_inicio(fini);
+		setFecha_fin(ffin);
+		setSesiones(ses);
+		setEstado(est);
+	}
 
-
+	public CursosDTO(int id, String tit, String descr, String fini, String ffin, int dur, int plz, int cuotaPre, int cuotaCol, int cuotaMinus, int coutaDes, int cuotaEmpl, int cuotaAlu, int cuotaEmpr, int cuotaOtros, String apertura, String cierre, String est) {
+		setId_curso(id);
+		setTitulo(tit); 
+		setDescripcion(descr);
+		setFecha_inicio(fini);
+		setFecha_fin(ffin);
+		setDuracion(dur);
+		setPlazas(plz);
+		setApertura_inscripcion(apertura);
+		setCierre_inscripcion(cierre);
+		setCuota_precolegiado(cuotaPre);
+		setCuota_colegiado(cuotaCol);
+		setCuota_minusvalido(cuotaMinus);
+		setCuota_desempleado(coutaDes);
+		setCuota_empleado(cuotaEmpl);
+		setCuota_alumno(cuotaAlu);
+		setCuota_empresa(cuotaEmpr);
+		setCuota_otros(cuotaOtros);
+		setEstado(est);
+	}
+	
+	public CursosDTO(int id, String tit, String descr, String est) {
+		setId_curso(id);
+		setTitulo(tit);
+		setDescripcion(descr);
+		setEstado(est);
+	}
+	
 	public String getDNI() {
 		return DNI;
 	}
@@ -308,6 +378,38 @@ public class CursosDTO {
 
 	public void setLista_espera(boolean lista_espera) {
 		this.listaEspera = lista_espera;
+	}
+
+	public String getFecha_cancelacion() {
+		return fecha_cancelacion;
+	}
+
+	public void setFecha_cancelacion(String fecha_cancelacion) {
+		this.fecha_cancelacion = fecha_cancelacion;
+	}
+
+	public int getPorcentaje_devolucion() {
+		return porcentaje_devolucion;
+	}
+
+	public void setPorcentaje_devolucion(int porcentaje_devolucion) {
+		this.porcentaje_devolucion = porcentaje_devolucion;
+	}
+
+	public boolean isCancelable() {
+		return cancelable;
+	}
+
+	public void setCancelable(boolean cancelable) {
+		this.cancelable = cancelable;
+	}
+
+	public int getSesiones() {
+		return sesiones;
+	}
+
+	public void setSesiones(int sesiones) {
+		this.sesiones = sesiones;
 	}
 
 

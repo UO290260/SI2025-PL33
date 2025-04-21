@@ -25,9 +25,21 @@ public class ColegiadosDTO {
 		this.fecha_nacimiento = fecha_nacimiento;
 		this.cuenta_bancaria = cuenta_bancaria;
 		this.titulacion = titulacion;
-		this.fecha_nacimiento = fecha_nacimiento;
-		this.fecha_nacimiento = fecha_colegiacion;
+		this.fecha_colegiacion = fecha_colegiacion;
 	}
+	
+	 public ColegiadosDTO(int id_colegiado, String nombre, String apellidos,String DNI, String direccion, String poblacion, String titulacion, String fecha_colegiacion, String cuenta_bancaria) {
+	        this.id_colegiado = id_colegiado;
+	        this.nombre = nombre;
+	        this.apellidos = apellidos;
+	        this.dni=DNI;
+	        this.direccion = direccion;
+	        this.poblacion = poblacion;
+	        this.titulacion = titulacion;
+	        this.fecha_colegiacion = fecha_colegiacion;
+	        this.cuenta_bancaria=cuenta_bancaria;
+	    }
+	 
 	public int getId_colegiado() { return id_colegiado; } public void setId_colegiado(int id_colegiado) { this.id_colegiado = id_colegiado; }
 	public String getNombre() { return nombre; } public void setNombre(String nombre) { this.nombre = nombre; }
 	public String getApellidos() { return apellidos; } public void setApellidos(String apellidos) { this.apellidos = apellidos; }
