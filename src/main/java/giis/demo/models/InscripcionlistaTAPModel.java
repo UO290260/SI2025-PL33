@@ -54,7 +54,7 @@ public class InscripcionlistaTAPModel {
 	 * @param colegiado
 	 */
 	public void actualizarColegiado(ColegiadosDTO colegiado) {
-		String sql = "UPDATE Colegiados SET nombre = ?, apellidos = ?, DNI = ?, direccion = ?, poblacion = ?, fecha_nacimiento = ?, cuenta_bancaria = ?, titulacion = ? WHERE id_colegiado = ?";
+		String sql = "UPDATE Colegiados SET nombre = ?, apellidos = ?, dni = ?, direccion = ?, poblacion = ?, fecha_nacimiento = ?, cuenta_bancaria = ?, titulacion = ? WHERE id_colegiado = ?";
 		db.executeUpdate(sql,colegiado.getNombre(),colegiado.getApellidos(),colegiado.getDni(),colegiado.getDireccion(),colegiado.getPoblacion(),colegiado.getFecha_nacimiento(),colegiado.getCuenta_bancaria(),colegiado.getTitulacion(),colegiado.getId_colegiado());  
 	}
 	
