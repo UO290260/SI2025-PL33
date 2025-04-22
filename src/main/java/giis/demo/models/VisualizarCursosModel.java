@@ -36,7 +36,9 @@ private Database db= new Database();
 	 */
 	public void actualizarInscritos(int idCurso) {
 		String sqlEstado = "UPDATE Inscripciones SET estado = ? WHERE id_curso = ?";
+		String sqlCuota = "UPDATE Inscripciones SET cantidad_devolver = cantidad_pagar WHERE id_curso = ?";
 		db.executeUpdate(sqlEstado, "Cancelado", idCurso);
+		db.executeUpdate(sqlCuota, idCurso);
 	}
 	
 	/**
@@ -48,7 +50,7 @@ private Database db= new Database();
 		String sql = "SELECT i.id_inscripcion, "
 		           + "COALESCE(c.nombre, e.nombre) AS nombre, "
 		           + "COALESCE(c.apellidos, e.apellidos) AS apellidos, "
-		           + "i.dni, i.estado "
+		           + "i.dni, i.cantidad_devolver, i.estado "
 		           + "FROM Inscripciones AS i "
 		           + "LEFT JOIN Colegiados AS c ON i.dni = c.dni "
 		           + "LEFT JOIN Externos AS e ON i.dni = e.dni "

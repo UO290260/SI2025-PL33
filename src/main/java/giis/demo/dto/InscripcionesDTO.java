@@ -6,14 +6,16 @@ public class InscripcionesDTO {
 	private String apellidos;
 	private String dni;
 	private int posicion;
+	private int cantidad_devolver;
 	private String estado;
 	
-	public InscripcionesDTO(int id, String nom, String ap, String dni,int posicion, String est) {
+	public InscripcionesDTO(int id, String nom, String ap, String dni,int posicion, int devolver, String est) {
 		setId_inscripcion(id);
 		setNombre(nom);
 		setApellidos(ap);
 		setDni(dni);
 		setPosicion(posicion);
+		setCantidad_devolver(devolver);
 		setEstado(est);
 	}
 	
@@ -56,6 +58,14 @@ public class InscripcionesDTO {
 
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
+	}
+
+	public int getCantidad_devolver() {
+		return cantidad_devolver;
+	}
+
+	public void setCantidad_devolver(int cantidad_devolver) {
+		this.cantidad_devolver = cantidad_devolver;
 	}
 	
 }
