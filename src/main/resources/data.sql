@@ -19,12 +19,12 @@ INSERT INTO Cursos (id_curso, titulo, descripcion, fecha_inicio, fecha_fin, dura
 (5, 'Entrenador', 'Principios de entrenamiento deportivo', '2024-01-07', '2024-01-10', 90, 40, 6, 100, 100, 70, 100, 120, 100, 400, 150, NULL, NULL,FALSE,30,NULL,TRUE, 'Pendiente');
 delete from Inscripciones;
 INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion,estado,cantidad_pagar,cantidad_devolver,lista_espera,posicion) VALUES
-(1, '12345678A', 1, '2024-02-15','Matriculado',NULL,NULL,FALSE,NULL),
-(2, '23456789B', 2, '2024-03-01','Matriculado',NULL,NULL,FALSE,NULL),
-(3, '34567890C', 3, '2024-03-05','Matriculado',NULL,NULL,FALSE,NULL),
-(4, '45678901D', 4, '2024-04-01','Matriculado',NULL,NULL,FALSE,NULL),
-(5, '56789012E', 5, '2024-04-10','Matriculado',NULL,NULL,FALSE,NULL),
-(6, '12345678A', 4, '2024-06-10','Matriculado',NULL,NULL,FALSE,NULL);
+(1, '12345678A', 1, '2024-02-15','Matriculado',100,NULL,FALSE,NULL),
+(2, '23456789B', 2, '2024-03-01','Matriculado',120,NULL,FALSE,NULL),
+(3, '34567890C', 3, '2024-03-05','Matriculado',200,NULL,FALSE,NULL),
+(4, '45678901D', 4, '2024-04-01','Matriculado',150,NULL,FALSE,NULL),
+(5, '56789012E', 5, '2024-04-10','Matriculado',300,NULL,FALSE,NULL),
+(6, '12345678A', 4, '2024-06-10','Matriculado',150,NULL,FALSE,NULL);
 delete from Sesiones;
 INSERT INTO Sesiones (id_sesion, id_curso, fecha, hora_inicio, duracion) VALUES
 (1, 1, '2024-01-03', '09:00', 3),

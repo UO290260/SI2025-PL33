@@ -122,7 +122,7 @@ public class VisualizarCursosController {
             	if ((int) view.getTablaCursos().getSelectedRow() != -1) {
             		List<InscripcionesDTO> inscripciones = model.getListaInscritos((int) view.getTablaCursos().getValueAt(view.getTablaCursos().getSelectedRow(), 0));
                 	TableModel modelInscriciones = SwingUtil.getTableModelFromPojos(inscripciones, new String[]{
-            				"id_inscripcion", "nombre", "apellidos", "dni", "estado"}
+            				"id_inscripcion", "nombre", "apellidos", "dni", "cantidad_devolver", "estado"}
             		);
             		
             		view.getTablaInscritos().setModel(modelInscriciones);
