@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.swing.table.TableModel;
 
-import giis.demo.memoriaAnualPericiales.PericialesDTO;
+import giis.demo.dto.PericialesDTO;
 import giis.demo.models.MemoriaAnualesPericialesModel;
 import giis.demo.util.SwingUtil;
 import giis.demo.views.MemoriaAnualesPericialesView;

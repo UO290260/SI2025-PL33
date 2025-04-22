@@ -2,7 +2,7 @@ package giis.demo.models;
 
 import java.util.List;
 
-import giis.demo.memoriaAnualPericiales.PericialesDTO;
+import giis.demo.dto.PericialesDTO;
 import giis.demo.util.Database;
 
 public class MemoriaAnualesPericialesModel {
