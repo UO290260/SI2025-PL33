@@ -50,11 +50,11 @@ public class ExternoDTO {
 		this.apellidos = apellidos;
 	}
 
-	public String getDNI() {
+	public String getDni() {
 		return DNI;
 	}
 
-	public void setDNI(String dNI) {
+	public void setDni(String dNI) {
 		DNI = dNI;
 	}
 

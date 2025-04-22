@@ -110,7 +110,7 @@ public class InscripcionCursosController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (InscripcionCursosController.this.comprobar_datos_tarjeta()) {
-					String dni = (colegiado != null) ? colegiado.getDni() : externo.getDNI();
+					String dni = (colegiado != null) ? colegiado.getDni() : externo.getDni();
 					String nombre = (colegiado != null) ? colegiado.getNombre() : externo.getNombre();
 					String apellidos = (colegiado != null) ? colegiado.getApellidos() : externo.getApellidos();
 					JustificanteTarjeta justificante = new JustificanteTarjeta(nombre,apellidos,dni, SwingUtil.Obtener_fechaActual(), curso,tarjetaV.getTxtNumeroTarjeta().getText(),view.getLstcuotas().getSelectedItem().toString());
@@ -143,7 +143,7 @@ public class InscripcionCursosController {
 						return;
 					}
 
-					if (externo != null && model.Comprobar_Inscripción(externo.getDNI(), cursoId)) {
+					if (externo != null && model.Comprobar_Inscripción(externo.getDni(), cursoId)) {
 						JOptionPane.showMessageDialog(view.getFrame(), "El alumno ya está matriculado ya solicitó el curso.", "Error", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
@@ -152,7 +152,7 @@ public class InscripcionCursosController {
 					if (!model.plazasDisponibles(cursoId)) {
 						if(listaEspera) //si se ha activado la lista de espera los matricula pero con una posición en la lista de espera
 						{
-							String dni = (colegiado != null) ? colegiado.getDni() : externo.getDNI();
+							String dni = (colegiado != null) ? colegiado.getDni() : externo.getDni();
 							model.activarlistaEspera(cursoId,dni); //activa el campo lista espera de la inscripción
 							int pos =model.ObtenerPosListaEspera(cursoId);//obtiene la posición de llegada 
 							idInscripcion = model.ObtenerIdInscripcion(); //obtiene la id de la inscripción
@@ -190,7 +190,7 @@ public class InscripcionCursosController {
 					} 
 					else {
 						// Determinar el tipo de usuario e inscribirlo
-						String dni = (colegiado != null) ? colegiado.getDni() : externo.getDNI();
+						String dni = (colegiado != null) ? colegiado.getDni() : externo.getDni();
 						String nombre = (colegiado != null) ? colegiado.getNombre() : externo.getNombre();
 						String apellidos = (colegiado != null) ? colegiado.getApellidos() : externo.getApellidos();
 						String cuentaBancaria = (colegiado != null) ? colegiado.getCuenta_bancaria() : externo.getCuenta_bancaria();
