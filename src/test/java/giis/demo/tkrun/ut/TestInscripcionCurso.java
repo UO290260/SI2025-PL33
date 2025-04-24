@@ -42,7 +42,7 @@ public class TestInscripcionCurso {
 
 
 	private void loadDefaultData() {
-		// Carga datos básicos (colegiado, externo) que usarán varios tests
+		//Cargar datos iniciales
 		db.executeUpdate("DELETE FROM Inscripciones");
 		db.executeUpdate("DELETE FROM Colegiados");
 		db.executeUpdate("DELETE FROM Externos");
@@ -61,6 +61,7 @@ public class TestInscripcionCurso {
 
 	private void loadData_UsuarioYaInscrito() {
 		loadDefaultData();
+		//Cargar datos para comrpobación CE5
 		int idInsc = model.ObtenerIdInscripcion();
 		db.executeUpdate("INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion, estado, lista_espera, posicion) VALUES (?, ?, ?, ?, ?, ?, ?)",
 				idInsc, DNI_COLEGIADO_OK, CURSO_ID_DISPONIBLE_PLAZAS, todayDateStr, "Matriculado", false, null);
@@ -142,7 +143,7 @@ public class TestInscripcionCurso {
 		assertEquals("Estado debe ser En espera", "En espera", insc.getEstado());
 		assertEquals("Posición incorrecta", posEsperada, insc.getPosicion());
 
-		// Verificar Plazas Curso (no cambian)
+		
 		int finalPlazas = db.executeQueryPojo(CursosDTO.class, "SELECT plazas from Cursos where id_curso=?", cursoId).get(0).getPlazas();
 		assertEquals("Plazas no deben cambiar", 0, finalPlazas);
 	}
@@ -153,7 +154,7 @@ public class TestInscripcionCurso {
 		int cursoId = CURSO_ID_DISPONIBLE_PLAZAS; 
 		CursosDTO curso = db.executeQueryPojo(CursosDTO.class, "SELECT apertura_inscripcion, cierre_inscripcion FROM Cursos WHERE id_curso=?", cursoId).get(0);
 
-		// Probamos la condición directamente
+		
 		assertTrue("La fecha actual debe estar fuera del plazo",
 				model.ComprobarFechaApertura(todayDate, Util.isoStringToDate(curso.getApertura_inscripcion()), Util.isoStringToDate(curso.getCierre_inscripcion())));
 	}
@@ -163,7 +164,7 @@ public class TestInscripcionCurso {
 		loadData_UsuarioYaInscrito(); 
 		int cursoId = CURSO_ID_DISPONIBLE_PLAZAS;
 
-		// Probamos la condición directamente
+		
 		assertTrue("El colegiado ya debería estar inscrito", model.Comprobar_Inscripción(DNI_COLEGIADO_OK, cursoId));
 
 	}
