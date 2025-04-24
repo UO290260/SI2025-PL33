@@ -33,13 +33,13 @@ public class TestInscripcionCurso {
 	public void setUp() throws Exception {
 		db = new Database();
 		model = new InscripcionCursosModel();
-		db.createDatabase(true); // Recrea el schema limpiamente
+		db.createDatabase(true); 
 		todayDate = new Date();
 		todayDateStr = Util.dateToIsoString(todayDate);
-		// Llama a métodos específicos para cargar datos para cada test.
+		
 	}
 
-	// ----- Métodos Helper para Carga de Datos (EJEMPLOS) -----
+	
 
 	private void loadDefaultData() {
 		// Carga datos básicos (colegiado, externo) que usarán varios tests
@@ -64,7 +64,6 @@ public class TestInscripcionCurso {
 		int idInsc = model.ObtenerIdInscripcion();
 		db.executeUpdate("INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion, estado, lista_espera, posicion) VALUES (?, ?, ?, ?, ?, ?, ?)",
 				idInsc, DNI_COLEGIADO_OK, CURSO_ID_DISPONIBLE_PLAZAS, todayDateStr, "Matriculado", false, null);
-		// Actualizar plazas del curso 1
 		db.executeUpdate("UPDATE Cursos SET plazas = plazas - 1 WHERE id_curso = ?", CURSO_ID_DISPONIBLE_PLAZAS);
 	}
 
@@ -72,7 +71,7 @@ public class TestInscripcionCurso {
 
 	@Test
 	public void testInscribirColegiado_Transferencia_Exito() {
-		loadDefaultData(); // Carga datos iniciales
+		loadDefaultData(); 
 		int cursoId = CURSO_ID_DISPONIBLE_PLAZAS;
 		int initialPlazas = db.executeQueryPojo(CursosDTO.class, "SELECT plazas from Cursos where id_curso=?", cursoId).get(0).getPlazas();
 		assertEquals("PRECONDICION: Curso debe tener 30 plaza", 30, initialPlazas);
@@ -104,15 +103,15 @@ public class TestInscripcionCurso {
         assertFalse("PRECONDICION: Colegiado no debe estar inscrito", model.Comprobar_Inscripción(DNI_COLEGIADO_OK, cursoId));
 
         int inscId = model.ObtenerIdInscripcion();
-        // Asumimos tarjeta válida, ya que la validación ocurre en controller/view
-        model.InscribirEnCurso(inscId, DNI_COLEGIADO_OK, cursoId, todayDateStr, true); // true = Tarjeta
+        
+        model.InscribirEnCurso(inscId, DNI_COLEGIADO_OK, cursoId, todayDateStr, true);
 
          // Verificar Inscripcion
         List<InscripcionesDTO> inscripciones = db.executeQueryPojo(InscripcionesDTO.class, "SELECT * FROM Inscripciones WHERE DNI = ? AND id_curso = ?", DNI_COLEGIADO_OK, cursoId);
         assertEquals("Debe existir 1 inscripción", 1, inscripciones.size());
         InscripcionesDTO insc = inscripciones.get(0);
         assertEquals("ID inscripción incorrecto", inscId, insc.getId_inscripcion());
-        assertEquals("Estado debe ser Matriculado", "Matriculado", insc.getEstado()); // Cambio clave por tarjeta
+        assertEquals("Estado debe ser Matriculado", "Matriculado", insc.getEstado()); 
         assertEquals("Posición debe ser 0",0,insc.getPosicion());
 
         // Verificar Plazas Curso
@@ -150,38 +149,37 @@ public class TestInscripcionCurso {
 	@Test
     public void testInscribir_Error_FueraDePlazo() {
         loadDefaultData();
-        int cursoId = CURSO_ID_DISPONIBLE_PLAZAS; // Este curso cerró ayer
+        int cursoId = CURSO_ID_DISPONIBLE_PLAZAS; 
         CursosDTO curso = db.executeQueryPojo(CursosDTO.class, "SELECT apertura_inscripcion, cierre_inscripcion FROM Cursos WHERE id_curso=?", cursoId).get(0);
 
         // Probamos la condición directamente
         assertTrue("La fecha actual debe estar fuera del plazo",
                    model.ComprobarFechaApertura(todayDate, Util.isoStringToDate(curso.getApertura_inscripcion()), Util.isoStringToDate(curso.getCierre_inscripcion())));
-        // El controller lanzaría el error basado en esto
     }
 
 	 @Test
 	    public void testInscribir_Error_YaInscrito() {
-	        loadData_UsuarioYaInscrito(); // Carga datos con el colegiado ya inscrito en curso 1
+	        loadData_UsuarioYaInscrito(); 
 	        int cursoId = CURSO_ID_DISPONIBLE_PLAZAS;
 
 	        // Probamos la condición directamente
 	         assertTrue("El colegiado ya debería estar inscrito", model.Comprobar_Inscripción(DNI_COLEGIADO_OK, cursoId));
-	         // El controller lanzaría el error basado en esto
+	       
 	    }
 
 	     @Test
 	    public void testInscribir_Error_SinPlazasSinListaEspera() {
 	        loadDefaultData();
-	        int cursoId = CURSO_ID_DISPONIBLE_SINPLAZAS_LE_OFF; // 0 plazas, LE off
+	        int cursoId = CURSO_ID_DISPONIBLE_SINPLAZAS_LE_OFF; // 0 plazas, Lista espera off
 
 	        assertFalse("El curso no debería tener plazas", model.plazasDisponibles(cursoId));
 	        assertFalse("El curso no debería tener LE habilitada", db.executeQueryPojo(CursosDTO.class, "SELECT lista_espera FROM Cursos WHERE id_curso=?", cursoId).get(0).isLista_espera());
-	        // El controller lanzaría el error "No hay plazas disponibles."
+	        
 	    }
 
 	     @Test
 	     public void testCargarCuotas_ConNulos() {
-	        loadDefaultData(); // Curso 1 tiene colegiado=100, otros=50, resto NULL
+	        loadDefaultData(); 
 	        int cursoId = CURSO_ID_DISPONIBLE_SINPLAZAS_LE_ON;
 
 	        List<String> cuotas = model.cargarCuotas(cursoId);
