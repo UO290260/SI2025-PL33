@@ -121,7 +121,7 @@ public class TestInscripcionTAP {
 	public void testInscripcionTAP_esPerito() {
 		InscripcionlistaTAPModel modelo = new InscripcionlistaTAPModel();
 		assertFalse("El estado del perito es aporbado", modelo.estadoColegiado(1));
-		// El controller usaría esta comprobación para lanzar el error.
+		
 	}
 
 	/**
