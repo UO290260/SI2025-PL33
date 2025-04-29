@@ -36,7 +36,6 @@ public class TestInscripcionCurso {
 		db.createDatabase(true); 
 		todayDate = new Date();
 		todayDateStr = Util.dateToIsoString(todayDate);
-
 	}
 
 
