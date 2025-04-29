@@ -22,7 +22,7 @@ public class TestInscripcionCurso {
 	private String todayDateStr;
 	private Date todayDate;
 
-	
+	// Constantes para DNIs y IDs de Curso
 	private static final String DNI_COLEGIADO_OK = "12345678A";
 	private static final String DNI_EXTERNO_OK = "67891234F";
 	private static final int CURSO_ID_DISPONIBLE_PLAZAS = 1;
@@ -41,7 +41,7 @@ public class TestInscripcionCurso {
 
 
 	private void loadDefaultData() {
-		
+		//Cargar datos iniciales
 		db.executeUpdate("DELETE FROM Inscripciones");
 		db.executeUpdate("DELETE FROM Colegiados");
 		db.executeUpdate("DELETE FROM Externos");
@@ -60,14 +60,14 @@ public class TestInscripcionCurso {
 
 	private void loadData_UsuarioYaInscrito() {
 		loadDefaultData();
-		// CE5
+		//Cargar datos para comrpobación CE5
 		int idInsc = model.ObtenerIdInscripcion();
 		db.executeUpdate("INSERT INTO Inscripciones (id_inscripcion, DNI, id_curso, fecha_inscripcion, estado, lista_espera, posicion) VALUES (?, ?, ?, ?, ?, ?, ?)",
 				idInsc, DNI_COLEGIADO_OK, CURSO_ID_DISPONIBLE_PLAZAS, todayDateStr, "Matriculado", false, null);
 		db.executeUpdate("UPDATE Cursos SET plazas = plazas - 1 WHERE id_curso = ?", CURSO_ID_DISPONIBLE_PLAZAS);
 	}
 
-	
+	// ----- Tests Casos de Exíto -----
 
 	//CE1
 	@Test
@@ -82,7 +82,7 @@ public class TestInscripcionCurso {
 		int inscId = model.ObtenerIdInscripcion();
 		model.InscribirEnCurso(inscId, DNI_COLEGIADO_OK, cursoId, todayDateStr, false); // false = Transferencia
 
-		
+		// Verificar Inscripcion
 		List<InscripcionesDTO> inscripciones = db.executeQueryPojo(InscripcionesDTO.class, "SELECT * FROM Inscripciones WHERE DNI = ? AND id_curso = ?", DNI_COLEGIADO_OK, cursoId);
 		assertEquals("Debe existir 1 inscripción", 1, inscripciones.size());
 		InscripcionesDTO insc = inscripciones.get(0);
@@ -90,7 +90,7 @@ public class TestInscripcionCurso {
 		assertEquals("Estado debe ser Pre-inscrito", "Pre-inscrito", insc.getEstado());
 		assertEquals("Posición debe ser NULL",0 ,insc.getPosicion()); 
 
-		
+		// Verificar Plazas Curso
 		int finalPlazas = db.executeQueryPojo(CursosDTO.class, "SELECT plazas from Cursos where id_curso=?", cursoId).get(0).getPlazas();
 		assertEquals("Plazas deben haberse decrementado", initialPlazas - 1, finalPlazas);
 	}
@@ -107,7 +107,7 @@ public class TestInscripcionCurso {
 
 		model.InscribirEnCurso(inscId, DNI_COLEGIADO_OK, cursoId, todayDateStr, true);
 
-		
+		// Verificar Inscripcion
 		List<InscripcionesDTO> inscripciones = db.executeQueryPojo(InscripcionesDTO.class, "SELECT * FROM Inscripciones WHERE DNI = ? AND id_curso = ?", DNI_COLEGIADO_OK, cursoId);
 		assertEquals("Debe existir 1 inscripción", 1, inscripciones.size());
 		InscripcionesDTO insc = inscripciones.get(0);
@@ -115,7 +115,7 @@ public class TestInscripcionCurso {
 		assertEquals("Estado debe ser Matriculado", "Matriculado", insc.getEstado()); 
 		assertEquals("Posición debe ser 0",0,insc.getPosicion());
 
-		
+		// Verificar Plazas Curso
 		int finalPlazas = db.executeQueryPojo(CursosDTO.class, "SELECT plazas from Cursos where id_curso=?", cursoId).get(0).getPlazas();
 		assertEquals("Plazas deben haberse decrementado", initialPlazas - 1, finalPlazas);
 	}
@@ -134,7 +134,7 @@ public class TestInscripcionCurso {
 		int inscId = model.ObtenerIdInscripcion();
 		model.MeterEnlistaEspera(inscId, DNI_COLEGIADO_OK, cursoId, todayDateStr, posEsperada);
 
-		
+		// Verificar Inscripcion
 		List<InscripcionesDTO> inscripciones = db.executeQueryPojo(InscripcionesDTO.class, "SELECT * FROM Inscripciones WHERE DNI = ? AND id_curso = ?", DNI_COLEGIADO_OK, cursoId);
 		assertEquals("Debe existir 1 inscripción", 1, inscripciones.size());
 		InscripcionesDTO insc = inscripciones.get(0);
