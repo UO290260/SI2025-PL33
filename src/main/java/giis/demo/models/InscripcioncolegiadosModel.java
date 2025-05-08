@@ -31,6 +31,7 @@ public class InscripcioncolegiadosModel {
 		colegiado.setEstado("Pendiente");
 		String sql="INSERT INTO Colegiados (id_colegiado ,nombre, apellidos, DNI, direccion, poblacion, fecha_nacimiento, cuenta_bancaria, titulacion, fecha_colegiacion ,estado) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
 		int nuevoId= incrementarID();
+		colegiado.setId_colegiado(nuevoId);
 		db.executeUpdate(sql,nuevoId,colegiado.getNombre(),colegiado.getApellidos(),colegiado.getDni(),colegiado.getDireccion(),colegiado.getPoblacion(),colegiado.getFecha_nacimiento(),colegiado.getCuenta_bancaria(),colegiado.getTitulacion(),colegiado.getFecha_colegiacion(),colegiado.getEstado());
 	}
 
@@ -43,6 +44,17 @@ public class InscripcioncolegiadosModel {
 		List<Object[]> result = db.executeQueryArray(sql, dni);
 		//Si es mayor a 0 retornara true , en caso contrario false
 		return ((Number) result.get(0)[0]).intValue() > 0;
+	}
+	
+	/**
+	 * Añadido para el Test
+	 * @param dni
+	 * @return
+	 */
+	public boolean dniExiste2(String dni) {
+		String sql = "SELECT COUNT(*) FROM Colegiados WHERE DNI = ?";
+		List<Object[]> result = db.executeQueryArray(sql, dni);
+		return ((Number) result.get(0)[0]).intValue() > 1; 
 	}
 
 	/**
